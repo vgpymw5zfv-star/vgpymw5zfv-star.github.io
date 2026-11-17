@@ -1,6 +1,6 @@
 # 🧮 도토리 계산기 (dotori-calc)
 
-직장인·자취생 생활비·절세 계산기 6종 — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
+직장인·자취생 생활비·절세 계산기 8종 — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
 빌드 서버 없이 GitHub Pages에 그대로 올려 쓰는 구조입니다.
 
 - 홈: https://vgpymw5zfv-star.github.io/
@@ -11,7 +11,9 @@
 
 | 경로 | 내용 | 근거 |
 | --- | --- | --- |
+| `/salary/` | 2026 연봉 실수령액 (4대보험·간이세액·비과세·부양가족·중소기업 90% 감면) | 국민연금법 §88, 국민건강보험법 시행령 §44, 노인장기요양보험법 시행령 §4, 고용보험법 시행령 §12, 소득세법 시행령 [별표 2] |
 | `/sme-tax/` | 중소기업 취업자 소득세 감면 90% · 5년 경정청구 | 조세특례제한법 §30, 국세기본법 §45의2 |
+| `/housing/` | 전세 vs 월세 주거비 손익분기 (전환율·월세 세액공제) | 주택임대차보호법 §7조의2·시행령 §9, 조세특례제한법 §95의2 |
 | `/electricity/` | 우리집 전기세 · 누진제 (총 사용량(kWh)·청구액·평수, 저압·고압) | 한국전력 전기요금표 (2026) |
 | `/transit/` | K-패스 vs 기후동행카드 손익분기 | 국토교통부 K-패스, 서울시 기후동행카드 |
 | `/rent-tax/` | 월세 세액공제 vs 현금영수증 소득공제 | 조세특례제한법 §95의2 |
@@ -35,9 +37,9 @@
 │   ├── favicon.svg · og-dotori.png
 │   └── js/
 │       ├── dotori-core.js    # 세금·포맷 공용 코어 (DOM 비의존)
-│       ├── sme-tax.js · electricity.js · transit.js · rent-tax.js · ai-cost.js · heating.js
+│       ├── salary.js · sme-tax.js · housing.js · electricity.js · transit.js · rent-tax.js · ai-cost.js · heating.js
 │       └── page-*.js         # 각 페이지 입력 → 결과 연결
-├── sme-tax/ · electricity/ · transit/ · rent-tax/ · ai-cost/ · heating/
+├── salary/ · sme-tax/ · housing/ · electricity/ · transit/ · rent-tax/ · ai-cost/ · heating/
 └── about/ · privacy/ · contact/
 ```
 
