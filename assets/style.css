@@ -1916,6 +1916,14 @@ body.embed-mode .page-head h1 {
 body.embed-mode .calc-layout {
   margin-top: 0;
   gap: 12px;
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 임베드에서는 아코디언 등 숨긴 영역의 생성 콘텐츠도 노출하지 않는다 */
+body.embed-mode .faq summary::after {
+  content: "" !important;
 }
 
 body.embed-mode .calc-col,
