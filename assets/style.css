@@ -628,6 +628,17 @@ main {
   min-width: 0;
 }
 
+/* 결과 칸의 카드·표가 칸 폭을 밀어내지 않도록 (임베드·좁은 화면 가로 스크롤 0) */
+.result-col > * {
+  min-width: 0;
+}
+
+.result-col .result-row dt,
+.result-col .result-row dd {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 /* ---------- 폼 ---------- */
 
 .field {
@@ -1950,8 +1961,13 @@ table.data td.is-muted {
     font-size: 15px;
   }
 
+  /* 네비 9개가 390px에서도 한 줄에 들어가도록 글자·간격을 살짝 조인다 */
   .site-nav {
-    gap: 12px;
+    gap: 10px;
+  }
+
+  .site-nav a {
+    font-size: 12.5px;
   }
 }
 

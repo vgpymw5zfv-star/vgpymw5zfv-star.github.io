@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>전세 vs 월세 주거비 손익분기 계산기 · 세액공제·전환율 2026 | 도토리 계산기</title>
+<meta name="description" content="전세 보증금·전세대출 이자·보증금 기회비용과 월세·관리비 차이·월세 세액공제(17%·15%, 연 1,000만원 한도)를 넣어 월 주거비와 2년 총액을 비교하고, 손익분기 월세와 전월세 전환율까지 계산합니다.">
+<meta name="author" content="도토리사원">
+<meta name="theme-color" content="#1F2A44">
+<meta name="google-site-verification" content="_dxc0C2kiFi1gcrJOmOw2CYSbvuWM6zPb_HV6ua8Irc">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://vgpymw5zfv-star.github.io/housing/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="도토리 계산기">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="전세 vs 월세, 내 조건에선 어느 쪽이 유리할까">
+<meta property="og:description" content="전세 보증금·전세대출 이자·보증금 기회비용과 월세·관리비 차이·월세 세액공제(17%·15%, 연 1,000만원 한도)를 넣어 월 주거비와 2년 총액을 비교하고, 손익분기 월세와 전월세 전환율까지 계산합니다.">
+<meta property="og:url" content="https://vgpymw5zfv-star.github.io/housing/">
+<meta property="og:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="전세 vs 월세, 내 조건에선 어느 쪽이 유리할까">
+<meta name="twitter:description" content="전세 보증금·전세대출 이자·보증금 기회비용과 월세·관리비 차이·월세 세액공제(17%·15%, 연 1,000만원 한도)를 넣어 월 주거비와 2년 총액을 비교하고, 손익분기 월세와 전월세 전환율까지 계산합니다.">
+<meta name="twitter:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "전세 vs 월세 주거비 손익분기 계산기",
+      "url": "https://vgpymw5zfv-star.github.io/housing/",
+      "description": "전세 보증금·전세대출 이자·보증금 기회비용과 월세·관리비 차이·월세 세액공제(17%·15%, 연 1,000만원 한도)를 넣어 월 주거비와 2년 총액을 비교하고, 손익분기 월세와 전월세 전환율까지 계산합니다.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "JavaScript 지원 브라우저",
+      "inLanguage": "ko-KR",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "도토리사원"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "도토리 계산기",
+        "url": "https://vgpymw5zfv-star.github.io/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "홈",
+          "item": "https://vgpymw5zfv-star.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "전세 vs 월세",
+          "item": "https://vgpymw5zfv-star.github.io/housing/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "전세가 유리한지 월세가 유리한지 어떻게 판단하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "전세는 ‘월세 0원’이 아니라 보증금을 묶어 두는 비용이 있습니다. 전세대출 이자와 자기자본의 기회비용(예금·투자 수익률)을 더한 금액과, 월세에 보증금 기회비용·관리비 차이를 더하고 세액공제를 뺀 금액을 비교합니다. 이 계산기의 ‘순 월 주거비’가 그 값입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "보증금 기회비용 수익률은 몇 %로 넣어야 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "보증금을 맡기지 않았다면 굴렸을 곳의 수익률을 넣습니다. 예금 3.0~3.5%, MMF·파킹통장 2.5~3.0%, 투자까지 고려하면 4~5%입니다. 기본값 3.5%는 예금 금리 수준입니다. 이 값을 높이면 전세(보증금이 큰 쪽)에 불리해집니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "월세 세액공제는 어떻게 반영되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "총급여 5,500만원 이하 17%, 5,500만~8,000만원 15%를 월세액에 곱하고, 연 1,000만원 한도까지만 인정합니다. 세액공제는 세금에서 직접 빼주므로 지방소득세 10% 감소분까지 더해 월 주거비에서 차감했습니다. 실제 환급은 연말정산에서 한 번에 이뤄집니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "전세대출 이자는 어떤 상환 방식을 가정하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "이자만 내는 만기일시 상환을 가정합니다. 원리금균등으로 갚으면 초기 이자 부담이 더 크고 원금이 줄어 자기자본이 늘어나므로, 실제 비용은 시기별로 달라집니다. 보증료(연 0.1~0.3% 안팎)도 반영하지 않았습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "손익분기 월세와 전월세 전환율은 어떻게 다른가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "손익분기 월세는 내 대출이자·기회비용을 기준으로 전세와 비용이 같아지는 월세입니다. 전월세 전환율은 집주인이 보증금을 월세로 바꿀 때 쓰는 비율(월세 = 보증금 차액 × 전환율 ÷ 12)로, 법정 상한은 연 10%와 한국은행 기준금리 + 2%p 중 낮은 비율입니다. 전환율이 손익분기 전환율보다 높으면 월세가, 낮으면 전세가 유리합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "보증금을 돌려받지 못하는 위험도 계산에 들어가나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "아니요. 전세 사기·경매·임대인의 반환 지연 위험, 보증보험(HUG·HF) 가입 비용, 이사비·중개수수료는 반영하지 않았습니다. 전세보증금이 큰 경우에는 보증보험 가입 여부와 임대인의 국세·보증금 비율을 별도로 확인하세요."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../index.html" aria-label="도토리 계산기 홈">
+        <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8v1.9"/><path d="M5.9 9.1c0-2.5 2.7-4.5 6.1-4.5s6.1 2 6.1 4.5c0 .5-.4.9-.9.9H6.8c-.5 0-.9-.4-.9-.9z"/><path d="M7.3 10.9h9.4c0 4.4-1.9 8.6-4.7 10.2-2.8-1.6-4.7-5.8-4.7-10.2z"/></svg></span>
+        <span class="brand__full">도토리 계산기</span>
+        <span class="brand__short">도토리</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 계산기">
+        <a href="../index.html"><span class="nav-full">홈</span><span class="nav-short">홈</span></a>
+        <a href="../salary/"><span class="nav-full">연봉</span><span class="nav-short">연봉</span></a>
+        <a href="../sme-tax/"><span class="nav-full">소득세 감면</span><span class="nav-short">감면</span></a>
+        <a href="../housing/" aria-current="page"><span class="nav-full">전월세</span><span class="nav-short">전월세</span></a>
+        <a href="../electricity/"><span class="nav-full">전기세</span><span class="nav-short">전기세</span></a>
+        <a href="../heating/"><span class="nav-full">난방비</span><span class="nav-short">난방</span></a>
+        <a href="../transit/"><span class="nav-full">교통비</span><span class="nav-short">교통</span></a>
+        <a href="../rent-tax/"><span class="nav-full">월세 절세</span><span class="nav-short">월세</span></a>
+        <a href="../ai-cost/"><span class="nav-full">AI 구독</span><span class="nav-short">AI</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <div class="container">
+      <section class="page-head">
+        <nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">홈</a><span aria-hidden="true">/</span><span aria-current="page">전세 vs 월세</span></nav>
+        <h1>전세 vs 월세 주거비 손익분기 계산기</h1>
+        <p class="lead">전세대출 이자와 보증금 기회비용, 월세 세액공제까지 넣어 어느 쪽이 매달 얼마나 유리한지 계산합니다. 손익분기 월세와 전월세 전환율까지 함께.</p>
+      </section>
+
+      <div class="calc-layout">
+        <div class="calc-col">
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">1</span>전세 조건</h2>
+            </div>
+
+            <label class="field" for="housing-jdeposit">
+              <span class="field-label">전세 보증금 <small>계약서상 금액</small></span>
+              <span class="field-control">
+                <input id="housing-jdeposit" type="number" inputmode="numeric" min="0" max="2000000" step="100" value="30000">
+                <span class="field-unit">만원</span>
+              </span>
+              <span class="field-help">3억원이면 30,000으로 입력하세요.</span>
+            </label>
+
+            <div class="field">
+              <div class="field-label">
+                <span>전세대출 금액</span>
+                <small>보증금 대비 LTV로 빠르게</small>
+              </div>
+              <div class="filters" style="margin-bottom:12px" data-ltv-bar role="group" aria-label="전세대출 LTV 선택">
+                <button type="button" class="chip" data-ltv="0" aria-pressed="false">대출 없음</button>
+                <button type="button" class="chip" data-ltv="40" aria-pressed="false">40%</button>
+                <button type="button" class="chip" data-ltv="60" aria-pressed="false">60%</button>
+                <button type="button" class="chip" data-ltv="80" aria-pressed="true">80%</button>
+              </div>
+              <label class="field" for="housing-jloan" style="margin-top:0">
+                <span class="field-label">대출 금액</span>
+                <span class="field-control">
+                  <input id="housing-jloan" type="number" inputmode="numeric" min="0" max="2000000" step="100" value="24000">
+                  <span class="field-unit">만원</span>
+                </span>
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field" for="housing-loan-rate">
+                <span class="field-label">대출 금리 <small>연</small></span>
+                <span class="field-control">
+                  <input id="housing-loan-rate" type="number" inputmode="decimal" min="0" max="30" step="0.1" value="4.0">
+                  <span class="field-unit">%</span>
+                </span>
+                <span class="field-help">전세자금대출 금리</span>
+              </label>
+              <label class="field" for="housing-return">
+                <span class="field-label">내 돈의 기회비용 <small>연</small></span>
+                <span class="field-control">
+                  <input id="housing-return" type="number" inputmode="decimal" min="0" max="30" step="0.1" value="3.5">
+                  <span class="field-unit">%</span>
+                </span>
+                <span class="field-help">예금·투자로 얻을 수익률</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">2</span>월세 조건</h2>
+            </div>
+
+            <div class="field-row">
+              <label class="field" for="housing-wdeposit">
+                <span class="field-label">월세 보증금</span>
+                <span class="field-control">
+                  <input id="housing-wdeposit" type="number" inputmode="numeric" min="0" max="2000000" step="100" value="3000">
+                  <span class="field-unit">만원</span>
+                </span>
+              </label>
+              <label class="field" for="housing-wloan">
+                <span class="field-label">보증금 대출</span>
+                <span class="field-control">
+                  <input id="housing-wloan" type="number" inputmode="numeric" min="0" max="2000000" step="100" value="0">
+                  <span class="field-unit">만원</span>
+                </span>
+                <span class="field-help">없으면 0</span>
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field" for="housing-wrent">
+                <span class="field-label">월세</span>
+                <span class="field-control">
+                  <input id="housing-wrent" type="number" inputmode="numeric" min="0" max="5000" step="1" value="60">
+                  <span class="field-unit">만원</span>
+                </span>
+                <span class="field-help">매달 내는 임대료</span>
+              </label>
+              <label class="field" for="housing-maint">
+                <span class="field-label">관리비 차이 <small>월세 − 전세</small></span>
+                <span class="field-control">
+                  <input id="housing-maint" type="number" inputmode="numeric" min="-500" max="500" step="1" value="0">
+                  <span class="field-unit">만원</span>
+                </span>
+                <span class="field-help">월세 집이 더 내면 +, 덜 내면 −</span>
+              </label>
+            </div>
+
+            <label class="field" for="housing-band">
+              <span class="field-label">총급여 구간 <small>월세 세액공제</small></span>
+              <span class="field-control">
+                <select id="housing-band">
+                  <option value="low" selected>5,500만원 이하 — 17%</option>
+                  <option value="mid">5,500만~8,000만원 — 15%</option>
+                  <option value="none">8,000만원 초과 — 해당 없음</option>
+                </select>
+              </span>
+              <span class="field-help">무주택 세대주여야 하며, 공제 대상 월세는 연 1,000만원까지입니다. 자세한 조건은 <a href="../rent-tax/">월세 세액공제 계산기</a>에서 확인하세요.</span>
+            </label>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">3</span>계산 기준</h2>
+            </div>
+            <div class="notice">
+              <span class="notice__icon" aria-hidden="true">i</span>
+              <span>전세는 <b>대출이자 + 자기자본 기회비용</b>, 월세는 <b>보증금 대출이자 + 기회비용 + 월세 − 세액공제</b>로 비교합니다. 전세대출은 이자만 내는 만기일시 상환을 가정합니다.</span>
+            </div>
+            <p class="field-help" style="margin-top:12px">월세 세액공제는 <b>내야 할 세금에서 빼주는</b> 방식이라, 공제액(소득세 + 지방소득세 10%)을 월 주거비에서 그대로 차감했습니다. 실제 환급은 연말정산에서 한 번에 이뤄집니다.</p>
+          </div>
+        </div>
+
+        <div class="result-col">
+          <div class="result-card" aria-live="polite">
+            <p class="result-card__label" id="housing-hero-label">2년(24개월) 기준 유리한 쪽</p>
+            <p class="result-value"><span id="housing-gap">0</span><small>원</small></p>
+            <p class="result-sub" id="housing-sub">월 기준 차이 · 2년 총액 차이 0원</p>
+            <p class="pill pill--blue" id="housing-pill" style="margin-top:10px">비교 중</p>
+
+            <dl class="result-rows">
+              <div class="result-row">
+                <dt>전세 순 월 주거비</dt>
+                <dd id="housing-jcost">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>월세 순 월 주거비</dt>
+                <dd id="housing-wcost">0원</dd>
+              </div>
+              <div class="result-row result-row--strong">
+                <dt>월 차액</dt>
+                <dd id="housing-month-gap">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>2년(24개월) 총액 차이</dt>
+                <dd id="housing-total24">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>손익분기 월세</dt>
+                <dd id="housing-breakeven">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>손익분기 전환율</dt>
+                <dd id="housing-breakeven-rate">-</dd>
+              </div>
+            </dl>
+            <p class="result-note" id="housing-note">대출 금리 · 기회비용 수익률 · 세액공제를 반영한 추정입니다. 보증금 반환 위험, 대출 보증료, 임대료 인상은 반영하지 않았습니다.</p>
+          </div>
+
+          <div class="summary">
+            <h3>항목별 비교 (월 기준)</h3>
+            <div class="table-wrap" style="border:0">
+              <table class="data" style="min-width:0;font-size:13.5px">
+                <thead>
+                  <tr>
+                    <th scope="col">항목</th>
+                    <th scope="col">전세</th>
+                    <th scope="col">월세</th>
+                  </tr>
+                </thead>
+                <tbody id="housing-compare-table"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="summary">
+            <h3>손익분기 월세</h3>
+            <p class="result-sub" style="margin:0 0 10px" id="housing-breakeven-text">계산 중</p>
+            <div class="notice notice--good" id="housing-verdict">
+              <span class="notice__icon" aria-hidden="true">✓</span>
+              <span id="housing-verdict-text">전세와 월세 비용이 같아지는 월세 금액을 계산합니다.</span>
+            </div>
+          </div>
+
+          <div id="housing-warnings" class="stack"></div>
+        </div>
+      </div>
+
+      <div class="ads-slot" data-slot="top" hidden></div>
+
+      <div data-blog-banner hidden></div>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>전월세 전환율 시뮬레이션</h2>
+          <p>같은 보증금 차액을 아래 전환율로 월세로 돌릴 때, 지금 조건에서 유리한지 비교합니다.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <caption>월세 = (전세보증금 − 월세보증금) × 전환율 ÷ 12 · 손익분기 월세와 비교</caption>
+            <thead>
+              <tr>
+                <th scope="col">전환율</th>
+                <th scope="col">환산 월세</th>
+                <th scope="col">손익분기 대비</th>
+                <th scope="col">유리한 쪽</th>
+              </tr>
+            </thead>
+            <tbody id="housing-conversion-table"></tbody>
+          </table>
+        </div>
+        <p class="field-help" style="margin-top:12px">법정 전환율 상한은 <b>연 10%와 한국은행 기준금리 + 2%p 중 낮은 비율</b>입니다(주택임대차보호법 §7조의2·시행령 §9). 이 상한은 계약 중이거나 갱신할 때 보증금을 월세로 바꾸는 경우에 적용되고, 새로 맺는 계약의 월세는 시세로 정해집니다.</p>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>전세가 항상 유리한 건 아닙니다</h2>
+        </div>
+        <div class="prose">
+          <p>전세는 ‘월세 0원’처럼 보이지만, <strong>보증금을 묶어 두는 비용</strong>이 있습니다. 전세 3억원 중 2억 4,000만원을 4%로 빌리면 월 이자만 80만원이고, 남은 자기자본 6,000만원도 예금 3.5%라면 월 17만 5,000원의 수익을 포기하는 셈입니다. 합치면 <strong>월 97만 5,000원</strong>입니다.</p>
+          <p>같은 집을 보증금 3,000만원 · 월세 60만원으로 계약하면, 보증금 기회비용 8만 7,500원과 월세 60만원을 더한 68만 7,500원에서 월세 세액공제 11만 2,200원(17% + 지방소득세)을 뺀 <strong>월 57만 5,300원</strong>이 됩니다. 이 조건에서는 <strong>월세가 월 39만 9,700원, 2년이면 959만원 유리</strong>합니다.</p>
+          <p>반대로 전세대출을 거의 쓰지 않거나(자기자본 100%), 대출 금리가 낮거나, 월세가 비싼 지역이라면 전세가 유리해집니다. 이 계산기의 <strong>손익분기 월세</strong>가 그 경계입니다.</p>
+
+          <h3>계산에 넣은 것 · 넣지 않은 것</h3>
+          <ul>
+            <li><strong>넣은 것</strong>: 전세대출 이자(만기일시), 자기자본 기회비용, 월세, 관리비 차이, 월세 세액공제(17% / 15%, 연 1,000만원 한도, 지방소득세 포함)</li>
+            <li><strong>넣지 않은 것</strong>: 전세대출 보증료(연 0.1~0.3% 안팎), 대출 원금 상환, 보증금 반환 위험(전세 사기·경매), 중개수수료, 이사비, 임대료 인상, 보증금을 돌려받는 시점의 가치</li>
+            <li><strong>보증금 차이</strong>: 두 조건의 보증금이 다르면 각각의 자기자본에 기회비용을 따로 계산했습니다. 그래서 ‘보증금을 더 넣는 것’의 부담이 자동으로 반영됩니다.</li>
+          </ul>
+          <p>전세대출 이자는 금리 유형(고정·변동)과 상환 방식(만기일시·원리금균등)에 따라 달라집니다. 원리금균등으로 갚는다면 초기 이자 부담이 이 계산보다 큽니다.</p>
+
+          <h3>전환율과 손익분기 월세는 어떻게 다른가</h3>
+          <p><strong>전월세 전환율</strong>은 집주인이 보증금을 월세로 바꿀 때 쓰는 비율이고, <strong>손익분기 월세</strong>는 내가 실제로 내는 대출이자·기회비용을 기준으로 전세와 비용이 같아지는 월세입니다. 전환율이 5%인데 손익분기 전환율이 4.6%라면, 시세대로 월세를 내는 쪽이 오히려 유리합니다.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>자주 묻는 질문</h2>
+        </div>
+        <div class="faq">
+      <details>
+        <summary>전세가 유리한지 월세가 유리한지 어떻게 판단하나요?</summary>
+        <p>전세는 ‘월세 0원’이 아니라 보증금을 묶어 두는 비용이 있습니다. 전세대출 이자와 자기자본의 기회비용(예금·투자 수익률)을 더한 금액과, 월세에 보증금 기회비용·관리비 차이를 더하고 세액공제를 뺀 금액을 비교합니다. 이 계산기의 ‘순 월 주거비’가 그 값입니다.</p>
+      </details>
+      <details>
+        <summary>보증금 기회비용 수익률은 몇 %로 넣어야 하나요?</summary>
+        <p>보증금을 맡기지 않았다면 굴렸을 곳의 수익률을 넣습니다. 예금 3.0~3.5%, MMF·파킹통장 2.5~3.0%, 투자까지 고려하면 4~5%입니다. 기본값 3.5%는 예금 금리 수준입니다. 이 값을 높이면 전세(보증금이 큰 쪽)에 불리해집니다.</p>
+      </details>
+      <details>
+        <summary>월세 세액공제는 어떻게 반영되나요?</summary>
+        <p>총급여 5,500만원 이하 17%, 5,500만~8,000만원 15%를 월세액에 곱하고, 연 1,000만원 한도까지만 인정합니다. 세액공제는 세금에서 직접 빼주므로 지방소득세 10% 감소분까지 더해 월 주거비에서 차감했습니다. 실제 환급은 연말정산에서 한 번에 이뤄집니다.</p>
+      </details>
+      <details>
+        <summary>전세대출 이자는 어떤 상환 방식을 가정하나요?</summary>
+        <p>이자만 내는 만기일시 상환을 가정합니다. 원리금균등으로 갚으면 초기 이자 부담이 더 크고 원금이 줄어 자기자본이 늘어나므로, 실제 비용은 시기별로 달라집니다. 보증료(연 0.1~0.3% 안팎)도 반영하지 않았습니다.</p>
+      </details>
+      <details>
+        <summary>손익분기 월세와 전월세 전환율은 어떻게 다른가요?</summary>
+        <p>손익분기 월세는 내 대출이자·기회비용을 기준으로 전세와 비용이 같아지는 월세입니다. 전월세 전환율은 집주인이 보증금을 월세로 바꿀 때 쓰는 비율(월세 = 보증금 차액 × 전환율 ÷ 12)로, 법정 상한은 연 10%와 한국은행 기준금리 + 2%p 중 낮은 비율입니다. 전환율이 손익분기 전환율보다 높으면 월세가, 낮으면 전세가 유리합니다.</p>
+      </details>
+      <details>
+        <summary>보증금을 돌려받지 못하는 위험도 계산에 들어가나요?</summary>
+        <p>아니요. 전세 사기·경매·임대인의 반환 지연 위험, 보증보험(HUG·HF) 가입 비용, 이사비·중개수수료는 반영하지 않았습니다. 전세보증금이 큰 경우에는 보증보험 가입 여부와 임대인의 국세·보증금 비율을 별도로 확인하세요.</p>
+      </details>
+    </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>공식 출처</h2>
+        </div>
+        <ul class="source-list">
+          <li><a href="https://www.law.go.kr/법령/주택임대차보호법" target="_blank" rel="noopener">주택임대차보호법 제7조의2 — 월차임 전환 시 산정률의 제한</a> <span>법제처 국가법령정보센터</span></li>
+          <li><a href="https://www.law.go.kr/법령/조세특례제한법" target="_blank" rel="noopener">조세특례제한법 제95조의2 — 월세액 세액공제</a> <span>법제처 국가법령정보센터</span></li>
+          <li><a href="https://nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=239025" target="_blank" rel="noopener">국세청 — 월세액 세액공제 요건과 공제율</a> <span>nts.go.kr</span></li>
+          <li><a href="https://www.molit.go.kr" target="_blank" rel="noopener">국토교통부 — 주택 임대차 제도 안내</a> <span>molit.go.kr</span></li>
+          <li><a href="https://www.bok.or.kr" target="_blank" rel="noopener">한국은행 — 기준금리(전환율 상한 산정 기준)</a> <span>bok.or.kr</span></li>
+          <li>블로그 심화편: <a href="https://news67.tistory.com/18" target="_blank" rel="noopener">연말정산 월세 세액공제·경정청구 정리</a> <span>도토리사원 재테크 연구소</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>함께 쓰면 좋은 계산기</h2>
+        </div>
+        <div class="grid grid--2" data-related>
+        <a class="calc-card" href="../salary/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10.5h18"/><circle cx="16.8" cy="15" r="1.1" fill="currentColor"/></svg></span>
+            <span class="calc-card__tag">생활비</span>
+          </div>
+          <h3>2026 연봉 실수령액 · 4대보험·소득세</h3>
+          <p>연봉·비과세·부양가족만 넣으면 4대보험과 소득세를 뺀 월 실수령액이 바로 나옵니다. 중소기업 90% 감면까지.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../sme-tax/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span>
+            <span class="calc-card__tag">절세</span>
+          </div>
+          <h3>중소기업 취업자 소득세 감면 · 5년 경정청구</h3>
+          <p>청년 90% 감면으로 놓친 세금을 5년치 돌려받는 금액을 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../electricity/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg></span>
+            <span class="calc-card__tag">생활비</span>
+          </div>
+          <h3>우리집 전기세 · 누진제 계산</h3>
+          <p>총 사용량(kWh)만 넣으면 이번 달 예상 전기요금이 바로 나옵니다. 저압·고압 누진제, 평수·전용면적, 가전별 추가 요금까지 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../heating/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s4.5 4.2 4.5 8.4a4.5 4.5 0 0 1-9 0C7.5 7.2 12 3 12 3z"/><path d="M12 21a5 5 0 0 0 5-5"/></svg></span>
+            <span class="calc-card__tag">생활비</span>
+          </div>
+          <h3>겨울 난방비 · 도시가스·지역난방</h3>
+          <p>사용열량(MJ·Mcal)·계량기(㎥)·평수로 이번 달 난방비와 겨울 4개월 예상액을 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../transit/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="14" rx="2.5"/><path d="M4 11h16M8 17v3M16 17v3"/><circle cx="8" cy="14" r=".8" fill="currentColor"/><circle cx="16" cy="14" r=".8" fill="currentColor"/></svg></span>
+            <span class="calc-card__tag">교통</span>
+          </div>
+          <h3>K-패스 vs 기후동행카드 손익분기</h3>
+          <p>내 통근 패턴에서 어느 쪽이 유리한지 월·연 절약액으로 비교합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../rent-tax/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span>
+            <span class="calc-card__tag">절세</span>
+          </div>
+          <h3>월세 세액공제 vs 현금영수증 소득공제</h3>
+          <p>월세 60만원 직장인이 실제로 돌려받는 금액을 5년치까지 비교합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../ai-cost/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M18.5 16.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span>
+            <span class="calc-card__tag">구독</span>
+          </div>
+          <h3>직장인 AI 구독 조합 가성비</h3>
+          <p>ChatGPT·Gemini·Claude·Perplexity, 조합별 월 비용을 한눈에 정리합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+      </div>
+      </section>
+
+      <div class="ads-slot" data-slot="bottom" hidden></div>
+
+      <div class="embed-footer"><a href="https://vgpymw5zfv-star.github.io/housing/" target="_blank" rel="noopener">도토리 계산기 전체 보기 ↗</a></div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__top">
+        <a class="site-footer__brand" href="../index.html">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8v1.9"/><path d="M5.9 9.1c0-2.5 2.7-4.5 6.1-4.5s6.1 2 6.1 4.5c0 .5-.4.9-.9.9H6.8c-.5 0-.9-.4-.9-.9z"/><path d="M7.3 10.9h9.4c0 4.4-1.9 8.6-4.7 10.2-2.8-1.6-4.7-5.8-4.7-10.2z"/></svg></span>
+          <span>도토리 계산기</span>
+        </a>
+        <nav aria-label="사이트 정보">
+          <a href="../about/">운영 소개</a>
+          <a href="../privacy/">개인정보처리방침</a>
+          <a href="../contact/">문의</a>
+          <a href="../sitemap/">사이트맵</a>
+        </nav>
+      </div>
+      <p>기준일 <span data-기준일>2026년 11월</span> · 운영 도토리사원 · <a href="../contact/">문의 페이지</a></p>
+      <p class="disclaimer">이 사이트의 모든 계산 결과는 공개된 요율과 단순화한 가정에 따른 <strong>참고용 추정치</strong>입니다. 세금·요금·환급 여부는 개인의 실제 조건과 관계 기관의 최종 결정에 따라 달라질 수 있으며, 계산 결과를 근거로 한 신고·계약·투자 판단의 책임은 이용자에게 있습니다. 공식 기준은 국세청 홈택스, 한국전력공사, 국토교통부, 서울시 등 원문을 확인하세요.</p>
+      <p>© <span data-year>2026</span> 도토리 계산기. 직접 만든 무료 도구이며, 어떤 금융기관과도 제휴 관계가 없습니다.</p>
+    </div>
+  </footer>
+  <script src="../assets/site-config.js"></script>
+  <script src="../assets/app.js"></script>
+  <script src="../assets/js/dotori-core.js"></script>
+  <script src="../assets/js/housing.js"></script>
+  <script src="../assets/js/page-housing.js"></script>
+</body>
+</html>
