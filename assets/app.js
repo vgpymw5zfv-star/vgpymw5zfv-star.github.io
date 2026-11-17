@@ -194,6 +194,37 @@
     });
   }
 
+  /* ---------------- Google 애널리틱스(GA4) ---------------- */
+
+  function injectGA4() {
+    var id = (config.GA4_ID || "").trim();
+    if (!id) return; /* 설정 전: 측정 스크립트를 삽입하지 않음 */
+
+    if (!/^G-[A-Z0-9]{6,}$/.test(id)) {
+      if (window.console && console.warn) {
+        console.warn("[도토리] GA4_ID 형식이 올바르지 않습니다:", id);
+      }
+      return;
+    }
+
+    if ($("script[data-dotori-ga4]")) return; /* 중복 삽입 방지 */
+
+    var s = document.createElement("script");
+    s.async = true;
+    s.setAttribute("data-dotori-ga4", "1");
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(id);
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag =
+      window.gtag ||
+      function () {
+        window.dataLayer.push(arguments);
+      };
+    window.gtag("js", new Date());
+    window.gtag("config", id, { anonymize_ip: true });
+  }
+
   /* ---------------- 블로그 · 제휴 배너 ---------------- */
 
   function renderBanner() {
@@ -316,6 +347,7 @@
     renderBanner();
     initFilters();
     injectAdsense();
+    injectGA4();
     if (embed) {
       watchResize();
       postHeight();
