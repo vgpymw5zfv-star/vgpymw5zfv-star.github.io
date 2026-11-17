@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>월세 세액공제 vs 현금영수증 소득공제 계산기 · 5년 경정청구 | 도토리 계산기</title>
+<meta name="description" content="총급여 5,500만원 이하 17%, 8,000만원 이하 15% 월세 세액공제와 월세액 30% 현금영수증 소득공제를 실제 절세액으로 비교하고, 5년 경정청구 환급액까지 계산합니다.">
+<meta name="author" content="도토리사원">
+<meta name="theme-color" content="#1F2A44">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://vgpymw5zfv-star.github.io/rent-tax/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="도토리 계산기">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="월세 세액공제 vs 현금영수증, 뭐가 유리할까">
+<meta property="og:description" content="총급여 5,500만원 이하 17%, 8,000만원 이하 15% 월세 세액공제와 월세액 30% 현금영수증 소득공제를 실제 절세액으로 비교하고, 5년 경정청구 환급액까지 계산합니다.">
+<meta property="og:url" content="https://vgpymw5zfv-star.github.io/rent-tax/">
+<meta property="og:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="월세 세액공제 vs 현금영수증, 뭐가 유리할까">
+<meta name="twitter:description" content="총급여 5,500만원 이하 17%, 8,000만원 이하 15% 월세 세액공제와 월세액 30% 현금영수증 소득공제를 실제 절세액으로 비교하고, 5년 경정청구 환급액까지 계산합니다.">
+<meta name="twitter:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "월세 세액공제 비교 계산기",
+      "url": "https://vgpymw5zfv-star.github.io/rent-tax/",
+      "description": "총급여 5,500만원 이하 17%, 8,000만원 이하 15% 월세 세액공제와 월세액 30% 현금영수증 소득공제를 실제 절세액으로 비교하고, 5년 경정청구 환급액까지 계산합니다.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "JavaScript 지원 브라우저",
+      "inLanguage": "ko-KR",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "도토리사원"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "도토리 계산기",
+        "url": "https://vgpymw5zfv-star.github.io/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "홈",
+          "item": "https://vgpymw5zfv-star.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "월세 절세",
+          "item": "https://vgpymw5zfv-star.github.io/rent-tax/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "월세 세액공제와 현금영수증 소득공제를 같이 받을 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "같은 월세로 두 가지를 동시에 받을 수 없습니다. 월세 세액공제를 받으면 그 월세는 소득공제 대상에서 빠집니다. 그래서 내 총급여와 월세액에 따라 유리한 쪽을 골라야 합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "월세 세액공제 요건은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "무주택 세대주이면서 총급여 8,000만원 이하, 그리고 기준시가 4억원 이하이거나 국민주택규모(85㎡) 이하인 주택에 살아야 합니다. 계약서상 임대인이 개인·법인인지는 상관없습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "집주인이 현금영수증을 안 해주면 어떻게 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "임대인의 동의 없이도 국세청에 '현금영수증 발급 신고'를 하면 소급 발급받을 수 있습니다. 월세 세액공제도 집주인 동의가 필요 없고, 연말정산 간소화 자료에 월세액이 뜨면 그대로 신고하면 됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "5년치 월세를 지금 돌려받을 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "무주택 세대주 요건을 충족했는데 신고하지 않았다면, 경정청구 기한 5년 안에서 과거분을 청구할 수 있습니다. 다만 그 해에도 요건(총급여·세대주·주택)을 만족해야 합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "전입신고를 안 하면 못 받나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "세대주 요건은 주민등록 기준으로 판단되므로, 전입신고가 되어 있지 않으면 세대주로 인정되지 않아 공제를 받을 수 없습니다. 월세 계약 후 전입신고를 먼저 하세요."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../index.html" aria-label="도토리 계산기 홈">
+        <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8v1.9"/><path d="M5.9 9.1c0-2.5 2.7-4.5 6.1-4.5s6.1 2 6.1 4.5c0 .5-.4.9-.9.9H6.8c-.5 0-.9-.4-.9-.9z"/><path d="M7.3 10.9h9.4c0 4.4-1.9 8.6-4.7 10.2-2.8-1.6-4.7-5.8-4.7-10.2z"/></svg></span>
+        <span class="brand__full">도토리 계산기</span>
+        <span class="brand__short">도토리</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 계산기">
+        <a href="../index.html"><span class="nav-full">홈</span><span class="nav-short">홈</span></a>
+        <a href="../sme-tax/"><span class="nav-full">소득세 감면</span><span class="nav-short">감면</span></a>
+        <a href="../electricity/"><span class="nav-full">전기세</span><span class="nav-short">전기세</span></a>
+        <a href="../transit/"><span class="nav-full">교통비</span><span class="nav-short">교통</span></a>
+        <a href="../rent-tax/" aria-current="page"><span class="nav-full">월세 절세</span><span class="nav-short">월세</span></a>
+        <a href="../ai-cost/"><span class="nav-full">AI 구독</span><span class="nav-short">AI</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <div class="container">
+      <section class="page-head">
+        <nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">홈</a><span aria-hidden="true">/</span><span aria-current="page">월세 절세</span></nav>
+        <h1>월세 세액공제 vs 현금영수증 소득공제 계산기</h1>
+        <p class="lead">같은 월세라도 신고 방식에 따라 돌려받는 금액이 다릅니다. 유리한 쪽과 5년치를 계산합니다.</p>
+      </section>
+
+      <div class="calc-layout">
+        <div class="calc-col">
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">1</span>소득과 월세</h2>
+            </div>
+
+            <label class="field" for="rent-salary">
+              <span class="field-label">총급여 <small>원천징수영수증 기준</small></span>
+              <span class="field-control">
+                <input id="rent-salary" type="number" inputmode="numeric" min="0" max="100000" step="100" value="4000">
+                <span class="field-unit">만원</span>
+              </span>
+              <span class="field-help">5,500만 이하 17% · 8,000만 이하 15%</span>
+            </label>
+
+            <div class="field-row">
+              <label class="field" for="rent-rent">
+                <span class="field-label">월세</span>
+                <span class="field-control">
+                  <input id="rent-rent" type="number" inputmode="numeric" min="0" max="1000" step="1" value="60">
+                  <span class="field-unit">만원</span>
+                </span>
+                <span class="field-help">보증금 제외</span>
+              </label>
+              <label class="field" for="rent-months">
+                <span class="field-label">연 납부 개월 수</span>
+                <span class="field-control">
+                  <input id="rent-months" type="number" inputmode="numeric" min="0" max="12" step="1" value="12">
+                  <span class="field-unit">개월</span>
+                </span>
+                <span class="field-help">1년이면 12</span>
+              </label>
+            </div>
+
+            <label class="field" for="rent-years" style="margin-top:16px">
+              <span class="field-label">경정청구 가능 연수</span>
+              <span class="field-control">
+                <select id="rent-years">
+                  <option value="1">1년치</option>
+                  <option value="2">2년치</option>
+                  <option value="3">3년치</option>
+                  <option value="4">4년치</option>
+                  <option value="5" selected>5년치 (최대)</option>
+                </select>
+              </span>
+              <span class="field-help">경정청구 기한 5년</span>
+            </label>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">2</span>공제 요건</h2>
+            </div>
+
+            <label class="check">
+              <input type="checkbox" id="rent-householder" checked>
+              <span>
+                <span class="check__label">무주택 세대주입니다</span>
+                <span class="check__desc">세대원이면 세액공제 불가</span>
+              </span>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="rent-housing" checked>
+              <span>
+                <span class="check__label">주택 요건을 충족합니다</span>
+                <span class="check__desc">기준시가 4억 이하 또는 85㎡ 이하</span>
+              </span>
+            </label>
+
+            <div class="notice" style="margin-top:12px">
+              <span class="notice__icon" aria-hidden="true">i</span>
+              <span>두 공제 모두 <b>집주인 동의가 필요 없습니다.</b></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-col">
+          <div class="result-card" aria-live="polite">
+            <p class="result-card__label">1년 절세액 · <span id="rent-better">월세 세액공제가 유리</span></p>
+            <p class="result-value"><span id="rent-saving">1,346,400</span><small>원</small></p>
+            <p class="result-sub" id="rent-sub">연 월세 720만원 · 총급여 4,000만원 · 17% 적용</p>
+
+            <dl class="result-rows">
+              <div class="result-row">
+                <dt>월세 세액공제</dt>
+                <dd id="rent-credit">134만 6,400원</dd>
+              </div>
+              <div class="result-row">
+                <dt>현금영수증 소득공제</dt>
+                <dd id="rent-cash">35만 6,400원</dd>
+              </div>
+              <div class="result-row result-row--strong">
+                <dt>차액</dt>
+                <dd id="rent-diff">99만원</dd>
+              </div>
+              <div class="result-row">
+                <dt>공제 대상 월세</dt>
+                <dd id="rent-base">720만원</dd>
+              </div>
+              <div class="result-row">
+                <dt>5년 경정청구 합계</dt>
+                <dd id="rent-total5">673만 2,000원</dd>
+              </div>
+            </dl>
+            <p class="result-note">세액공제·소득공제 효과 모두 지방소득세 10% 감소분을 포함한 값입니다. 실제 환급액은 다른 공제·감면에 따라 달라집니다.</p>
+          </div>
+
+          <div class="summary">
+            <h3>두 방식 비교</h3>
+            <div class="table-wrap" style="border:0">
+              <table class="data" style="min-width:0;font-size:13.5px">
+                <thead>
+                  <tr><th scope="col">구분</th><th scope="col">세액공제</th><th scope="col">현금영수증</th></tr>
+                </thead>
+                <tbody id="rent-compare">
+                  <tr><th scope="row">방식</th><td>세금에서 직접 차감</td><td>소득에서 30% 차감</td></tr>
+                  <tr><th scope="row">요건</th><td>무주택 세대주</td><td>요건 없음</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="rent-warnings" class="stack"></div>
+        </div>
+      </div>
+
+      <div class="ads-slot" data-slot="top" hidden></div>
+
+      <div data-blog-banner hidden></div>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>왜 세액공제가 거의 항상 유리한가</h2>
+          <p>‘세금에서 빼는’ 것과 ‘소득에서 빼는’ 것의 차이입니다.</p>
+        </div>
+        <div class="prose">
+          <p><strong>월세 세액공제</strong>는 월세의 15~17%를 <strong>내야 할 세금에서 직접 빼줍니다.</strong> 연 월세 720만원이면 122만 4,000원(17%)이 그대로 줄어들고, 여기에 지방소득세 10%(12만 2,400원)까지 줄어 1년에 약 134만 6,000원을 아낍니다.</p>
+          <p>반면 <strong>현금영수증 소득공제</strong>는 월세의 30%를 <strong>소득에서 빼주는</strong> 방식입니다. 소득이 줄면 세금도 줄지만, 줄어든 소득에 <strong>내 한계세율(6~24%)</strong>을 곱한 만큼만 아낍니다. 연 월세 720만원의 30%인 216만원을 공제해도, 한계세율 15%라면 32만 4,000원 수준입니다. 같은 월세로 4배 차이가 나는 이유입니다.</p>
+          <p>그래서 <strong>세액공제 요건을 충족한다면 세액공제가 정답</strong>입니다. 다만 다음 경우에는 현금영수증 소득공제를 선택해야 합니다.</p>
+          <ul>
+            <li>총급여가 <strong>8,000만원을 넘는</strong> 경우(세액공제 대상 아님)</li>
+            <li><strong>무주택 세대주가 아닌</strong> 경우(세대원, 부모 집에 세대원으로 등재 등)</li>
+            <li>기준시가 4억원 초과이면서 전용 85㎡를 넘는 주택에 사는 경우</li>
+          </ul>
+          <p>두 공제는 <strong>같은 월세로 동시에 받을 수 없습니다.</strong> 세액공제를 받은 월세는 소득공제 대상에서 제외됩니다. 그래서 매년 1월 연말정산 전에 내 총급여와 세대주 여부를 확인하고 유리한 쪽을 고르는 것이 중요합니다.</p>
+
+          <h3>한도와 계산식</h3>
+          <p>월세 세액공제는 <strong>연 월세 1,000만원까지</strong>만 공제 대상입니다. 월세 100만원 × 12개월 = 1,200만원이어도 1,000만원까지만 계산합니다. 공제율은 총급여 5,500만원 이하 17%, 5,500만원 초과 8,000만원 이하 15%입니다.</p>
+          <p>현금영수증 소득공제는 월세액의 30%를 소득에서 빼고, <strong>공제 한도는 총급여 7,000만원 이하 300만원, 초과 250만원</strong>입니다. 연 월세 1,000만원이면 30%가 300만원이라 한도에 정확히 걸립니다.</p>
+
+          <h3>5년치를 돌려받는 방법</h3>
+          <p>요건을 충족했는데 신고하지 않았다면, 국세기본법상 <strong>경정청구 기한 5년</strong> 안에서 과거분을 청구할 수 있습니다. 다만 그 해에도 요건(총급여·무주택 세대주·주택 기준)을 만족해야 하고, 전입신고가 되어 있어야 세대주로 인정됩니다.</p>
+          <p>현금영수증을 발급받지 못했다면 국세청 홈택스에서 <strong>‘현금영수증 발급 신고’</strong>로 소급 발급을 요청할 수 있습니다. 임대인의 동의는 필요 없고, 신고가 되면 해당 금액이 소득공제 자료에 반영됩니다.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>총급여별 유불리 (월세 60만원 · 12개월)</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <caption>2026년 11월 기준 · 지방소득세 포함, 부양가족 없는 본인 공제만 반영한 추정입니다.</caption>
+            <thead>
+              <tr>
+                <th scope="col">총급여</th>
+                <th scope="col">세액공제</th>
+                <th scope="col">현금영수증</th>
+                <th scope="col">유리한 쪽</th>
+              </tr>
+            </thead>
+            <tbody id="rent-example-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>자주 묻는 질문</h2>
+        </div>
+        <div class="faq">
+      <details>
+        <summary>월세 세액공제와 현금영수증 소득공제를 같이 받을 수 있나요?</summary>
+        <p>같은 월세로 두 가지를 동시에 받을 수 없습니다. 월세 세액공제를 받으면 그 월세는 소득공제 대상에서 빠집니다. 그래서 내 총급여와 월세액에 따라 유리한 쪽을 골라야 합니다.</p>
+      </details>
+      <details>
+        <summary>월세 세액공제 요건은 무엇인가요?</summary>
+        <p>무주택 세대주이면서 총급여 8,000만원 이하, 그리고 기준시가 4억원 이하이거나 국민주택규모(85㎡) 이하인 주택에 살아야 합니다. 계약서상 임대인이 개인·법인인지는 상관없습니다.</p>
+      </details>
+      <details>
+        <summary>집주인이 현금영수증을 안 해주면 어떻게 하나요?</summary>
+        <p>임대인의 동의 없이도 국세청에 '현금영수증 발급 신고'를 하면 소급 발급받을 수 있습니다. 월세 세액공제도 집주인 동의가 필요 없고, 연말정산 간소화 자료에 월세액이 뜨면 그대로 신고하면 됩니다.</p>
+      </details>
+      <details>
+        <summary>5년치 월세를 지금 돌려받을 수 있나요?</summary>
+        <p>무주택 세대주 요건을 충족했는데 신고하지 않았다면, 경정청구 기한 5년 안에서 과거분을 청구할 수 있습니다. 다만 그 해에도 요건(총급여·세대주·주택)을 만족해야 합니다.</p>
+      </details>
+      <details>
+        <summary>전입신고를 안 하면 못 받나요?</summary>
+        <p>세대주 요건은 주민등록 기준으로 판단되므로, 전입신고가 되어 있지 않으면 세대주로 인정되지 않아 공제를 받을 수 없습니다. 월세 계약 후 전입신고를 먼저 하세요.</p>
+      </details>
+    </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>공식 출처</h2>
+        </div>
+        <ul class="source-list">
+          <li><a href="https://www.law.go.kr/법령/조세특례제한법" target="_blank" rel="noopener">조세특례제한법 제95조의2(월세액에 대한 세액공제)</a> <span>법제처 국가법령정보센터</span></li>
+          <li><a href="https://www.nts.go.kr" target="_blank" rel="noopener">국세청 — 월세 세액공제·현금영수증 소득공제 안내</a> <span>nts.go.kr</span></li>
+          <li><a href="https://hometax.go.kr" target="_blank" rel="noopener">홈택스 — 연말정산 간소화·경정청구</a> <span>hometax.go.kr</span></li>
+          <li>블로그 심화편: <a href="https://news67.tistory.com/18" target="_blank" rel="noopener">연말정산 월세 세액공제·경정청구 정리</a> <span>도토리사원 재테크 연구소</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>함께 쓰면 좋은 계산기</h2>
+        </div>
+        <div class="grid grid--2" data-related>
+        <a class="calc-card" href="../sme-tax/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span>
+            <span class="calc-card__tag">절세</span>
+          </div>
+          <h3>중소기업 취업자 소득세 감면 · 5년 경정청구</h3>
+          <p>청년 90% 감면으로 놓친 세금을 5년치 돌려받는 금액을 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../electricity/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg></span>
+            <span class="calc-card__tag">생활비</span>
+          </div>
+          <h3>자취 원룸 전기세 · 누진제 계산</h3>
+          <p>1,500W 온풍기를 하루 2시간 쓰면 얼마 더 나올까. 누진 구간까지 반영합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../transit/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="14" rx="2.5"/><path d="M4 11h16M8 17v3M16 17v3"/><circle cx="8" cy="14" r=".8" fill="currentColor"/><circle cx="16" cy="14" r=".8" fill="currentColor"/></svg></span>
+            <span class="calc-card__tag">교통</span>
+          </div>
+          <h3>K-패스 vs 기후동행카드 손익분기</h3>
+          <p>내 통근 패턴에서 어느 쪽이 유리한지 월·연 절약액으로 비교합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../ai-cost/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M18.5 16.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span>
+            <span class="calc-card__tag">구독</span>
+          </div>
+          <h3>직장인 AI 구독 조합 가성비</h3>
+          <p>ChatGPT·Gemini·Claude·Perplexity, 조합별 월 비용을 한눈에 정리합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+      </div>
+      </section>
+
+      <div class="ads-slot" data-slot="bottom" hidden></div>
+
+      <div class="embed-footer"><a href="https://vgpymw5zfv-star.github.io/rent-tax/" target="_blank" rel="noopener">도토리 계산기 전체 보기 ↗</a></div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__top">
+        <a class="site-footer__brand" href="../index.html">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8v1.9"/><path d="M5.9 9.1c0-2.5 2.7-4.5 6.1-4.5s6.1 2 6.1 4.5c0 .5-.4.9-.9.9H6.8c-.5 0-.9-.4-.9-.9z"/><path d="M7.3 10.9h9.4c0 4.4-1.9 8.6-4.7 10.2-2.8-1.6-4.7-5.8-4.7-10.2z"/></svg></span>
+          <span>도토리 계산기</span>
+        </a>
+        <nav aria-label="사이트 정보">
+          <a href="../about/">운영 소개</a>
+          <a href="../privacy/">개인정보처리방침</a>
+          <a href="../contact/">문의</a>
+          <a href="../sitemap.xml">사이트맵</a>
+        </nav>
+      </div>
+      <p>기준일 <span data-기준일>2026년 11월</span> · 운영 도토리사원 · 문의 <span data-contact-email>misun6007@gmail.com</span></p>
+      <p class="disclaimer">이 사이트의 모든 계산 결과는 공개된 요율과 단순화한 가정에 따른 <strong>참고용 추정치</strong>입니다. 세금·요금·환급 여부는 개인의 실제 조건과 관계 기관의 최종 결정에 따라 달라질 수 있으며, 계산 결과를 근거로 한 신고·계약·투자 판단의 책임은 이용자에게 있습니다. 공식 기준은 국세청 홈택스, 한국전력공사, 국토교통부, 서울시 등 원문을 확인하세요.</p>
+      <p>© <span data-year>2026</span> 도토리 계산기. 직접 만든 무료 도구이며, 어떤 금융기관과도 제휴 관계가 없습니다.</p>
+    </div>
+  </footer>
+  <script src="../assets/site-config.js"></script>
+  <script src="../assets/app.js"></script>
+  <script src="../assets/js/dotori-core.js"></script>
+  <script src="../assets/js/rent-tax.js"></script>
+  <script src="../assets/js/page-rent.js"></script>
+</body>
+</html>
