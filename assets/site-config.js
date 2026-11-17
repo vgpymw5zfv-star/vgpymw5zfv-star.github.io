@@ -12,7 +12,7 @@ window.DOTORI_CONFIG = {
   siteTagline: "직장인 · 자취생 생활비와 세금을 30초에 계산",
   baseUrl: "https://vgpymw5zfv-star.github.io",
   author: "도토리사원",
-  contactEmail: "misun6007@gmail.com",
+  /* 문의는 /contact/ 무료 문의 폼으로 받습니다 (개인 이메일 노출 없음) */
 
   /* 계산 기준일 표기 (사이트 전 페이지 배지·푸터에 표시) */
   기준일: "2026년 11월",

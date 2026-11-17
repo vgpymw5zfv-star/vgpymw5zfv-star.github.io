@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>원룸 전기세 누진제 계산기 · 추가 가전 전기요금 2026 | 도토리 계산기</title>
-<meta name="description" content="2026년 한국전력 주택용 저압 누진제(120/214.6/307.3원)와 기본요금·기후환경요금·연료비조정요금·부가세·전력산업기반기금을 모두 반영해, 온풍기·건조기·가습기 추가 사용 시 전기요금을 계산합니다.">
+<title>우리집 전기세 · 누진제 계산기 · 원룸(저압)·아파트(고압) 2026 | 도토리 계산기</title>
+<meta name="description" content="2026년 한국전력 주택용 저압(120/214.6/307.3원)과 고압(105/174/242.3원) 누진제를 평수·전용면적·가전별로 계산합니다. 하계 300/450kWh 구간, 슈퍼유저, 기후환경요금·연료비조정요금·부가세·전력산업기반기금 2.7%까지 반영.">
 <meta name="author" content="도토리사원">
 <meta name="theme-color" content="#1F2A44">
 <meta name="google-site-verification" content="_dxc0C2kiFi1gcrJOmOw2CYSbvuWM6zPb_HV6ua8Irc">
@@ -13,15 +13,15 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="도토리 계산기">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="자취 원룸 전기세 · 누진제 계산기">
-<meta property="og:description" content="2026년 한국전력 주택용 저압 누진제(120/214.6/307.3원)와 기본요금·기후환경요금·연료비조정요금·부가세·전력산업기반기금을 모두 반영해, 온풍기·건조기·가습기 추가 사용 시 전기요금을 계산합니다.">
+<meta property="og:title" content="우리집 전기세 · 누진제 계산기">
+<meta property="og:description" content="2026년 한국전력 주택용 저압(120/214.6/307.3원)과 고압(105/174/242.3원) 누진제를 평수·전용면적·가전별로 계산합니다. 하계 300/450kWh 구간, 슈퍼유저, 기후환경요금·연료비조정요금·부가세·전력산업기반기금 2.7%까지 반영.">
 <meta property="og:url" content="https://vgpymw5zfv-star.github.io/electricity/">
 <meta property="og:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="자취 원룸 전기세 · 누진제 계산기">
-<meta name="twitter:description" content="2026년 한국전력 주택용 저압 누진제(120/214.6/307.3원)와 기본요금·기후환경요금·연료비조정요금·부가세·전력산업기반기금을 모두 반영해, 온풍기·건조기·가습기 추가 사용 시 전기요금을 계산합니다.">
+<meta name="twitter:title" content="우리집 전기세 · 누진제 계산기">
+<meta name="twitter:description" content="2026년 한국전력 주택용 저압(120/214.6/307.3원)과 고압(105/174/242.3원) 누진제를 평수·전용면적·가전별로 계산합니다. 하계 300/450kWh 구간, 슈퍼유저, 기후환경요금·연료비조정요금·부가세·전력산업기반기금 2.7%까지 반영.">
 <meta name="twitter:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -33,9 +33,9 @@
   "@graph": [
     {
       "@type": "WebApplication",
-      "name": "원룸 전기세 누진제 계산기",
+      "name": "우리집 전기세 누진제 계산기",
       "url": "https://vgpymw5zfv-star.github.io/electricity/",
-      "description": "2026년 한국전력 주택용 저압 누진제(120/214.6/307.3원)와 기본요금·기후환경요금·연료비조정요금·부가세·전력산업기반기금을 모두 반영해, 온풍기·건조기·가습기 추가 사용 시 전기요금을 계산합니다.",
+      "description": "2026년 한국전력 주택용 저압(120/214.6/307.3원)과 고압(105/174/242.3원) 누진제를 평수·전용면적·가전별로 계산합니다. 하계 300/450kWh 구간, 슈퍼유저, 기후환경요금·연료비조정요금·부가세·전력산업기반기금 2.7%까지 반영.",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "All",
       "browserRequirements": "JavaScript 지원 브라우저",
@@ -78,10 +78,26 @@
       "mainEntity": [
         {
           "@type": "Question",
+          "name": "저압과 고압(아파트)은 요금이 어떻게 다른가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "원룸·빌라·단독주택은 대부분 주택용 저압, 아파트는 대부분 주택용 고압입니다. 고압은 전력량요금이 1kWh당 15~65원 싸고 기본요금도 낮습니다. 350kWh를 쓰면 저압은 약 6만원, 고압은 약 4만 8천원 수준으로 한 달에 1만원 넘게 차이 납니다. 청구서의 ‘계약종별’을 먼저 확인하세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "평수나 전용면적만 알아도 계산되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네. 전용면적(㎡)과 가구원 수를 넣으면 참고 사용량을 추정해 요금을 계산합니다. 1평은 3.3058㎡이고, 아파트 ‘25평형’은 공급면적 기준이라 전용면적은 약 59㎡입니다. 다만 이 값은 평균 추정치이므로, 고지서가 있으면 사용량(kWh)이나 청구 금액으로 입력하는 쪽이 정확합니다."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "누진제는 어떻게 계산되나요?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "사용량 전체에 한 단가를 곱하는 게 아니라 구간별로 나눠 곱합니다. 350kWh를 쓰면 200kWh까지는 120원, 나머지 150kWh는 214.6원이 적용되고, 기본요금도 마지막 구간 기준(1,600원)으로 붙습니다."
+            "text": "사용량 전체에 한 단가를 곱하는 게 아니라 구간별로 나눠 곱합니다. 저압 기준 350kWh를 쓰면 200kWh까지는 120원, 나머지 150kWh는 214.6원이 적용되고, 기본요금도 마지막 구간 기준(1,600원)으로 붙습니다."
           }
         },
         {
@@ -94,18 +110,18 @@
         },
         {
           "@type": "Question",
-          "name": "청구서 금액만 알고 있는데 사용량을 알 수 있나요?",
+          "name": "여름(하계)에는 누진 기준이 다른가요?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "네. 계산기에서 '청구서 금액으로 입력'을 선택하면 해당 금액이 나오는 사용량을 역으로 찾아 계산합니다. 청구서의 '사용량'란을 보는 게 가장 정확합니다."
+            "text": "7~8월에는 누진 경계가 300kWh / 450kWh로 넓어져 같은 사용량도 요금이 낮습니다. 대신 1,000kWh를 넘기면 초과분에 슈퍼유저 요금(저압 736.2원, 고압 593.3원)이 붙습니다. 12~2월 동계 청구서도 1,000kWh를 넘겼다면 계산기에서 슈퍼유저 항목을 체크하세요."
           }
         },
         {
           "@type": "Question",
-          "name": "에어컨·온풍기 같은 난방·냉방 가전은 얼마나 나오나요?",
+          "name": "청구서 금액만 알고 있는데 사용량을 알 수 있나요?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "소비전력(W) × 하루 사용시간 × 사용일수 ÷ 1,000 = 월 사용량(kWh)입니다. 예를 들어 1,500W 온풍기를 하루 2시간, 30일 쓰면 90kWh가 늘어납니다. 이미 200kWh를 넘겼다면 3구간(307.3원)에 걸려 부담이 커집니다."
+            "text": "네. 계산기에서 ‘청구서 금액’을 선택하면 해당 금액이 나오는 사용량을 역으로 찾아 계산합니다. 청구서의 ‘사용량’란을 보는 게 가장 정확합니다."
           }
         },
         {
@@ -113,7 +129,7 @@
           "name": "이 계산 결과가 청구서와 똑같이 나오나요?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "계약종별(주택용 저압/고압), 복지할인, TV수신료, 연체료, 계절별 연료비조정요금에 따라 달라질 수 있습니다. 계산기는 주택용 저압 기준의 표준 요금 구조를 따릅니다."
+            "text": "계약종별(저압·고압)과 계절 구간을 그대로 반영하지만, 복지할인, TV수신료, 연체료, 연료비조정요금의 월별 변동, 아파트 공용 전기료는 포함하지 않습니다. 청구서와 1,000원 안팎 차이가 날 수 있습니다."
           }
         },
         {
@@ -121,7 +137,7 @@
           "name": "전기요금을 줄이는 가장 확실한 방법은 무엇인가요?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "누진 구간을 넘기지 않는 것이 가장 큽니다. 400kWh를 넘기면 단가가 307.3원으로 뛰므로, 고전력 가전은 사용 시간을 나누고 대기전력을 차단하는 것만으로도 월 1만원 이상 차이가 납니다."
+            "text": "누진 구간을 넘기지 않는 것이 가장 큽니다. 저압 3구간은 1kWh당 307.3원으로 1구간의 2.6배이므로, 고전력 가전은 사용 시간을 나누고 대기전력을 차단하는 것만으로도 월 1만원 이상 차이가 납니다. 아파트라면 계약 종별이 고압으로 되어 있는지도 확인해 보세요."
           }
         }
       ]
@@ -153,29 +169,109 @@
     <div class="container">
       <section class="page-head">
         <nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">홈</a><span aria-hidden="true">/</span><span aria-current="page">전기세 누진제</span></nav>
-        <h1>자취 원룸 전기세 · 누진제 계산기</h1>
-        <p class="lead">온풍기·건조기·가습기를 더하면 전기요금이 얼마나 오를까요. 누진 구간 점프까지 반영합니다.</p>
+        <h1>우리집 전기세 · 누진제 계산기</h1>
+        <p class="lead">원룸·빌라(저압)부터 아파트(고압)까지 — 평수·전용면적과 가전별 사용량으로 누진 요금을 계산합니다.</p>
       </section>
 
       <div class="calc-layout">
         <div class="calc-col">
           <div class="field-group">
             <div class="field-group__title">
-              <h2><span class="step-no">1</span>지금 쓰는 전기</h2>
+              <h2><span class="step-no">1</span>계약 종별 · 계절</h2>
+            </div>
+
+            <div class="field">
+              <div class="field-label">
+                <span>계약 종별</span>
+                <small>청구서의 ‘계약종별’과 같게</small>
+              </div>
+              <div class="segment segment--wrap" data-segment="contract" role="group" aria-label="계약 종별">
+                <button type="button" data-value="low" aria-pressed="true">주택용 저압</button>
+                <button type="button" data-value="high" aria-pressed="false">주택용 고압(아파트)</button>
+              </div>
+              <span class="field-help">원룸·빌라·단독주택은 대부분 저압, 아파트는 대부분 고압입니다. 고압이 1kWh당 15~65원 쌉니다.</span>
+            </div>
+
+            <div class="field">
+              <div class="field-label">
+                <span>계절 구간</span>
+                <small>누진 경계 200/400 ↔ 300/450kWh</small>
+              </div>
+              <div class="segment segment--wrap" data-segment="season" role="group" aria-label="계절 구간">
+                <button type="button" data-value="general" aria-pressed="true">일반(3~6·9~12월)</button>
+                <button type="button" data-value="summer" aria-pressed="false">하계(7~8월)</button>
+              </div>
+              <span class="field-help">하계에는 1구간이 300kWh, 2구간이 450kWh까지 넓어져 같은 사용량도 요금이 낮습니다.</span>
+            </div>
+
+            <label class="check">
+              <input type="checkbox" id="elec-superuser">
+              <span>
+                <span class="check__label">1,000kWh 초과 슈퍼유저 요금 적용</span>
+                <span class="check__desc">하계(7~8월)는 자동 적용됩니다. 12~2월 청구서를 계산할 때 직접 체크하세요.</span>
+              </span>
+            </label>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">2</span>우리집 기본 사용량</h2>
             </div>
 
             <div class="field">
               <div class="field-label">
                 <span>입력 방식</span>
-                <small>청구서의 사용량 또는 청구 금액</small>
+                <small>평수·전용면적 / 사용량 / 청구 금액</small>
               </div>
-              <div class="segment" data-segment="usage-mode" role="group" aria-label="사용량 입력 방식">
-                <button type="button" data-value="kwh" aria-pressed="true">사용량(kWh)</button>
+              <div class="segment segment--wrap" data-segment="usage-mode" role="group" aria-label="사용량 입력 방식">
+                <button type="button" data-value="area" aria-pressed="true">평수·전용면적</button>
+                <button type="button" data-value="kwh" aria-pressed="false">사용량(kWh)</button>
                 <button type="button" data-value="bill" aria-pressed="false">청구서 금액(원)</button>
               </div>
             </div>
 
-            <label class="field" id="elec-kwh-wrap" for="elec-usage">
+            <div id="elec-area-wrap">
+              <div class="filters" style="margin-bottom:14px" data-area-bar role="group" aria-label="대표 면적 선택">
+                <button type="button" class="chip" data-area="20" data-persons="1">원룸 20㎡(6평)</button>
+                <button type="button" class="chip" data-area="40" data-persons="2">소형 40㎡(12평)</button>
+                <button type="button" class="chip" data-area="59" data-persons="3">59㎡(25평형)</button>
+                <button type="button" class="chip" data-area="84" data-persons="3">84㎡(34평형)</button>
+                <button type="button" class="chip" data-area="114" data-persons="4">114㎡(43평형)</button>
+              </div>
+
+              <div class="field-row">
+                <label class="field" for="elec-area-m2">
+                  <span class="field-label">전용면적</span>
+                  <span class="field-control">
+                    <input id="elec-area-m2" type="number" inputmode="decimal" min="0" max="500" step="1" value="59">
+                    <span class="field-unit">㎡</span>
+                  </span>
+                </label>
+                <label class="field" for="elec-area-pyeong">
+                  <span class="field-label">평수</span>
+                  <span class="field-control">
+                    <input id="elec-area-pyeong" type="number" inputmode="decimal" min="0" max="200" step="0.1" value="17.8">
+                    <span class="field-unit">평</span>
+                  </span>
+                </label>
+              </div>
+              <span class="field-help">1평 = 3.3058㎡(전용면적 기준). 부동산의 ‘25평형·34평형’은 공급면적 기준이라 전용면적은 59㎡·84㎡ 안팎입니다.</span>
+
+              <div class="field">
+                <div class="field-label">
+                  <span>거주 인원</span>
+                  <small>가구원 수가 많을수록 사용량이 늘어납니다</small>
+                </div>
+                <div class="segment segment--wrap" data-segment="persons" role="group" aria-label="거주 인원">
+                  <button type="button" data-value="1" aria-pressed="false">1인</button>
+                  <button type="button" data-value="2" aria-pressed="false">2인</button>
+                  <button type="button" data-value="3" aria-pressed="true">3인</button>
+                  <button type="button" data-value="4" aria-pressed="false">4인+</button>
+                </div>
+              </div>
+            </div>
+
+            <label class="field" id="elec-kwh-wrap" for="elec-usage" hidden>
               <span class="field-label">이번 달 사용량</span>
               <span class="field-control">
                 <input id="elec-usage" type="number" inputmode="decimal" min="0" max="100000" step="1" value="200">
@@ -187,7 +283,7 @@
             <label class="field" id="elec-bill-wrap" for="elec-bill" hidden>
               <span class="field-label">이번 달 청구 금액</span>
               <span class="field-control">
-                <input id="elec-bill" type="number" inputmode="numeric" min="0" max="100000000" step="10" value="31500">
+                <input id="elec-bill" type="number" inputmode="numeric" min="0" max="100000000" step="10" value="31220">
                 <span class="field-unit">원</span>
               </span>
               <span class="field-help">전기요금만(수신료·연체료 제외).</span>
@@ -195,22 +291,24 @@
 
             <div class="notice" id="elec-mode-note">
               <span class="notice__icon" aria-hidden="true">i</span>
-              <span>입력한 사용량의 예상 청구액은 <b id="elec-before">31,500원</b>입니다.</span>
+              <span>전용면적·가구원 수를 고르면 참고 사용량과 예상 요금을 바로 계산합니다.</span>
             </div>
           </div>
 
           <div class="field-group">
             <div class="field-group__title">
-              <h2><span class="step-no">2</span>추가할 가전</h2>
+              <h2><span class="step-no">3</span>추가·함께 쓰는 가전</h2>
               <small style="color:var(--muted-light);font-size:12px">프리셋을 누르면 자동 입력됩니다</small>
             </div>
 
             <div class="filters" style="margin-bottom:16px" data-preset-bar>
+              <button type="button" class="chip" data-preset="ac-stand">스탠드 에어컨 1,800W</button>
+              <button type="button" class="chip" data-preset="ac-wall">벽걸이 에어컨 700W</button>
+              <button type="button" class="chip" data-preset="dryer">의류건조기 1,000W</button>
+              <button type="button" class="chip" data-preset="dishwasher">식기세척기 1,200W</button>
               <button type="button" class="chip" data-preset="bath-heater">욕실온풍기 1,500W</button>
-              <button type="button" class="chip" data-preset="mini-dryer">미니건조기 850W</button>
               <button type="button" class="chip" data-preset="humidifier">가열식 가습기 400W</button>
               <button type="button" class="chip" data-preset="electric-mat">전기장판 120W</button>
-              <button type="button" class="chip" data-preset="air-fryer">에어프라이어 1,400W</button>
               <button type="button" class="chip" data-preset="custom">직접 입력</button>
             </div>
 
@@ -218,14 +316,14 @@
               <label class="field" for="elec-watts">
                 <span class="field-label">소비전력</span>
                 <span class="field-control">
-                  <input id="elec-watts" type="number" inputmode="numeric" min="0" max="10000" step="10" value="1500">
+                  <input id="elec-watts" type="number" inputmode="numeric" min="0" max="10000" step="10" value="1800">
                   <span class="field-unit">W</span>
                 </span>
               </label>
               <label class="field" for="elec-hours">
                 <span class="field-label">하루 사용</span>
                 <span class="field-control">
-                  <input id="elec-hours" type="number" inputmode="decimal" min="0" max="24" step="0.5" value="2">
+                  <input id="elec-hours" type="number" inputmode="decimal" min="0" max="24" step="0.5" value="4">
                   <span class="field-unit">시간</span>
                 </span>
               </label>
@@ -237,7 +335,7 @@
                 </span>
               </label>
             </div>
-            <span class="field-help">제품 라벨의 정격소비전력 기준.</span>
+            <span class="field-help">제품 라벨의 정격소비전력 기준. 인버터 에어컨은 실제 소비전력이 더 낮습니다.</span>
             <p class="field-help" id="elec-clamp-note" hidden style="color:var(--warn)"></p>
           </div>
         </div>
@@ -246,35 +344,36 @@
           <div class="result-card" aria-live="polite">
             <p class="result-card__label">추가로 나오는 전기요금</p>
             <p class="result-value"><span id="elec-extra">0</span><small>원</small></p>
-            <p class="result-sub" id="elec-sub">월 90kWh 추가 · 1구간 유지</p>
+            <p class="result-sub" id="elec-sub">월 0kWh 추가 · 구간 유지</p>
+            <p class="pill pill--blue" id="elec-price-label" style="margin-top:10px">저압 · 일반</p>
 
             <dl class="result-rows">
               <div class="result-row">
                 <dt>추가 사용량</dt>
-                <dd id="elec-add-kwh">90kWh</dd>
+                <dd id="elec-add-kwh">0kWh</dd>
               </div>
               <div class="result-row">
                 <dt>기존 예상 요금</dt>
-                <dd id="elec-before-total">31,500원</dd>
+                <dd id="elec-before-total">0원</dd>
               </div>
               <div class="result-row result-row--strong">
                 <dt>추가 후 총 예상</dt>
-                <dd id="elec-after-total">47,630원</dd>
+                <dd id="elec-after-total">0원</dd>
               </div>
               <div class="result-row">
                 <dt>추가분 1kWh당</dt>
-                <dd id="elec-extra-unit">181원</dd>
+                <dd id="elec-extra-unit">0원</dd>
               </div>
               <div class="result-row">
                 <dt>구간</dt>
-                <dd id="elec-tier">1구간 → 2구간</dd>
+                <dd id="elec-tier">1구간 → 1구간</dd>
               </div>
               <div class="result-row">
                 <dt>연간 추가 부담</dt>
                 <dd id="elec-yearly">0원</dd>
               </div>
             </dl>
-            <p class="result-note">주택용 저압 기준 · 기본요금 + 전력량요금 + 기후환경요금 9원 + 연료비조정요금 5원 + 부가세 10% + 전력산업기반기금 3.7%</p>
+            <p class="result-note" id="elec-result-note">주택용 저압 · 일반(3~6·9~12월) 기준 · 기본요금 + 전력량요금 + 기후환경요금 9원 + 연료비조정요금 5원 + 부가세 10% + 전력산업기반기금 2.7%</p>
           </div>
 
           <div class="summary">
@@ -282,7 +381,7 @@
             <div class="table-wrap" style="border:0">
               <table class="data" style="min-width:0;font-size:13.5px">
                 <tbody id="elec-breakdown">
-                  <tr><th scope="row">기본요금</th><td>1,600원</td></tr>
+                  <tr><th scope="row">기본요금</th><td>0원</td></tr>
                   <tr><th scope="row">전력량요금</th><td>0원</td></tr>
                   <tr><th scope="row">기후환경요금</th><td>0원</td></tr>
                   <tr><th scope="row">연료비조정요금</th><td>0원</td></tr>
@@ -294,7 +393,7 @@
             </div>
             <div class="gauge" style="margin-top:14px">
               <div class="gauge__bar"><div class="gauge__fill" id="elec-gauge"></div></div>
-              <div class="gauge__scale"><span>0</span><span>200kWh</span><span>400kWh</span><span>500+</span></div>
+              <div class="gauge__scale" id="elec-gauge-scale"><span>0</span><span>200kWh</span><span>400kWh</span><span>500+</span></div>
             </div>
           </div>
 
@@ -312,33 +411,81 @@
           <p>구간별로 단가가 다르게 적용되는 구조를 이해하면 절전이 쉬워집니다.</p>
         </div>
         <div class="prose">
-          <p>주택용 전기요금은 <strong>기본요금 + 전력량요금 + 기후환경요금 + 연료비조정요금</strong>에 부가가치세 10%와 전력산업기반기금 3.7%를 더해 계산합니다. 2026년 11월 기준 주택용 저압 전력량요금은 1구간(200kWh 이하) 120.0원, 2구간(201~400kWh) 214.6원, 3구간(400kWh 초과) 307.3원입니다.</p>
-          <p>중요한 점은 <strong>구간별로 나눠 곱한다</strong>는 것입니다. 350kWh를 쓰면 350kWh 전부에 214.6원이 적용되는 게 아니라, 200kWh는 120원, 나머지 150kWh만 214.6원이 적용됩니다. 기본요금은 마지막 사용량이 속한 구간의 금액(910원 / 1,600원 / 7,300원)이 붙습니다.</p>
+          <p>주택용 전기요금은 <strong>기본요금 + 전력량요금 + 기후환경요금 + 연료비조정요금</strong>에 부가가치세 10%와 전력산업기반기금 2.7%를 더해 계산합니다. 2025년 7월 1일부터 기금 부담률이 3.7%에서 2.7%로 내려가, 같은 사용량이라도 청구서가 조금 낮아졌습니다.</p>
+          <p>전력량요금은 계약 종별로 다릅니다. <strong>주택용 저압</strong>(원룸·빌라·단독)은 1구간 120.0원, 2구간 214.6원, 3구간 307.3원이고, <strong>주택용 고압</strong>(대부분 아파트)은 105.0원, 174.0원, 242.3원입니다. 기본요금도 저압 910 / 1,600 / 7,300원, 고압 730 / 1,260 / 6,060원으로 차이가 납니다.</p>
+          <p>중요한 점은 <strong>구간별로 나눠 곱한다</strong>는 것입니다. 350kWh를 쓰면 350kWh 전부에 214.6원이 적용되는 게 아니라, 200kWh는 120원, 나머지 150kWh만 214.6원이 적용됩니다. 기본요금은 마지막 사용량이 속한 구간의 금액이 붙습니다.</p>
           <p>그래서 <strong>200kWh에서 201kWh로 1kWh만 늘어도 요금이 약 1,000원 오릅니다.</strong> 기본요금이 690원 뛰고, 201번째 1kWh부터 단가가 120원에서 214.6원으로 바뀌기 때문입니다. 400kWh를 넘길 때는 기본요금이 5,700원 뛰고 단가가 307.3원이 되므로, 401kWh 구간에 들어서는 순간 월 요금이 1만원 이상 올라갈 수 있습니다.</p>
-          <p>계산기는 이 구조를 그대로 구현하고, 추가 가전을 켰을 때 <strong>구간이 넘어가는지(점프)</strong>를 먼저 알려 줍니다. 점프가 예상되면 사용 시간을 줄이거나, 다른 고전력 가전과 시간을 나눠 쓰는 것이 가장 효과적입니다.</p>
+          <p>여름(7~8월)에는 누진 경계가 <strong>300kWh / 450kWh</strong>로 넓어집니다. 냉방을 많이 쓰는 달에 3구간으로 밀려나지 않게 하려는 제도라, 같은 400kWh라도 하계에는 2구간 요금이 적용됩니다. 대신 1,000kWh를 넘기면 초과분에 <strong>슈퍼유저 요금</strong>(저압 736.2원, 고압 593.3원)이 붙습니다. 계산기에서 계절을 바꾸면 이 구조가 그대로 반영됩니다.</p>
+        </div>
+      </section>
 
-          <h3>원룸에서 전기요금을 키우는 가전</h3>
+      <section class="section">
+        <div class="section-head">
+          <h2>같은 사용량, 저압과 고압은 얼마나 차이날까</h2>
+          <p>원룸에서 아파트로 이사하면 계약 종별이 바뀌면서 요금도 달라집니다.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <caption>2026년 11월 기준 · 현재 선택한 계절 구간 적용 · 부가세·기금 포함 월 청구액</caption>
+            <thead>
+              <tr>
+                <th scope="col">월 사용량</th>
+                <th scope="col">주택용 저압</th>
+                <th scope="col">주택용 고압</th>
+                <th scope="col">고압이 싼 금액</th>
+              </tr>
+            </thead>
+            <tbody id="elec-contract-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>평수·전용면적으로 우리집 사용량 어림하기</h2>
+          <p>고지서가 없어도 대략의 규모를 잡을 수 있습니다.</p>
+        </div>
+        <div class="prose">
+          <p>전기 사용량은 면적(냉난방 공간)과 가구원 수에 가장 크게 좌우됩니다. 계산기는 <strong>90 + 2.2 × 전용면적(㎡) + 50 × (가구원 수 − 1)</strong>로 월 사용량을 어림합니다. 20㎡ 원룸 1인은 약 130kWh, 59㎡ 3인은 약 320kWh, 84㎡ 4인은 약 430kWh 수준입니다.</p>
+          <p>이 값은 <strong>면적별 평균 추정치</strong>입니다. 같은 84㎡라도 재택근무를 하거나 전기 히터·에어컨을 오래 켜면 500kWh를 넘기도 하고, 여름에 에어컨을 거의 안 쓰면 250kWh대로 내려가기도 합니다. 정확한 금액이 필요하면 청구서의 <strong>사용량(kWh)</strong> 또는 <strong>청구 금액</strong> 탭을 쓰세요.</p>
+          <p>참고로 부동산에서 말하는 ‘25평형·34평형’은 <strong>공급면적</strong> 기준이고, 전기요금과 면적 기준은 <strong>전용면적</strong>입니다. 25평형 아파트의 전용면적은 59㎡ 안팎, 34평형은 84㎡ 안팎입니다.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>전기요금을 키우는 가전</h2>
+        </div>
+        <div class="prose">
           <ul>
-            <li><strong>욕실·화장실 온풍기(1,000~2,000W)</strong> — 하루 2시간이면 월 60~120kWh. 겨울철 3구간 진입의 주범입니다.</li>
-            <li><strong>미니건조기(500~1,000W)</strong> — 한 번에 1.5~3시간, 히터형은 전력 소모가 큽니다.</li>
+            <li><strong>스탠드 에어컨(1,500~2,200W)</strong> — 하루 4시간이면 월 180~260kWh. 여름 3구간 진입의 주범입니다.</li>
+            <li><strong>벽걸이 에어컨(600~900W)</strong> — 스탠드보다 적지만 하루 6시간이면 월 100kWh를 넘습니다.</li>
+            <li><strong>의류건조기(1,000~2,000W)</strong> — 히터형은 한 번에 2~3시간, 빨래량이 많으면 월 80kWh 이상.</li>
+            <li><strong>식기세척기(1,000~1,500W)</strong> — 하루 2시간이면 월 60~80kWh, 건조 코스까지 쓰면 더 늘어납니다.</li>
+            <li><strong>욕실·화장실 온풍기(1,000~2,000W)</strong> — 하루 2시간이면 월 60~120kWh. 겨울철 3구간 진입 원인입니다.</li>
             <li><strong>가열식 가습기(300~600W)</strong> — 하루 8시간 틀면 월 70~140kWh로 의외로 큽니다.</li>
             <li><strong>전기장판·전기요(100~200W)</strong> — 오래 틀지만 소비전력이 낮아 부담이 적습니다.</li>
-            <li><strong>에어프라이어·전기포트(1,200~1,800W)</strong> — 짧게 쓰지만 한 번에 많은 전력을 끌어올립니다.</li>
           </ul>
+        </div>
+      </section>
 
-          <h3>청구서와 계산기가 다른 이유</h3>
-          <p>계산기는 주택용 저압 계약을 기준으로 합니다. 원룸·오피스텔이 <strong>주택용 고압</strong>이거나 상가용(일반용) 계약이면 단가가 다릅니다. 또 복지할인(장애인·대가족·생명유지장치), TV수신료, 연체료, 계절별 연료비조정요금이 붙으면 실제 금액과 차이가 납니다. 청구서의 ‘계약종별’을 먼저 확인하세요.</p>
+      <section class="section">
+        <div class="section-head">
+          <h2>청구서와 계산기가 다른 이유</h2>
+        </div>
+        <div class="prose">
+          <p>계산기는 청구서의 <strong>계약 종별(저압·고압)</strong>과 <strong>계절 구간</strong>을 그대로 따릅니다. 다만 복지할인(장애인·대가족·생명유지장치), TV수신료, 연체료, 연료비조정요금의 월별 변동, 아파트 관리비에 함께 붙는 공용 전기료가 있으면 실제 금액과 차이가 납니다. 청구서의 ‘계약종별’과 ‘사용량’을 먼저 확인하세요.</p>
         </div>
       </section>
 
       <section class="section">
         <div class="section-head">
           <h2>사용 시간별 추가 요금 예시</h2>
-          <p>1,500W 욕실온풍기를 월 30일 사용했을 때, 기존 사용량에 따른 추가 부담입니다.</p>
+          <p>1,800W 스탠드 에어컨을 월 30일 사용했을 때, 기존 사용량에 따른 추가 부담입니다.</p>
         </div>
         <div class="table-wrap">
           <table class="data">
-            <caption>2026년 11월 주택용 저압 기준 · 구간 점프가 반영된 값입니다.</caption>
+            <caption id="elec-example-caption">2026년 11월 · 주택용 저압 · 일반(3~6·9~12월) 기준입니다. 기본요금 구간 점프까지 반영했습니다.</caption>
             <thead>
               <tr>
                 <th scope="col">기존 사용량</th>
@@ -358,28 +505,36 @@
         </div>
         <div class="faq">
       <details>
+        <summary>저압과 고압(아파트)은 요금이 어떻게 다른가요?</summary>
+        <p>원룸·빌라·단독주택은 대부분 주택용 저압, 아파트는 대부분 주택용 고압입니다. 고압은 전력량요금이 1kWh당 15~65원 싸고 기본요금도 낮습니다. 350kWh를 쓰면 저압은 약 6만원, 고압은 약 4만 8천원 수준으로 한 달에 1만원 넘게 차이 납니다. 청구서의 ‘계약종별’을 먼저 확인하세요.</p>
+      </details>
+      <details>
+        <summary>평수나 전용면적만 알아도 계산되나요?</summary>
+        <p>네. 전용면적(㎡)과 가구원 수를 넣으면 참고 사용량을 추정해 요금을 계산합니다. 1평은 3.3058㎡이고, 아파트 ‘25평형’은 공급면적 기준이라 전용면적은 약 59㎡입니다. 다만 이 값은 평균 추정치이므로, 고지서가 있으면 사용량(kWh)이나 청구 금액으로 입력하는 쪽이 정확합니다.</p>
+      </details>
+      <details>
         <summary>누진제는 어떻게 계산되나요?</summary>
-        <p>사용량 전체에 한 단가를 곱하는 게 아니라 구간별로 나눠 곱합니다. 350kWh를 쓰면 200kWh까지는 120원, 나머지 150kWh는 214.6원이 적용되고, 기본요금도 마지막 구간 기준(1,600원)으로 붙습니다.</p>
+        <p>사용량 전체에 한 단가를 곱하는 게 아니라 구간별로 나눠 곱합니다. 저압 기준 350kWh를 쓰면 200kWh까지는 120원, 나머지 150kWh는 214.6원이 적용되고, 기본요금도 마지막 구간 기준(1,600원)으로 붙습니다.</p>
       </details>
       <details>
         <summary>왜 200kWh에서 201kWh로 1kWh만 늘어도 요금이 확 오르나요?</summary>
         <p>기본요금이 910원에서 1,600원으로 690원 뛰고, 201번째 1kWh부터 단가가 120원에서 214.6원으로 바뀌기 때문입니다. 부가세와 기금까지 붙어 실제 차이는 1,000원 안팎이 됩니다.</p>
       </details>
       <details>
-        <summary>청구서 금액만 알고 있는데 사용량을 알 수 있나요?</summary>
-        <p>네. 계산기에서 '청구서 금액으로 입력'을 선택하면 해당 금액이 나오는 사용량을 역으로 찾아 계산합니다. 청구서의 '사용량'란을 보는 게 가장 정확합니다.</p>
+        <summary>여름(하계)에는 누진 기준이 다른가요?</summary>
+        <p>7~8월에는 누진 경계가 300kWh / 450kWh로 넓어져 같은 사용량도 요금이 낮습니다. 대신 1,000kWh를 넘기면 초과분에 슈퍼유저 요금(저압 736.2원, 고압 593.3원)이 붙습니다. 12~2월 동계 청구서도 1,000kWh를 넘겼다면 계산기에서 슈퍼유저 항목을 체크하세요.</p>
       </details>
       <details>
-        <summary>에어컨·온풍기 같은 난방·냉방 가전은 얼마나 나오나요?</summary>
-        <p>소비전력(W) × 하루 사용시간 × 사용일수 ÷ 1,000 = 월 사용량(kWh)입니다. 예를 들어 1,500W 온풍기를 하루 2시간, 30일 쓰면 90kWh가 늘어납니다. 이미 200kWh를 넘겼다면 3구간(307.3원)에 걸려 부담이 커집니다.</p>
+        <summary>청구서 금액만 알고 있는데 사용량을 알 수 있나요?</summary>
+        <p>네. 계산기에서 ‘청구서 금액’을 선택하면 해당 금액이 나오는 사용량을 역으로 찾아 계산합니다. 청구서의 ‘사용량’란을 보는 게 가장 정확합니다.</p>
       </details>
       <details>
         <summary>이 계산 결과가 청구서와 똑같이 나오나요?</summary>
-        <p>계약종별(주택용 저압/고압), 복지할인, TV수신료, 연체료, 계절별 연료비조정요금에 따라 달라질 수 있습니다. 계산기는 주택용 저압 기준의 표준 요금 구조를 따릅니다.</p>
+        <p>계약종별(저압·고압)과 계절 구간을 그대로 반영하지만, 복지할인, TV수신료, 연체료, 연료비조정요금의 월별 변동, 아파트 공용 전기료는 포함하지 않습니다. 청구서와 1,000원 안팎 차이가 날 수 있습니다.</p>
       </details>
       <details>
         <summary>전기요금을 줄이는 가장 확실한 방법은 무엇인가요?</summary>
-        <p>누진 구간을 넘기지 않는 것이 가장 큽니다. 400kWh를 넘기면 단가가 307.3원으로 뛰므로, 고전력 가전은 사용 시간을 나누고 대기전력을 차단하는 것만으로도 월 1만원 이상 차이가 납니다.</p>
+        <p>누진 구간을 넘기지 않는 것이 가장 큽니다. 저압 3구간은 1kWh당 307.3원으로 1구간의 2.6배이므로, 고전력 가전은 사용 시간을 나누고 대기전력을 차단하는 것만으로도 월 1만원 이상 차이가 납니다. 아파트라면 계약 종별이 고압으로 되어 있는지도 확인해 보세요.</p>
       </details>
     </div>
       </section>
@@ -455,10 +610,10 @@
           <a href="../about/">운영 소개</a>
           <a href="../privacy/">개인정보처리방침</a>
           <a href="../contact/">문의</a>
-          <a href="../sitemap.xml">사이트맵</a>
+          <a href="../sitemap/">사이트맵</a>
         </nav>
       </div>
-      <p>기준일 <span data-기준일>2026년 11월</span> · 운영 도토리사원 · 문의 <span data-contact-email>misun6007@gmail.com</span></p>
+      <p>기준일 <span data-기준일>2026년 11월</span> · 운영 도토리사원 · <a href="../contact/">문의 페이지</a></p>
       <p class="disclaimer">이 사이트의 모든 계산 결과는 공개된 요율과 단순화한 가정에 따른 <strong>참고용 추정치</strong>입니다. 세금·요금·환급 여부는 개인의 실제 조건과 관계 기관의 최종 결정에 따라 달라질 수 있으며, 계산 결과를 근거로 한 신고·계약·투자 판단의 책임은 이용자에게 있습니다. 공식 기준은 국세청 홈택스, 한국전력공사, 국토교통부, 서울시 등 원문을 확인하세요.</p>
       <p>© <span data-year>2026</span> 도토리 계산기. 직접 만든 무료 도구이며, 어떤 금융기관과도 제휴 관계가 없습니다.</p>
     </div>

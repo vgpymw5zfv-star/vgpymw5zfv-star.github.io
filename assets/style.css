@@ -919,6 +919,24 @@ main {
   box-shadow: 0 1px 2px rgba(27, 34, 51, 0.12);
 }
 
+/* 3개 이상 · 라벨이 긴 세그먼트 (좌우 스크롤 없이 줄바꿈) */
+
+.segment--wrap {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 2px;
+}
+
+.segment--wrap button {
+  flex: 1 1 118px;
+  min-width: 0;
+  padding: 8px 10px;
+  white-space: normal;
+  line-height: 1.3;
+  text-align: center;
+}
+
 .field-group {
   padding: 18px;
   border: 1px solid var(--line);
@@ -1246,6 +1264,17 @@ table.data tbody th {
 table.data td.is-best {
   color: var(--blue-dark);
   font-weight: 700;
+}
+
+/* 설명형 표(사이트맵 등)는 본문 칸도 왼쪽 정렬 */
+table.data.table--text {
+  min-width: 0;
+}
+
+table.data.table--text th,
+table.data.table--text td {
+  text-align: left;
+  font-variant-numeric: normal;
 }
 
 table.data td.is-muted {
@@ -1715,6 +1744,51 @@ table.data td.is-muted {
   color: var(--blue-dark);
   font-size: 11.5px;
   font-weight: 700;
+}
+
+/* 문의 폼 (Google Forms 임베드) */
+
+.form-embed {
+  padding: 10px;
+}
+
+.form-embed__frame {
+  display: block;
+  width: 100%;
+  height: 920px;
+  border: 0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.form-embed__foot {
+  margin-top: 8px;
+  padding: 0 4px;
+  text-align: right;
+}
+
+.form-embed__foot a {
+  display: inline-block;
+  padding: 6px 2px;
+  color: var(--blue-dark);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.form-embed__foot a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .form-embed {
+    padding: 6px;
+  }
+
+  .form-embed__frame {
+    height: 1040px;
+  }
+
 }
 
 /* ---------- 반응형 ---------- */

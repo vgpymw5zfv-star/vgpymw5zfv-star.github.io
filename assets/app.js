@@ -333,9 +333,6 @@
     $$("[data-year]").forEach(function (el) {
       el.textContent = String(new Date().getFullYear());
     });
-    $$("[data-contact-email]").forEach(function (el) {
-      el.textContent = config.contactEmail || "";
-    });
   }
 
   /* ---------------- 시작 ---------------- */
