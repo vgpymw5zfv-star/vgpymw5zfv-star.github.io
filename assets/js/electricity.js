@@ -276,6 +276,10 @@
     var marginalUnit = marginalRate * (1 + C.VAT + C.FUND);
 
     var gaugeMax = cfg.limits[1] + 100;
+    var afterTierNo = tierIndex(afterKwh, cfg);
+    /* 다음 누진 구간까지 남은 사용량 (3구간이면 0) */
+    var remainingToNextTier =
+      afterTierNo < 2 ? Math.max(0, Math.round((cfg.limits[afterTierNo] - afterKwh) * 10) / 10) : 0;
 
     return {
       mode: mode,
@@ -310,6 +314,8 @@
       afterTierLabel: tierLabel(afterKwh, cfg),
       jumped: jumped,
       yearlyExtra: extraBill * 12,
+      yearlyTotal: after.total * 12,
+      remainingToNextTier: remainingToNextTier,
       /* 게이지 표시용 (하계는 550kWh를 100%로) */
       gaugeMax: gaugeMax,
       gaugePercent: Core.clamp((afterKwh / gaugeMax) * 100, 0, 100),

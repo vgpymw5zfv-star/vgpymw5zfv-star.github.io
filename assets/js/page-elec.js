@@ -34,9 +34,18 @@
       example: document.getElementById("elec-example-table"),
       exampleCaption: document.getElementById("elec-example-caption"),
       contractTable: document.getElementById("elec-contract-table"),
-      clampNote: document.getElementById("elec-clamp-note")
+      clampNote: document.getElementById("elec-clamp-note"),
+      heroLabel: document.getElementById("elec-hero-label"),
+      row3: document.getElementById("elec-row-3"),
+      dts: [1, 2, 3, 4, 5, 6].map(function (i) {
+        return document.getElementById("elec-dt-" + i);
+      })
     };
     if (!el.usage) return;
+
+    /* 결과 카드 6행 라벨 — 총 요금 뷰 / 추가 가전 뷰 */
+    var ROW_LABELS_TOTAL = ["총 사용량", "적용 구간", "1kWh당 평균", "다음 누진 구간까지", "기본요금 · 전력량", "연간 예상 요금"];
+    var ROW_LABELS_EXTRA = ["추가 사용량", "기존 예상 요금", "추가 후 총 예상", "추가분 1kWh당", "구간", "연간 추가 부담"];
 
     var syncLock = false;
 
@@ -146,6 +155,8 @@
 
       var priceLabel = result.contractLabel + " · " + result.seasonLabel;
 
+      syncPresetChips();
+
       /* 입력 방식 안내 */
       if (el.modeNote) {
         var note = "";
@@ -177,20 +188,67 @@
         el.modeNote.innerHTML = '<span class="notice__icon" aria-hidden="true">i</span><span>' + note + "</span>";
       }
 
-      UI.countTo("elec-extra", result.extraBill, Core.comma);
-      UI.setText(
-        "elec-sub",
-        "월 " + Core.comma(result.addKwh) + "kWh 추가 · " +
-          (result.jumped
-            ? result.beforeTier + "구간 → " + result.afterTier + "구간 점프"
-            : result.afterTier + "구간 유지")
-      );
-      UI.setText("elec-add-kwh", Core.comma(result.addKwh) + "kWh");
-      UI.setText("elec-before-total", Core.won(result.before.total));
-      UI.setText("elec-after-total", Core.won(result.after.total));
-      UI.setText("elec-extra-unit", Core.won(Math.round(result.extraUnit)) + " / kWh");
-      UI.setText("elec-tier", result.beforeTier + "구간 → " + result.afterTier + "구간");
-      UI.setText("elec-yearly", Core.won(result.yearlyExtra));
+      /* 추가 가전이 없으면 총 요금 뷰, 있으면 추가분 뷰 */
+      var hasExtra = result.addKwh > 0;
+      var dts = hasExtra ? ROW_LABELS_EXTRA : ROW_LABELS_TOTAL;
+      el.dts.forEach(function (node, i) {
+        if (node) node.textContent = dts[i];
+      });
+      if (el.row3) {
+        el.row3.className = "result-row" + (hasExtra ? " result-row--strong" : "");
+      }
+
+      if (el.heroLabel) el.heroLabel.textContent = hasExtra ? "추가로 나오는 전기요금" : "이번 달 예상 전기요금";
+      UI.countTo("elec-extra", hasExtra ? result.extraBill : result.after.total, Core.comma);
+
+      if (hasExtra) {
+        UI.setText(
+          "elec-sub",
+          "월 " + Core.comma(result.addKwh) + "kWh 추가 · " +
+            (result.jumped
+              ? result.beforeTier + "구간 → " + result.afterTier + "구간 점프"
+              : result.afterTier + "구간 유지")
+        );
+        UI.setText("elec-add-kwh", Core.comma(result.addKwh) + "kWh");
+        UI.setText("elec-before-total", Core.won(result.before.total));
+        UI.setText("elec-after-total", Core.won(result.after.total));
+        UI.setText("elec-extra-unit", Core.won(Math.round(result.extraUnit)) + " / kWh");
+        UI.setText("elec-tier", result.beforeTier + "구간 → " + result.afterTier + "구간");
+        UI.setText("elec-yearly", Core.won(result.yearlyExtra));
+      } else {
+        var kwhNow = result.baseKwh;
+        var tierNow = result.after.tier;
+        var sub = "총 " + Core.comma(kwhNow) + "kWh · " + tierNow + "구간";
+        if (result.after.superuserKwh > 0) {
+          sub += " · 슈퍼유저 구간 적용 중";
+        } else if (tierNow >= 3) {
+          sub += " 적용 중";
+        } else if (result.remainingToNextTier > 0) {
+          sub += " (다음 구간까지 " + Core.comma(result.remainingToNextTier) + "kWh 남음)";
+        } else {
+          sub += " (다음 1kWh부터 " + (tierNow + 1) + "구간)";
+        }
+        UI.setText("elec-sub", sub);
+        UI.setText("elec-add-kwh", Core.comma(kwhNow) + "kWh");
+        UI.setText("elec-before-total", tierNow + "구간");
+        UI.setText(
+          "elec-after-total",
+          kwhNow > 0 ? Core.won(Math.round(result.after.unitPrice)) + " / kWh" : "0원 / kWh"
+        );
+        UI.setText(
+          "elec-extra-unit",
+          tierNow >= 3
+            ? "초과 중"
+            : result.remainingToNextTier > 0
+              ? Core.comma(result.remainingToNextTier) + "kWh 남음"
+              : "경계 도달"
+        );
+        UI.setText(
+          "elec-tier",
+          Core.won(result.after.base) + " · " + Core.won(result.after.energy)
+        );
+        UI.setText("elec-yearly", Core.won(result.yearlyTotal));
+      }
       UI.setText("elec-price-label", result.contractShort + " · " + result.seasonShort);
 
       /* 청구서 구성 */
@@ -307,6 +365,30 @@
     }
 
     /* 프리셋 */
+    function setPresetPressed(id) {
+      if (!el.presetBar) return;
+      UI.$$("button[data-preset]", el.presetBar).forEach(function (b) {
+        b.setAttribute("aria-pressed", b.getAttribute("data-preset") === String(id) ? "true" : "false");
+      });
+    }
+
+    /* 입력된 소비전력·시간·일수에 맞춰 프리셋 칩 상태를 맞춤다 */
+    function syncPresetChips() {
+      if (!el.presetBar) return;
+      var w = UI.toNumber(el.watts, 0);
+      var h = UI.toNumber(el.hours, 0);
+      var d = UI.toNumber(el.days, 0);
+      if (!(w > 0) || !(h > 0) || !(d > 0)) {
+        setPresetPressed("none");
+        return;
+      }
+      var match = null;
+      Elec.PRESETS.forEach(function (p) {
+        if (p.id !== "custom" && p.watts === w && p.hours === h && p.days === d) match = p.id;
+      });
+      setPresetPressed(match || "custom");
+    }
+
     if (el.presetBar) {
       UI.$$("button[data-preset]", el.presetBar).forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -315,9 +397,14 @@
           Elec.PRESETS.forEach(function (p) {
             if (p.id === id) preset = p;
           });
-          UI.$$("button[data-preset]", el.presetBar).forEach(function (b) {
-            b.setAttribute("aria-pressed", b === btn ? "true" : "false");
-          });
+          /* 추가 가전 없이 총 요금만 보는 상태로 돌아가기 */
+          if (id === "none") {
+            if (el.watts) el.watts.value = "0";
+            setPresetPressed("none");
+            render();
+            return;
+          }
+          setPresetPressed(id);
           if (!preset || preset.id === "custom") {
             if (el.watts) el.watts.focus();
             return;

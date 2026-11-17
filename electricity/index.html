@@ -170,7 +170,7 @@
       <section class="page-head">
         <nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">홈</a><span aria-hidden="true">/</span><span aria-current="page">전기세 누진제</span></nav>
         <h1>우리집 전기세 · 누진제 계산기</h1>
-        <p class="lead">원룸·빌라(저압)부터 아파트(고압)까지 — 평수·전용면적과 가전별 사용량으로 누진 요금을 계산합니다.</p>
+        <p class="lead">이번 달 총 사용량(kWh)만 넣으면 예상 전기요금이 바로 나옵니다 — 평수·전용면적, 청구 금액, 가전별 사용량으로도 계산합니다.</p>
       </section>
 
       <div class="calc-layout">
@@ -215,22 +215,31 @@
 
           <div class="field-group">
             <div class="field-group__title">
-              <h2><span class="step-no">2</span>우리집 기본 사용량</h2>
+              <h2><span class="step-no">2</span>우리집 전기 사용량</h2>
             </div>
 
             <div class="field">
               <div class="field-label">
                 <span>입력 방식</span>
-                <small>평수·전용면적 / 사용량 / 청구 금액</small>
+                <small>사용량(kWh) / 평수·전용면적 / 청구 금액</small>
               </div>
               <div class="segment segment--wrap" data-segment="usage-mode" role="group" aria-label="사용량 입력 방식">
-                <button type="button" data-value="area" aria-pressed="true">평수·전용면적</button>
-                <button type="button" data-value="kwh" aria-pressed="false">사용량(kWh)</button>
+                <button type="button" data-value="kwh" aria-pressed="true">사용량(kWh)</button>
+                <button type="button" data-value="area" aria-pressed="false">평수·전용면적</button>
                 <button type="button" data-value="bill" aria-pressed="false">청구서 금액(원)</button>
               </div>
             </div>
 
-            <div id="elec-area-wrap">
+            <label class="field" id="elec-kwh-wrap" for="elec-usage">
+              <span class="field-label">이번 달 총 사용량</span>
+              <span class="field-control">
+                <input id="elec-usage" type="number" inputmode="decimal" min="0" max="100000" step="1" value="200">
+                <span class="field-unit">kWh</span>
+              </span>
+              <span class="field-help">청구서 ‘사용량’란 그대로 넣으면 총 전기요금이 바로 계산됩니다.</span>
+            </label>
+
+            <div id="elec-area-wrap" hidden>
               <div class="filters" style="margin-bottom:14px" data-area-bar role="group" aria-label="대표 면적 선택">
                 <button type="button" class="chip" data-area="20" data-persons="1">원룸 20㎡(6평)</button>
                 <button type="button" class="chip" data-area="40" data-persons="2">소형 40㎡(12평)</button>
@@ -271,15 +280,6 @@
               </div>
             </div>
 
-            <label class="field" id="elec-kwh-wrap" for="elec-usage" hidden>
-              <span class="field-label">이번 달 사용량</span>
-              <span class="field-control">
-                <input id="elec-usage" type="number" inputmode="decimal" min="0" max="100000" step="1" value="200">
-                <span class="field-unit">kWh</span>
-              </span>
-              <span class="field-help">청구서 ‘사용량’란 그대로.</span>
-            </label>
-
             <label class="field" id="elec-bill-wrap" for="elec-bill" hidden>
               <span class="field-label">이번 달 청구 금액</span>
               <span class="field-control">
@@ -291,39 +291,40 @@
 
             <div class="notice" id="elec-mode-note">
               <span class="notice__icon" aria-hidden="true">i</span>
-              <span>전용면적·가구원 수를 고르면 참고 사용량과 예상 요금을 바로 계산합니다.</span>
+              <span>총 사용량을 넣으면 이번 달 예상 전기요금이 바로 계산됩니다.</span>
             </div>
           </div>
 
           <div class="field-group">
             <div class="field-group__title">
-              <h2><span class="step-no">3</span>추가·함께 쓰는 가전</h2>
-              <small style="color:var(--muted-light);font-size:12px">프리셋을 누르면 자동 입력됩니다</small>
+              <h2><span class="step-no">3</span>추가 가전 더해보기 (선택)</h2>
+              <small style="color:var(--muted-light);font-size:12px">가전을 고르면 자동 입력됩니다</small>
             </div>
 
-            <div class="filters" style="margin-bottom:16px" data-preset-bar>
-              <button type="button" class="chip" data-preset="ac-stand">스탠드 에어컨 1,800W</button>
-              <button type="button" class="chip" data-preset="ac-wall">벽걸이 에어컨 700W</button>
-              <button type="button" class="chip" data-preset="dryer">의류건조기 1,000W</button>
-              <button type="button" class="chip" data-preset="dishwasher">식기세척기 1,200W</button>
-              <button type="button" class="chip" data-preset="bath-heater">욕실온풍기 1,500W</button>
-              <button type="button" class="chip" data-preset="humidifier">가열식 가습기 400W</button>
-              <button type="button" class="chip" data-preset="electric-mat">전기장판 120W</button>
-              <button type="button" class="chip" data-preset="custom">직접 입력</button>
+            <div class="filters" style="margin-bottom:16px" data-preset-bar role="group" aria-label="추가 가전 선택">
+              <button type="button" class="chip" data-preset="none" aria-pressed="true">추가 안 함 (총 요금만)</button>
+              <button type="button" class="chip" data-preset="ac-stand" aria-pressed="false">스탠드 에어컨 1,800W</button>
+              <button type="button" class="chip" data-preset="ac-wall" aria-pressed="false">벽걸이 에어컨 700W</button>
+              <button type="button" class="chip" data-preset="dryer" aria-pressed="false">의류건조기 1,000W</button>
+              <button type="button" class="chip" data-preset="dishwasher" aria-pressed="false">식기세척기 1,200W</button>
+              <button type="button" class="chip" data-preset="bath-heater" aria-pressed="false">욕실온풍기 1,500W</button>
+              <button type="button" class="chip" data-preset="humidifier" aria-pressed="false">가열식 가습기 400W</button>
+              <button type="button" class="chip" data-preset="electric-mat" aria-pressed="false">전기장판 120W</button>
+              <button type="button" class="chip" data-preset="custom" aria-pressed="false">직접 입력</button>
             </div>
 
             <div class="field-row field-row--3">
               <label class="field" for="elec-watts">
                 <span class="field-label">소비전력</span>
                 <span class="field-control">
-                  <input id="elec-watts" type="number" inputmode="numeric" min="0" max="10000" step="10" value="1800">
+                  <input id="elec-watts" type="number" inputmode="numeric" min="0" max="10000" step="10" value="0">
                   <span class="field-unit">W</span>
                 </span>
               </label>
               <label class="field" for="elec-hours">
                 <span class="field-label">하루 사용</span>
                 <span class="field-control">
-                  <input id="elec-hours" type="number" inputmode="decimal" min="0" max="24" step="0.5" value="4">
+                  <input id="elec-hours" type="number" inputmode="decimal" min="0" max="24" step="0.5" value="2">
                   <span class="field-unit">시간</span>
                 </span>
               </label>
@@ -335,41 +336,41 @@
                 </span>
               </label>
             </div>
-            <span class="field-help">제품 라벨의 정격소비전력 기준. 인버터 에어컨은 실제 소비전력이 더 낮습니다.</span>
+            <span class="field-help">제품 라벨의 정격소비전력 기준. 인버터 에어컨은 실제 소비전력이 더 낮습니다. 소비전력을 비우거나 0으로 두면 총 요금만 계산합니다.</span>
             <p class="field-help" id="elec-clamp-note" hidden style="color:var(--warn)"></p>
           </div>
         </div>
 
         <div class="result-col">
           <div class="result-card" aria-live="polite">
-            <p class="result-card__label">추가로 나오는 전기요금</p>
+            <p class="result-card__label" id="elec-hero-label">이번 달 예상 전기요금</p>
             <p class="result-value"><span id="elec-extra">0</span><small>원</small></p>
-            <p class="result-sub" id="elec-sub">월 0kWh 추가 · 구간 유지</p>
+            <p class="result-sub" id="elec-sub">총 200kWh · 1구간</p>
             <p class="pill pill--blue" id="elec-price-label" style="margin-top:10px">저압 · 일반</p>
 
             <dl class="result-rows">
               <div class="result-row">
-                <dt>추가 사용량</dt>
+                <dt id="elec-dt-1">총 사용량</dt>
                 <dd id="elec-add-kwh">0kWh</dd>
               </div>
               <div class="result-row">
-                <dt>기존 예상 요금</dt>
+                <dt id="elec-dt-2">적용 구간</dt>
                 <dd id="elec-before-total">0원</dd>
               </div>
-              <div class="result-row result-row--strong">
-                <dt>추가 후 총 예상</dt>
+              <div class="result-row" id="elec-row-3">
+                <dt id="elec-dt-3">1kWh당 평균</dt>
                 <dd id="elec-after-total">0원</dd>
               </div>
               <div class="result-row">
-                <dt>추가분 1kWh당</dt>
+                <dt id="elec-dt-4">다음 누진 구간까지</dt>
                 <dd id="elec-extra-unit">0원</dd>
               </div>
               <div class="result-row">
-                <dt>구간</dt>
-                <dd id="elec-tier">1구간 → 1구간</dd>
+                <dt id="elec-dt-5">기본요금 · 전력량</dt>
+                <dd id="elec-tier">0원 · 0원</dd>
               </div>
               <div class="result-row">
-                <dt>연간 추가 부담</dt>
+                <dt id="elec-dt-6">연간 예상 요금</dt>
                 <dd id="elec-yearly">0원</dd>
               </div>
             </dl>
