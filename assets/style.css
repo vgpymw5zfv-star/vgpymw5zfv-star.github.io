@@ -1784,7 +1784,7 @@ table.data td.is-muted {
   /* 좁은 화면에서는 폼이 쓸 수 있는 폭을 조금이라도 넓혀 제목·문항 줄바꿈을 줄인다 */
   .form-embed {
     padding: 4px;
-    margin-inline: -16px;
+    margin-inline: -15px;
   }
 
   .form-embed__frame {
