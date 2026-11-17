@@ -1971,6 +1971,17 @@ table.data td.is-muted {
   }
 }
 
+@media (max-width: 380px) {
+  /* 360~375px 기기에서도 네비 9개가 한 줄에 (줄바꿈·페이지 가로스크롤 0) */
+  .site-nav {
+    gap: 8px;
+  }
+
+  .site-nav a {
+    font-size: 12px;
+  }
+}
+
 /* ---------- 임베드 모드 (?embed=1) ---------- */
 
 body.embed-mode {
