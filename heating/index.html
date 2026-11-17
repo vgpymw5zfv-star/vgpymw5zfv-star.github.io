@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>겨울 난방비 계산기 · 도시가스·지역난방 (2026년 11월 요율) | 도토리 계산기</title>
+<meta name="description" content="2026년 11월 기준 도시가스 주택용(서울 22.5268·경기 22.6226·인천 22.5084원/MJ)과 한국지역난방공사 요금(52.40원/㎡·112.32원/Mcal)으로 이번 달 난방비와 겨울 4개월 예상액을 계산합니다. 사용열량(MJ·Mcal)·계량기(㎥)·평수 입력 지원.">
+<meta name="author" content="도토리사원">
+<meta name="theme-color" content="#1F2A44">
+<meta name="google-site-verification" content="_dxc0C2kiFi1gcrJOmOw2CYSbvuWM6zPb_HV6ua8Irc">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://vgpymw5zfv-star.github.io/heating/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="도토리 계산기">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="겨울 난방비 계산기 · 도시가스·지역난방">
+<meta property="og:description" content="2026년 11월 기준 도시가스 주택용(서울 22.5268·경기 22.6226·인천 22.5084원/MJ)과 한국지역난방공사 요금(52.40원/㎡·112.32원/Mcal)으로 이번 달 난방비와 겨울 4개월 예상액을 계산합니다. 사용열량(MJ·Mcal)·계량기(㎥)·평수 입력 지원.">
+<meta property="og:url" content="https://vgpymw5zfv-star.github.io/heating/">
+<meta property="og:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="겨울 난방비 계산기 · 도시가스·지역난방">
+<meta name="twitter:description" content="2026년 11월 기준 도시가스 주택용(서울 22.5268·경기 22.6226·인천 22.5084원/MJ)과 한국지역난방공사 요금(52.40원/㎡·112.32원/Mcal)으로 이번 달 난방비와 겨울 4개월 예상액을 계산합니다. 사용열량(MJ·Mcal)·계량기(㎥)·평수 입력 지원.">
+<meta name="twitter:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "겨울 난방비 계산기 (도시가스·지역난방)",
+      "url": "https://vgpymw5zfv-star.github.io/heating/",
+      "description": "2026년 11월 기준 도시가스 주택용(서울 22.5268·경기 22.6226·인천 22.5084원/MJ)과 한국지역난방공사 요금(52.40원/㎡·112.32원/Mcal)으로 이번 달 난방비와 겨울 4개월 예상액을 계산합니다. 사용열량(MJ·Mcal)·계량기(㎥)·평수 입력 지원.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "JavaScript 지원 브라우저",
+      "inLanguage": "ko-KR",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "도토리사원"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "도토리 계산기",
+        "url": "https://vgpymw5zfv-star.github.io/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "홈",
+          "item": "https://vgpymw5zfv-star.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "난방비",
+          "item": "https://vgpymw5zfv-star.github.io/heating/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "도시가스 요금은 계량기(㎥)와 사용열량(MJ) 중 무엇으로 계산하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "요금은 ㎥가 아니라 열량(MJ)에 매깁니다. 사용열량 = 검침량(㎥) × 온압보정계수 × 평균열량(42.5MJ/㎥ 안팎)이고, 여기에 MJ당 단가와 기본요금을 더한 뒤 부가세 10%를 붙입니다. 고지서에 적힌 ‘사용열량(MJ)’을 그대로 넣는 것이 가장 정확하고, 계량기 지침만 알면 계산기가 환산해 줍니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "우리 집이 도시가스인지 지역난방인지 어떻게 알 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "고지서에 ‘도시가스’가 찍혀 나오고 보일러를 직접 켜는 집은 개별난방(도시가스)입니다. 아파트 관리비 고지서에 ‘난방비·급탕비’가 따로 표시되면 지역난방(집단에너지)입니다. 지역난방은 단지 전체가 한 공급사에서 열을 받고, 세대별 열량계로 사용량을 나눕니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "516MJ 기준은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "취사와 난방을 한 계량기로 함께 쓰는 세대는 한 달 516MJ까지 취사용 단가, 넘는 부분은 난방용 단가를 적용합니다. 서울·경기·인천·부산·대구는 두 단가가 같아 차이가 없고, 광주·대전처럼 단가가 다른 지역에서만 금액이 달라집니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "지역난방은 난방을 안 해도 돈이 나오나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네. 기본요금은 계약면적 ㎡당 52.40원(한국지역난방공사)으로 매달 부과됩니다. 84㎡면 월 4,402원, 여기에 부가세 10%가 붙습니다. 사용요금은 실제 쓴 열량(Mcal)에만 붙기 때문에, 여름에는 기본요금과 급탕 사용분만 나옵니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "계약면적과 전용면적은 어떻게 다른가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "전용면적은 현관 안쪽 우리 집 면적이고, 지역난방의 계약면적은 전용면적에 발코니 확장면적과 관리사무소·경비실 등 공용 열사용 면적을 더한 값입니다. 그래서 고지서의 계약면적이 분양 때 들은 전용면적보다 조금 큽니다. 기본요금은 계약면적으로 계산합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "단일요금과 계절별 차등요금 중 어느 쪽이 유리한가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "난방을 많이 쓰는 겨울에는 단일요금(112.32원/Mcal)이 유리하고, 여름처럼 거의 안 쓰는 달에는 하계 단가(99.02원)가 싼 계절별 요금이 유리합니다. 다만 요금제는 세대가 고르는 것이 아니라 단지가 정하므로, 고지서의 단가를 확인해 어느 쪽인지 먼저 보세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "1kWh는 몇 Mcal인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "1kWh = 0.86Mcal입니다(1Mcal = 1.163kWh). 세대 열량계가 kWh로 표시되면 계산기에서 ‘열량(kWh)’을 선택해 그대로 넣으면 Mcal로 환산해 계산합니다. 반대로 도시가스 1㎥는 약 42.5MJ로, 1Mcal(4.186MJ)의 약 10배입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "계산 결과가 실제 고지서와 똑같이 나오나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "공개된 주택용 단가·기본요금과 부가세·10원 미만 절사까지 반영하지만, 계량기 교체비, 복지·자동이체 할인, 연체료, 요금 변경 월의 일수 안분은 빠져 있습니다. 지역난방은 공용 배분과 배관 열손실이 더해져 고지서가 조금 더 나올 수 있습니다. 청구서와 1,000~3,000원 차이는 정상 범위입니다."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../index.html" aria-label="도토리 계산기 홈">
+        <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8v1.9"/><path d="M5.9 9.1c0-2.5 2.7-4.5 6.1-4.5s6.1 2 6.1 4.5c0 .5-.4.9-.9.9H6.8c-.5 0-.9-.4-.9-.9z"/><path d="M7.3 10.9h9.4c0 4.4-1.9 8.6-4.7 10.2-2.8-1.6-4.7-5.8-4.7-10.2z"/></svg></span>
+        <span class="brand__full">도토리 계산기</span>
+        <span class="brand__short">도토리</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 계산기">
+        <a href="../index.html"><span class="nav-full">홈</span><span class="nav-short">홈</span></a>
+        <a href="../sme-tax/"><span class="nav-full">소득세 감면</span><span class="nav-short">감면</span></a>
+        <a href="../electricity/"><span class="nav-full">전기세</span><span class="nav-short">전기세</span></a>
+        <a href="../transit/"><span class="nav-full">교통비</span><span class="nav-short">교통</span></a>
+        <a href="../rent-tax/"><span class="nav-full">월세 절세</span><span class="nav-short">월세</span></a>
+        <a href="../ai-cost/"><span class="nav-full">AI 구독</span><span class="nav-short">AI</span></a>
+        <a href="../heating/" aria-current="page"><span class="nav-full">난방비</span><span class="nav-short">난방</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <div class="container">
+      <section class="page-head">
+        <nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">홈</a><span aria-hidden="true">/</span><span aria-current="page">난방비</span></nav>
+        <h1>겨울 난방비 계산기 · 도시가스·지역난방</h1>
+        <p class="lead">이번 달 사용열량(MJ·Mcal)만 넣으면 난방비가 바로 나옵니다 — 계량기 지침(㎥), 열량(kWh), 평수·면적으로도 계산합니다.</p>
+      </section>
+
+      <div class="calc-layout">
+        <div class="calc-col">
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">1</span>난방 방식</h2>
+            </div>
+            <div class="segment segment--wrap" data-segment="type" role="group" aria-label="난방 방식">
+              <button type="button" data-value="gas" aria-pressed="true">도시가스 (개별난방)</button>
+              <button type="button" data-value="district" aria-pressed="false">지역난방 (아파트)</button>
+            </div>
+            <span class="field-help">고지서에 ‘도시가스’가 찍히면 개별난방(보일러), 관리비에 ‘난방비·급탕비’가 따로 붙으면 지역난방입니다.</span>
+          </div>
+
+          <div class="field-group" id="heat-gas-region-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">2</span>지역 · 공급사</h2>
+              <small style="color:var(--muted-light);font-size:12px">고지서의 공급사와 같은 지역</small>
+            </div>
+
+            <div class="filters" data-region-bar role="group" aria-label="도시가스 지역 선택">
+              <button type="button" class="chip" data-region="seoul" aria-pressed="true">서울</button>
+              <button type="button" class="chip" data-region="gyeonggi" aria-pressed="false">경기</button>
+              <button type="button" class="chip" data-region="incheon" aria-pressed="false">인천</button>
+              <button type="button" class="chip" data-region="busan" aria-pressed="false">부산</button>
+              <button type="button" class="chip" data-region="daegu" aria-pressed="false">대구</button>
+              <button type="button" class="chip" data-region="gwangju" aria-pressed="false">광주</button>
+              <button type="button" class="chip" data-region="daejeon" aria-pressed="false">대전</button>
+              <button type="button" class="chip" data-region="custom" aria-pressed="false">직접 입력</button>
+            </div>
+
+            <div id="heat-custom-wrap" hidden style="margin-top:14px">
+              <div class="field-row field-row--3">
+                <label class="field" for="heat-custom-base">
+                  <span class="field-label">기본요금</span>
+                  <span class="field-control">
+                    <input id="heat-custom-base" type="number" inputmode="numeric" min="0" max="100000" step="10" value="1250">
+                    <span class="field-unit">원/월</span>
+                  </span>
+                </label>
+                <label class="field" for="heat-custom-cooking">
+                  <span class="field-label">취사 단가</span>
+                  <span class="field-control">
+                    <input id="heat-custom-cooking" type="number" inputmode="decimal" min="0" max="200" step="0.0001" value="22.5268">
+                    <span class="field-unit">원/MJ</span>
+                  </span>
+                </label>
+                <label class="field" for="heat-custom-heating">
+                  <span class="field-label">난방 단가</span>
+                  <span class="field-control">
+                    <input id="heat-custom-heating" type="number" inputmode="decimal" min="0" max="200" step="0.0001" value="22.5268">
+                    <span class="field-unit">원/MJ</span>
+                  </span>
+                </label>
+              </div>
+              <span class="field-help">고지서(또는 공급사 요금표)의 ‘주택용’ 기본요금과 취사·난방 단가를 원/MJ 단위로 넣으세요. 부가세는 별도로 붙습니다.</span>
+            </div>
+
+            <span class="field-help" id="heat-region-help">서울도시가스·예스코 등 서울 5개사 · 기본요금 1,250원 · 취사·난방 22.5268원/MJ (2026년 11월 1일 사용분, 부가세 별도)</span>
+          </div>
+
+          <div class="field-group" id="heat-dh-plan-group" hidden>
+            <div class="field-group__title">
+              <h2><span class="step-no">2</span>지역난방 요금제</h2>
+              <small style="color:var(--muted-light);font-size:12px">단지 단위로 정해집니다</small>
+            </div>
+            <div class="segment segment--wrap" data-segment="plan" role="group" aria-label="지역난방 요금제">
+              <button type="button" data-value="single" aria-pressed="true">단일요금 (연중 동일)</button>
+              <button type="button" data-value="seasonal" aria-pressed="false">계절별 차등요금</button>
+            </div>
+            <span class="field-help" id="heat-plan-help">한국지역난방공사 주택용 단일요금 Mcal당 112.32원(부가세 별도). 계절별 차등요금을 쓰는 단지는 이번 달 절기 단가가 자동 적용됩니다.</span>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">3</span>이번 달 사용량</h2>
+            </div>
+
+            <div class="segment segment--wrap" data-segment="mode-gas" role="group" aria-label="도시가스 사용량 입력 방식">
+              <button type="button" data-value="mj" aria-pressed="true">사용열량(MJ)</button>
+              <button type="button" data-value="m3" aria-pressed="false">계량기 지침(㎥)</button>
+              <button type="button" data-value="area" aria-pressed="false">평수·전용면적</button>
+            </div>
+            <div class="segment segment--wrap" data-segment="mode-dh" role="group" aria-label="지역난방 사용량 입력 방식" hidden>
+              <button type="button" data-value="mcal" aria-pressed="true">사용열량(Mcal)</button>
+              <button type="button" data-value="kwh" aria-pressed="false">열량(kWh)</button>
+              <button type="button" data-value="area" aria-pressed="false">평수·계약면적</button>
+            </div>
+
+            <label class="field" id="heat-mj-wrap" for="heat-mj" style="margin-top:14px">
+              <span class="field-label">사용열량</span>
+              <span class="field-control">
+                <input id="heat-mj" type="number" inputmode="decimal" min="0" max="200000" step="1" value="1000">
+                <span class="field-unit">MJ</span>
+              </span>
+              <span class="field-help">고지서의 ‘사용열량(MJ)’ 그대로 넣으면 가장 정확합니다.</span>
+            </label>
+
+            <div id="heat-m3-wrap" hidden>
+              <label class="field" for="heat-m3">
+                <span class="field-label">계량기 검침량</span>
+                <span class="field-control">
+                  <input id="heat-m3" type="number" inputmode="decimal" min="0" max="20000" step="0.1" value="24">
+                  <span class="field-unit">㎥</span>
+                </span>
+                <span class="field-help">이번 달 지침 − 지난달 지침. 고지서 ‘사용량’ 칸과 같습니다.</span>
+              </label>
+              <div class="field-row">
+                <label class="field" for="heat-coef">
+                  <span class="field-label">온압보정계수</span>
+                  <span class="field-control">
+                    <input id="heat-coef" type="number" inputmode="decimal" min="0.5" max="1.5" step="0.0001" value="0.9940">
+                  </span>
+                </label>
+                <label class="field" for="heat-heat">
+                  <span class="field-label">평균열량</span>
+                  <span class="field-control">
+                    <input id="heat-heat" type="number" inputmode="decimal" min="41" max="44.4" step="0.01" value="42.5">
+                    <span class="field-unit">MJ/㎥</span>
+                  </span>
+                </label>
+              </div>
+              <span class="field-help">사용열량 = 검침량 × 온압보정계수 × 평균열량. 두 값 모두 고지서 ‘사용량 계산’ 칸에 적혀 있어요(지역마다 보정계수가 다릅니다).</span>
+            </div>
+
+            <label class="field" id="heat-mcal-wrap" for="heat-mcal" hidden>
+              <span class="field-label">사용열량</span>
+              <span class="field-control">
+                <input id="heat-mcal" type="number" inputmode="decimal" min="0" max="200000" step="1" value="900">
+                <span class="field-unit">Mcal</span>
+              </span>
+              <span class="field-help">관리비 고지서의 ‘난방 사용열량(Mcal)’ 그대로 넣으세요.</span>
+            </label>
+
+            <label class="field" id="heat-kwh-wrap" for="heat-kwh" hidden>
+              <span class="field-label">사용 열량</span>
+              <span class="field-control">
+                <input id="heat-kwh" type="number" inputmode="decimal" min="0" max="200000" step="1" value="1000">
+                <span class="field-unit">kWh</span>
+              </span>
+              <span class="field-help">세대 열량계가 kWh로 표시되면 그 값을 넣으세요. 1kWh = 0.86Mcal로 환산합니다.</span>
+            </label>
+
+            <div id="heat-area-wrap" hidden>
+              <div class="filters" style="margin-bottom:14px" data-area-bar role="group" aria-label="대표 면적 선택">
+                <button type="button" class="chip" data-area="20">원룸 20㎡</button>
+                <button type="button" class="chip" data-area="40">소형 40㎡</button>
+                <button type="button" class="chip" data-area="59">59㎡ (25평형)</button>
+                <button type="button" class="chip" data-area="84">84㎡ (34평형)</button>
+                <button type="button" class="chip" data-area="114">114㎡ (43평형)</button>
+              </div>
+
+              <div class="field-row">
+                <label class="field" for="heat-area-m2">
+                  <span class="field-label" id="heat-area-label">전용면적</span>
+                  <span class="field-control">
+                    <input id="heat-area-m2" type="number" inputmode="decimal" min="0" max="500" step="1" value="84">
+                    <span class="field-unit">㎡</span>
+                  </span>
+                </label>
+                <label class="field" for="heat-area-pyeong">
+                  <span class="field-label">평수</span>
+                  <span class="field-control">
+                    <input id="heat-area-pyeong" type="number" inputmode="decimal" min="0" max="200" step="0.1" value="25.4">
+                    <span class="field-unit">평</span>
+                  </span>
+                </label>
+              </div>
+              <span class="field-help" id="heat-area-help">1평 = 3.3058㎡(전용면적 기준). 부동산의 ‘34평형’은 공급면적 기준이라 전용면적은 84㎡ 안팎입니다.</span>
+
+              <div class="field">
+                <div class="field-label">
+                  <span>난방 습관</span>
+                  <small>겨울철 실내온도 기준</small>
+                </div>
+                <div class="segment segment--wrap" data-segment="habit" role="group" aria-label="난방 습관">
+                  <button type="button" data-value="save" aria-pressed="false">절약 19~20℃</button>
+                  <button type="button" data-value="normal" aria-pressed="true">보통 21~22℃</button>
+                  <button type="button" data-value="warm" aria-pressed="false">따뜻함 23℃+</button>
+                </div>
+              </div>
+              <span class="field-help">면적과 습관으로 겨울철 월 사용량을 어림합니다. 평균 추정치이니 고지서의 MJ·Mcal·㎥를 넣는 쪽이 정확합니다.</span>
+            </div>
+
+            <p class="field-help" id="heat-clamp-note" hidden style="color:var(--warn)"></p>
+
+            <div class="notice" id="heat-mode-note">
+              <span class="notice__icon" aria-hidden="true">i</span>
+              <span>사용열량을 넣으면 이번 달 예상 난방비가 바로 계산됩니다.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-col">
+          <div class="result-card" aria-live="polite">
+            <p class="result-card__label" id="heat-hero-label">이번 달 예상 난방비</p>
+            <p class="result-value"><span id="heat-total">0</span><small>원</small></p>
+            <p class="result-sub" id="heat-sub">도시가스 1,000MJ · 서울</p>
+            <p class="pill pill--blue" id="heat-price-label" style="margin-top:10px">서울 · 도시가스</p>
+
+            <dl class="result-rows">
+              <div class="result-row">
+                <dt>기본요금</dt>
+                <dd id="heat-base">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>사용요금</dt>
+                <dd id="heat-energy">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>부가세 (10%)</dt>
+                <dd id="heat-vat">0원</dd>
+              </div>
+              <div class="result-row" id="heat-row-unit">
+                <dt id="heat-dt-unit">1MJ당 평균</dt>
+                <dd id="heat-unit">0원 / MJ</dd>
+              </div>
+              <div class="result-row">
+                <dt>겨울 4개월(11~2월)</dt>
+                <dd id="heat-winter">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>1℃ 낮추면 (약 7%)</dt>
+                <dd id="heat-saving">0원</dd>
+              </div>
+            </dl>
+            <p class="result-note" id="heat-result-note">서울도시가스 기준 · 기본요금 + 사용열량 × 단가 + 부가세 10% (10원 미만 절사)</p>
+          </div>
+
+          <div class="summary">
+            <h3>이번 달 예상 청구서</h3>
+            <div class="table-wrap" style="border:0">
+              <table class="data" style="min-width:0;font-size:13.5px">
+                <tbody id="heat-breakdown">
+                  <tr><th scope="row">기본요금</th><td>0원</td></tr>
+                  <tr><th scope="row">사용요금</th><td>0원</td></tr>
+                  <tr><th scope="row">부가가치세</th><td>0원</td></tr>
+                  <tr><th scope="row" style="color:var(--navy);font-weight:700">합계</th><td style="color:var(--blue-dark);font-weight:700">0원</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="summary">
+            <h3>온도 1℃의 차이</h3>
+            <p id="heat-saving-text" style="margin:0;font-size:14px;color:var(--muted)">실내온도를 1℃ 낮추면 난방비가 약 7% 줄어듭니다.</p>
+            <div class="gauge" style="margin-top:14px">
+              <div class="gauge__bar"><div class="gauge__fill" id="heat-gauge"></div></div>
+              <div class="gauge__scale"><span>0</span><span>7% 절감</span><span>14% (2℃)</span></div>
+            </div>
+          </div>
+
+          <div id="heat-warnings" class="stack"></div>
+        </div>
+      </div>
+
+      <div class="ads-slot" data-slot="top" hidden></div>
+
+      <div data-blog-banner hidden></div>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>난방비는 어떻게 계산될까</h2>
+          <p>도시가스는 열량(MJ), 지역난방은 열량(Mcal)에 단가를 곱하고 기본요금과 부가세를 더합니다.</p>
+        </div>
+        <div class="prose">
+          <p><strong>도시가스(개별난방)</strong>는 ㎥가 아니라 <strong>열량(MJ)</strong>으로 요금을 매깁니다. 사용열량 = 검침량(㎥) × 온압보정계수 × 평균열량(MJ/㎥)이고, 여기에 MJ당 단가를 곱한 뒤 기본요금과 부가세 10%를 더합니다. 요금표의 단가는 부가세 별도이고, 최종 청구액은 10원 미만을 버립니다.</p>
+          <p><strong>지역난방(아파트)</strong>은 <strong>기본요금(계약면적 ㎡ × 52.40원) + 사용요금(사용열량 Mcal × 단가)</strong>에 부가세 10%를 더합니다. 기본요금은 난방을 거의 안 한 달에도 나오는 고정 비용입니다. 요금제는 단지 단위로 정해지고, 계절별 차등요금 단지는 12~2월 동절기 단가가 가장 높습니다.</p>
+          <p>1Mcal는 1,000kcal로, 물 1톤을 1℃ 올리는 열량입니다. 세대 열량계가 kWh로 표시되면 <strong>1kWh = 0.86Mcal</strong>로 바꿔 넣으면 됩니다. 반대로 도시가스 1㎥는 약 42.5MJ로, 1Mcal(4.186MJ)의 약 10배입니다.</p>
+          <p>그래서 두 요금을 같은 숫자로 비교하면 안 됩니다. 도시가스 1,000MJ는 약 23,000원(서울, 부가세 별도), 지역난방 1,000Mcal는 약 112,000원(단일요금, 부가세 별도)입니다. 열량 단위가 10배 차이 나기 때문입니다.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>지역별 · 요금제별 단가 비교</h2>
+          <p id="heat-compare-caption">2026년 11월 기준 · 부가세 별도 단가와 이번 달 예상 청구액입니다.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <caption id="heat-compare-caption-table">선택한 사용량 기준으로 계산한 예상 금액입니다. 부가세 포함·10원 미만 절사.</caption>
+            <thead id="heat-compare-head"></thead>
+            <tbody id="heat-compare-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>난방비를 줄이는 순서</h2>
+          <p>요금 구조를 알면 어디부터 손대야 할지 보입니다.</p>
+        </div>
+        <div class="prose">
+          <ul>
+            <li><strong>실내온도 1℃ 낮추기</strong> — 난방비의 약 7%가 줄어듭니다. 20℃ 안팎이 가장 효율이 좋은 구간입니다.</li>
+            <li><strong>외출 모드 대신 ‘저온 유지’</strong> — 완전히 끄면 다시 데우는 데 더 많은 열이 듭니다. 15~17℃ 유지가 유리합니다.</li>
+            <li><strong>창문·현관 단열</strong> — 문풍지와 뽁뽁이만으로도 체감 온도가 2~3℃ 올라갑니다.</li>
+            <li><strong>보일러 분배기 청소·공기 빼기</strong> — 배관에 공기가 차면 같은 온수에도 열이 덜 퍼집니다.</li>
+            <li><strong>지역난방은 기본요금 고정</strong> — 계약면적 기준이라 사용량을 줄여도 기본요금은 그대로입니다. 사용요금(열량)을 줄이는 데 집중하세요.</li>
+            <li><strong>온수 사용 시간 줄이기</strong> — 샤워 시간을 5분 줄이면 도시가스 30~40MJ(약 800원)가 줄어듭니다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>고지서와 계산기가 다른 이유</h2>
+        </div>
+        <div class="prose">
+          <p>계산기는 공개된 주택용 단가와 기본요금을 그대로 씁니다. 다만 <strong>계량기 교체비, 사회적 배려 대상자 할인, 자동이체·전자고지 할인, 연체료</strong>, 그리고 요금이 바뀐 달의 일수 안분은 반영하지 않습니다. 아파트 지역난방은 관리사무소가 공용 사용분과 배관 열손실을 배분해 붙이기 때문에 세대 고지서와 차이가 날 수 있고, 계약면적도 전용면적과 다를 수 있습니다. 정확한 금액은 고지서의 사용열량과 단가를 확인하세요.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>자주 묻는 질문</h2>
+        </div>
+        <div class="faq">
+      <details>
+        <summary>도시가스 요금은 계량기(㎥)와 사용열량(MJ) 중 무엇으로 계산하나요?</summary>
+        <p>요금은 ㎥가 아니라 열량(MJ)에 매깁니다. 사용열량 = 검침량(㎥) × 온압보정계수 × 평균열량(42.5MJ/㎥ 안팎)이고, 여기에 MJ당 단가와 기본요금을 더한 뒤 부가세 10%를 붙입니다. 고지서에 적힌 ‘사용열량(MJ)’을 그대로 넣는 것이 가장 정확하고, 계량기 지침만 알면 계산기가 환산해 줍니다.</p>
+      </details>
+      <details>
+        <summary>우리 집이 도시가스인지 지역난방인지 어떻게 알 수 있나요?</summary>
+        <p>고지서에 ‘도시가스’가 찍혀 나오고 보일러를 직접 켜는 집은 개별난방(도시가스)입니다. 아파트 관리비 고지서에 ‘난방비·급탕비’가 따로 표시되면 지역난방(집단에너지)입니다. 지역난방은 단지 전체가 한 공급사에서 열을 받고, 세대별 열량계로 사용량을 나눕니다.</p>
+      </details>
+      <details>
+        <summary>516MJ 기준은 무엇인가요?</summary>
+        <p>취사와 난방을 한 계량기로 함께 쓰는 세대는 한 달 516MJ까지 취사용 단가, 넘는 부분은 난방용 단가를 적용합니다. 서울·경기·인천·부산·대구는 두 단가가 같아 차이가 없고, 광주·대전처럼 단가가 다른 지역에서만 금액이 달라집니다.</p>
+      </details>
+      <details>
+        <summary>지역난방은 난방을 안 해도 돈이 나오나요?</summary>
+        <p>네. 기본요금은 계약면적 ㎡당 52.40원(한국지역난방공사)으로 매달 부과됩니다. 84㎡면 월 4,402원, 여기에 부가세 10%가 붙습니다. 사용요금은 실제 쓴 열량(Mcal)에만 붙기 때문에, 여름에는 기본요금과 급탕 사용분만 나옵니다.</p>
+      </details>
+      <details>
+        <summary>계약면적과 전용면적은 어떻게 다른가요?</summary>
+        <p>전용면적은 현관 안쪽 우리 집 면적이고, 지역난방의 계약면적은 전용면적에 발코니 확장면적과 관리사무소·경비실 등 공용 열사용 면적을 더한 값입니다. 그래서 고지서의 계약면적이 분양 때 들은 전용면적보다 조금 큽니다. 기본요금은 계약면적으로 계산합니다.</p>
+      </details>
+      <details>
+        <summary>단일요금과 계절별 차등요금 중 어느 쪽이 유리한가요?</summary>
+        <p>난방을 많이 쓰는 겨울에는 단일요금(112.32원/Mcal)이 유리하고, 여름처럼 거의 안 쓰는 달에는 하계 단가(99.02원)가 싼 계절별 요금이 유리합니다. 다만 요금제는 세대가 고르는 것이 아니라 단지가 정하므로, 고지서의 단가를 확인해 어느 쪽인지 먼저 보세요.</p>
+      </details>
+      <details>
+        <summary>1kWh는 몇 Mcal인가요?</summary>
+        <p>1kWh = 0.86Mcal입니다(1Mcal = 1.163kWh). 세대 열량계가 kWh로 표시되면 계산기에서 ‘열량(kWh)’을 선택해 그대로 넣으면 Mcal로 환산해 계산합니다. 반대로 도시가스 1㎥는 약 42.5MJ로, 1Mcal(4.186MJ)의 약 10배입니다.</p>
+      </details>
+      <details>
+        <summary>계산 결과가 실제 고지서와 똑같이 나오나요?</summary>
+        <p>공개된 주택용 단가·기본요금과 부가세·10원 미만 절사까지 반영하지만, 계량기 교체비, 복지·자동이체 할인, 연체료, 요금 변경 월의 일수 안분은 빠져 있습니다. 지역난방은 공용 배분과 배관 열손실이 더해져 고지서가 조금 더 나올 수 있습니다. 청구서와 1,000~3,000원 차이는 정상 범위입니다.</p>
+      </details>
+    </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>공식 출처</h2>
+        </div>
+        <ul class="source-list">
+          <li><a href="https://www.seoulgas.co.kr" target="_blank" rel="noopener">서울도시가스 — 가스요금표</a> <span>서울 주택용 22.5268원/MJ · 기본요금 1,250원</span></li>
+          <li><a href="https://www.incheon.go.kr/eco/ECO020806" target="_blank" rel="noopener">인천광역시 — 도시가스 요금 안내</a> <span>인천 22.5084원/MJ · 온압보정계수 0.9945 · 산정식</span></li>
+          <li><a href="https://www.kogas.or.kr" target="_blank" rel="noopener">한국가스공사 — 도시가스용 도매요금</a> <span>지역별 소매요금의 기준이 되는 도매요금</span></li>
+          <li><a href="https://www.samchully.co.kr" target="_blank" rel="noopener">삼천리 — 도시가스 요금 안내</a> <span>경기·인천 지역 공급사 요금표</span></li>
+          <li>한국지역난방공사 — 열요금표(2024.7.1부, 2026년 7월 동결) <span>www.kdhc.co.kr · 기본요금 52.40원/㎡ · 단일 112.32원/Mcal</span></li>
+          <li><a href="https://www.motie.go.kr" target="_blank" rel="noopener">산업통상자원부 — 지역냉난방 열요금 산정기준 및 상한</a> <span>지역난방 요금체계 근거</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>함께 쓰면 좋은 계산기</h2>
+        </div>
+        <div class="grid grid--2" data-related>
+        <a class="calc-card" href="../sme-tax/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span>
+            <span class="calc-card__tag">절세</span>
+          </div>
+          <h3>중소기업 취업자 소득세 감면 · 5년 경정청구</h3>
+          <p>청년 90% 감면으로 놓친 세금을 5년치 돌려받는 금액을 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../electricity/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg></span>
+            <span class="calc-card__tag">생활비</span>
+          </div>
+          <h3>우리집 전기세 · 누진제 계산</h3>
+          <p>총 사용량(kWh)만 넣으면 이번 달 예상 전기요금이 바로 나옵니다. 저압·고압 누진제, 평수·전용면적, 가전별 추가 요금까지 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../transit/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="14" rx="2.5"/><path d="M4 11h16M8 17v3M16 17v3"/><circle cx="8" cy="14" r=".8" fill="currentColor"/><circle cx="16" cy="14" r=".8" fill="currentColor"/></svg></span>
+            <span class="calc-card__tag">교통</span>
+          </div>
+          <h3>K-패스 vs 기후동행카드 손익분기</h3>
+          <p>내 통근 패턴에서 어느 쪽이 유리한지 월·연 절약액으로 비교합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../rent-tax/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span>
+            <span class="calc-card__tag">절세</span>
+          </div>
+          <h3>월세 세액공제 vs 현금영수증 소득공제</h3>
+          <p>월세 60만원 직장인이 실제로 돌려받는 금액을 5년치까지 비교합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../ai-cost/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M18.5 16.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span>
+            <span class="calc-card__tag">구독</span>
+          </div>
+          <h3>직장인 AI 구독 조합 가성비</h3>
+          <p>ChatGPT·Gemini·Claude·Perplexity, 조합별 월 비용을 한눈에 정리합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+      </div>
+      </section>
+
+      <div class="ads-slot" data-slot="bottom" hidden></div>
+
+      <div class="embed-footer"><a href="https://vgpymw5zfv-star.github.io/heating/" target="_blank" rel="noopener">도토리 계산기 전체 보기 ↗</a></div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__top">
+        <a class="site-footer__brand" href="../index.html">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8v1.9"/><path d="M5.9 9.1c0-2.5 2.7-4.5 6.1-4.5s6.1 2 6.1 4.5c0 .5-.4.9-.9.9H6.8c-.5 0-.9-.4-.9-.9z"/><path d="M7.3 10.9h9.4c0 4.4-1.9 8.6-4.7 10.2-2.8-1.6-4.7-5.8-4.7-10.2z"/></svg></span>
+          <span>도토리 계산기</span>
+        </a>
+        <nav aria-label="사이트 정보">
+          <a href="../about/">운영 소개</a>
+          <a href="../privacy/">개인정보처리방침</a>
+          <a href="../contact/">문의</a>
+          <a href="../sitemap/">사이트맵</a>
+        </nav>
+      </div>
+      <p>기준일 <span data-기준일>2026년 11월</span> · 운영 도토리사원 · <a href="../contact/">문의 페이지</a></p>
+      <p class="disclaimer">이 사이트의 모든 계산 결과는 공개된 요율과 단순화한 가정에 따른 <strong>참고용 추정치</strong>입니다. 세금·요금·환급 여부는 개인의 실제 조건과 관계 기관의 최종 결정에 따라 달라질 수 있으며, 계산 결과를 근거로 한 신고·계약·투자 판단의 책임은 이용자에게 있습니다. 공식 기준은 국세청 홈택스, 한국전력공사, 국토교통부, 서울시 등 원문을 확인하세요.</p>
+      <p>© <span data-year>2026</span> 도토리 계산기. 직접 만든 무료 도구이며, 어떤 금융기관과도 제휴 관계가 없습니다.</p>
+    </div>
+  </footer>
+  <script src="../assets/site-config.js"></script>
+  <script src="../assets/app.js"></script>
+  <script src="../assets/js/dotori-core.js"></script>
+  <script src="../assets/js/heating.js"></script>
+  <script src="../assets/js/page-heating.js"></script>
+</body>
+</html>

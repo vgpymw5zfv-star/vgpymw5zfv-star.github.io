@@ -1,6 +1,6 @@
 # 🧮 도토리 계산기 (dotori-calc)
 
-직장인·자취생 생활비·절세 계산기 5종 — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
+직장인·자취생 생활비·절세 계산기 6종 — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
 빌드 서버 없이 GitHub Pages에 그대로 올려 쓰는 구조입니다.
 
 - 홈: https://vgpymw5zfv-star.github.io/
@@ -16,6 +16,7 @@
 | `/transit/` | K-패스 vs 기후동행카드 손익분기 | 국토교통부 K-패스, 서울시 기후동행카드 |
 | `/rent-tax/` | 월세 세액공제 vs 현금영수증 소득공제 | 조세특례제한법 §95의2 |
 | `/ai-cost/` | AI 구독 조합 가성비 | 각 서비스 공식 요금 |
+| `/heating/` | 겨울 난방비 · 도시가스·지역난방 (사용열량 MJ·Mcal, 계량기 ㎥, 평수) | 2026년 11월 도시가스 주택용 요금표, 한국지역난방공사 열요금표(2024.7.1부) |
 
 정책 페이지: `/about/` · `/privacy/` · `/contact/` · `404.html` · `robots.txt` · `sitemap.xml`
 
@@ -34,9 +35,9 @@
 │   ├── favicon.svg · og-dotori.png
 │   └── js/
 │       ├── dotori-core.js    # 세금·포맷 공용 코어 (DOM 비의존)
-│       ├── sme-tax.js · electricity.js · transit.js · rent-tax.js · ai-cost.js
+│       ├── sme-tax.js · electricity.js · transit.js · rent-tax.js · ai-cost.js · heating.js
 │       └── page-*.js         # 각 페이지 입력 → 결과 연결
-├── sme-tax/ · electricity/ · transit/ · rent-tax/ · ai-cost/
+├── sme-tax/ · electricity/ · transit/ · rent-tax/ · ai-cost/ · heating/
 └── about/ · privacy/ · contact/
 ```
 
