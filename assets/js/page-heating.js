@@ -268,6 +268,7 @@
           " · 기본요금 " + r.areaM2.toFixed(0) + "㎡ × 52.40원 + " +
           numLabel(r.mcal, 0) + "Mcal × " + r.rate.toFixed(2) + "원 + 부가세 10%";
       }
+      note += " · 겨울 4개월은 이번 달 사용량이 이어진다고 가정";
       UI.setText("heat-result-note", note);
 
       /* 입력 방식 안내 */
