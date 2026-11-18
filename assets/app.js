@@ -1,7 +1,8 @@
 /* ==========================================================================
-   도토리 계산기 — 공통 스크립트
+   도토리 툴즈 — 공통 스크립트
    - ?embed=1 경량(임베드) 모드 + 부모 페이지 높이 자동 전달(postMessage)
    - site-config.js 기반 애드센스 / 블로그 배너 자동 삽입
+   - 계산 결과 카드에 '결과 복사 · 링크 공유' 버튼 자동 삽입
    - 헤더 현재 메뉴 표시, 홈 카테고리 필터
    ========================================================================== */
 
@@ -225,10 +226,38 @@
     window.gtag("config", id, { anonymize_ip: true });
   }
 
+  /* ---------------- 페이지 슬러그 ---------------- */
+
+  function pageSlug() {
+    try {
+      var path = window.location.pathname.replace(/index\.html?$/i, "");
+      var parts = path.split("/").filter(Boolean);
+      return parts.length ? decodeURIComponent(parts[parts.length - 1]).toLowerCase() : "";
+    } catch (e) {
+      return "";
+    }
+  }
+
   /* ---------------- 블로그 · 제휴 배너 ---------------- */
 
+  /* 계산기 슬러그별 맞춤 배너가 있으면 그것을, 없으면 기본 배너를 쓴다 */
+  function bannerFor(slug) {
+    var base = config.BLOG_BANNER || {};
+    var bySlug = base.bySlug || base.perSlug || {};
+    var hit = slug && Object.prototype.hasOwnProperty.call(bySlug, slug) ? bySlug[slug] : null;
+    if (!hit || !hit.href) return base;
+    return {
+      enabled: base.enabled,
+      label: hit.label || base.label,
+      title: hit.title || base.title,
+      text: hit.text || "",
+      href: hit.href,
+      cta: hit.cta || base.cta
+    };
+  }
+
   function renderBanner() {
-    var banner = config.BLOG_BANNER || {};
+    var banner = bannerFor(pageSlug());
     var hosts = $$("[data-blog-banner]");
     if (!hosts.length) return;
 
@@ -267,6 +296,200 @@
 
       host.appendChild(text);
       host.appendChild(link);
+    });
+  }
+
+  /* ---------------- 결과 복사 · 링크 공유 ---------------- */
+
+  var ICON_COPY =
+    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.4"/><path d="M15 5.5H6.5A1.5 1.5 0 0 0 5 7v8.5"/></svg>';
+  var ICON_SHARE =
+    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5.2" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.8" r="2.5"/><path d="M8.2 10.8 15.8 6.4M8.2 13.2l7.6 4.4"/></svg>';
+
+  /* 임베드 파라미터를 떼어낸 공유용 주소 */
+  function shareUrl() {
+    try {
+      var url = new URL(window.location.href);
+      url.searchParams.delete(embedKey);
+      url.hash = "";
+      return url.toString();
+    } catch (e) {
+      return window.location.href;
+    }
+  }
+
+  function squeeze(text) {
+    return String(text || "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  /* 결과 카드에서 제목·핵심값·요약을 뽑아 4줄짜리 공유 문구를 만든다 */
+  function resultShareData() {
+    var card = $(".result-card");
+    var h1 = $("h1");
+    var title = squeeze(h1 ? h1.textContent : "") || squeeze(document.title);
+    var label = squeeze(card && $(".result-card__label", card) ? $(".result-card__label", card).textContent : "");
+    var value = squeeze(card && $(".result-value", card) ? $(".result-value", card).textContent : "");
+    var sub = squeeze(card && $(".result-sub", card) ? $(".result-sub", card).textContent : "");
+    var url = shareUrl();
+
+    var lines = [];
+    if (title) lines.push(title);
+    if (value) lines.push(label ? label + ": " + value : value);
+    if (sub) lines.push(sub);
+
+    return {
+      title: title,
+      url: url,
+      body: lines.join("\n"),
+      text: lines.concat([url]).join("\n")
+    };
+  }
+
+  /* 클립보드 복사: Clipboard API → 실패·미지원 시 execCommand 폴백 */
+  function copyText(text) {
+    function legacy() {
+      var ok = false;
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.setAttribute("aria-hidden", "true");
+      ta.style.position = "fixed";
+      ta.style.top = "0";
+      ta.style.left = "-9999px";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      try {
+        ta.focus();
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        ok = document.execCommand("copy");
+      } catch (e) {
+        ok = false;
+      }
+      document.body.removeChild(ta);
+      return ok;
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        return navigator.clipboard.writeText(text).then(
+          function () {
+            return true;
+          },
+          function () {
+            return legacy();
+          }
+        );
+      } catch (e) {
+        /* 아래 폴백 */
+      }
+    }
+    if (window.Promise) return window.Promise.resolve(legacy());
+    return { then: function (fn) { fn(legacy()); } };
+  }
+
+  function actionButton(action, label, icon) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "result-action";
+    btn.setAttribute("data-action", action);
+    btn.innerHTML = icon + '<span class="result-action__label"></span>';
+    var span = $(".result-action__label", btn);
+    if (span) span.textContent = label;
+    btn.setAttribute("data-label", label);
+    btn.setAttribute("title", label);
+    return btn;
+  }
+
+  function flashAction(btn, text, status, message) {
+    var span = $(".result-action__label", btn);
+    if (span) span.textContent = text;
+    btn.classList.add("is-done");
+    if (status) status.textContent = message;
+    window.clearTimeout(btn._dotoriFlash);
+    btn._dotoriFlash = window.setTimeout(function () {
+      if (span) span.textContent = btn.getAttribute("data-label") || "";
+      btn.classList.remove("is-done");
+      if (status) status.textContent = "";
+    }, 2000);
+  }
+
+  function bindResultActions() {
+    var cards = $$(".result-card");
+    if (!cards.length) return;
+
+    cards.forEach(function (card) {
+      if ($("[data-result-actions]", card)) return;
+
+      var row = document.createElement("div");
+      row.className = "result-actions";
+      row.setAttribute("data-result-actions", "1");
+      row.setAttribute("role", "group");
+      row.setAttribute("aria-label", "결과 복사 및 공유");
+
+      var copyBtn = actionButton("copy", "결과 복사", ICON_COPY);
+      var shareBtn = actionButton("share", "링크 공유", ICON_SHARE);
+      var status = document.createElement("span");
+      status.className = "result-actions__status";
+      status.setAttribute("role", "status");
+
+      copyBtn.addEventListener("click", function () {
+        var data = resultShareData();
+        copyText(data.text).then(function (ok) {
+          if (ok) {
+            flashAction(copyBtn, "복사 완료 ✓", status, "결과를 클립보드에 복사했습니다.");
+          } else {
+            flashAction(copyBtn, "복사 실패", status, "복사하지 못했습니다. 주소창의 링크를 이용해 주세요.");
+          }
+        });
+      });
+
+      shareBtn.addEventListener("click", function () {
+        var data = resultShareData();
+
+        function copyLink() {
+          copyText(data.url).then(function (ok) {
+            if (ok) {
+              flashAction(shareBtn, "링크 복사됨 ✓", status, "링크를 클립보드에 복사했습니다.");
+            } else {
+              flashAction(shareBtn, "복사 실패", status, "복사하지 못했습니다. 주소창의 링크를 이용해 주세요.");
+            }
+          });
+        }
+
+        if (navigator.share) {
+          var pending;
+          try {
+            pending = navigator.share({ title: data.title, text: data.body, url: data.url });
+          } catch (e) {
+            copyLink();
+            return;
+          }
+          if (pending && typeof pending.then === "function") {
+            pending.then(
+              function () {
+                status.textContent = "";
+              },
+              function (err) {
+                /* 사용자가 공유 창을 닫은 경우는 조용히 넘어간다 */
+                if (err && (err.name === "AbortError" || err.name === "Abort")) return;
+                copyLink();
+              }
+            );
+          }
+          return;
+        }
+
+        /* 공유 미지원 브라우저(데스크톱 등) → 링크 복사 */
+        copyLink();
+      });
+
+      row.appendChild(copyBtn);
+      row.appendChild(shareBtn);
+      row.appendChild(status);
+      card.appendChild(row);
     });
   }
 
@@ -511,6 +734,7 @@
     markCurrentNav();
     initNavDropdowns();
     renderBanner();
+    bindResultActions();
     initFilters();
     injectAdsense();
     injectGA4();

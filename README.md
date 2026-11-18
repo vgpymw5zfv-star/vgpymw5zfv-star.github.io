@@ -1,4 +1,4 @@
-# 🧮 도토리 계산기 (dotori-calc)
+# 🧮 도토리 툴즈 (dotori-calc)
 
 직장인·자취생 생활비·절세 계산기 12종 — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
 빌드 서버 없이 GitHub Pages에 그대로 올려 쓰는 구조입니다.
@@ -79,7 +79,7 @@ ADSENSE_SLOTS: { top: "", bottom: "" },  // 수동 광고 단위를 쓸 때만 �
 GitHub Pages(사용자 사이트) 저장소 루트에 이 폴더의 **내용물 전체**를 올리면 끝입니다.
 
 ```bash
-git add -A && git commit -m "도토리 계산기 배포" && git push origin main
+git add -A && git commit -m "도토리 툴즈 배포" && git push origin main
 ```
 
 Settings → Pages → Source: `Deploy from a branch` / `main` / `/ (root)`.

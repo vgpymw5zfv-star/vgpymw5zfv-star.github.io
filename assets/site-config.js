@@ -1,5 +1,5 @@
 /* ==========================================================================
-   도토리 계산기 — 중앙 설정 파일
+   도토리 툴즈 — 중앙 설정 파일
    --------------------------------------------------------------------------
    이 파일 하나만 고치면 사이트 전체에 반영됩니다. (각 페이지 수정 불필요)
    1) ADSENSE_CLIENT_ID 에 "ca-pub-..." 를 넣으면 모든 페이지 <head>에
@@ -8,7 +8,7 @@
    ========================================================================== */
 
 window.DOTORI_CONFIG = {
-  siteName: "도토리 계산기",
+  siteName: "도토리 툴즈",
   siteTagline: "직장인 · 자취생 생활비와 세금을 30초에 계산",
   baseUrl: "https://vgpymw5zfv-star.github.io",
   author: "도토리사원",
@@ -42,6 +42,10 @@ window.DOTORI_CONFIG = {
   /* ----------------------------------------------------------------------
      [2] 블로그 · 제휴 배너
      계산기 결과 아래에 노출됩니다. enabled: false 로 끌 수 있습니다.
+     bySlug: 계산기 슬러그별 맞춤 배너. 매핑이 없으면 아래 기본 배너를 씁니다.
+       heating  → /heating/     ai-cost → /ai-cost/      sme-tax   → /sme-tax/
+       housing  → /housing/     rent-tax → /rent-tax/     unemployment → /unemployment/
+       loan     → /loan/
      ---------------------------------------------------------------------- */
   BLOG_BANNER: {
     enabled: true,
@@ -49,7 +53,51 @@ window.DOTORI_CONFIG = {
     title: "계산만으로는 부족할 때 — 실제 사용기와 절약 기록",
     text: "자취·소형가전·연말정산, 숫자로 검증한 글만 모아 두었습니다.",
     href: "https://blog.naver.com/dotorisawon",
-    cta: "블로그 보기"
+    cta: "블로그 보기",
+    bySlug: {
+      heating: {
+        label: "도토리노트",
+        title: "겨울 난방비 절약, 보일러 외출모드 대신 2도 낮추면?",
+        href: "https://blog.naver.com/dotorisawon/224482027883",
+        cta: "도토리노트 글 보기"
+      },
+      "ai-cost": {
+        label: "도토리노트",
+        title: "무료 AI 4대장 한도·조합, 유료 결제 전 비교 정리",
+        href: "https://blog.naver.com/dotorisawon/224480453599",
+        cta: "도토리노트 글 보기"
+      },
+      "sme-tax": {
+        label: "도토리사원 티스토리",
+        title: "중소기업 취업자 소득세 90% 감면, 5년 경정청구 가이드",
+        href: "https://news67.tistory.com/19",
+        cta: "티스토리 글 보기"
+      },
+      housing: {
+        label: "도토리사원 티스토리",
+        title: "전세 vs 월세 손익분기점, 전월세전환율 5% 실전 비교",
+        href: "https://news67.tistory.com/20",
+        cta: "티스토리 글 보기"
+      },
+      "rent-tax": {
+        label: "도토리사원 티스토리",
+        title: "집주인 동의 없이 월세 세액공제·5년 경정청구 받는 법",
+        href: "https://news67.tistory.com/18",
+        cta: "티스토리 글 보기"
+      },
+      unemployment: {
+        label: "도토리사원 티스토리",
+        title: "2026 실업급여 조건·지급액·자진퇴사 예외 총정리",
+        href: "https://news67.tistory.com/16",
+        cta: "티스토리 글 보기"
+      },
+      loan: {
+        label: "도토리사원 티스토리",
+        title: "2026년 11월 보금자리론·주담대 조건 한눈에 보기",
+        href: "https://news67.tistory.com/13",
+        cta: "티스토리 글 보기"
+      }
+    }
   },
 
   /* ----------------------------------------------------------------------
@@ -58,7 +106,7 @@ window.DOTORI_CONFIG = {
      ---------------------------------------------------------------------- */
   EMBED: {
     queryKey: "embed",
-    sourceLabel: "도토리 계산기 전체 보기 ↗",
+    sourceLabel: "도토리 툴즈 전체 보기 ↗",
     minHeight: 420
   }
 };
