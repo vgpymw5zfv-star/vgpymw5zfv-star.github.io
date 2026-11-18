@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>내 차 유지비 계산기 · 자동차세·기름값 vs K-패스 대중교통 (2026) | 도토리 계산기</title>
+<meta name="description" content="배기량·차령·주행거리·유가·보험·정비·주차비로 내 차의 월 유지비를 계산하고, K-패스 환급(20~53%)을 반영한 대중교통비와 월·연·5년 차이를 비교합니다. 2026년 자동차세와 오피넷 전국 평균 유가 기준.">
+<meta name="author" content="도토리사원">
+<meta name="theme-color" content="#1F2A44">
+<meta name="google-site-verification" content="_dxc0C2kiFi1gcrJOmOw2CYSbvuWM6zPb_HV6ua8Irc">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://vgpymw5zfv-star.github.io/car-cost/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="도토리 계산기">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="내 차 유지비 vs 대중교통, 어느 쪽이 쌀까">
+<meta property="og:description" content="배기량·차령·주행거리·유가·보험·정비·주차비로 내 차의 월 유지비를 계산하고, K-패스 환급(20~53%)을 반영한 대중교통비와 월·연·5년 차이를 비교합니다. 2026년 자동차세와 오피넷 전국 평균 유가 기준.">
+<meta property="og:url" content="https://vgpymw5zfv-star.github.io/car-cost/">
+<meta property="og:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="내 차 유지비 vs 대중교통, 어느 쪽이 쌀까">
+<meta name="twitter:description" content="배기량·차령·주행거리·유가·보험·정비·주차비로 내 차의 월 유지비를 계산하고, K-패스 환급(20~53%)을 반영한 대중교통비와 월·연·5년 차이를 비교합니다. 2026년 자동차세와 오피넷 전국 평균 유가 기준.">
+<meta name="twitter:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "내 차 유지비 · 대중교통 비교 계산기",
+      "url": "https://vgpymw5zfv-star.github.io/car-cost/",
+      "description": "배기량·차령·주행거리·유가·보험·정비·주차비로 내 차의 월 유지비를 계산하고, K-패스 환급(20~53%)을 반영한 대중교통비와 월·연·5년 차이를 비교합니다. 2026년 자동차세와 오피넷 전국 평균 유가 기준.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "JavaScript 지원 브라우저",
+      "inLanguage": "ko-KR",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "도토리사원"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "도토리 계산기",
+        "url": "https://vgpymw5zfv-star.github.io/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "홈",
+          "item": "https://vgpymw5zfv-star.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "차 유지비",
+          "item": "https://vgpymw5zfv-star.github.io/car-cost/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "자동차세는 어떻게 계산하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "비영업용 승용차는 배기량 1cc당 세율(1,000cc 이하 80원, 1,600cc 이하 140원, 1,600cc 초과 200원)을 곱하고, 3년차부터 매년 5%씩(최대 50%) 경감한 뒤 자동차세의 30%를 지방교육세로 더합니다. 1,998cc 신차라면 399,600원 + 교육세 119,880원 = 연 519,480원입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "전기차 자동차세는 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "전기·수소 승용차는 배기량이 없어 ‘그 밖의 승용자동차’로 분류되어 자동차세 10만원 정액에 지방교육세 3만원을 더한 연 13만원입니다. 차값이나 배터리 용량과 무관하고, 내연차와 달리 차령 경감도 적용되지 않습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "자동차세 연납을 하면 얼마나 아끼나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "1월에 연납하면 연세액의 4.58%, 3월 3.76%, 6월 2.51%, 9월 1.25%를 공제받습니다. 연세액 51만 9,480원짜리 2,000cc 승용차라면 1월 연납으로 2만 3,792원을 아낍니다. 전기차는 세액이 작아 공제액도 6,000원 안팎입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "차 유지비에 감가상각도 넣어야 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "실제 차량 비용을 보려면 넣어야 합니다. 이 계산기는 기름값·세금·보험·정비·주차비·할부금만 계산하고 감가상각은 제외했습니다. 신차 3,000만원을 10년 타면 연 200만원 안팎의 감가상각이 발생하므로, 장기 비교에는 이 금액을 더해 보세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "K-패스 환급은 어떻게 반영되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "월 대중교통비에 환급률(일반 20%·청년 30%·다자녀 2자녀 30%·3자녀 이상 50%·저소득 53%)을 곱해 뺍니다. 환급은 월 60회까지 인정되므로, 1회 요금 1,550원이면 월 9만 3,000원까지만 환급 대상입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "차를 없애면 정말 이득인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "월 유지비가 대중교통비보다 크면 숫자로는 이득입니다. 다만 차를 없애면 장거리·심야 이동이 택시로 바뀌므로, 계산기의 ‘택시 환산 횟수’로 남는 돈으로 월 몇 번 택시를 탈 수 있는지 확인하세요. 잔존가치와 사고·주차 스트레스는 숫자에 들어가지 않습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "유가와 연비는 어떻게 넣어야 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "유가는 2026년 11월 18일 오피넷 전국 평균(휘발유 1,855원/L, 경유 1,842원/L, LPG 1,177원/L, 전기 320원/kWh)을 기본값으로 넣었습니다. 우리 동네 가격이나 실제 주유 단가로 바꾸면 더 정확합니다. 연비는 제조사 공인연비보다 실주행 연비가 보통 10~20% 낮습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "LPG·하이브리드는 어떤 기준으로 계산하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LPG는 유가만 LPG 단가를 쓰고 자동차세는 배기량 기준으로 매깁니다. 하이브리드는 엔진 배기량이 있어 전기차 정액이 아니라 일반 승용차와 같은 배기량 기준 세율이 적용됩니다."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../index.html" aria-label="도토리 계산기 홈">
+        <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8v1.9"/><path d="M5.9 9.1c0-2.5 2.7-4.5 6.1-4.5s6.1 2 6.1 4.5c0 .5-.4.9-.9.9H6.8c-.5 0-.9-.4-.9-.9z"/><path d="M7.3 10.9h9.4c0 4.4-1.9 8.6-4.7 10.2-2.8-1.6-4.7-5.8-4.7-10.2z"/></svg></span>
+        <span class="brand__full">도토리 계산기</span>
+        <span class="brand__short">도토리</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 계산기">
+        <a href="../index.html"><span class="nav-full">홈</span><span class="nav-short">홈</span></a>
+        <a href="../salary/"><span class="nav-full">연봉</span><span class="nav-short">연봉</span></a>
+        <a href="../sme-tax/"><span class="nav-full">소득세 감면</span><span class="nav-short">감면</span></a>
+        <a href="../severance/"><span class="nav-full">퇴직금</span><span class="nav-short">퇴직</span></a>
+        <a href="../rent-tax/"><span class="nav-full">월세 절세</span><span class="nav-short">월세</span></a>
+        <a href="../housing/"><span class="nav-full">전월세</span><span class="nav-short">전세</span></a>
+        <a href="../loan/"><span class="nav-full">대출 이자</span><span class="nav-short">대출</span></a>
+        <a href="../electricity/"><span class="nav-full">전기세</span><span class="nav-short">전기</span></a>
+        <a href="../heating/"><span class="nav-full">난방비</span><span class="nav-short">난방</span></a>
+        <a href="../unemployment/"><span class="nav-full">실업급여</span><span class="nav-short">실업</span></a>
+        <a href="../transit/"><span class="nav-full">교통비</span><span class="nav-short">교통</span></a>
+        <a href="../car-cost/" aria-current="page"><span class="nav-full">차 유지비</span><span class="nav-short">차량</span></a>
+        <a href="../ai-cost/"><span class="nav-full">AI 구독</span><span class="nav-short">AI</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <div class="container">
+      <section class="page-head">
+        <nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">홈</a><span aria-hidden="true">/</span><span aria-current="page">차 유지비</span></nav>
+        <h1>내 차 유지비 vs 대중교통 계산기</h1>
+        <p class="lead">기름값·자동차세·보험·정비·주차비를 모두 넣어 내 차의 월 유지비를 구하고, K-패스 환급을 반영한 대중교통비와 나란히 비교합니다.</p>
+      </section>
+
+      <div class="calc-layout">
+        <div class="calc-col">
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">1</span>차량 정보</h2>
+            </div>
+
+            <label class="field" for="car-fuel">
+              <span class="field-label">차종 · 유종</span>
+              <span class="field-control">
+                <select id="car-fuel">
+                  <option value="gasoline" selected>가솔린 (휘발유)</option>
+                  <option value="diesel">디젤 (경유)</option>
+                  <option value="lpg">LPG</option>
+                  <option value="hybrid">하이브리드</option>
+                  <option value="premium">고급휘발유</option>
+                  <option value="electric">전기차</option>
+                </select>
+              </span>
+              <span class="field-help">하이브리드는 엔진 배기량 기준으로 자동차세를 매깁니다.</span>
+            </label>
+
+            <div class="field-row">
+              <label class="field" for="car-cc" data-car-cc-field>
+                <span class="field-label">배기량</span>
+                <span class="field-control">
+                  <input id="car-cc" type="number" inputmode="numeric" min="0" max="10000" step="1" value="1998">
+                  <span class="field-unit">cc</span>
+                </span>
+                <span class="field-help">자동차등록증 기준</span>
+              </label>
+              <label class="field" for="car-age">
+                <span class="field-label">차령 <small>등록 후 경과</small></span>
+                <span class="field-control">
+                  <input id="car-age" type="number" inputmode="numeric" min="0" max="50" step="1" value="5">
+                  <span class="field-unit">년</span>
+                </span>
+                <span class="field-help">3년차부터 매년 5% 경감(최대 50%)</span>
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field" for="car-eff">
+                <span class="field-label">연비</span>
+                <span class="field-control">
+                  <input id="car-eff" type="number" inputmode="decimal" min="0.1" max="60" step="0.1" value="12">
+                  <span class="field-unit" data-car-eff-unit>km/L</span>
+                </span>
+              </label>
+              <label class="field" for="car-km">
+                <span class="field-label">월 주행거리</span>
+                <span class="field-control">
+                  <input id="car-km" type="number" inputmode="numeric" min="0" max="20000" step="50" value="1200">
+                  <span class="field-unit">km</span>
+                </span>
+                <span class="field-help">통근 40km × 20일 + 주말 나들이</span>
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field" for="car-price">
+                <span class="field-label">유가 <small>직접 수정</small></span>
+                <span class="field-control">
+                  <input id="car-price" type="number" inputmode="numeric" min="1" max="10000" step="1" value="1855">
+                  <span class="field-unit" data-car-price-unit>원/L</span>
+                </span>
+                <span class="field-help">2026-11-18 오피넷 전국 평균</span>
+              </label>
+              <label class="field" for="car-prepay">
+                <span class="field-label">자동차세 연납</span>
+                <span class="field-control">
+                  <select id="car-prepay">
+                    <option value="none" selected>미적용</option>
+                    <option value="jan">1월 연납 (4.58% 공제)</option>
+                    <option value="mar">3월 연납 (3.76%)</option>
+                    <option value="jun">6월 연납 (2.51%)</option>
+                    <option value="sep">9월 연납 (1.25%)</option>
+                  </select>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">2</span>고정비</h2>
+            </div>
+
+            <label class="field" for="car-parking">
+              <span class="field-label">월 주차비 + 통행료</span>
+              <span class="field-control">
+                <input id="car-parking" type="number" inputmode="numeric" min="0" max="5000000" step="10000" value="100000">
+                <span class="field-unit">원</span>
+              </span>
+              <span class="field-help">거주지 주차비·하이패스·유료도로를 합쳐 넣으세요.</span>
+            </label>
+
+            <div class="field-row">
+              <label class="field" for="car-ins">
+                <span class="field-label">연 자동차보험료</span>
+                <span class="field-control">
+                  <input id="car-ins" type="number" inputmode="numeric" min="0" max="20000000" step="10000" value="1000000">
+                  <span class="field-unit">원</span>
+                </span>
+              </label>
+              <label class="field" for="car-maint">
+                <span class="field-label">연 정비·소모품비</span>
+                <span class="field-control">
+                  <input id="car-maint" type="number" inputmode="numeric" min="0" max="20000000" step="10000" value="600000">
+                  <span class="field-unit">원</span>
+                </span>
+              </label>
+            </div>
+
+            <label class="check">
+              <input type="checkbox" id="car-loan-check">
+              <span>
+                <span class="check__label">할부·리스료 포함</span>
+                <span class="check__desc">차량 구입 대금을 매달 내고 있다면 함께 넣어 비교하세요.</span>
+              </span>
+            </label>
+            <label class="field" for="car-loan" data-car-loan-field hidden>
+              <span class="field-label">월 할부·리스료</span>
+              <span class="field-control">
+                <input id="car-loan" type="number" inputmode="numeric" min="0" max="10000000" step="10000" value="400000">
+                <span class="field-unit">원</span>
+              </span>
+            </label>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">3</span>비교할 대중교통</h2>
+            </div>
+
+            <div class="field-row">
+              <label class="field" for="car-transit">
+                <span class="field-label">월 대중교통비</span>
+                <span class="field-control">
+                  <input id="car-transit" type="number" inputmode="numeric" min="0" max="5000000" step="100" value="66650">
+                  <span class="field-unit">원</span>
+                </span>
+                <span class="field-help">환급 전 결제 금액</span>
+              </label>
+              <label class="field" for="car-kpass">
+                <span class="field-label">K-패스 유형</span>
+                <span class="field-control">
+                  <select id="car-kpass">
+                    <option value="general" selected>일반 20%</option>
+                    <option value="youth">청년 30%</option>
+                    <option value="multi2">다자녀 2자녀 30%</option>
+                    <option value="multi3">다자녀 3자녀 50%</option>
+                    <option value="low">저소득 53%</option>
+                  </select>
+                </span>
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field" for="car-fare">
+                <span class="field-label">1회 기본요금</span>
+                <span class="field-control">
+                  <input id="car-fare" type="number" inputmode="numeric" min="100" max="10000" step="10" value="1550">
+                  <span class="field-unit">원</span>
+                </span>
+                <span class="field-help">월 60회 한도 계산에 사용</span>
+              </label>
+              <label class="field" for="car-taxi">
+                <span class="field-label">택시 1회 요금</span>
+                <span class="field-control">
+                  <input id="car-taxi" type="number" inputmode="numeric" min="1000" max="200000" step="500" value="12000">
+                  <span class="field-unit">원</span>
+                </span>
+                <span class="field-help">손익분기 환산에 사용</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-col">
+          <div class="result-card" aria-live="polite">
+            <p class="result-card__label">월 비용 차이 · <span id="car-better">대중교통이 유리</span></p>
+            <p class="result-value"><span id="car-diff">0</span><small>원</small></p>
+            <p class="result-sub" id="car-sub">차 월 0원 · 대중교통 월 0원</p>
+            <p class="pill pill--blue" id="car-pill" style="margin-top:10px">가솔린 · 1,200km/월</p>
+
+            <dl class="result-rows">
+              <div class="result-row">
+                <dt>연료비</dt>
+                <dd id="car-fuel-m">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>자동차세 (월 환산)</dt>
+                <dd id="car-tax-m">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>보험료 (월 환산)</dt>
+                <dd id="car-ins-m">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>정비·소모품 (월 환산)</dt>
+                <dd id="car-maint-m">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>주차비 + 통행료</dt>
+                <dd id="car-parking-m">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>할부·리스료</dt>
+                <dd id="car-loan-m">0원</dd>
+              </div>
+              <div class="result-row result-row--strong">
+                <dt>차 월 합계</dt>
+                <dd id="car-total">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>K-패스 환급 후 교통비</dt>
+                <dd id="car-transit-amount">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>연 차이</dt>
+                <dd id="car-year-diff">0원</dd>
+              </div>
+              <div class="result-row">
+                <dt>5년 누적 차이</dt>
+                <dd id="car-5y-diff">0원</dd>
+              </div>
+            </dl>
+            <p class="result-note">차를 처분하고 대중교통으로 바꾸면 남는 돈으로 택시를 월 <strong id="car-taxi-rides">0회</strong>까지 탈 수 있는 금액입니다.</p>
+          </div>
+
+          <div class="summary">
+            <h3>자동차세 계산 내역</h3>
+            <div class="table-wrap" style="border:0">
+              <table class="data" style="min-width:0;font-size:13.5px">
+                <tbody>
+                  <tr><th scope="row">과세 기준</th><td id="car-tax-base">0원</td></tr>
+                  <tr><th scope="row">차령 경감</th><td id="car-tax-age">-</td></tr>
+                  <tr><th scope="row">자동차세</th><td id="car-tax-auto">0원</td></tr>
+                  <tr><th scope="row">지방교육세 (30%)</th><td id="car-tax-edu">0원</td></tr>
+                  <tr><th scope="row">연세액</th><td id="car-tax-total">0원</td></tr>
+                  <tr><th scope="row">연납 공제</th><td id="car-tax-discount">0원</td></tr>
+                  <tr><th scope="row">연납 후 연세액</th><td class="is-best" id="car-tax-prepaid">0원</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="summary">
+            <h3>차 vs 대중교통</h3>
+            <div class="table-wrap" style="border:0">
+              <table class="data" style="min-width:0;font-size:13.5px">
+                <thead>
+                  <tr><th scope="col">구분</th><th scope="col">내 차</th><th scope="col">대중교통</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">월 비용</th><td id="car-monthly-car">0원</td><td id="car-monthly-transit">0원</td></tr>
+                  <tr><th scope="row">연 비용</th><td id="car-yearly">0원</td><td id="car-transit-yearly">0원</td></tr>
+                  <tr><th scope="row">5년</th><td id="car-five-year">0원</td><td id="car-transit-five">0원</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="car-warnings" class="stack"></div>
+        </div>
+      </div>
+
+      <div class="ads-slot" data-slot="top" hidden></div>
+
+      <div data-blog-banner hidden></div>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>차 유지비는 기름값보다 고정비가 큽니다</h2>
+          <p>월 1,200km를 타는 2,000cc 가솔린 승용차 기준으로 보면 이렇습니다.</p>
+        </div>
+        <div class="prose">
+          <p>연료비만 보면 월 20만원 안팎이지만, <strong>보험·자동차세·정비·주차비를 더하면 두 배가 넘습니다.</strong> 특히 거주지 주차비와 통행료는 지역 차이가 커서, 같은 차라도 사는 곳에 따라 월 10만원 이상 벌어집니다. 차를 살 때 흔히 놓치는 부분입니다.</p>
+          <p>자동차세는 <strong>배기량 × cc당 세율</strong>로 매기고, 여기에 지방교육세 30%가 붙습니다. 2,000cc면 연 39만 9,600원 + 교육세 11만 9,880원 = <strong>연 51만 9,480원</strong>이고, 3년차부터 매년 5%씩 줄어 12년차에는 절반이 됩니다. 1월에 미리 내는 <strong>연납</strong>을 신청하면 4.58%를 깎아 줍니다.</p>
+          <p>전기차는 배기량이 없어 자동차세가 <strong>연 10만원 정액(+지방교육세 3만원)</strong>입니다. 대신 차령 경감이 없어서, 10년 넘게 타면 소형 내연차보다 세금이 많아질 수 있습니다.</p>
+
+          <h3>대중교통과 비교할 때의 함정</h3>
+          <p>대중교통비는 <strong>K-패스 환급</strong>을 빼고 비교해야 합니다. 월 6만 6,650원(월 43회)을 쓰면 일반 20% 기준 1만 3,330원을 돌려받아 실부담은 5만 3,320원입니다. 차와의 차액이 이만큼 벌어집니다.</p>
+          <p>다만 차를 없애면 <strong>장거리·심야 이동이 택시로 바뀝니다.</strong> 이 계산기는 그 대체 비용을 택시 요금으로 환산해 보여줍니다. 남는 돈으로 월 몇 번 택시를 탈 수 있는지가 ‘차를 팔아도 되는지’의 실질 기준이 됩니다. 감가상각과 사고·범칙금 위험은 숫자에 넣지 않았으니, 차의 잔존가치까지 함께 보고 판단하세요.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>2026년 비영업용 승용차 자동차세</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <caption>지방세법 제127조·제151조 표준세율 기준</caption>
+            <thead>
+              <tr>
+                <th scope="col">차종</th>
+                <th scope="col">자동차세</th>
+                <th scope="col">지방교육세</th>
+                <th scope="col">연세액 (신차)</th>
+                <th scope="col">12년차</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">1,000cc 이하</th><td>80원/cc</td><td>30%</td><td>998cc 기준 103,792원</td><td>51,896원</td></tr>
+              <tr><th scope="row">1,600cc 이하</th><td>140원/cc</td><td>30%</td><td>1,598cc 기준 290,836원</td><td>145,418원</td></tr>
+              <tr><th scope="row">1,600cc 초과</th><td>200원/cc</td><td>30%</td><td>1,998cc 기준 519,480원</td><td>259,740원</td></tr>
+              <tr><th scope="row">전기·수소</th><td>정액 100,000원</td><td>30,000원</td><td>130,000원</td><td>130,000원</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>주행거리별 월 유지비</h2>
+          <p>지금 넣은 차량·고정비 조건 그대로 주행거리만 바꾼 결과입니다.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <caption>연비·유가는 위 입력값 기준</caption>
+            <thead>
+              <tr>
+                <th scope="col">월 주행</th>
+                <th scope="col">연료비</th>
+                <th scope="col">월 합계</th>
+                <th scope="col">km당 비용</th>
+                <th scope="col">대중교통과 비교</th>
+              </tr>
+            </thead>
+            <tbody id="car-km-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>자주 묻는 질문</h2>
+        </div>
+        <div class="faq">
+      <details>
+        <summary>자동차세는 어떻게 계산하나요?</summary>
+        <p>비영업용 승용차는 배기량 1cc당 세율(1,000cc 이하 80원, 1,600cc 이하 140원, 1,600cc 초과 200원)을 곱하고, 3년차부터 매년 5%씩(최대 50%) 경감한 뒤 자동차세의 30%를 지방교육세로 더합니다. 1,998cc 신차라면 399,600원 + 교육세 119,880원 = 연 519,480원입니다.</p>
+      </details>
+      <details>
+        <summary>전기차 자동차세는 얼마인가요?</summary>
+        <p>전기·수소 승용차는 배기량이 없어 ‘그 밖의 승용자동차’로 분류되어 자동차세 10만원 정액에 지방교육세 3만원을 더한 연 13만원입니다. 차값이나 배터리 용량과 무관하고, 내연차와 달리 차령 경감도 적용되지 않습니다.</p>
+      </details>
+      <details>
+        <summary>자동차세 연납을 하면 얼마나 아끼나요?</summary>
+        <p>1월에 연납하면 연세액의 4.58%, 3월 3.76%, 6월 2.51%, 9월 1.25%를 공제받습니다. 연세액 51만 9,480원짜리 2,000cc 승용차라면 1월 연납으로 2만 3,792원을 아낍니다. 전기차는 세액이 작아 공제액도 6,000원 안팎입니다.</p>
+      </details>
+      <details>
+        <summary>차 유지비에 감가상각도 넣어야 하나요?</summary>
+        <p>실제 차량 비용을 보려면 넣어야 합니다. 이 계산기는 기름값·세금·보험·정비·주차비·할부금만 계산하고 감가상각은 제외했습니다. 신차 3,000만원을 10년 타면 연 200만원 안팎의 감가상각이 발생하므로, 장기 비교에는 이 금액을 더해 보세요.</p>
+      </details>
+      <details>
+        <summary>K-패스 환급은 어떻게 반영되나요?</summary>
+        <p>월 대중교통비에 환급률(일반 20%·청년 30%·다자녀 2자녀 30%·3자녀 이상 50%·저소득 53%)을 곱해 뺍니다. 환급은 월 60회까지 인정되므로, 1회 요금 1,550원이면 월 9만 3,000원까지만 환급 대상입니다.</p>
+      </details>
+      <details>
+        <summary>차를 없애면 정말 이득인가요?</summary>
+        <p>월 유지비가 대중교통비보다 크면 숫자로는 이득입니다. 다만 차를 없애면 장거리·심야 이동이 택시로 바뀌므로, 계산기의 ‘택시 환산 횟수’로 남는 돈으로 월 몇 번 택시를 탈 수 있는지 확인하세요. 잔존가치와 사고·주차 스트레스는 숫자에 들어가지 않습니다.</p>
+      </details>
+      <details>
+        <summary>유가와 연비는 어떻게 넣어야 하나요?</summary>
+        <p>유가는 2026년 11월 18일 오피넷 전국 평균(휘발유 1,855원/L, 경유 1,842원/L, LPG 1,177원/L, 전기 320원/kWh)을 기본값으로 넣었습니다. 우리 동네 가격이나 실제 주유 단가로 바꾸면 더 정확합니다. 연비는 제조사 공인연비보다 실주행 연비가 보통 10~20% 낮습니다.</p>
+      </details>
+      <details>
+        <summary>LPG·하이브리드는 어떤 기준으로 계산하나요?</summary>
+        <p>LPG는 유가만 LPG 단가를 쓰고 자동차세는 배기량 기준으로 매깁니다. 하이브리드는 엔진 배기량이 있어 전기차 정액이 아니라 일반 승용차와 같은 배기량 기준 세율이 적용됩니다.</p>
+      </details>
+    </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>공식 출처</h2>
+        </div>
+        <ul class="source-list">
+          <li><a href="https://www.law.go.kr/법령/지방세법" target="_blank" rel="noopener">지방세법 제127조·제128조·제151조 — 자동차세</a> <span>법제처 국가법령정보센터</span></li>
+          <li><a href="https://www.opinet.co.kr" target="_blank" rel="noopener">오피넷 — 전국 평균 유가</a> <span>한국석유공사 opinet.co.kr</span></li>
+          <li><a href="https://www.kpass.go.kr" target="_blank" rel="noopener">K-패스 — 환급률과 이용 조건</a> <span>kpass.go.kr</span></li>
+          <li><a href="https://www.wetax.go.kr" target="_blank" rel="noopener">위택스 — 자동차세 조회·연납 공제</a> <span>wetax.go.kr</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>함께 쓰면 좋은 계산기</h2>
+        </div>
+        <div class="grid grid--2" data-related>
+        <a class="calc-card" href="../salary/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10.5h18"/><circle cx="16.8" cy="15" r="1.1" fill="currentColor"/></svg></span>
+            <span class="calc-card__tag">생활비</span>
+          </div>
+          <h3>2026 연봉 실수령액 · 4대보험·소득세</h3>
+          <p>연봉·비과세·부양가족만 넣으면 4대보험과 소득세를 뺀 월 실수령액이 바로 나옵니다. 중소기업 90% 감면까지.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../sme-tax/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span>
+            <span class="calc-card__tag">절세</span>
+          </div>
+          <h3>중소기업 취업자 소득세 감면 · 5년 경정청구</h3>
+          <p>청년 90% 감면으로 놓친 세금을 5년치 돌려받는 금액을 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../severance/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span>
+            <span class="calc-card__tag">절세</span>
+          </div>
+          <h3>퇴직금 · 퇴직소득세 실수령 & 연차수당</h3>
+          <p>입사일·퇴사일과 월급만 넣으면 퇴직금, 미사용 연차수당, 퇴직소득세를 뺀 실수령액과 IRP 절세액까지 나옵니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../rent-tax/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span>
+            <span class="calc-card__tag">절세</span>
+          </div>
+          <h3>월세 세액공제 vs 현금영수증 소득공제</h3>
+          <p>월세 60만원 직장인이 실제로 돌려받는 금액을 5년치까지 비교합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../housing/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.2" cy="8.2" r="4.2"/><path d="M11.2 11.2 20 20M16.4 16.4l2-2M19 19l1.6-1.6"/></svg></span>
+            <span class="calc-card__tag">주거</span>
+          </div>
+          <h3>전세 vs 월세 주거비 손익분기</h3>
+          <p>전세대출 이자·보증금 기회비용·월세 세액공제를 넣어 어느 쪽이 매달 얼마나 유리한지와 손익분기 월세를 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../loan/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span>
+            <span class="calc-card__tag">주거</span>
+          </div>
+          <h3>대출 이자 · 상환방식 비교</h3>
+          <p>원리금균등·원금균등·체증식·만기일시의 첫 달 납입액과 총 이자를 나란히 비교합니다. 주담대·전세·신용대출 프리셋.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../electricity/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg></span>
+            <span class="calc-card__tag">생활비</span>
+          </div>
+          <h3>우리집 전기세 · 누진제 계산</h3>
+          <p>총 사용량(kWh)만 넣으면 이번 달 예상 전기요금이 바로 나옵니다. 저압·고압 누진제, 평수·전용면적, 가전별 추가 요금까지 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../heating/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s4.5 4.2 4.5 8.4a4.5 4.5 0 0 1-9 0C7.5 7.2 12 3 12 3z"/><path d="M12 21a5 5 0 0 0 5-5"/></svg></span>
+            <span class="calc-card__tag">생활비</span>
+          </div>
+          <h3>겨울 난방비 · 도시가스·지역난방</h3>
+          <p>사용열량(MJ·Mcal)·계량기(㎥)·평수로 이번 달 난방비와 겨울 4개월 예상액을 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../unemployment/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10.5h18"/><circle cx="16.8" cy="15" r="1.1" fill="currentColor"/></svg></span>
+            <span class="calc-card__tag">생활비</span>
+          </div>
+          <h3>2026 실업급여(구직급여)</h3>
+          <p>퇴직 전 3개월 월급·나이·가입기간으로 2026년 상한 68,100원·하한 66,048원을 적용한 수급액과 총 수령액을 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../transit/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="14" rx="2.5"/><path d="M4 11h16M8 17v3M16 17v3"/><circle cx="8" cy="14" r=".8" fill="currentColor"/><circle cx="16" cy="14" r=".8" fill="currentColor"/></svg></span>
+            <span class="calc-card__tag">교통</span>
+          </div>
+          <h3>K-패스 vs 기후동행카드 손익분기</h3>
+          <p>내 통근 패턴에서 어느 쪽이 유리한지 월·연 절약액으로 비교합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../ai-cost/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M18.5 16.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span>
+            <span class="calc-card__tag">구독</span>
+          </div>
+          <h3>직장인 AI 구독 조합 가성비</h3>
+          <p>ChatGPT·Gemini·Claude·Perplexity, 조합별 월 비용을 한눈에 정리합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+      </div>
+      </section>
+
+      <div class="ads-slot" data-slot="bottom" hidden></div>
+
+      <div class="embed-footer"><a href="https://vgpymw5zfv-star.github.io/car-cost/" target="_blank" rel="noopener">도토리 계산기 전체 보기 ↗</a></div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__top">
+        <a class="site-footer__brand" href="../index.html">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8v1.9"/><path d="M5.9 9.1c0-2.5 2.7-4.5 6.1-4.5s6.1 2 6.1 4.5c0 .5-.4.9-.9.9H6.8c-.5 0-.9-.4-.9-.9z"/><path d="M7.3 10.9h9.4c0 4.4-1.9 8.6-4.7 10.2-2.8-1.6-4.7-5.8-4.7-10.2z"/></svg></span>
+          <span>도토리 계산기</span>
+        </a>
+        <nav aria-label="사이트 정보">
+          <a href="../about/">운영 소개</a>
+          <a href="../privacy/">개인정보처리방침</a>
+          <a href="../contact/">문의</a>
+          <a href="../sitemap/">사이트맵</a>
+        </nav>
+      </div>
+      <p>기준일 <span data-기준일>2026년 11월</span> · 운영 도토리사원 · <a href="../contact/">문의 페이지</a></p>
+      <p class="disclaimer">이 사이트의 모든 계산 결과는 공개된 요율과 단순화한 가정에 따른 <strong>참고용 추정치</strong>입니다. 세금·요금·환급 여부는 개인의 실제 조건과 관계 기관의 최종 결정에 따라 달라질 수 있으며, 계산 결과를 근거로 한 신고·계약·투자 판단의 책임은 이용자에게 있습니다. 공식 기준은 국세청 홈택스, 한국전력공사, 국토교통부, 서울시 등 원문을 확인하세요.</p>
+      <p>© <span data-year>2026</span> 도토리 계산기. 직접 만든 무료 도구이며, 어떤 금융기관과도 제휴 관계가 없습니다.</p>
+    </div>
+  </footer>
+  <script src="../assets/site-config.js"></script>
+  <script src="../assets/app.js"></script>
+  <script src="../assets/js/dotori-core.js"></script>
+  <script src="../assets/js/car-cost.js"></script>
+  <script src="../assets/js/page-car.js"></script>
+</body>
+</html>

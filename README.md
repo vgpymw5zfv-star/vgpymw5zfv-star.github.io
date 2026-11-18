@@ -1,6 +1,6 @@
 # 🧮 도토리 계산기 (dotori-calc)
 
-직장인·자취생 생활비·절세 계산기 8종 — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
+직장인·자취생 생활비·절세 계산기 12종 — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
 빌드 서버 없이 GitHub Pages에 그대로 올려 쓰는 구조입니다.
 
 - 홈: https://vgpymw5zfv-star.github.io/
@@ -19,6 +19,10 @@
 | `/rent-tax/` | 월세 세액공제 vs 현금영수증 소득공제 | 조세특례제한법 §95의2 |
 | `/ai-cost/` | AI 구독 조합 가성비 | 각 서비스 공식 요금 |
 | `/heating/` | 겨울 난방비 · 도시가스·지역난방 (사용열량 MJ·Mcal, 계량기 ㎥, 평수) | 2026년 11월 도시가스 주택용 요금표, 한국지역난방공사 열요금표(2024.7.1부) |
+| `/severance/` | 퇴직금 · 퇴직소득세 실수령 & 미사용 연차수당 (IRP 연금 감면 비교) | 근로자퇴직급여 보장법 §8, 근로기준법 §2·§60, 소득세법 §48·§55·시행규칙 별지 제40호의2 |
+| `/car-cost/` | 내 차 유지비 vs 대중교통(K-패스) — 자동차세·유가·보험·정비·주차 | 지방세법 §127·§128·§151, 오피넷 2026-11-18 전국 평균, 국토교통부 K-패스 |
+| `/unemployment/` | 2026 실업급여(구직급여) — 상한 68,100원·하한 66,048원, 소정급여일수 | 고용보험법 §45~§50·시행령 §68·[별표 1], 2026년 최저임금 10,320원 |
+| `/loan/` | 대출 이자 · 원리금균등·원금균등·체증식·만기일시 비교 | 한국주택금융공사·시중은행 상환방식 안내 |
 
 정책 페이지: `/about/` · `/privacy/` · `/contact/` · `404.html` · `robots.txt` · `sitemap.xml`
 
@@ -38,6 +42,7 @@
 │   └── js/
 │       ├── dotori-core.js    # 세금·포맷 공용 코어 (DOM 비의존)
 │       ├── salary.js · sme-tax.js · housing.js · electricity.js · transit.js · rent-tax.js · ai-cost.js · heating.js
+│       ├── severance.js · car-cost.js · unemployment.js · loan.js  (신규 4종)
 │       └── page-*.js         # 각 페이지 입력 → 결과 연결
 ├── salary/ · sme-tax/ · housing/ · electricity/ · transit/ · rent-tax/ · ai-cost/ · heating/
 └── about/ · privacy/ · contact/
