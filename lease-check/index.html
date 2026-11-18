@@ -231,9 +231,14 @@
             <p class="result-value"><span id="lease-ratio">71.4</span><small>%</small></p>
             <p class="result-sub" id="lease-sub">전세가율 = 보증금 ÷ 주택 시세</p>
 
-            <div class="gauge" style="margin-top:14px">
-              <div class="gauge__bar"><div class="gauge__fill" id="lease-gauge" style="width:71%"></div></div>
-              <div class="gauge__scale"><span>0%</span><span>80% 안전</span><span>90% 위험</span><span>100%</span></div>
+            <div class="gauge gauge--marked" style="margin-top:14px">
+              <div class="gauge__bar">
+                <div class="gauge__fill" id="lease-gauge" style="width:71%"></div>
+                <span class="gauge__mark" style="left:80%" aria-hidden="true"></span>
+                <span class="gauge__mark gauge__mark--danger" style="left:90%" aria-hidden="true"></span>
+              </div>
+              <div class="gauge__scale"><span>0%</span><span>100%</span></div>
+              <p class="gauge__legend">세로선 = 전세가율 80%(안전선) · 90%(위험선)</p>
             </div>
 
             <dl class="result-rows" style="margin-top:16px">

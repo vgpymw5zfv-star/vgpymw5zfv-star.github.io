@@ -2627,6 +2627,27 @@ body.embed-mode .result-actions {
   opacity: 0.8;
 }
 
+/* 게이지 기준선 (80% · 90%) */
+.gauge--marked .gauge__bar {
+  overflow: visible;
+}
+.gauge__mark {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(93, 107, 133, 0.45);
+}
+.gauge__mark--danger {
+  background: rgba(180, 35, 24, 0.55);
+}
+.gauge__legend {
+  margin-top: 6px;
+  color: var(--muted-light);
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
 /* 게이지 색 (주의·위험) */
 .gauge__fill.is-warn {
   background: #d97706;
