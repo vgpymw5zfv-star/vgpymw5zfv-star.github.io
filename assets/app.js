@@ -288,6 +288,174 @@
       if (target.charAt(target.length - 1) !== "/") target += "/";
       if (target === path) a.setAttribute("aria-current", "page");
     });
+
+    /* 현재 페이지가 속한 카테고리 드롭다운 버튼에 활성 표시 */
+    $$(".site-nav [data-nav-item]").forEach(function (item) {
+      var btn = $(".nav-toggle", item);
+      var hit = $('.nav-panel a[aria-current="page"]', item);
+      if (!btn) return;
+      if (hit) {
+        item.classList.add("is-active");
+        btn.setAttribute("aria-current", "true");
+      } else {
+        item.classList.remove("is-active");
+        btn.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  /* ---------------- 헤더 카테고리 드롭다운 ---------------- */
+
+  function initNavDropdowns() {
+    var nav = $(".site-nav");
+    if (!nav) return;
+    var items = $$("[data-nav-item]", nav);
+    if (!items.length) return;
+
+    /* hover 로 열 수 있는 기기(마우스·트랙패드)에서만 마우스 오버를 쓴다 */
+    var hoverable =
+      !!(window.matchMedia &&
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches);
+    var openItem = null;
+
+    function btnOf(item) {
+      return $(".nav-toggle", item);
+    }
+
+    function panelOf(item) {
+      return $(".nav-panel", item);
+    }
+
+    /* 패널이 화면 밖으로 나가면 안쪽으로 밀어 넣는다(오른쪽 끝 교통·구독 대응) */
+    function place(item) {
+      var panel = panelOf(item);
+      if (!panel) return;
+      panel.style.left = "";
+      panel.style.width = "";
+      var vw = document.documentElement.clientWidth || window.innerWidth;
+      var pad = 12;
+
+      /* 좁은 화면: 버튼 위치와 상관없이 화면 폭에 맞춘 패널을 왼쪽에 고정 */
+      if (vw <= 720) {
+        var box = item.getBoundingClientRect();
+        panel.style.width = Math.min(340, vw - pad * 2) + "px";
+        panel.style.left = Math.round(pad - box.left) + "px";
+        return;
+      }
+
+      var r = panel.getBoundingClientRect();
+      var current = parseFloat(window.getComputedStyle(panel).left) || 0;
+      var delta = 0;
+      if (r.right > vw - pad) delta = vw - pad - r.right;
+      if (r.left + delta < pad) delta = pad - r.left;
+      if (delta) panel.style.left = Math.round(current + delta) + "px";
+    }
+
+    function open(item, focusFirst) {
+      if (openItem && openItem !== item) close(openItem);
+      openItem = item;
+      item._hoverOpen = false;
+      item.classList.add("is-open");
+      var btn = btnOf(item);
+      if (btn) btn.setAttribute("aria-expanded", "true");
+      place(item);
+      if (focusFirst) {
+        var first = $(".nav-panel a", item);
+        if (first) first.focus();
+      }
+    }
+
+    function close(item) {
+      if (!item) return;
+      item.classList.remove("is-open");
+      var btn = btnOf(item);
+      if (btn) btn.setAttribute("aria-expanded", "false");
+      var panel = panelOf(item);
+      if (panel) {
+        panel.style.left = "";
+        panel.style.width = "";
+      }
+      if (openItem === item) openItem = null;
+    }
+
+    function closeAll() {
+      items.forEach(close);
+    }
+
+    items.forEach(function (item) {
+      var btn = btnOf(item);
+      if (!btn) return;
+
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (item.classList.contains("is-open")) {
+          /* 마우스 오버로 열린 상태에서 누른 것이면 닫지 않고 고정만 한다 */
+          if (item._hoverOpen) {
+            item._hoverOpen = false;
+            return;
+          }
+          close(item);
+          return;
+        }
+        open(item);
+      });
+
+      if (hoverable) {
+        item.addEventListener("mouseenter", function () {
+          if (item.classList.contains("is-open")) return;
+          open(item);
+          item._hoverOpen = true;
+        });
+        item.addEventListener("mouseleave", function () {
+          /* 키보드로 패널 안에 초점이 있거나 클릭으로 고정했으면 닫지 않는다 */
+          if (!item._hoverOpen) return;
+          if (item.contains(document.activeElement)) return;
+          close(item);
+        });
+      }
+
+      item.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          e.stopPropagation();
+          close(item);
+          btn.focus();
+          return;
+        }
+        if (e.key === "ArrowDown" && e.target === btn && !item.classList.contains("is-open")) {
+          e.preventDefault();
+          open(item, true);
+        }
+      });
+
+      /* 패널 밖으로 탭 이동하면 닫기 */
+      item.addEventListener("focusout", function (e) {
+        if (!item.contains(e.relatedTarget)) close(item);
+      });
+    });
+
+    /* 바깥 클릭 / 다른 메뉴 클릭 → 닫기 */
+    document.addEventListener("click", function (e) {
+      if (!nav.contains(e.target)) closeAll();
+    });
+
+    /* Escape → 닫고 버튼으로 초점 복귀 */
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape" || !openItem) return;
+      var item = openItem;
+      closeAll();
+      var btn = btnOf(item);
+      if (btn) btn.focus();
+    });
+
+    /* 화면 폭이 바뀌면 열린 패널 위치를 다시 계산 */
+    window.addEventListener("resize", function () {
+      items.forEach(function (item) {
+        if (item.classList.contains("is-open")) place(item);
+      });
+    });
+
+    closeAll();
   }
 
   /* ---------------- 홈 카테고리 필터 ---------------- */
@@ -341,6 +509,7 @@
     if (embed) document.body.classList.add("embed-mode");
     fillDynamicText();
     markCurrentNav();
+    initNavDropdowns();
     renderBanner();
     initFilters();
     injectAdsense();
