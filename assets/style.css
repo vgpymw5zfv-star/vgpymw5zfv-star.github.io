@@ -2522,3 +2522,207 @@ body.embed-mode .result-actions {
     gap: 5px;
   }
 }
+/* ==========================================================================
+   체크 도구 공통 (전세·월세 안전 계약 · 연말정산 체크리스트)
+   ========================================================================== */
+
+/* 체크리스트 상단 바 */
+.checklist-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.checklist-bar__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+.checklist-bar > .segment {
+  max-width: 100%;
+}
+
+/* 보조 버튼 */
+.btn-ghost {
+  padding: 7px 13px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: border-color 0.16s ease, color 0.16s ease, background 0.16s ease,
+    transform 0.14s ease;
+}
+.btn-ghost:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+.btn-ghost:active {
+  transform: scale(0.975);
+}
+.btn-ghost.is-copied {
+  border-color: #b9e4cf;
+  background: var(--good-bg);
+  color: var(--good);
+}
+
+/* 진행률 */
+.progress {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.progress__bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  border-radius: 999px;
+  background: var(--blue);
+  transition: width 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.progress__label {
+  margin-top: 8px;
+  color: var(--muted-light);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+.progress__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.progress__foot .progress__label {
+  margin-top: 8px;
+}
+
+/* 체크 완료 상태 */
+.check[hidden] {
+  display: none !important;
+}
+.field[hidden] {
+  display: none !important;
+}
+.check--done {
+  border-color: #cfe9dc;
+  background: #fbfefc;
+}
+.check--done .check__label {
+  color: var(--muted-light);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+.check--done .check__desc {
+  color: var(--muted-light);
+  opacity: 0.8;
+}
+
+/* 게이지 색 (주의·위험) */
+.gauge__fill.is-warn {
+  background: #d97706;
+}
+.gauge__fill.is-bad {
+  background: #d92d20;
+}
+
+/* 결과 카드 내 가입 가능/어려움 */
+.result-row dd.is-good {
+  color: var(--good);
+}
+.result-row dd.is-bad {
+  color: var(--bad);
+}
+
+/* 표 안 작은 보조 문구 */
+.muted-sm {
+  display: inline-block;
+  margin-top: 2px;
+  color: var(--muted-light);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+/* 특약 문구 카드 */
+.term-list {
+  display: grid;
+  gap: 12px;
+}
+.term {
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.term__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+.term__head h3 {
+  font-size: 14.5px;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+}
+.term__text {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.72;
+}
+.copy-btn {
+  flex: none;
+  padding: 6px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--blue-dark);
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.16s ease, background 0.16s ease, color 0.16s ease,
+    transform 0.14s ease;
+}
+.copy-btn:hover {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+}
+.copy-btn:active {
+  transform: scale(0.97);
+}
+.copy-btn.is-copied {
+  border-color: #b9e4cf;
+  background: var(--good-bg);
+  color: var(--good);
+}
+
+@media (max-width: 640px) {
+  .term {
+    padding: 16px;
+  }
+  .term__head {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .copy-btn {
+    align-self: flex-end;
+  }
+  .checklist-bar__right {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+}
