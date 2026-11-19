@@ -131,7 +131,7 @@
           return (
             "<tr><th scope=\"row\">" + Core.comma(s) + "만원</th><td>" +
             Core.won(r.creditTotalWon) + "</td><td>" + Core.won(r.cashTotalWon) +
-            "</td><td class=\"is-best\">" + label + "</td></tr>"
+            "</td><td class=\"is-best is-center\">" + label + "</td></tr>"
           );
         })
         .join("");

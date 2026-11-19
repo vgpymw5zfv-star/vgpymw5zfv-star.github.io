@@ -56,7 +56,7 @@
         el.items.innerHTML = result.items
           .map(function (item) {
             return (
-              '<tr><th scope="row">' + item.name + "</th><td>" +
+              '<tr><th scope="row">' + item.name + "</th><td class=\"is-text\">" +
               item.planLabel +
               (item.currency === "USD" ? " ($" + item.price + ")" : "") +
               "</td><td>" + (item.krw > 0 ? Core.won(item.krw) : "0원") + "</td></tr>"
@@ -88,7 +88,7 @@
             rate: 1400
           });
           return (
-            "<tr><th scope=\"row\">" + c.name + "</th><td class=\"is-muted\" style=\"text-align:left\">" +
+            "<tr><th scope=\"row\">" + c.name + "</th><td class=\"is-muted is-text\">" +
             c.desc + "</td><td>" + Core.won(r.total) + "</td><td>" + Core.won(r.yearly) + "</td></tr>"
           );
         })

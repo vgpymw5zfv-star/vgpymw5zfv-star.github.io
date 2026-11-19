@@ -294,28 +294,31 @@
             <p class="result-note">거치기간에는 이자만 냅니다. 총 이자는 원금에 단순 이자를 붙이는 월 단위 계산입니다.</p>
           </div>
 
-          <div class="summary">
-            <h3>상환방식별 비교</h3>
-            <div class="table-wrap" style="border:0">
-              <table class="data" style="min-width:0;font-size:13px">
-                <thead>
-                  <tr>
-                    <th scope="col">방식</th>
-                    <th scope="col">첫 달</th>
-                    <th scope="col">마지막 달</th>
-                    <th scope="col">총 이자</th>
-                    <th scope="col">원리금균등 대비</th>
-                  </tr>
-                </thead>
-                <tbody id="loan-compare"></tbody>
-              </table>
-            </div>
-            <p class="result-note" style="margin:12px 0 0">같은 조건에서 <strong>원금균등</strong>이 총이자가 가장 적고, <strong>만기일시</strong>가 가장 많습니다. 대신 원금균등은 초기 납입액이 큽니다.</p>
-          </div>
-
           <div id="loan-warnings" class="stack"></div>
         </div>
       </div>
+
+      <section class="section" style="margin-top:26px">
+        <div class="section-head">
+          <h2>상환방식별 비교</h2>
+          <p>같은 조건에서 첫 달·마지막 달 납입액과 총 이자를 나란히 봅니다.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <thead>
+              <tr>
+                <th scope="col">방식</th>
+                <th scope="col">첫 달</th>
+                <th scope="col">마지막 달</th>
+                <th scope="col">총 이자</th>
+                <th scope="col">원리금균등 대비</th>
+              </tr>
+            </thead>
+            <tbody id="loan-compare"></tbody>
+          </table>
+        </div>
+        <p class="result-note" style="margin:12px 0 0">같은 조건에서 <strong>원금균등</strong>이 총이자가 가장 적고, <strong>만기일시</strong>가 가장 많습니다. 대신 원금균등은 초기 납입액이 큽니다.</p>
+      </section>
 
       <div class="ads-slot" data-slot="top" hidden></div>
 

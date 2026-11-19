@@ -122,7 +122,10 @@
           : Math.round(r.tax.ageDiscountRate * 100) + "% 경감 (차령 " + r.tax.ageYears + "년)"
       );
       UI.setText("car-tax-prepaid", Core.won(r.tax.afterPrepay));
-      UI.setText("car-tax-discount", "-" + Core.won(r.tax.prepayDiscount));
+      UI.setText(
+        "car-tax-discount",
+        (r.tax.prepayDiscount > 0 ? "-" : "") + Core.won(r.tax.prepayDiscount)
+      );
 
       if (el.warnings) {
         el.warnings.innerHTML = r.warnings

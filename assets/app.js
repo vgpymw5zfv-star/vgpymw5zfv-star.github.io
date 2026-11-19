@@ -681,6 +681,40 @@
     closeAll();
   }
 
+  /* ---------------- 표 가로 스크롤 안내 ---------------- */
+
+  /* 내용이 표 틀보다 넓은 표에만 오른쪽 그늘(.is-scrollable)과 안내 문구를 붙인다 */
+  function markScrollableTables() {
+    $$(".table-wrap").forEach(function (wrap) {
+      var scrollable = wrap.scrollWidth - wrap.clientWidth > 1;
+      var wasScrollable = wrap.getAttribute("data-scrollable") === "1";
+      wrap.classList.toggle("is-scrollable", scrollable);
+      if (scrollable === wasScrollable) return;
+      wrap.setAttribute("data-scrollable", scrollable ? "1" : "0");
+      var hint = wrap.nextElementSibling;
+      var hasHint = hint && hint.classList.contains("table-scroll-hint");
+      if (scrollable && !hasHint) {
+        hint = document.createElement("p");
+        hint.className = "table-scroll-hint";
+        hint.textContent = "표를 옆으로 넘기면 전체 열이 보입니다";
+        wrap.parentNode.insertBefore(hint, wrap.nextSibling);
+      } else if (!scrollable && hasHint) {
+        hint.parentNode.removeChild(hint);
+      }
+    });
+  }
+
+  function watchTableScroll() {
+    if (!document.querySelector(".table-wrap")) return;
+    markScrollableTables();
+    window.addEventListener("resize", markScrollableTables);
+    if (typeof ResizeObserver !== "function") return;
+    var ro = new ResizeObserver(markScrollableTables);
+    $$(".table-wrap > table").forEach(function (table) {
+      ro.observe(table);
+    });
+  }
+
   /* ---------------- 홈 카테고리 필터 ---------------- */
 
   function initFilters() {
@@ -736,6 +770,7 @@
     renderBanner();
     bindResultActions();
     initFilters();
+    watchTableScroll();
     injectAdsense();
     injectGA4();
     if (embed) {

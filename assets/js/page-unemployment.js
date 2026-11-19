@@ -88,7 +88,7 @@
             Core.won(row.dailyAvg) +
             "</td><td class=\"is-best\">" +
             Core.won(row.daily) +
-            "</td><td>" +
+            "</td><td class=\"is-center\">" +
             tag +
             "</td><td>" +
             Core.won(row.daily * 30) +

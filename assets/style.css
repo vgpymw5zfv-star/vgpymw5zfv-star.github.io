@@ -1365,13 +1365,21 @@ main {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: #fff;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+/* 내용이 넘치는 표는 오른쪽 끝에 옅은 그늘을 드리워 가로 스크롤 여지를 알린다 */
+.table-wrap.is-scrollable {
+  box-shadow: inset -16px 0 16px -16px rgba(31, 42, 68, 0.26);
 }
 
 table.data {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
-  min-width: 420px;
+  /* 표 폭은 내용에 맞춰 정하고, 좁은 화면에서도 420px을 억지로 채우지 않는다 */
+  min-width: 0;
 }
 
 table.data caption {
@@ -1389,6 +1397,7 @@ table.data td {
   border-bottom: 1px solid var(--line);
   text-align: right;
   font-variant-numeric: tabular-nums;
+  word-break: keep-all;
 }
 
 table.data th:first-child,
@@ -1430,8 +1439,138 @@ table.data.table--text td {
   font-variant-numeric: normal;
 }
 
+/* 숫자 표 안의 설명·항목·조건 칸(텍스트)은 왼쪽 정렬하고 헤더도 같은 쪽에 둔다 */
+table.data th.is-text,
+table.data td.is-text {
+  text-align: left;
+  font-variant-numeric: normal;
+}
+
+/* 비교표의 짧은 판정·라벨 칸은 가운데 정렬 */
+table.data th.is-center,
+table.data td.is-center {
+  text-align: center;
+  font-variant-numeric: normal;
+}
+
 table.data td.is-muted {
   color: var(--muted-light);
+}
+
+/* 좁은 화면: 표를 조금 조밀하게 만들어 4~5열 표도 잘리지 않게 한다 */
+@media (max-width: 560px) {
+  table.data {
+    font-size: 13px;
+  }
+
+  table.data th,
+  table.data td {
+    padding: 10px 9px;
+  }
+
+  /* 좁은 화면에서는 긴 열 제목이 두 줄로 접히도록 해 표 폭을 줄인다 */
+  table.data thead th {
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  table.data caption {
+    padding: 10px 13px;
+  }
+
+  /* 설명 칸은 최소 폭을 지켜 한두 글자씩 세로로 꺾이는 것을 막는다 */
+  table.data th.is-text,
+  table.data td.is-text {
+    min-width: 108px;
+  }
+
+  /* 금액 앞 보조 문구는 한 줄 띄워 숫자가 줄 중간에서 끊기지 않게 */
+  table.data .muted-sm.cell-sub {
+    display: block;
+    margin-top: 0;
+    white-space: nowrap;
+  }
+}
+
+/* 아주 좁은 화면(390·360px대)은 여백을 조금 더 줄여 표가 잘리지 않게 한다 */
+@media (max-width: 420px) {
+  table.data th,
+  table.data td {
+    padding: 9px 8px;
+  }
+}
+
+/* 설명형 표는 좁은 화면에서 항목별 카드로 쌓아 읽기 쉽게 한다 */
+@media (max-width: 640px) {
+  table.data.table--stack {
+    display: block;
+  }
+
+  table.data.table--stack caption,
+  table.data.table--stack thead,
+  table.data.table--stack tbody,
+  table.data.table--stack tr {
+    display: block;
+  }
+
+  table.data.table--stack thead {
+    display: none;
+  }
+
+  table.data.table--stack tr {
+    padding: 13px 0 15px;
+  }
+
+  table.data.table--stack tr + tr {
+    border-top: 1px solid var(--line);
+  }
+
+  table.data.table--stack th,
+  table.data.table--stack td {
+    display: block;
+    padding: 2px 15px;
+    border: 0;
+    text-align: left;
+  }
+
+  table.data.table--stack th {
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  table.data.table--stack td {
+    color: var(--text);
+    font-size: 13.5px;
+    line-height: 1.62;
+  }
+
+  table.data.table--stack td::before {
+    content: attr(data-label);
+    display: block;
+    margin: 6px 0 1px;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-weight: 700;
+  }
+
+  table.data.table--stack td:first-of-type::before {
+    margin-top: 4px;
+  }
+}
+
+/* 가로로 넘치는 표 안내 */
+
+.table-scroll-hint {
+  margin: 8px 2px 0;
+  color: var(--muted-light);
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.table-scroll-hint::after {
+  content: " →";
 }
 
 /* 막대 게이지(전기 누진) */

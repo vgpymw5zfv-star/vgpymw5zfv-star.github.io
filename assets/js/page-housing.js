@@ -168,7 +168,7 @@
               "<th scope=\"row\">" + row.rate.toFixed(1) + "%</th>" +
               "<td>" + won(row.convertedWolse) + "</td>" +
               "<td>" + diffText + "</td>" +
-              "<td>" + (row.verdict === "wolse" ? "월세" : "전세") + "</td>" +
+              "<td class=\"is-center\">" + (row.verdict === "wolse" ? "월세" : "전세") + "</td>" +
               "</tr>"
             );
           })
