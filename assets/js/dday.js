@@ -221,8 +221,11 @@
       }
       cursor = addDays(cursor, 1);
     }
-    var y = start.getUTCFullYear();
-    if (COVERED_YEARS.indexOf(y) === -1 && COVERED_YEARS.indexOf(end.getUTCFullYear()) === -1) {
+    /* 공휴일 데이터는 2026·2027년만 있으므로, 구간이 그 밖으로 나가면 안내를 띄운다 */
+    if (
+      COVERED_YEARS.indexOf(start.getUTCFullYear()) === -1 ||
+      COVERED_YEARS.indexOf(end.getUTCFullYear()) === -1
+    ) {
       result.covered = false;
     }
     return result;
