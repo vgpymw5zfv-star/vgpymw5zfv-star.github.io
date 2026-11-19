@@ -2886,3 +2886,111 @@ body.embed-mode .result-actions {
     margin-left: 0;
   }
 }
+
+/* ==========================================================================
+   문서·일정 도구 (글자수·바이트 / D-day)
+   ========================================================================== */
+
+/* 긴 글 입력 상자 */
+.text-box {
+  display: block;
+  width: 100%;
+  min-height: 230px;
+  padding: 14px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14.5px;
+  line-height: 1.72;
+  resize: vertical;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.text-box::placeholder {
+  color: var(--muted-light);
+}
+
+.text-box:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* 보조 버튼 줄 */
+.tool-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tool-bar .btn-ghost {
+  flex: none;
+}
+
+/* 다가오는 공휴일 목록 */
+.up-list {
+  display: grid;
+  gap: 0;
+}
+
+.up-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 2px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.up-list li:last-child {
+  border-bottom: 0;
+}
+
+.up-list b {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.up-list span {
+  color: var(--muted);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* 기념일 표에서 가장 가까운 다음 기념일 강조 */
+table.data tbody tr.is-next th,
+table.data tbody tr.is-next td {
+  background: var(--blue-soft);
+}
+
+@media (max-width: 640px) {
+  .up-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .text-box {
+    min-height: 190px;
+    font-size: 14px;
+  }
+}
+
+/* 헤더 카테고리 라벨 — 좁은 화면에서는 두 글자 축약본으로 바꿔 7개 메뉴를 한 줄에 넣는다 */
+.nav-toggle__short {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .nav-toggle__full {
+    display: none;
+  }
+
+  .nav-toggle__short {
+    display: inline;
+  }
+}
