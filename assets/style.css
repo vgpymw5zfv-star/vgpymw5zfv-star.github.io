@@ -1698,6 +1698,31 @@ table.data td.is-muted {
   font-weight: 600;
 }
 
+/* 관련 도구 4개 + 전체 목록 링크 */
+
+.related-all {
+  margin-top: 16px;
+  font-size: 14px;
+  text-align: right;
+}
+
+.related-all a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.related-all a:hover {
+  border-bottom-color: currentColor;
+}
+
+@media (max-width: 560px) {
+  .related-all {
+    text-align: left;
+  }
+}
+
 .source-list span {
   color: var(--muted-light);
   font-size: 12.5px;
