@@ -1,6 +1,6 @@
 # 🧮 도토리 툴즈 (dotori-calc)
 
-직장인·자취생 생활비·절세 계산기 12종 + 실전 체크도구 2종 + 문서·일정 도구 2종(16종) — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
+직장인·자취생 생활비·절세 계산기 13종 + 실전 체크도구 2종 + 문서·일정 도구 3종(18종) — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
 빌드 서버 없이 GitHub Pages에 그대로 올려 쓰는 구조입니다.
 
 - 홈: https://vgpymw5zfv-star.github.io/
@@ -27,6 +27,8 @@
 | `/loan/` | 대출 이자 · 원리금균등·원금균등·체증식·만기일시 비교 | 한국주택금융공사·시중은행 상환방식 안내 |
 | `/text-counter/` | 글자수·바이트 & 줄바꿈 정리기 (공백 포함·제외, UTF-8/EUC-KR, SMS 90B·LMS 2,000B, 200자 원고지, 읽기 시간, 원클릭 정리) | 유니코드 코드 포인트, UTF-8 인코딩 규칙, TTA 정보통신용어사전(SMS·LMS), 관행적 200자 원고지 |
 | `/dday/` | D-day · 근무일(공휴일 제외) · 기념일 (총 일수·주·개월, 2026·2027년 공휴일·대체공휴일 제외 근무일, 100일·1주년) | 「관공서의 공휴일에 관한 규정」(2026. 4. 30. 개정), 우주항공청 2026·2027년 월력요항, 한국천문연구원 달력자료, 공직선거법 §34 |
+| `/unit-price/` | 단위가격 · 1+1 실구매가 비교기 (상품 4개, 100g·100ml·1개당 단가, 구성 수량, 쿠폰·카드 할인, 최저 단가 배지·2등 대비 절약률) | 계량에 관한 법률(법정 계량단위), 한국소비자원 단위가격 안내, 공정위 할인·증정 표시 기준 |
+| `/msg-template/` | 실무 문자·메일 템플릿 생성기 (11가지 상황, 정중한 업무용·부드러운 카톡용, 원클릭 복사, 문자 규격 표시) | 주택임대차보호법 §6·§6의2·§6의3·§7, 민법 §623·§660, 전자상거래법 §17·§18, 근로기준법 §39·시행령 §19, 소득세법 §143 |
 
 정책 페이지: `/about/` · `/privacy/` · `/contact/` · `404.html` · `robots.txt` · `sitemap.xml`
 
@@ -48,9 +50,10 @@
 │       ├── salary.js · sme-tax.js · housing.js · electricity.js · transit.js · rent-tax.js · ai-cost.js · heating.js
 │       ├── severance.js · car-cost.js · unemployment.js · loan.js
 │       ├── text-counter.js · dday.js  (문서·일정 도구, DOM 비의존)
+│       ├── unit-price.js · msg-template.js  (단위가격·문자 템플릿, DOM 비의존)
 │       └── page-*.js         # 각 페이지 입력 → 결과 연결
 ├── salary/ · sme-tax/ · housing/ · electricity/ · transit/ · rent-tax/ · ai-cost/ · heating/
-├── text-counter/ · dday/
+├── text-counter/ · dday/ · unit-price/ · msg-template/
 └── about/ · privacy/ · contact/
 ```
 

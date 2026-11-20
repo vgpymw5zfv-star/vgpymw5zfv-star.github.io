@@ -2994,3 +2994,185 @@ table.data tbody tr.is-next td {
     display: inline;
   }
 }
+
+/* ==========================================================================
+   단위가격 · 1+1 실구매가 비교기
+   ========================================================================== */
+
+.up-item {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: #fff;
+}
+
+.up-item + .up-item {
+  margin-top: 10px;
+}
+
+.up-item.is-best {
+  border-color: #b9e4cf;
+  background: #fbfffd;
+}
+
+.up-item__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.up-item__no {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: var(--bg-soft);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.up-item.is-best .up-item__no {
+  background: var(--navy);
+  color: #fff;
+}
+
+.up-item__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--navy);
+  font-family: var(--font);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.up-item__name::placeholder {
+  color: var(--muted-light);
+  font-weight: 500;
+}
+
+.up-item__name:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.up-item__badge {
+  flex: none;
+}
+
+/* 상품별 단가 비교 목록 */
+
+.up-compare {
+  display: grid;
+  gap: 10px;
+}
+
+.up-row {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: #fff;
+}
+
+.up-row.is-best {
+  border-color: #b9e4cf;
+  background: var(--good-bg);
+}
+
+.up-row__top {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+
+.up-row__rank {
+  flex: none;
+  color: var(--muted-light);
+  font-size: 11.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.up-row.is-best .up-row__rank {
+  color: var(--good);
+}
+
+.up-row__name {
+  min-width: 0;
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.up-row__unit {
+  margin-left: auto;
+  color: var(--blue-dark);
+  font-size: 13.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.up-row.is-best .up-row__unit {
+  color: var(--good);
+}
+
+.up-row__bar {
+  margin-top: 8px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  overflow: hidden;
+}
+
+.up-row__bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--line-strong);
+  transition: width 0.28s ease;
+}
+
+.up-row.is-best .up-row__bar span {
+  background: var(--blue);
+}
+
+.up-row__meta {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   실무 문자·메일 템플릿 생성기
+   ========================================================================== */
+
+#msg-fields .field-label {
+  font-size: 13px;
+}
+
+#msg-tone {
+  flex: none;
+}
+
+@media (max-width: 560px) {
+  #msg-tone {
+    width: 100%;
+  }
+
+  #msg-tone button {
+    flex: 1 1 auto;
+  }
+}
