@@ -1,8 +1,12 @@
 User-agent: *
 Allow: /
+Allow: /sitemap.xml
+Allow: /sitemap_index.xml
+Allow: /feed.xml
 
 # 광고 크롤러
 User-agent: Mediapartners-Google
 Allow: /
 
 Sitemap: https://vgpymw5zfv-star.github.io/sitemap.xml
+Sitemap: https://vgpymw5zfv-star.github.io/sitemap_index.xml
