@@ -120,10 +120,13 @@
             ? "기준일이 입사일보다 앞설 수 없습니다. 두 날짜를 확인해 주세요."
             : "입사일과 기준일을 넣으면 연차 일수를 계산합니다."
         );
-        ["tenure", "expiry", "next", "rule"].forEach(function (k) {
-          if (els[k]) setText(els[k], "—");
-        });
+        ["tenure", "expiry", "next", "rule", "hourly", "daily", "usedOut", "remain", "pay"].forEach(
+          function (k) {
+            if (els[k]) setText(els[k], "—");
+          }
+        );
         last = null;
+        if (window.DotoriNotifyResize) window.DotoriNotifyResize();
         return;
       }
 

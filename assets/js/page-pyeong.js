@@ -123,15 +123,25 @@
       setText(el.value, P.comma(pyeong, 2) + "평");
       setText(
         el.sub,
-        (basis === "supply" ? "공급 " : "전용 ") +
-          P.comma(sqm, 1) +
-          "㎡ · 공급면적 " +
-          P.comma(Math.round(calc.supply)) +
-          "㎡ (" +
-          P.comma(P.sqmToPyeong(calc.supply), 1) +
-          "평, " +
-          type +
-          "평형 추정)"
+        basis === "supply"
+          ? "공급 " +
+              P.comma(sqm, 1) +
+              "㎡ · 전용 " +
+              P.comma(calc.exclusive, 1) +
+              "㎡ (" +
+              P.comma(P.sqmToPyeong(calc.exclusive), 1) +
+              "평) · " +
+              type +
+              "평형"
+          : "전용 " +
+              P.comma(sqm, 1) +
+              "㎡ · 공급면적 " +
+              P.comma(Math.round(calc.supply)) +
+              "㎡ (" +
+              P.comma(P.sqmToPyeong(calc.supply), 1) +
+              "평, " +
+              type +
+              "평형 추정)"
       );
 
       setText(el.sqmOut, P.comma(sqm, 1) + "㎡");
@@ -195,7 +205,7 @@
       return P.sqmToPyeong(v).toFixed(2);
     });
     bindPair(el.pyeong, el.sqm, function (v) {
-      return (v * P.SQM_PER_PYEONG).toFixed(1);
+      return (v * P.SQM_PER_PYEONG).toFixed(2);
     });
 
     UI.onInput([el.rate, el.price], paint, 60);
