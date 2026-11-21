@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>평수 계산기 · ㎡↔평 변환·전용면적·평당가 | 도토리 툴즈</title>
+<meta name="description" content="㎡와 평을 서로 바꾸고(1평=3.305785㎡), 전용률로 공급면적·주거공용면적과 평형을 추정합니다. 매매가·전세금으로 공급·전용 기준 평당 가격과 방 크기 감각까지 계산합니다.">
+<meta name="author" content="도토리사원">
+<meta name="theme-color" content="#1F2A44">
+<meta name="google-site-verification" content="_dxc0C2kiFi1gcrJOmOw2CYSbvuWM6zPb_HV6ua8Irc">
+<meta name="naver-site-verification" content="8cae25a2a99bf6fc06dd7b48bcecf8f519ab032f">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://vgpymw5zfv-star.github.io/pyeong/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="도토리 툴즈">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="84㎡는 25평? 34평형? 평수·면적 한 번에">
+<meta property="og:description" content="㎡와 평을 서로 바꾸고(1평=3.305785㎡), 전용률로 공급면적·주거공용면적과 평형을 추정합니다. 매매가·전세금으로 공급·전용 기준 평당 가격과 방 크기 감각까지 계산합니다.">
+<meta property="og:url" content="https://vgpymw5zfv-star.github.io/pyeong/">
+<meta property="og:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="84㎡는 25평? 34평형? 평수·면적 한 번에">
+<meta name="twitter:description" content="㎡와 평을 서로 바꾸고(1평=3.305785㎡), 전용률로 공급면적·주거공용면적과 평형을 추정합니다. 매매가·전세금으로 공급·전용 기준 평당 가격과 방 크기 감각까지 계산합니다.">
+<meta name="twitter:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "평수 · 전용면적 ㎡ 변환 계산기",
+      "url": "https://vgpymw5zfv-star.github.io/pyeong/",
+      "description": "㎡와 평을 서로 바꾸고(1평=3.305785㎡), 전용률로 공급면적·주거공용면적과 평형을 추정합니다. 매매가·전세금으로 공급·전용 기준 평당 가격과 방 크기 감각까지 계산합니다.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "JavaScript 지원 브라우저",
+      "inLanguage": "ko-KR",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "도토리사원"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "도토리 툴즈",
+        "url": "https://vgpymw5zfv-star.github.io/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "홈",
+          "item": "https://vgpymw5zfv-star.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "평수·면적 환산",
+          "item": "https://vgpymw5zfv-star.github.io/pyeong/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "전용 84㎡인데 왜 34평형이라고 부르나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "84㎡는 25.41평으로, 이는 현관 안쪽 우리 집 면적(전용면적)입니다. 여기에 계단·복도·엘리베이터 홀 같은 주거공용면적 약 28㎡를 더하면 공급면적이 약 112㎡(33.9평)가 되고, 이를 반올림해 34평형이라고 부릅니다. 부동산에서 말하는 ‘○○평형’은 공급면적 기준입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "1평은 정확히 몇 ㎡인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "1평 = 400/121 ㎡ = 3.305785㎡입니다. 반대로 1㎡는 0.3025평입니다. 암산할 때는 ㎡에 0.3을 곱하면 거의 맞습니다(84 × 0.3 = 25.2평, 실제 25.41평). 평은 2007년 7월부터 법정 계량단위가 아니어서 계약서·공고에는 ㎡로 적힙니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "전용률은 보통 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "전용률 = 전용면적 ÷ 공급면적 × 100입니다. 아파트는 대체로 70~80%이고, 계단식 신축이 75~80%, 복도식·구축이 70~75%, 주상복합이 65~75% 수준입니다. 오피스텔은 주차장·관리실까지 넣은 계약면적으로 나누는 경우가 많아 50% 안팎으로 낮습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "공급면적과 계약면적은 무엇이 다른가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "공급면적은 전용면적에 주거공용면적(계단·복도·엘리베이터 홀)을 더한 값이고, 계약면적은 여기에 지하주차장·관리사무소·커뮤니티 시설 같은 기타공용면적까지 더한 값입니다. 아파트 분양 평형은 공급면적, 오피스텔 분양 평형은 계약면적 기준인 경우가 많습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "발코니는 어느 면적에 들어가나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "발코니는 법적으로 외부 공간이라 서비스면적으로 분류되어 전용·공급·계약면적 어디에도 들어가지 않습니다. 발코니를 확장해 실내로 만들어도 서류상 면적은 그대로입니다. 그래서 같은 전용 84㎡라도 발코니 확장 여부에 따라 체감 넓이가 달라집니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "평당 가격은 어떤 면적으로 나눠야 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "매물의 ‘평당 ○○만원’은 대개 공급면적 기준입니다. 전용면적으로 나누면 숫자가 더 커지므로, 두 단지의 평당가를 비교할 때는 같은 기준으로 다시 계산해야 합니다. 예를 들어 매매가 8억원·전용 84㎡·공급 112㎡라면 공급 기준 평당 약 2,361만원, 전용 기준 약 3,148만원입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "오피스텔 30평이 아파트 30평보다 좁은 이유는 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "오피스텔은 주차장·관리실까지 포함한 계약면적을 평형으로 부르는 경우가 많고 전용률도 50% 안팎입니다. 같은 30평이라도 실제로 쓰는 전용면적이 아파트보다 훨씬 작습니다. 오피스텔을 볼 때는 평형보다 전용면적(㎡)을 먼저 확인하세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "청약이나 세금은 어떤 면적을 기준으로 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "청약 자격, 대출 LTV, 취득세는 대부분 전용면적을 기준으로 합니다. 국민주택규모(전용 85㎡ 이하)에 드는지, 전용 85㎡를 넘는지에 따라 청약 자격과 농어촌특별세 비과세 여부가 달라집니다. 실거래가 공개시스템과 등기부에도 전용면적이 적힙니다."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../index.html" aria-label="도토리 툴즈 홈">
+        <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8v1.9"/><path d="M5.9 9.1c0-2.5 2.7-4.5 6.1-4.5s6.1 2 6.1 4.5c0 .5-.4.9-.9.9H6.8c-.5 0-.9-.4-.9-.9z"/><path d="M7.3 10.9h9.4c0 4.4-1.9 8.6-4.7 10.2-2.8-1.6-4.7-5.8-4.7-10.2z"/></svg></span>
+        <span class="brand__full">도토리 툴즈</span>
+        <span class="brand__short">도토리</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 계산기">
+        <a class="nav-home" href="../index.html">홈</a>
+        <div class="nav-item" data-nav-item><button type="button" class="nav-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-tax"><span class="nav-toggle__label">절세</span><svg class="nav-toggle__chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button><div class="nav-panel" id="nav-panel-tax" role="group" aria-label="절세 계산기"><a href="../sme-tax/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">소득세 감면</span><span class="nav-panel__desc">청년 90% · 5년 경정청구</span></span></a><a href="../severance/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">퇴직금</span><span class="nav-panel__desc">퇴직소득세 · 연차수당</span></span></a><a href="../rent-tax/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">월세 절세</span><span class="nav-panel__desc">세액공제 vs 소득공제</span></span></a><a href="../year-end-check/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">12월 절세 액션 · 서류</span><span class="nav-panel__desc">간소화 누락 서류까지</span></span></a></div></div>
+        <div class="nav-item" data-nav-item><button type="button" class="nav-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-living"><span class="nav-toggle__full">생활비</span><span class="nav-toggle__short">생활</span><svg class="nav-toggle__chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button><div class="nav-panel" id="nav-panel-living" role="group" aria-label="생활비 계산기"><a href="../salary/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10.5h18"/><circle cx="16.8" cy="15" r="1.1" fill="currentColor"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">연봉 실수령액</span><span class="nav-panel__desc">4대보험·소득세 뺀 월 실수령</span></span></a><a href="../electricity/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">전기세</span><span class="nav-panel__desc">저압 · 고압 누진제</span></span></a><a href="../heating/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s4.5 4.2 4.5 8.4a4.5 4.5 0 0 1-9 0C7.5 7.2 12 3 12 3z"/><path d="M12 21a5 5 0 0 0 5-5"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">난방비</span><span class="nav-panel__desc">도시가스 · 지역난방</span></span></a><a href="../unemployment/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10.5h18"/><circle cx="16.8" cy="15" r="1.1" fill="currentColor"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">실업급여</span><span class="nav-panel__desc">상한 68,100원 · 하한 66,048원</span></span></a><a href="../unit-price/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 3.4H20a.6.6 0 0 1 .6.6v7.4a2 2 0 0 1-.6 1.4l-7.6 7.6a2 2 0 0 1-2.8 0l-5.4-5.4a2 2 0 0 1 0-2.8l7.6-7.6a2 2 0 0 1 1.4-.6z"/><circle cx="16.4" cy="7.6" r="1.3"/><path d="M8.5 12.5l3 3"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">단위가격 · 1+1</span><span class="nav-panel__desc">100g·100ml·1개당 단가 4개 비교</span></span></a></div></div>
+        <div class="nav-item is-active" data-nav-item><button type="button" class="nav-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-housing"><span class="nav-toggle__label">주거</span><svg class="nav-toggle__chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button><div class="nav-panel" id="nav-panel-housing" role="group" aria-label="주거 계산기"><a href="../housing/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.2" cy="8.2" r="4.2"/><path d="M11.2 11.2 20 20M16.4 16.4l2-2M19 19l1.6-1.6"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">전세 vs 월세</span><span class="nav-panel__desc">손익분기 월세 · 전환율</span></span></a><a href="../loan/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">대출 이자</span><span class="nav-panel__desc">상환방식 4종 비교</span></span></a><a href="../lease-check/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.2" cy="8.2" r="4.2"/><path d="M11.2 11.2 20 20M16.4 16.4l2-2M19 19l1.6-1.6"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">전세 계약 안전 점검</span><span class="nav-panel__desc">체크리스트 · 특약 8종</span></span></a><a href="../pyeong/" aria-current="page"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.2" y="9" width="19.6" height="6" rx="1.6"/><path d="M6.4 9v2.6M9.8 9v2.6M13.2 9v2.6M16.6 9v2.6M20 9v2.6"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">평수 · ㎡ 변환</span><span class="nav-panel__desc">㎡↔평 · 전용률·평당가</span></span></a></div></div>
+        <div class="nav-item" data-nav-item><button type="button" class="nav-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-transit"><span class="nav-toggle__label">교통</span><svg class="nav-toggle__chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button><div class="nav-panel" id="nav-panel-transit" role="group" aria-label="교통 계산기"><a href="../transit/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="14" rx="2.5"/><path d="M4 11h16M8 17v3M16 17v3"/><circle cx="8" cy="14" r=".8" fill="currentColor"/><circle cx="16" cy="14" r=".8" fill="currentColor"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">K-패스 vs 기후동행</span><span class="nav-panel__desc">월 교통비 절약액</span></span></a><a href="../car-cost/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16.5V13l1.8-4.2A2 2 0 0 1 7.6 7.5h8.8a2 2 0 0 1 1.8 1.3L20 13v3.5"/><path d="M4 13h16"/><circle cx="7.5" cy="17" r="1.6"/><circle cx="16.5" cy="17" r="1.6"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">내 차 유지비</span><span class="nav-panel__desc">자동차세 · 기름값 포함</span></span></a></div></div>
+        <div class="nav-item" data-nav-item><button type="button" class="nav-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-subscribe"><span class="nav-toggle__label">구독</span><svg class="nav-toggle__chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button><div class="nav-panel" id="nav-panel-subscribe" role="group" aria-label="구독 계산기"><a href="../ai-cost/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M18.5 16.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">AI 구독 조합</span><span class="nav-panel__desc">월 구독료 조합 비교</span></span></a></div></div>
+        <div class="nav-item" data-nav-item><button type="button" class="nav-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-doc"><span class="nav-toggle__full">문서·일정</span><span class="nav-toggle__short">문서</span><svg class="nav-toggle__chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button><div class="nav-panel" id="nav-panel-doc" role="group" aria-label="문서·일정 계산기"><a href="../text-counter/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14M5 11h14M5 16h9"/><path d="M5 3.5h9"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">글자수·바이트</span><span class="nav-panel__desc">SMS 90B · 원고지 매수</span></span></a><a href="../dday/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/><path d="M7.5 13.5h3v3h-3z"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">D-day · 근무일</span><span class="nav-panel__desc">공휴일 뺀 근무일 · 100일</span></span></a><a href="../msg-template/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.5c0 3.9-3.8 7-8.5 7-1 0-2-.1-2.9-.4L4 20l1.3-3.5A6.4 6.4 0 0 1 3.5 11.5c0-3.9 3.8-7 8.5-7s8.5 3.1 8.5 7z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">문자·메일 템플릿</span><span class="nav-panel__desc">11가지 상황 · 원클릭 복사</span></span></a><a href="../annual-leave/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 0 0-8.5 8.5h17A8.5 8.5 0 0 0 12 3.5z"/><path d="M12 3.5v8.5"/><path d="M12 12v6.2a2.3 2.3 0 0 0 4.6 0"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">연차 일수 · 미사용 수당</span><span class="nav-panel__desc">2026 발생 일수 · 미사용 수당</span></span></a></div></div>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <div class="container">
+      <section class="page-head">
+        <nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">홈</a><span aria-hidden="true">/</span><span aria-current="page">평수·면적 환산</span></nav>
+        <h1>평수 · 전용면적 ㎡ 변환 계산기</h1>
+        <p class="lead">부동산 매물의 <b>84㎡</b>와 <b>34평형</b>이 왜 다른 숫자인지, 한 화면에서 정리합니다. ㎡와 평을 넣으면 서로 바꿔 주고, 전용률로 <b>공급면적·주거공용면적</b>을 추정해 평형까지 표시합니다. 매매가·전세금을 넣으면 평당 가격, 방 크기 감각을 위한 정사각 환산까지 계산합니다. 입력한 값은 서버로 전송되지 않습니다.</p>
+      </section>
+
+      <div class="calc-layout">
+        <div class="calc-col">
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">1</span>면적 넣기 <small class="muted-sm">한쪽만 고치면 반대쪽이 따라옵니다</small></h2>
+            </div>
+
+            <div class="field-row">
+              <label class="field" for="py-sqm">
+                <span class="field-label">제곱미터 ㎡</span>
+                <span class="field-control">
+                  <input id="py-sqm" type="text" inputmode="decimal" value="84" autocomplete="off">
+                  <span class="field-unit">㎡</span>
+                </span>
+              </label>
+              <label class="field" for="py-pyeong">
+                <span class="field-label">평</span>
+                <span class="field-control">
+                  <input id="py-pyeong" type="text" inputmode="decimal" value="25.41" autocomplete="off">
+                  <span class="field-unit">평</span>
+                </span>
+              </label>
+            </div>
+            <p class="field-help">1평 = 3.305785㎡(400/121), 1㎡ = 0.3025평입니다. 분양 공고·등기부에 적힌 숫자를 그대로 넣으세요.</p>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">2</span>어떤 면적인가요</h2>
+            </div>
+
+            <div class="segment" id="py-basis" role="group" aria-label="입력한 면적의 기준">
+              <button type="button" data-value="exclusive" aria-pressed="true">전용면적</button>
+              <button type="button" data-value="supply" aria-pressed="false">공급면적</button>
+            </div>
+            <p class="field-help" style="margin-top:8px">전용면적은 현관 안쪽 우리 집 면적, 공급면적은 여기에 계단·복도·엘리베이터 홀(주거공용)을 더한 값입니다. 매물의 ‘○○평형’은 공급면적 기준입니다.</p>
+
+            <label class="field" for="py-rate" style="margin-top:12px">
+              <span class="field-label">전용률 <small>전용면적 ÷ 공급면적</small></span>
+              <span class="field-control">
+                <input id="py-rate" type="text" inputmode="decimal" value="75" autocomplete="off">
+                <span class="field-unit">%</span>
+              </span>
+            </label>
+
+            <div class="filters" id="py-rate-chips" role="group" aria-label="건물 유형별 전용률 예시" style="margin-top:10px">
+              <button type="button" class="chip" data-rate="78" aria-pressed="false">계단식 78%</button>
+              <button type="button" class="chip" data-rate="72" aria-pressed="false">복도식 72%</button>
+              <button type="button" class="chip" data-rate="68" aria-pressed="false">주상복합 68%</button>
+            </div>
+            <p class="field-help" style="margin-top:8px">아파트는 대체로 70~80%입니다. 단지 면적표에 전용·공급면적이 모두 있으면 <b>전용 ÷ 공급 × 100</b>으로 정확한 값을 넣으세요.</p>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">3</span>집값 <small class="muted-sm">선택</small></h2>
+            </div>
+
+            <label class="field" for="py-price">
+              <span class="field-label">매매가 · 전세금</span>
+              <span class="field-control">
+                <input id="py-price" type="text" inputmode="numeric" value="800,000,000" autocomplete="off">
+                <span class="field-unit">원</span>
+              </span>
+              <span class="field-help">넣으면 공급면적 기준·전용면적 기준 평당 가격을 함께 보여 줍니다.</span>
+            </label>
+
+            <div class="tool-bar" style="margin-top:12px">
+              <button type="button" class="btn-ghost" id="py-copy">카톡·메모용 요약 복사</button>
+            </div>
+            <p class="field-help" id="py-status" role="status" aria-live="polite" style="margin-top:8px">면적을 바꾸면 결과가 바로 갱신됩니다.</p>
+          </div>
+        </div>
+
+        <div class="result-col">
+          <div class="result-card" aria-live="polite">
+            <p class="result-card__label">평수 환산</p>
+            <p class="result-value"><span id="py-value">—</span></p>
+            <p class="result-sub" id="py-sub">면적을 넣으면 평수와 평형을 함께 계산합니다.</p>
+
+            <dl class="result-rows" style="margin-top:16px">
+              <div class="result-row">
+                <dt>㎡</dt>
+                <dd id="py-sqm-out">—</dd>
+              </div>
+              <div class="result-row">
+                <dt>평</dt>
+                <dd id="py-pyeong-out">—</dd>
+              </div>
+              <div class="result-row">
+                <dt>계산 기준</dt>
+                <dd id="py-basis-out">—</dd>
+              </div>
+              <div class="result-row">
+                <dt>전용률</dt>
+                <dd id="py-rate-out">—</dd>
+              </div>
+              <div class="result-row">
+                <dt>공급면적</dt>
+                <dd id="py-supply">—</dd>
+              </div>
+              <div class="result-row">
+                <dt>주거공용면적</dt>
+                <dd id="py-shared">—</dd>
+              </div>
+              <div class="result-row">
+                <dt>평형 표기</dt>
+                <dd id="py-type">—</dd>
+              </div>
+              <div class="result-row result-row--strong">
+                <dt>평당 가격 <small class="muted-sm">공급 기준</small></dt>
+                <dd id="py-per-pyeong">—</dd>
+              </div>
+              <div class="result-row">
+                <dt>평당 가격 <small class="muted-sm">전용 기준</small></dt>
+                <dd id="py-total">—</dd>
+              </div>
+              <div class="result-row">
+                <dt>정사각 환산</dt>
+                <dd id="py-side">—</dd>
+              </div>
+            </dl>
+
+            <p class="result-note" id="py-note">입력한 면적을 전용면적으로 보고 전용률로 공급면적을 추정했습니다.</p>
+            <p class="result-note">공급면적은 단지·타입마다 달라 추정값입니다. 계약 전에는 입주자 모집공고나 건축물대장의 면적표로 확인하세요.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ads-slot" data-slot="top" hidden></div>
+
+      <div data-blog-banner hidden></div>
+
+      <section class="section" aria-labelledby="py-terms-title">
+        <div class="section-head">
+          <h2 id="py-terms-title">전용·공급·계약면적, 무엇을 더한 값인가</h2>
+          <p>같은 집을 84㎡·25평·34평으로 부르는 이유는 재는 범위가 다르기 때문입니다.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data table--text table--stack">
+            <caption>전용 84㎡ 아파트 한 세대를 예로 든 면적 구분 — 실제 값은 단지 면적표에 따릅니다.</caption>
+            <thead>
+              <tr>
+                <th scope="col">면적</th>
+                <th scope="col">포함 범위</th>
+                <th scope="col">전용 84㎡ 예시</th>
+                <th scope="col">쓰이는 곳</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">전용면적</th>
+                <td data-label="포함 범위">현관 안쪽 방·거실·주방·욕실 (발코니 제외)</td>
+                <td data-label="전용 84㎡ 예시">84㎡ = 25.4평</td>
+                <td data-label="쓰이는 곳">등기부, 실거래가, 세금, 청약</td>
+              </tr>
+              <tr>
+                <th scope="row">주거공용면적</th>
+                <td data-label="포함 범위">계단·복도·엘리베이터 홀 등 같은 동이 나눠 쓰는 공간</td>
+                <td data-label="전용 84㎡ 예시">약 28㎡ = 8.5평</td>
+                <td data-label="쓰이는 곳">전용률 계산</td>
+              </tr>
+              <tr>
+                <th scope="row">공급면적</th>
+                <td data-label="포함 범위">전용면적 + 주거공용면적</td>
+                <td data-label="전용 84㎡ 예시">약 112㎡ = 33.9평 → 34평형</td>
+                <td data-label="쓰이는 곳">분양가, 매물의 ‘○○평형’, 평당가</td>
+              </tr>
+              <tr>
+                <th scope="row">기타공용면적</th>
+                <td data-label="포함 범위">지하주차장·관리사무소·커뮤니티 시설</td>
+                <td data-label="전용 84㎡ 예시">단지마다 다름</td>
+                <td data-label="쓰이는 곳">계약면적 계산</td>
+              </tr>
+              <tr>
+                <th scope="row">계약면적</th>
+                <td data-label="포함 범위">공급면적 + 기타공용면적</td>
+                <td data-label="전용 84㎡ 예시">단지마다 다름</td>
+                <td data-label="쓰이는 곳">오피스텔·상가 분양 평형</td>
+              </tr>
+              <tr>
+                <th scope="row">서비스면적</th>
+                <td data-label="포함 범위">발코니 — 어느 면적에도 들어가지 않음</td>
+                <td data-label="전용 84㎡ 예시">확장해도 서류상 84㎡</td>
+                <td data-label="쓰이는 곳">실사용 넓이 참고</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="py-table-title">
+        <div class="section-head">
+          <h2 id="py-table-title">자주 보는 전용면적과 평형</h2>
+          <p>부동산에서 부르는 평형은 공급면적을 평으로 바꿔 반올림한 값입니다.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data table--text table--stack">
+            <caption>공급면적은 단지·타입에 따라 달라지는 예시값입니다. 전용률은 예시 공급면적으로 계산했습니다.</caption>
+            <thead>
+              <tr>
+                <th scope="col">전용면적</th>
+                <th scope="col">전용 평수</th>
+                <th scope="col">공급면적 예시</th>
+                <th scope="col">흔한 평형</th>
+                <th scope="col">전용률</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">59㎡</th>
+                <td data-label="전용 평수">17.85평</td>
+                <td data-label="공급면적 예시">82㎡ (24.8평)</td>
+                <td data-label="흔한 평형">25평형</td>
+                <td data-label="전용률">72.0%</td>
+              </tr>
+              <tr>
+                <th scope="row">74㎡</th>
+                <td data-label="전용 평수">22.39평</td>
+                <td data-label="공급면적 예시">99㎡ (29.9평)</td>
+                <td data-label="흔한 평형">30평형</td>
+                <td data-label="전용률">74.7%</td>
+              </tr>
+              <tr>
+                <th scope="row">84㎡</th>
+                <td data-label="전용 평수">25.41평</td>
+                <td data-label="공급면적 예시">112㎡ (33.9평)</td>
+                <td data-label="흔한 평형">34평형</td>
+                <td data-label="전용률">75.0%</td>
+              </tr>
+              <tr>
+                <th scope="row">101㎡</th>
+                <td data-label="전용 평수">30.55평</td>
+                <td data-label="공급면적 예시">132㎡ (39.9평)</td>
+                <td data-label="흔한 평형">40평형</td>
+                <td data-label="전용률">76.5%</td>
+              </tr>
+              <tr>
+                <th scope="row">114㎡</th>
+                <td data-label="전용 평수">34.48평</td>
+                <td data-label="공급면적 예시">148㎡ (44.8평)</td>
+                <td data-label="흔한 평형">45평형</td>
+                <td data-label="전용률">77.0%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="result-note" style="margin:12px 0 0">청약·대출·취득세는 대부분 <strong>전용면적</strong>이 기준입니다. 국민주택규모(전용 85㎡ 이하)에 드는지, 전용 85㎡ 초과인지에 따라 청약 자격과 세금이 달라집니다.</p>
+      </section>
+
+      <section class="section" aria-labelledby="py-rate-title">
+        <div class="section-head">
+          <h2 id="py-rate-title">전용률이 다르면 같은 34평형도 방 하나가 달라집니다</h2>
+          <p>공급면적 112.4㎡(34평형)를 기준으로 전용률만 바꿔 본 값입니다.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <caption>전용면적 = 공급면적 × 전용률. 34평형이라도 전용률 70%와 80%는 전용 3.4평 차이입니다.</caption>
+            <thead>
+              <tr>
+                <th scope="col">전용률</th>
+                <th scope="col">전용면적</th>
+                <th scope="col">전용 평수</th>
+                <th scope="col">주거공용면적</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">70%</th>
+                <td>78.7㎡</td>
+                <td>23.8평</td>
+                <td>33.7㎡</td>
+              </tr>
+              <tr>
+                <th scope="row">72%</th>
+                <td>80.9㎡</td>
+                <td>24.5평</td>
+                <td>31.5㎡</td>
+              </tr>
+              <tr>
+                <th scope="row">75%</th>
+                <td>84.3㎡</td>
+                <td>25.5평</td>
+                <td>28.1㎡</td>
+              </tr>
+              <tr>
+                <th scope="row">78%</th>
+                <td>87.7㎡</td>
+                <td>26.5평</td>
+                <td>24.7㎡</td>
+              </tr>
+              <tr>
+                <th scope="row">80%</th>
+                <td>89.9㎡</td>
+                <td>27.2평</td>
+                <td>22.5㎡</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="py-room-title">
+        <div class="section-head">
+          <h2 id="py-room-title">평수가 방 크기로 얼마인지 감 잡기</h2>
+          <p>같은 넓이의 정사각형으로 바꿨을 때 한 변 길이입니다. 실제 집은 직사각형이라 가로·세로가 다릅니다.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data table--text table--stack">
+            <caption>1평 = 3.305785㎡ 기준. 정사각 환산은 넓이의 제곱근입니다.</caption>
+            <thead>
+              <tr>
+                <th scope="col">평</th>
+                <th scope="col">㎡</th>
+                <th scope="col">정사각 한 변</th>
+                <th scope="col">체감</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1평</th>
+                <td data-label="㎡">3.3㎡</td>
+                <td data-label="정사각 한 변">1.82m × 1.82m</td>
+                <td data-label="체감">성인 두 명이 누울 정도</td>
+              </tr>
+              <tr>
+                <th scope="row">3평</th>
+                <td data-label="㎡">9.9㎡</td>
+                <td data-label="정사각 한 변">3.15m × 3.15m</td>
+                <td data-label="체감">작은 방 한 칸</td>
+              </tr>
+              <tr>
+                <th scope="row">5평</th>
+                <td data-label="㎡">16.5㎡</td>
+                <td data-label="정사각 한 변">4.07m × 4.07m</td>
+                <td data-label="체감">원룸 실사용 면적</td>
+              </tr>
+              <tr>
+                <th scope="row">10평</th>
+                <td data-label="㎡">33.1㎡</td>
+                <td data-label="정사각 한 변">5.75m × 5.75m</td>
+                <td data-label="체감">투룸 실사용 면적</td>
+              </tr>
+              <tr>
+                <th scope="row">20평</th>
+                <td data-label="㎡">66.1㎡</td>
+                <td data-label="정사각 한 변">8.13m × 8.13m</td>
+                <td data-label="체감">24평형 아파트 전용면적</td>
+              </tr>
+              <tr>
+                <th scope="row">25평</th>
+                <td data-label="㎡">82.6㎡</td>
+                <td data-label="정사각 한 변">9.09m × 9.09m</td>
+                <td data-label="체감">34평형 아파트 전용 84㎡</td>
+              </tr>
+              <tr>
+                <th scope="row">34평</th>
+                <td data-label="㎡">112.4㎡</td>
+                <td data-label="정사각 한 변">10.60m × 10.60m</td>
+                <td data-label="체감">34평형 아파트 공급면적</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>평당 가격을 비교할 때 확인할 것</h2>
+        </div>
+        <div class="prose">
+          <p>평은 <strong>2007년 7월부터 법정 계량단위가 아니어서</strong>, 분양 공고·등기부·거래 계약서에는 ㎡만 적힙니다(계량에 관한 법률). 그래도 말로는 평을 쓰니 두 단위를 오가게 되는데, 환산은 1평 = 3.305785㎡만 기억하면 됩니다. 암산할 때는 ㎡에 0.3을 곱하면 대략 맞습니다(84 × 0.3 = 25.2평, 실제 25.41평).</p>
+          <p>평당 가격은 <strong>어떤 면적으로 나눴는지</strong>에 따라 크게 달라집니다. 매물의 ‘평당 ○○만원’은 대개 공급면적 기준이고, 전용면적으로 나누면 숫자가 더 커집니다. 전용 84㎡·공급 112㎡ 집의 매매가가 8억원이면 공급 기준 평당 2,360만원, 전용 기준 평당 3,148만원입니다. 같은 8억이라도 기준을 섞으면 30% 넘게 차이가 나니, 두 단지의 평당가를 비교할 때는 반드시 같은 기준으로 다시 계산하세요.</p>
+          <p>오피스텔은 표기 기준이 한 단계 더 다릅니다. 오피스텔 분양 ‘30평’은 주차장·관리실까지 포함한 <strong>계약면적</strong>인 경우가 많고 전용률도 50% 안팎이라, 같은 30평 아파트보다 실제로 쓰는 공간이 훨씬 좁습니다. 오피스텔을 볼 때는 평형보다 <strong>전용면적(㎡)</strong>을 먼저 확인하세요.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>자주 묻는 질문</h2>
+        </div>
+        <div class="faq">
+      <details>
+        <summary>전용 84㎡인데 왜 34평형이라고 부르나요?</summary>
+        <p>84㎡는 25.41평으로, 이는 현관 안쪽 우리 집 면적(전용면적)입니다. 여기에 계단·복도·엘리베이터 홀 같은 주거공용면적 약 28㎡를 더하면 공급면적이 약 112㎡(33.9평)가 되고, 이를 반올림해 34평형이라고 부릅니다. 부동산에서 말하는 ‘○○평형’은 공급면적 기준입니다.</p>
+      </details>
+      <details>
+        <summary>1평은 정확히 몇 ㎡인가요?</summary>
+        <p>1평 = 400/121 ㎡ = 3.305785㎡입니다. 반대로 1㎡는 0.3025평입니다. 암산할 때는 ㎡에 0.3을 곱하면 거의 맞습니다(84 × 0.3 = 25.2평, 실제 25.41평). 평은 2007년 7월부터 법정 계량단위가 아니어서 계약서·공고에는 ㎡로 적힙니다.</p>
+      </details>
+      <details>
+        <summary>전용률은 보통 얼마인가요?</summary>
+        <p>전용률 = 전용면적 ÷ 공급면적 × 100입니다. 아파트는 대체로 70~80%이고, 계단식 신축이 75~80%, 복도식·구축이 70~75%, 주상복합이 65~75% 수준입니다. 오피스텔은 주차장·관리실까지 넣은 계약면적으로 나누는 경우가 많아 50% 안팎으로 낮습니다.</p>
+      </details>
+      <details>
+        <summary>공급면적과 계약면적은 무엇이 다른가요?</summary>
+        <p>공급면적은 전용면적에 주거공용면적(계단·복도·엘리베이터 홀)을 더한 값이고, 계약면적은 여기에 지하주차장·관리사무소·커뮤니티 시설 같은 기타공용면적까지 더한 값입니다. 아파트 분양 평형은 공급면적, 오피스텔 분양 평형은 계약면적 기준인 경우가 많습니다.</p>
+      </details>
+      <details>
+        <summary>발코니는 어느 면적에 들어가나요?</summary>
+        <p>발코니는 법적으로 외부 공간이라 서비스면적으로 분류되어 전용·공급·계약면적 어디에도 들어가지 않습니다. 발코니를 확장해 실내로 만들어도 서류상 면적은 그대로입니다. 그래서 같은 전용 84㎡라도 발코니 확장 여부에 따라 체감 넓이가 달라집니다.</p>
+      </details>
+      <details>
+        <summary>평당 가격은 어떤 면적으로 나눠야 하나요?</summary>
+        <p>매물의 ‘평당 ○○만원’은 대개 공급면적 기준입니다. 전용면적으로 나누면 숫자가 더 커지므로, 두 단지의 평당가를 비교할 때는 같은 기준으로 다시 계산해야 합니다. 예를 들어 매매가 8억원·전용 84㎡·공급 112㎡라면 공급 기준 평당 약 2,361만원, 전용 기준 약 3,148만원입니다.</p>
+      </details>
+      <details>
+        <summary>오피스텔 30평이 아파트 30평보다 좁은 이유는 무엇인가요?</summary>
+        <p>오피스텔은 주차장·관리실까지 포함한 계약면적을 평형으로 부르는 경우가 많고 전용률도 50% 안팎입니다. 같은 30평이라도 실제로 쓰는 전용면적이 아파트보다 훨씬 작습니다. 오피스텔을 볼 때는 평형보다 전용면적(㎡)을 먼저 확인하세요.</p>
+      </details>
+      <details>
+        <summary>청약이나 세금은 어떤 면적을 기준으로 하나요?</summary>
+        <p>청약 자격, 대출 LTV, 취득세는 대부분 전용면적을 기준으로 합니다. 국민주택규모(전용 85㎡ 이하)에 드는지, 전용 85㎡를 넘는지에 따라 청약 자격과 농어촌특별세 비과세 여부가 달라집니다. 실거래가 공개시스템과 등기부에도 전용면적이 적힙니다.</p>
+      </details>
+    </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>공식 출처</h2>
+        </div>
+        <ul class="source-list">
+          <li><a href="https://www.law.go.kr/법령/계량에관한법률" target="_blank" rel="noopener">계량에 관한 법률 — 법정계량단위(㎡)</a> <span>국가법령정보센터</span></li>
+          <li><a href="https://www.law.go.kr/법령/주택공급에관한규칙" target="_blank" rel="noopener">주택공급에 관한 규칙 — 주택의 공급면적</a> <span>국가법령정보센터</span></li>
+          <li><a href="https://rt.molit.go.kr/" target="_blank" rel="noopener">실거래가 공개시스템 — 전용면적 기준 거래가</a> <span>국토교통부</span></li>
+          <li><a href="https://kbland.kr/" target="_blank" rel="noopener">부동산 면적 용어 안내 (전용·공급·계약면적)</a> <span>KB부동산</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>함께 쓰면 좋은 도구</h2>
+        </div>
+        <div class="grid grid--2" data-related>
+        <a class="calc-card" href="../housing/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.2" cy="8.2" r="4.2"/><path d="M11.2 11.2 20 20M16.4 16.4l2-2M19 19l1.6-1.6"/></svg></span>
+            <span class="calc-card__tag">주거</span>
+          </div>
+          <h3>전세 vs 월세 주거비 손익분기</h3>
+          <p>전세대출 이자·보증금 기회비용·월세 세액공제를 넣어 어느 쪽이 매달 얼마나 유리한지와 손익분기 월세를 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../rent-tax/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span>
+            <span class="calc-card__tag">절세</span>
+          </div>
+          <h3>월세 세액공제 vs 현금영수증 소득공제</h3>
+          <p>월세 60만원 직장인이 실제로 돌려받는 금액을 5년치까지 비교합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../loan/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span>
+            <span class="calc-card__tag">주거</span>
+          </div>
+          <h3>대출 이자 · 상환방식 비교</h3>
+          <p>원리금균등·원금균등·체증식·만기일시의 첫 달 납입액과 총 이자를 나란히 비교합니다. 주담대·전세·신용대출 프리셋.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../electricity/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg></span>
+            <span class="calc-card__tag">생활비</span>
+          </div>
+          <h3>우리집 전기세 · 누진제 계산</h3>
+          <p>총 사용량(kWh)만 넣으면 이번 달 예상 전기요금이 바로 나옵니다. 저압·고압 누진제, 평수·전용면적, 가전별 추가 요금까지 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+      </div>
+      <p class="related-all"><a href="../sitemap/">도구 20종 전체 목록 보기</a></p>
+      </section>
+
+      <div class="ads-slot" data-slot="bottom" hidden></div>
+
+      <div class="embed-footer"><a href="https://vgpymw5zfv-star.github.io/pyeong/" target="_blank" rel="noopener">도토리 툴즈 전체 보기 ↗</a></div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__top">
+        <a class="site-footer__brand" href="../index.html">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8v1.9"/><path d="M5.9 9.1c0-2.5 2.7-4.5 6.1-4.5s6.1 2 6.1 4.5c0 .5-.4.9-.9.9H6.8c-.5 0-.9-.4-.9-.9z"/><path d="M7.3 10.9h9.4c0 4.4-1.9 8.6-4.7 10.2-2.8-1.6-4.7-5.8-4.7-10.2z"/></svg></span>
+          <span>도토리 툴즈</span>
+        </a>
+        <nav aria-label="사이트 정보">
+          <a href="../about/">운영 소개</a>
+          <a href="../privacy/">개인정보처리방침</a>
+          <a href="../contact/">문의</a>
+          <a href="../sitemap/">사이트맵</a>
+        </nav>
+      </div>
+      <p>기준일 <span data-기준일>2026년 11월</span> · 운영 도토리사원 · <a href="../contact/">문의 페이지</a></p>
+      <p class="disclaimer">이 사이트의 모든 계산 결과는 공개된 요율과 단순화한 가정에 따른 <strong>참고용 추정치</strong>입니다. 세금·요금·환급 여부는 개인의 실제 조건과 관계 기관의 최종 결정에 따라 달라질 수 있으며, 계산 결과를 근거로 한 신고·계약·투자 판단의 책임은 이용자에게 있습니다. 공식 기준은 국세청 홈택스, 한국전력공사, 국토교통부, 서울시 등 원문을 확인하세요.</p>
+      <p>© <span data-year>2026</span> 도토리 툴즈. 직접 만든 무료 도구이며, 어떤 금융기관과도 제휴 관계가 없습니다.</p>
+    </div>
+  </footer>
+  <script src="../assets/site-config.js"></script>
+  <script src="../assets/app.js"></script>
+  <script src="../assets/js/dotori-core.js"></script>
+  <script src="../assets/js/pyeong.js"></script>
+  <script src="../assets/js/page-pyeong.js"></script>
+</body>
+</html>

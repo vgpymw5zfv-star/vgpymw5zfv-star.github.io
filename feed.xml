@@ -3,14 +3,14 @@
   <channel>
     <title>도토리 툴즈</title>
     <link>https://vgpymw5zfv-star.github.io/</link>
-    <description>2026년 11월 기준 공식 요율로 계산하는 무료 도구 18종</description>
+    <description>2026년 11월 기준 공식 요율로 계산하는 무료 도구 20종</description>
     <language>ko</language>
-    <lastBuildDate>2026-11-20</lastBuildDate>
+    <lastBuildDate>2026-11-21</lastBuildDate>
     <item>
-      <title>도토리 툴즈 — 연봉·세금·생활비·전세·연말정산·단위가격·문자 템플릿 무료 도구 18종</title>
+      <title>도토리 툴즈 — 연봉·세금·생활비·전세·평수·연차·단위가격 무료 도구 20종</title>
       <link>https://vgpymw5zfv-star.github.io/</link>
       <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/</guid>
-      <description>2026 연봉 실수령액, 중소기업 소득세 감면, 퇴직금·퇴직소득세, 월세 세액공제, 전세 vs 월세, 대출 이자·상환방식, 전기세 누진제, 난방비, 실업급여, 단위가격·1+1 비교, K-패스 vs 기후동행카드, 차 유지비, AI 구독료까지. 2026년 11월 기준 공식 요율로 바로 계산하는 무료 계산기 13종, 전세 계약·연말정산 체크도구 2종, 글자수·바이트와 D-day·문자 템플릿 도구 3종.</description>
+      <description>2026 연봉 실수령액, 중소기업 소득세 감면, 퇴직금·퇴직소득세, 월세 세액공제, 전세 vs 월세, 대출 이자·상환방식, 전기세 누진제, 난방비, 실업급여, 단위가격·1+1 비교, K-패스 vs 기후동행카드, 차 유지비, AI 구독료, 평수·면적 환산까지. 2026년 11월 기준 공식 요율로 바로 계산하는 무료 계산기 14종, 전세 계약·연말정산 체크도구 2종, 글자수·바이트와 D-day·문자 템플릿·연차 계산 도구 4종.</description>
     </item>
     <item>
       <title>중소기업 취업자 소득세 감면 90% 계산기 · 5년 경정청구 환급액 | 도토리 툴즈</title>
@@ -106,7 +106,7 @@
       <title>사이트맵 · 전체 페이지 한눈에 | 도토리 툴즈</title>
       <link>https://vgpymw5zfv-star.github.io/sitemap/</link>
       <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/sitemap/</guid>
-      <description>도토리 툴즈의 모든 페이지를 한 곳에서 확인하세요. 계산기 13종·체크도구 2종·문서·일정 도구 3종과 운영 소개, 개인정보처리방침, 문의 페이지, 검색엔진용 sitemap.xml·robots.txt 안내까지 정리했습니다.</description>
+      <description>도토리 툴즈의 모든 페이지를 한 곳에서 확인하세요. 계산기 14종·체크도구 2종·문서·일정 도구 4종과 운영 소개, 개인정보처리방침, 문의 페이지, 검색엔진용 sitemap.xml·robots.txt 안내까지 정리했습니다.</description>
     </item>
     <item>
       <title>전세·월세 안전 계약 체크리스트 &amp; 특약 복사기 | 도토리 툴즈</title>
@@ -143,6 +143,18 @@
       <link>https://vgpymw5zfv-star.github.io/msg-template/</link>
       <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/msg-template/</guid>
       <description>집주인 수리 요청, 월세·관리비 확인, 임대차 갱신 거절, 연차·병가 신청, 일정 리마인드, 정중한 거절, 퇴사 의사, 인수인계, 경력증명서 요청, 오배송 교환, 청약철회 환불까지 11가지 상황의 문자·메일 문구를 30초에 완성합니다. 정중한 업무용·부드러운 카톡용 전환과 원클릭 복사, 2026년 11월 법령 기준 기한 안내.</description>
+    </item>
+    <item>
+      <title>연차 일수 계산기 2026 · 미사용 연차수당·통상임금 | 도토리 툴즈</title>
+      <link>https://vgpymw5zfv-star.github.io/annual-leave/</link>
+      <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/annual-leave/</guid>
+      <description>입사일과 기준일로 2026년 근로기준법 기준 연차 일수(1년 미만 최대 11일·1년 15일·2년마다 1일 가산 최대 25일)와 사용기한을 계산하고, 월 통상임금으로 1일 통상임금과 미사용 연차수당을 구합니다.</description>
+    </item>
+    <item>
+      <title>평수 계산기 · ㎡↔평 변환·전용면적·평당가 | 도토리 툴즈</title>
+      <link>https://vgpymw5zfv-star.github.io/pyeong/</link>
+      <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/pyeong/</guid>
+      <description>㎡와 평을 서로 바꾸고(1평=3.305785㎡), 전용률로 공급면적·주거공용면적과 평형을 추정합니다. 매매가·전세금으로 공급·전용 기준 평당 가격과 방 크기 감각까지 계산합니다.</description>
     </item>
   </channel>
 </rss>
