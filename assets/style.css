@@ -1210,10 +1210,16 @@ main {
 .result-note {
   margin-top: 14px;
   padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.62);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
   font-size: 12px;
   line-height: 1.55;
+}
+
+/* 어두운 결과 카드 안에서는 밝은 글자로 */
+.result-card .result-note {
+  border-top-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.62);
 }
 
 /* 라이트 결과 카드 */
