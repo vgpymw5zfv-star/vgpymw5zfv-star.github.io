@@ -9,20 +9,18 @@
   body{font:14px/1.5 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;margin:16px;color:#1F2A44}
   h1{font-size:18px}
   pre{background:#f5f7fa;border:1px solid #dde3ea;border-radius:8px;padding:12px;white-space:pre-wrap;font-size:12px}
-  .frame{border:1px solid #c9d2dd;margin:8px 0 20px}
-  .label{font-weight:700;margin:14px 0 4px}
+  .frame{border:1px solid #c9d2dd;margin:8px 0 0}
 </style>
 </head>
 <body>
 <h1>도토리 툴즈 레이아웃 실측 (임시 QA)</h1>
-<p>아래 결과는 iframe으로 실제 페이지를 로드해 잰 값입니다.</p>
 <pre id="out">측정 중…</pre>
 <div id="host"></div>
 <script>
 (function () {
   var CASES = [];
   ["annual-leave", "pyeong", ""].forEach(function (slug) {
-    [360, 390, 768, 1280].forEach(function (w) {
+    [360, 390, 1280].forEach(function (w) {
       CASES.push({ slug: slug, url: (slug ? "/" + slug + "/" : "/"), w: w, embed: false });
     });
     [360, 760].forEach(function (w) {
@@ -33,73 +31,30 @@
   var host = document.getElementById("host");
   var out = document.getElementById("out");
   var lines = [];
+  var i = 0;
 
   function measure(frame, c) {
     var d = frame.contentDocument;
     var de = d.documentElement;
     var toggles = [].slice.call(d.querySelectorAll(".nav-toggle"));
     var tops = {};
-    toggles.forEach(function (b) {
-      tops[Math.round(b.getBoundingClientRect().top)] = 1;
+    toggles.forEach(function (b) { tops[Math.round(b.getBoundingClientRect().top)] = 1; });
+    var wraps = [].slice.call(d.querySelectorAll(".table-wrap")).map(function (w) {
+      return w.scrollWidth - w.clientWidth;
     });
+    var tableScroll = wraps.reduce(function (m, v) { return v > m ? v : m; }, 0);
     var header = d.querySelector(".site-header");
-    var inner = d.querySelector(".site-header__inner");
-    var navRight = toggles.length
-      ? Math.max.apply(null, toggles.map(function (b) { return b.getBoundingClientRect().right; }))
-      : 0;
-    var overflowEls = [].slice
-      .call(d.querySelectorAll("main *"))
-      .filter(function (el) {
-        return el.clientWidth > 0 && el.scrollWidth > el.clientWidth + 2;
-      })
-      .slice(0, 5)
-      .map(function (el) {
-        return (el.tagName.toLowerCase() + "." + (el.className || "").split(" ")[0] + ":" + (el.scrollWidth - el.clientWidth));
-      });
-    var tables = [].slice.call(d.querySelectorAll("table.data")).map(function (t) {
-      return t.scrollWidth - t.clientWidth;
-    });
-    var footer = d.querySelector(".site-footer");
-    var ads = [].slice.call(d.querySelectorAll(".ads-slot")).filter(function (a) {
-      return a.offsetParent !== null;
-    }).length;
-    var banner = d.querySelector("[data-blog-banner]");
+    var v = d.querySelector(".result-value");
     return {
-      slug: c.slug || "home",
-      w: c.w,
-      embed: c.embed,
-      scrollW: de.scrollWidth,
-      clientW: de.clientWidth,
-      overflowX: de.scrollWidth - de.clientWidth,
-      headerH: header ? header.offsetHeight : null,
-      headerVisible: header ? header.offsetParent !== null : false,
-      navItems: toggles.length,
+      key: (c.slug || "home") + " " + c.w + (c.embed ? " embed" : ""),
+      pageOverflow: de.scrollWidth - de.clientWidth,
+      headerH: header ? header.offsetHeight : 0,
       navRows: Object.keys(tops).length,
-      navRight: Math.round(navRight),
-      innerRight: inner ? Math.round(inner.getBoundingClientRect().right) : null,
-      navCut: toggles.length ? Math.round(navRight) > (inner ? Math.round(inner.getBoundingClientRect().right) + 1 : 9999) : null,
-      footerVisible: footer ? footer.offsetParent !== null : false,
-      adSlotsVisible: ads,
-      bannerHidden: banner ? banner.hidden : null,
-      tableOverflow: tables,
-      overflowEls: overflowEls,
-      resultMain: (function () {
-        var v = d.querySelector(".result-value");
-        return v ? v.textContent.trim() : null;
-      })(),
-      resultPay: (function () {
-        var rows = d.querySelectorAll(".result-row");
-        for (var i = 0; i < rows.length; i++) {
-          if (/연차수당|평당/.test(rows[i].querySelector("dt").textContent)) {
-            return rows[i].querySelector("dd").textContent.trim();
-          }
-        }
-        return null;
-      })()
+      tableScroll: tableScroll,
+      value: v ? v.textContent.trim() : "-"
     };
   }
 
-  var i = 0;
   function next() {
     if (i >= CASES.length) {
       out.textContent = lines.join("\n");
@@ -107,29 +62,25 @@
       return;
     }
     var c = CASES[i++];
-    var wrap = document.createElement("div");
-    var label = document.createElement("div");
-    label.className = "label";
-    label.textContent = c.slug || "home";
-    label.textContent += " · " + c.w + "px" + (c.embed ? " · embed" : "");
     var frame = document.createElement("iframe");
     frame.className = "frame";
     frame.style.width = c.w + "px";
-    frame.style.height = "900px";
-    frame.setAttribute("loading", "eager");
-    wrap.appendChild(label);
-    wrap.appendChild(frame);
-    host.appendChild(wrap);
+    frame.style.height = "700px";
+    host.appendChild(frame);
     frame.addEventListener("load", function () {
       setTimeout(function () {
         try {
-          lines.push(JSON.stringify(measure(frame, c)));
+          var m = measure(frame, c);
+          lines.push(
+            m.key + " | page " + m.pageOverflow + "px | header " + m.headerH +
+            "px | navRows " + m.navRows + " | table " + m.tableScroll + "px | " + m.value
+          );
         } catch (e) {
-          lines.push(JSON.stringify({ slug: c.slug, w: c.w, embed: c.embed, error: String(e) }));
+          lines.push(c.slug + " " + c.w + " ERROR " + e);
         }
-        document.getElementById("out").textContent = lines.join("\n");
+        out.textContent = lines.join("\n");
         next();
-      }, 1200);
+      }, 1000);
     });
     frame.src = c.url;
   }
