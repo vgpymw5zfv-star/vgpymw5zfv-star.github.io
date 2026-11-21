@@ -82,7 +82,7 @@
         next();
       }, 1000);
     });
-    frame.src = c.url;
+    frame.src = c.url + (c.url.indexOf("?") > -1 ? "&" : "?") + "v=" + Date.now();
   }
   next();
 })();
