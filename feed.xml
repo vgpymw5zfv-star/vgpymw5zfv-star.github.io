@@ -3,14 +3,14 @@
   <channel>
     <title>도토리 툴즈</title>
     <link>https://vgpymw5zfv-star.github.io/</link>
-    <description>2026년 11월 기준 공식 요율로 계산하는 무료 도구 22종</description>
+    <description>2026년 11월 기준 공식 요율로 계산하는 무료 도구 24종</description>
     <language>ko</language>
-    <lastBuildDate>2026-11-22</lastBuildDate>
+    <lastBuildDate>2026-11-23</lastBuildDate>
     <item>
-      <title>도토리 툴즈 — 연봉·세금·생활비·전세·평수·연차·3.3% 원천징수 무료 도구 22종</title>
+      <title>도토리 툴즈 — 연봉·세금·생활비·전세·청약가점·경력기간 무료 도구 24종</title>
       <link>https://vgpymw5zfv-star.github.io/</link>
       <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/</guid>
-      <description>2026 연봉 실수령액, 중소기업 소득세 감면, 퇴직금·퇴직소득세, 월세 세액공제, 전세 vs 월세, 대출 이자·상환방식, 전기세 누진제, 난방비, 실업급여, 단위가격·1+1 비교, K-패스 vs 기후동행카드, 차 유지비, AI 구독료, 평수·면적 환산까지. 2026년 11월 기준 공식 요율로 바로 계산하는 무료 계산기 14종, 전세 계약·연말정산 체크도구 2종, 글자수·바이트와 D-day·문자 템플릿·연차 계산 도구 4종.</description>
+      <description>2026 연봉 실수령액, 중소기업 소득세 감면, 퇴직금·퇴직소득세, 월세 세액공제, 전세 vs 월세, 대출 이자·상환방식, 전기세 누진제, 난방비, 실업급여, 단위가격·1+1 비교, K-패스 vs 기후동행카드, 차 유지비, AI 구독료, 평수·면적 환산, 청약 가점(84점), 경력기간까지. 2026년 11월 기준 공식 요율로 바로 계산하는 무료 계산기 17종, 전세 계약·연말정산 체크도구 2종, 글자수·바이트와 D-day·문자 템플릿·연차·경력기간 도구 5종.</description>
     </item>
     <item>
       <title>중소기업 취업자 소득세 감면 90% 계산기 · 5년 경정청구 환급액 | 도토리 툴즈</title>
@@ -167,6 +167,18 @@
       <link>https://vgpymw5zfv-star.github.io/dutch-pay/</link>
       <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/dutch-pay/</guid>
       <description>참석자와 차수별 결제액·결제자만 넣으면 1인 부담액과 송금 목록이 바로 나옵니다. 2차만 참석한 사람 제외, 100원 단위 끝전 처리, 서로 상계한 최소 송금, 카톡 정산 문구 복사까지 한 번에.</description>
+    </item>
+    <item>
+      <title>청약 가점 계산기 · 무주택기간·부양가족·청약통장 84점 (2026) | 도토리 툴즈</title>
+      <link>https://vgpymw5zfv-star.github.io/cheongyak/</link>
+      <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/cheongyak/</guid>
+      <description>생년월일·혼인신고일·부양가족 수·청약통장 가입일만 넣으면 민영주택 1순위 가점(무주택 32점·부양가족 35점·통장 17점)을 계산합니다. 다음 점수 구간까지 남은 기간과 약한 항목까지. 2026년 11월 기준.</description>
+    </item>
+    <item>
+      <title>경력기간 계산기 · 총 경력·수습 제외 인정 기간 (이직·이력서) | 도토리 툴즈</title>
+      <link>https://vgpymw5zfv-star.github.io/career/</link>
+      <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/career/</guid>
+      <description>회사별 입사일·퇴사일만 넣으면 경력별 기간과 총 경력(년·월)이 바로 나옵니다. 겹친 기간 중복 제거, 재직 중 기준일까지, 수습 제외 인정 경력, 이력서용 요약 복사까지.</description>
     </item>
   </channel>
 </rss>

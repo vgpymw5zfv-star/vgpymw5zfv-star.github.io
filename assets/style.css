@@ -3207,3 +3207,51 @@ table.data tbody tr.is-next td {
     flex: 1 1 auto;
   }
 }
+
+/* ==========================================================================
+   경력기간 계산기 — 경력 입력 카드
+   ========================================================================== */
+
+.cr-row {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: #fff;
+}
+
+.cr-row:focus-within {
+  border-color: #c9d6ef;
+}
+
+.cr-row__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cr-row__no {
+  color: var(--navy);
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.cr-row .cr-remove {
+  padding: 4px 10px;
+  font-size: 12.5px;
+}
+
+.cr-row .check {
+  padding: 9px 11px;
+}
+
+@media (max-width: 560px) {
+  .cr-row {
+    padding: 12px;
+  }
+
+  .cr-row .field-row {
+    grid-template-columns: 1fr;
+  }
+}

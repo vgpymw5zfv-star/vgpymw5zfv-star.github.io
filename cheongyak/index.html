@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>청약 가점 계산기 · 무주택기간·부양가족·청약통장 84점 (2026) | 도토리 툴즈</title>
+<meta name="description" content="생년월일·혼인신고일·부양가족 수·청약통장 가입일만 넣으면 민영주택 1순위 가점(무주택 32점·부양가족 35점·통장 17점)을 계산합니다. 다음 점수 구간까지 남은 기간과 약한 항목까지. 2026년 11월 기준.">
+<meta name="author" content="도토리사원">
+<meta name="theme-color" content="#1F2A44">
+<meta name="google-site-verification" content="_dxc0C2kiFi1gcrJOmOw2CYSbvuWM6zPb_HV6ua8Irc">
+<meta name="naver-site-verification" content="8cae25a2a99bf6fc06dd7b48bcecf8f519ab032f">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://vgpymw5zfv-star.github.io/cheongyak/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="도토리 툴즈">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="내 청약 가점은 몇 점? 무주택·부양가족·통장 84점 계산">
+<meta property="og:description" content="생년월일·혼인신고일·부양가족 수·청약통장 가입일만 넣으면 민영주택 1순위 가점(무주택 32점·부양가족 35점·통장 17점)을 계산합니다. 다음 점수 구간까지 남은 기간과 약한 항목까지. 2026년 11월 기준.">
+<meta property="og:url" content="https://vgpymw5zfv-star.github.io/cheongyak/">
+<meta property="og:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="내 청약 가점은 몇 점? 무주택·부양가족·통장 84점 계산">
+<meta name="twitter:description" content="생년월일·혼인신고일·부양가족 수·청약통장 가입일만 넣으면 민영주택 1순위 가점(무주택 32점·부양가족 35점·통장 17점)을 계산합니다. 다음 점수 구간까지 남은 기간과 약한 항목까지. 2026년 11월 기준.">
+<meta name="twitter:image" content="https://vgpymw5zfv-star.github.io/assets/og-dotori.png">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "청약 가점 계산기",
+      "url": "https://vgpymw5zfv-star.github.io/cheongyak/",
+      "description": "생년월일·혼인신고일·부양가족 수·청약통장 가입일만 넣으면 민영주택 1순위 가점(무주택 32점·부양가족 35점·통장 17점)을 계산합니다. 다음 점수 구간까지 남은 기간과 약한 항목까지. 2026년 11월 기준.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "JavaScript 지원 브라우저",
+      "inLanguage": "ko-KR",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "도토리사원"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "도토리 툴즈",
+        "url": "https://vgpymw5zfv-star.github.io/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "홈",
+          "item": "https://vgpymw5zfv-star.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "청약 가점",
+          "item": "https://vgpymw5zfv-star.github.io/cheongyak/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "청약 가점 84점은 어떻게 구성되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "민영주택 일반공급 1순위 가점제는 무주택기간 최대 32점, 부양가족 수 최대 35점, 청약통장(입주자저축) 가입기간 최대 17점을 더해 84점 만점으로 매깁니다. 배점은 「주택공급에 관한 규칙」 제28조와 별표 1에 정해져 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "무주택기간은 언제부터 세나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "본인과 배우자가 주택을 소유한 적이 없다면 만 30세가 되는 날부터 입주자모집공고일까지 셉니다. 만 30세 이전에 혼인했다면 혼인신고일부터 셉니다. 주택을 소유했다가 처분했다면 무주택자가 된 날과 그 날 중 늦은 날부터 다시 셉니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "만 30세 미만 미혼이면 무주택기간이 0점인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네. 만 30세 미만이면서 미혼인 무주택자는 무주택기간 점수가 0점입니다. 만 30세가 되는 날부터 자동으로 쌓이므로, 그 전에는 청약통장 가입기간을 유지하는 것이 점수에 도움이 됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "부양가족은 누구까지 인정되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "배우자(분리세대 포함), 3년 이상 같은 등본에 계속 등재된 본인·배우자의 직계존속, 등본에 등재된 미혼 직계비속입니다. 혼인한 적이 있는 자녀, 주택을 소유한 직계존속, 요양시설 입소자나 해외에 계속 90일 넘게 체류 중인 사람은 빠집니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "청약통장 가입기간 점수는 어떻게 계산하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "6개월 미만 1점, 6개월 이상 1년 미만 2점이고, 1년 이상은 가입 연수에 2점을 더합니다. 2년이면 4점, 10년이면 12점, 15년 이상이면 17점 만점입니다. 만 19세 이전에 가입한 기간은 최대 5년까지만 인정됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "배우자 통장 점수도 더할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2024년 3월 25일부터 배우자의 청약통장 가입기간 50%를 표에 적용해 최대 3점까지 합산합니다. 본인과 배우자를 합한 가입기간 점수는 17점을 넘을 수 없습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "유주택이면 가점을 아예 못 쓰나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "1순위 가점제 대상이 아닙니다. 다만 민영주택 일반공급은 가점제와 추첨제로 나뉘어 공급되고, 추첨제는 1주택자도 신청할 수 있는 물량이 있습니다. 지역·면적·규제 여부에 따라 비율이 다르니 공고문을 확인하세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "이 계산기 점수 그대로 청약해도 되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "아니요. 이 계산기는 배점표만으로 매긴 참고값입니다. 실제 가점은 입주자모집공고일 현재 등본·주택 소유 이력·통장 인정기간을 기준으로 청약홈에서 확정되므로, 신청 전에 청약홈 가점계산과 순위확인서로 확인하세요."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../index.html" aria-label="도토리 툴즈 홈">
+        <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8v1.9"/><path d="M5.9 9.1c0-2.5 2.7-4.5 6.1-4.5s6.1 2 6.1 4.5c0 .5-.4.9-.9.9H6.8c-.5 0-.9-.4-.9-.9z"/><path d="M7.3 10.9h9.4c0 4.4-1.9 8.6-4.7 10.2-2.8-1.6-4.7-5.8-4.7-10.2z"/></svg></span>
+        <span class="brand__full">도토리 툴즈</span>
+        <span class="brand__short">도토리</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 계산기">
+        <a class="nav-home" href="../index.html">홈</a>
+        <div class="nav-item" data-nav-item><button type="button" class="nav-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-tax"><span class="nav-toggle__label">절세</span><svg class="nav-toggle__chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button><div class="nav-panel" id="nav-panel-tax" role="group" aria-label="절세 계산기"><a href="../sme-tax/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">소득세 감면</span><span class="nav-panel__desc">청년 90% · 5년 경정청구</span></span></a><a href="../severance/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">퇴직금</span><span class="nav-panel__desc">퇴직소득세 · 연차수당</span></span></a><a href="../rent-tax/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">월세 절세</span><span class="nav-panel__desc">세액공제 vs 소득공제</span></span></a><a href="../year-end-check/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">12월 절세 액션 · 서류</span><span class="nav-panel__desc">간소화 누락 서류까지</span></span></a><a href="../freelance-tax/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5 5 19"/><circle cx="7.6" cy="7.6" r="2.4"/><circle cx="16.4" cy="16.4" r="2.4"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">3.3% 원천징수</span><span class="nav-panel__desc">3.3% 실수령 · 세전 역산</span></span></a></div></div>
+        <div class="nav-item" data-nav-item><button type="button" class="nav-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-living"><span class="nav-toggle__full">생활비</span><span class="nav-toggle__short">생활</span><svg class="nav-toggle__chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button><div class="nav-panel" id="nav-panel-living" role="group" aria-label="생활비 계산기"><a href="../salary/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10.5h18"/><circle cx="16.8" cy="15" r="1.1" fill="currentColor"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">연봉 실수령액</span><span class="nav-panel__desc">4대보험·소득세 뺀 월 실수령</span></span></a><a href="../electricity/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">전기세</span><span class="nav-panel__desc">저압 · 고압 누진제</span></span></a><a href="../heating/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s4.5 4.2 4.5 8.4a4.5 4.5 0 0 1-9 0C7.5 7.2 12 3 12 3z"/><path d="M12 21a5 5 0 0 0 5-5"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">난방비</span><span class="nav-panel__desc">도시가스 · 지역난방</span></span></a><a href="../unemployment/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10.5h18"/><circle cx="16.8" cy="15" r="1.1" fill="currentColor"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">실업급여</span><span class="nav-panel__desc">상한 68,100원 · 하한 66,048원</span></span></a><a href="../unit-price/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 3.4H20a.6.6 0 0 1 .6.6v7.4a2 2 0 0 1-.6 1.4l-7.6 7.6a2 2 0 0 1-2.8 0l-5.4-5.4a2 2 0 0 1 0-2.8l7.6-7.6a2 2 0 0 1 1.4-.6z"/><circle cx="16.4" cy="7.6" r="1.3"/><path d="M8.5 12.5l3 3"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">단위가격 · 1+1</span><span class="nav-panel__desc">100g·100ml·1개당 단가 4개 비교</span></span></a><a href="../dutch-pay/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.2" cy="8" r="3.2"/><path d="M3.6 20c0-3 2.5-5.2 5.6-5.2s5.6 2.2 5.6 5.2"/><path d="M15.6 5.3a3.2 3.2 0 0 1 0 5.5"/><path d="M17.4 14.8c1.9.6 3.1 2.3 3.1 4.2"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">더치페이 정산</span><span class="nav-panel__desc">차수별 N빵 · 카톡 정산</span></span></a></div></div>
+        <div class="nav-item is-active" data-nav-item><button type="button" class="nav-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-housing"><span class="nav-toggle__label">주거</span><svg class="nav-toggle__chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button><div class="nav-panel" id="nav-panel-housing" role="group" aria-label="주거 계산기"><a href="../housing/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.2" cy="8.2" r="4.2"/><path d="M11.2 11.2 20 20M16.4 16.4l2-2M19 19l1.6-1.6"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">전세 vs 월세</span><span class="nav-panel__desc">손익분기 월세 · 전환율</span></span></a><a href="../loan/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">대출 이자</span><span class="nav-panel__desc">상환방식 4종 비교</span></span></a><a href="../lease-check/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.2" cy="8.2" r="4.2"/><path d="M11.2 11.2 20 20M16.4 16.4l2-2M19 19l1.6-1.6"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">전세 계약 안전 점검</span><span class="nav-panel__desc">체크리스트 · 특약 8종</span></span></a><a href="../pyeong/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.2" y="9" width="19.6" height="6" rx="1.6"/><path d="M6.4 9v2.6M9.8 9v2.6M13.2 9v2.6M16.6 9v2.6M20 9v2.6"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">평수 · ㎡ 변환</span><span class="nav-panel__desc">㎡↔평 · 전용률·평당가</span></span></a><a href="../cheongyak/" aria-current="page"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">청약 가점</span><span class="nav-panel__desc">84점 만점 · 다음 구간까지</span></span></a></div></div>
+        <div class="nav-item" data-nav-item><button type="button" class="nav-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-transit"><span class="nav-toggle__label">교통</span><svg class="nav-toggle__chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button><div class="nav-panel" id="nav-panel-transit" role="group" aria-label="교통 계산기"><a href="../transit/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="14" rx="2.5"/><path d="M4 11h16M8 17v3M16 17v3"/><circle cx="8" cy="14" r=".8" fill="currentColor"/><circle cx="16" cy="14" r=".8" fill="currentColor"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">K-패스 vs 기후동행</span><span class="nav-panel__desc">월 교통비 절약액</span></span></a><a href="../car-cost/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16.5V13l1.8-4.2A2 2 0 0 1 7.6 7.5h8.8a2 2 0 0 1 1.8 1.3L20 13v3.5"/><path d="M4 13h16"/><circle cx="7.5" cy="17" r="1.6"/><circle cx="16.5" cy="17" r="1.6"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">내 차 유지비</span><span class="nav-panel__desc">자동차세 · 기름값 포함</span></span></a></div></div>
+        <div class="nav-item" data-nav-item><button type="button" class="nav-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-subscribe"><span class="nav-toggle__label">구독</span><svg class="nav-toggle__chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button><div class="nav-panel" id="nav-panel-subscribe" role="group" aria-label="구독 계산기"><a href="../ai-cost/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M18.5 16.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">AI 구독 조합</span><span class="nav-panel__desc">월 구독료 조합 비교</span></span></a></div></div>
+        <div class="nav-item" data-nav-item><button type="button" class="nav-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-panel-doc"><span class="nav-toggle__full">문서·일정</span><span class="nav-toggle__short">문서</span><svg class="nav-toggle__chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button><div class="nav-panel" id="nav-panel-doc" role="group" aria-label="문서·일정 계산기"><a href="../text-counter/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14M5 11h14M5 16h9"/><path d="M5 3.5h9"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">글자수·바이트</span><span class="nav-panel__desc">SMS 90B · 원고지 매수</span></span></a><a href="../dday/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/><path d="M7.5 13.5h3v3h-3z"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">D-day · 근무일</span><span class="nav-panel__desc">공휴일 뺀 근무일 · 100일</span></span></a><a href="../msg-template/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.5c0 3.9-3.8 7-8.5 7-1 0-2-.1-2.9-.4L4 20l1.3-3.5A6.4 6.4 0 0 1 3.5 11.5c0-3.9 3.8-7 8.5-7s8.5 3.1 8.5 7z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">문자·메일 템플릿</span><span class="nav-panel__desc">11가지 상황 · 원클릭 복사</span></span></a><a href="../annual-leave/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 0 0-8.5 8.5h17A8.5 8.5 0 0 0 12 3.5z"/><path d="M12 3.5v8.5"/><path d="M12 12v6.2a2.3 2.3 0 0 0 4.6 0"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">연차 일수 · 미사용 수당</span><span class="nav-panel__desc">2026 발생 일수 · 미사용 수당</span></span></a><a href="../career/"><span class="nav-panel__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7.5" width="18" height="12" rx="2.4"/><path d="M9 7.5V5.6A1.6 1.6 0 0 1 10.6 4h2.8A1.6 1.6 0 0 1 15 5.6v1.9"/><path d="M3 12.6h18"/><path d="M12 12.6v2.2"/></svg></span><span class="nav-panel__text"><span class="nav-panel__label">경력기간 산정</span><span class="nav-panel__desc">겹친 기간 중복 제거 · 수습 제외</span></span></a></div></div>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <div class="container">
+      <section class="page-head">
+        <nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">홈</a><span aria-hidden="true">/</span><span aria-current="page">청약 가점</span></nav>
+        <h1>청약 가점 계산기 · 무주택기간·부양가족·청약통장 84점</h1>
+        <p class="lead">민영주택 일반공급 1순위 가점제는 <b>무주택기간 32점 + 부양가족 35점 + 청약통장 가입기간 17점</b>을 더해 84점 만점으로 매깁니다. 생년월일·혼인신고일·통장 가입일만 넣으면 내 점수와 <b>다음 구간까지 남은 기간</b>이 바로 나옵니다. 입력한 값은 서버로 전송되지 않고 이 브라우저 안에서만 계산됩니다.</p>
+      </section>
+
+      <div class="calc-layout">
+        <div class="calc-col">
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">1</span>기준일과 생년월일</h2>
+              <span class="pill">2026년 기준</span>
+            </div>
+
+            <div class="field-row">
+              <label class="field" for="ck-base">
+                <span class="field-label">기준일 <small>입주자모집공고일</small></span>
+                <span class="field-control">
+                  <input id="ck-base" type="date">
+                </span>
+                <span class="field-help">모든 점수는 공고일 현재 상태로 판단합니다</span>
+              </label>
+              <label class="field" for="ck-birth">
+                <span class="field-label">생년월일</span>
+                <span class="field-control">
+                  <input id="ck-birth" type="date" value="1994-05-20">
+                </span>
+                <span class="field-help">만 30세가 되는 날부터 무주택기간을 셉니다</span>
+              </label>
+            </div>
+
+            <p class="field-label" style="margin:16px 0 8px">혼인 여부</p>
+            <div class="segment segment--wrap" id="ck-married" role="group" aria-label="혼인 여부">
+              <button type="button" data-value="no" aria-pressed="true">미혼</button>
+              <button type="button" data-value="yes" aria-pressed="false">기혼</button>
+            </div>
+
+            <label class="field" for="ck-marriage" id="ck-marriage-wrap" style="margin-top:12px" hidden>
+              <span class="field-label">혼인신고일</span>
+              <span class="field-control">
+                <input id="ck-marriage" type="date" value="2024-03-16">
+              </span>
+              <span class="field-help">만 30세 이전에 혼인했다면 이 날부터 무주택기간을 셉니다</span>
+            </label>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">2</span>주택 소유 이력</h2>
+            </div>
+            <div class="segment segment--wrap" id="ck-owned" role="group" aria-label="주택 소유 이력">
+              <button type="button" data-value="none" aria-pressed="true">계속 무주택</button>
+              <button type="button" data-value="sold" aria-pressed="false">소유 후 처분</button>
+              <button type="button" data-value="own" aria-pressed="false">지금 유주택</button>
+            </div>
+
+            <label class="field" for="ck-disposed" id="ck-disposed-wrap" style="margin-top:12px" hidden>
+              <span class="field-label">무주택자가 된 날 <small>주택 처분일</small></span>
+              <span class="field-control">
+                <input id="ck-disposed" type="date" value="2024-07-01">
+              </span>
+              <span class="field-help">처분일과 만 30세(또는 혼인신고일) 중 늦은 날부터 다시 셉니다</span>
+            </label>
+
+            <div class="notice notice--warn" id="ck-owned-warn" style="margin-top:12px" hidden>
+              <span class="notice__icon" aria-hidden="true">!</span>
+              <span>지금 유주택이면 <b>1순위 가점제 대상이 아닙니다</b>. 가점은 0점으로 계산되고, 추첨제나 특별공급 등 다른 방식으로 신청해야 합니다.</span>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">3</span>부양가족 <small>본인 제외</small></h2>
+              <span class="pill pill--blue" id="ck-dep-total">0명</span>
+            </div>
+
+            <div class="field-row field-row--3">
+              <label class="field" for="ck-dep-self">
+                <span class="field-label">본인 직계존속</span>
+                <span class="field-control">
+                  <select id="ck-dep-self">
+                    <option value="0" selected>0명</option>
+                    <option value="1">1명</option>
+                    <option value="2">2명</option>
+                    <option value="3">3명</option>
+                    <option value="4">4명</option>
+                    <option value="5">5명</option>
+                    <option value="6">6명 이상</option>
+                  </select>
+                </span>
+                <span class="field-help">부모·조부모</span>
+              </label>
+              <label class="field" for="ck-dep-spouse">
+                <span class="field-label">배우자 직계존속</span>
+                <span class="field-control">
+                  <select id="ck-dep-spouse">
+                    <option value="0" selected>0명</option>
+                    <option value="1">1명</option>
+                    <option value="2">2명</option>
+                    <option value="3">3명</option>
+                    <option value="4">4명</option>
+                    <option value="5">5명</option>
+                    <option value="6">6명 이상</option>
+                  </select>
+                </span>
+                <span class="field-help">배우자 부모·조부모</span>
+              </label>
+              <label class="field" for="ck-dep-child">
+                <span class="field-label">미혼 직계비속</span>
+                <span class="field-control">
+                  <select id="ck-dep-child">
+                    <option value="0" selected>0명</option>
+                    <option value="1">1명</option>
+                    <option value="2">2명</option>
+                    <option value="3">3명</option>
+                    <option value="4">4명</option>
+                    <option value="5">5명</option>
+                    <option value="6">6명 이상</option>
+                  </select>
+                </span>
+                <span class="field-help">자녀·손자녀</span>
+              </label>
+            </div>
+
+            <p class="field-help" style="margin-top:10px">배우자는 기혼을 고르면 자동으로 1명이 더해집니다. 등본에 올라 있다고 모두 인정되는 것은 아니므로, 아래 <b>부양가족 인정 기준</b>을 먼저 확인하세요.</p>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2><span class="step-no">4</span>청약통장 가입기간</h2>
+            </div>
+
+            <div class="field-row">
+              <label class="field" for="ck-join">
+                <span class="field-label">통장 최초 가입일 <small>순위기산일</small></span>
+                <span class="field-control">
+                  <input id="ck-join" type="date" value="2018-02-01">
+                </span>
+                <span class="field-help">명의변경·종류 변경을 해도 최초 가입일 기준입니다</span>
+              </label>
+              <label class="field" for="ck-spouse-account">
+                <span class="field-label">배우자 통장 가입기간</span>
+                <span class="field-control">
+                  <select id="ck-spouse-account">
+                    <option value="0" selected>없음 · 미가입</option>
+                    <option value="6">1년 미만</option>
+                    <option value="18">1년 이상 ~ 2년 미만</option>
+                    <option value="60">2년 이상</option>
+                  </select>
+                </span>
+                <span class="field-help">가입기간의 50%를 최대 3점까지 합산합니다</span>
+              </label>
+            </div>
+
+            <div class="tool-bar" style="margin-top:12px">
+              <button type="button" class="btn-ghost" id="ck-copy">계산 요약 복사</button>
+            </div>
+            <p class="field-help" id="ck-status" role="status" aria-live="polite" style="margin-top:8px">입력값을 바꾸면 결과가 바로 갱신됩니다.</p>
+          </div>
+        </div>
+
+        <div class="result-col">
+          <div class="result-card" aria-live="polite">
+            <p class="result-card__label">내 청약 가점</p>
+            <p class="result-value"><span id="ck-total">—</span> <small style="font-size:15px;font-weight:600;color:var(--muted)">/ 84점</small></p>
+            <p class="result-sub" id="ck-total-sub">생년월일과 통장 가입일을 넣으면 점수가 나옵니다.</p>
+
+            <div class="gauge" style="margin-top:14px">
+              <div class="gauge__bar"><div class="gauge__fill" id="ck-gauge" style="width:0%"></div></div>
+              <div class="gauge__scale"><span>0점</span><span>42점</span><span>84점</span></div>
+            </div>
+
+            <dl class="result-rows" style="margin-top:16px">
+              <div class="result-row">
+                <dt>무주택기간</dt>
+                <dd><span id="ck-nh-score">—</span> <small class="muted-sm" id="ck-nh-value"></small></dd>
+              </div>
+              <div class="result-row">
+                <dt>부양가족</dt>
+                <dd><span id="ck-dep-score">—</span> <small class="muted-sm" id="ck-dep-value"></small></dd>
+              </div>
+              <div class="result-row">
+                <dt>청약통장 가입기간</dt>
+                <dd><span id="ck-acct-score">—</span> <small class="muted-sm" id="ck-acct-value"></small></dd>
+              </div>
+              <div class="result-row result-row--strong">
+                <dt>다음 점수 구간</dt>
+                <dd id="ck-next">—</dd>
+              </div>
+            </dl>
+
+            <p class="result-note" id="ck-note">가점은 배점표만으로 계산한 참고값입니다. 실제 가점은 입주자모집공고일 기준으로 청약홈에서 확정됩니다.</p>
+          </div>
+
+          <div class="field-group">
+            <div class="field-group__title">
+              <h2>내 점수 어디가 약한가</h2>
+            </div>
+            <div id="ck-weak" class="mini-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ads-slot" data-slot="top" hidden></div>
+
+      <div data-blog-banner hidden></div>
+
+      <section class="section" aria-labelledby="ck-table-nh">
+        <div class="section-head">
+          <h2 id="ck-table-nh">무주택기간 배점표</h2>
+          <p>만 30세가 되는 날(30세 이전 혼인 시 혼인신고일)부터 입주자모집공고일까지 셉니다. 1년마다 2점씩 올라 15년 이상이면 32점입니다.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <caption>무주택기간별 가점 — 「주택공급에 관한 규칙」 별표 1</caption>
+            <thead>
+              <tr>
+                <th scope="col">무주택기간</th>
+                <th scope="col">가점</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">유주택 · 만 30세 미만 미혼</th>
+                <td>0점</td>
+              </tr>
+              <tr>
+                <th scope="row">1년 미만</th>
+                <td>2점</td>
+              </tr>
+              <tr>
+                <th scope="row">1년 이상 ~ 2년 미만</th>
+                <td>4점</td>
+              </tr>
+              <tr>
+                <th scope="row">2년 이상 ~ 3년 미만</th>
+                <td>6점</td>
+              </tr>
+              <tr>
+                <th scope="row">3년 이상 ~ 4년 미만</th>
+                <td>8점</td>
+              </tr>
+              <tr>
+                <th scope="row">4년 이상 ~ 5년 미만</th>
+                <td>10점</td>
+              </tr>
+              <tr>
+                <th scope="row">5년 이상 ~ 6년 미만</th>
+                <td>12점</td>
+              </tr>
+              <tr>
+                <th scope="row">6년 이상 ~ 7년 미만</th>
+                <td>14점</td>
+              </tr>
+              <tr>
+                <th scope="row">7년 이상 ~ 8년 미만</th>
+                <td>16점</td>
+              </tr>
+              <tr>
+                <th scope="row">8년 이상 ~ 9년 미만</th>
+                <td>18점</td>
+              </tr>
+              <tr>
+                <th scope="row">9년 이상 ~ 10년 미만</th>
+                <td>20점</td>
+              </tr>
+              <tr>
+                <th scope="row">10년 이상 ~ 11년 미만</th>
+                <td>22점</td>
+              </tr>
+              <tr>
+                <th scope="row">11년 이상 ~ 12년 미만</th>
+                <td>24점</td>
+              </tr>
+              <tr>
+                <th scope="row">12년 이상 ~ 13년 미만</th>
+                <td>26점</td>
+              </tr>
+              <tr>
+                <th scope="row">13년 이상 ~ 14년 미만</th>
+                <td>28점</td>
+              </tr>
+              <tr>
+                <th scope="row">14년 이상 ~ 15년 미만</th>
+                <td>30점</td>
+              </tr>
+              <tr>
+                <th scope="row">15년 이상</th>
+                <td>32점</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="result-note" style="margin:12px 0 0">2018년 12월 11일 이후 취득한 분양권·입주권은 주택을 소유한 것으로 봅니다. 배우자가 결혼 전에 매도한 주택은 무주택기간 산정에서 제외됩니다.</p>
+      </section>
+
+      <section class="section" aria-labelledby="ck-table-dep">
+        <div class="section-head">
+          <h2 id="ck-table-dep">부양가족·청약통장 배점표</h2>
+          <p>부양가족은 0명이어도 5점이 붙고, 1명마다 5점씩 올라 6명 이상이면 35점입니다. 통장은 15년 이상이면 17점 만점입니다.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <caption>부양가족 수(본인 제외)와 청약통장 가입기간 가점</caption>
+            <thead>
+              <tr>
+                <th scope="col">부양가족</th>
+                <th scope="col">가점</th>
+                <th scope="col">통장 가입기간</th>
+                <th scope="col">가점</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">0명</th>
+                <td>5점</td>
+                <th scope="row">6개월 미만</th>
+                <td>1점</td>
+              </tr>
+              <tr>
+                <th scope="row">1명</th>
+                <td>10점</td>
+                <th scope="row">6개월 이상 ~ 1년 미만</th>
+                <td>2점</td>
+              </tr>
+              <tr>
+                <th scope="row">2명</th>
+                <td>15점</td>
+                <th scope="row">1년 이상 ~ 2년 미만</th>
+                <td>3점</td>
+              </tr>
+              <tr>
+                <th scope="row">3명</th>
+                <td>20점</td>
+                <th scope="row">2년 이상 ~ 3년 미만</th>
+                <td>4점</td>
+              </tr>
+              <tr>
+                <th scope="row">4명</th>
+                <td>25점</td>
+                <th scope="row">10년 이상 ~ 11년 미만</th>
+                <td>12점</td>
+              </tr>
+              <tr>
+                <th scope="row">5명</th>
+                <td>30점</td>
+                <th scope="row">14년 이상 ~ 15년 미만</th>
+                <td>16점</td>
+              </tr>
+              <tr>
+                <th scope="row">6명 이상</th>
+                <td>35점</td>
+                <th scope="row">15년 이상</th>
+                <td>17점</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="result-note" style="margin:12px 0 0">1년 이상 구간은 <b>가입 연수 + 2점</b>으로 계산합니다(2년이면 4점). 배우자 통장은 가입기간의 50%를 표에 적용해 최대 3점까지 더하고, 본인·배우자 합계는 17점을 넘지 않습니다.</p>
+      </section>
+
+      <section class="section" aria-labelledby="ck-dep-rule">
+        <div class="section-head">
+          <h2 id="ck-dep-rule">부양가족 인정 기준</h2>
+          <p>등본에 이름이 올라 있다고 모두 부양가족이 되는 것은 아닙니다. 입주자모집공고일 현재 세대에 속한 사람 중 아래 조건을 갖춘 사람만 셉니다.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data table--text table--stack">
+            <caption>부양가족 인정 대상과 조건</caption>
+            <thead>
+              <tr>
+                <th scope="col">대상</th>
+                <th scope="col">인정 조건</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">배우자</th>
+                <td>항상 포함합니다. 주민등록이 분리된 배우자(분리세대)도 포함됩니다.</td>
+              </tr>
+              <tr>
+                <th scope="row">본인 직계존속</th>
+                <td>본인이 세대주이고, 3년 이상 같은 주민등록표등본에 계속 등재된 부모·조부모. 직계존속이나 그 배우자가 주택을 소유하면 원칙적으로 제외됩니다.</td>
+              </tr>
+              <tr>
+                <th scope="row">배우자 직계존속</th>
+                <td>3년 이상 같은 등본에 계속 등재된 배우자의 부모·조부모. 분리세대라면 배우자가 세대주여야 합니다.</td>
+              </tr>
+              <tr>
+                <th scope="row">미혼 직계비속</th>
+                <td>미혼 자녀(부모가 모두 사망한 손자녀 포함). 만 30세 이상 자녀는 최근 1년 이상 계속 같은 등본에 등재돼야 합니다.</td>
+              </tr>
+              <tr>
+                <th scope="row">인정되지 않는 경우</th>
+                <td>혼인 중이거나 혼인한 적이 있는 자녀, 외국인 직계존비속, 요양시설 입소자, 해외에 계속 90일을 넘겨 체류 중인 사람.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="result-note" style="margin:12px 0 0">2025년 6월 10일부터는 가점제·노부모부양 특별공급 당첨자에게 부양가족의 국민건강보험 요양급여 내역(직계존속 3년, 만 30세 이상 자녀 1년) 제출이 요구됩니다.</p>
+      </section>
+
+      <section class="section" aria-labelledby="ck-tips">
+        <div class="section-head">
+          <h2 id="ck-tips">가점이 낮을 때 확인할 것</h2>
+        </div>
+        <div class="prose">
+          <p><strong>가점제만 있는 것이 아닙니다.</strong> 민영주택 일반공급은 가점제와 추첨제로 나뉘어 공급되고, 비율은 지역·면적·규제 여부에 따라 다릅니다. 2025년 제도 개편으로 수도권을 중심으로 추첨제 물량이 늘어난 만큼, 내 가점이 낮다면 공고문의 추첨제 비중과 무주택자 우선공급 조건을 먼저 확인하세요.</p>
+          <p><strong>신혼부부·생애최초·신생아 특별공급은 가점이 아니라 자격과 소득 요건으로 당락이 갈립니다.</strong> 2025년 개편으로 민영주택 신혼부부 특별공급 물량이 건설량의 23%까지 늘었고, 혼인특례·출산특례가 생겼습니다. 결혼을 앞두고 있다면 일반공급 가점과 특별공급 자격을 함께 계산해 보는 편이 낫습니다.</p>
+          <p><strong>청약통장은 해지하지 마세요.</strong> 가입기간 점수는 최초 가입일부터 이어지므로, 통장을 새로 만들면 6개월 미만(1점)부터 다시 시작합니다. 당장 쓸 계획이 없어도 자동이체로 유지하는 것이 유리합니다.</p>
+          <p><strong>부양가족은 미리 등본을 정리해 두세요.</strong> 3년 이상 계속 등재가 조건이라, 부모를 모시고 산 지 얼마 안 됐다면 지금부터 등본을 유지해야 합니다. 전입·분리 이력은 청약홈에서 확인할 수 있습니다.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>자주 묻는 질문</h2>
+        </div>
+        <div class="faq">
+      <details>
+        <summary>청약 가점 84점은 어떻게 구성되나요?</summary>
+        <p>민영주택 일반공급 1순위 가점제는 무주택기간 최대 32점, 부양가족 수 최대 35점, 청약통장(입주자저축) 가입기간 최대 17점을 더해 84점 만점으로 매깁니다. 배점은 「주택공급에 관한 규칙」 제28조와 별표 1에 정해져 있습니다.</p>
+      </details>
+      <details>
+        <summary>무주택기간은 언제부터 세나요?</summary>
+        <p>본인과 배우자가 주택을 소유한 적이 없다면 만 30세가 되는 날부터 입주자모집공고일까지 셉니다. 만 30세 이전에 혼인했다면 혼인신고일부터 셉니다. 주택을 소유했다가 처분했다면 무주택자가 된 날과 그 날 중 늦은 날부터 다시 셉니다.</p>
+      </details>
+      <details>
+        <summary>만 30세 미만 미혼이면 무주택기간이 0점인가요?</summary>
+        <p>네. 만 30세 미만이면서 미혼인 무주택자는 무주택기간 점수가 0점입니다. 만 30세가 되는 날부터 자동으로 쌓이므로, 그 전에는 청약통장 가입기간을 유지하는 것이 점수에 도움이 됩니다.</p>
+      </details>
+      <details>
+        <summary>부양가족은 누구까지 인정되나요?</summary>
+        <p>배우자(분리세대 포함), 3년 이상 같은 등본에 계속 등재된 본인·배우자의 직계존속, 등본에 등재된 미혼 직계비속입니다. 혼인한 적이 있는 자녀, 주택을 소유한 직계존속, 요양시설 입소자나 해외에 계속 90일 넘게 체류 중인 사람은 빠집니다.</p>
+      </details>
+      <details>
+        <summary>청약통장 가입기간 점수는 어떻게 계산하나요?</summary>
+        <p>6개월 미만 1점, 6개월 이상 1년 미만 2점이고, 1년 이상은 가입 연수에 2점을 더합니다. 2년이면 4점, 10년이면 12점, 15년 이상이면 17점 만점입니다. 만 19세 이전에 가입한 기간은 최대 5년까지만 인정됩니다.</p>
+      </details>
+      <details>
+        <summary>배우자 통장 점수도 더할 수 있나요?</summary>
+        <p>2024년 3월 25일부터 배우자의 청약통장 가입기간 50%를 표에 적용해 최대 3점까지 합산합니다. 본인과 배우자를 합한 가입기간 점수는 17점을 넘을 수 없습니다.</p>
+      </details>
+      <details>
+        <summary>유주택이면 가점을 아예 못 쓰나요?</summary>
+        <p>1순위 가점제 대상이 아닙니다. 다만 민영주택 일반공급은 가점제와 추첨제로 나뉘어 공급되고, 추첨제는 1주택자도 신청할 수 있는 물량이 있습니다. 지역·면적·규제 여부에 따라 비율이 다르니 공고문을 확인하세요.</p>
+      </details>
+      <details>
+        <summary>이 계산기 점수 그대로 청약해도 되나요?</summary>
+        <p>아니요. 이 계산기는 배점표만으로 매긴 참고값입니다. 실제 가점은 입주자모집공고일 현재 등본·주택 소유 이력·통장 인정기간을 기준으로 청약홈에서 확정되므로, 신청 전에 청약홈 가점계산과 순위확인서로 확인하세요.</p>
+      </details>
+    </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>함께 쓰면 좋은 도구</h2>
+        </div>
+        <div class="grid grid--2" data-related>
+        <a class="calc-card" href="../housing/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.2" cy="8.2" r="4.2"/><path d="M11.2 11.2 20 20M16.4 16.4l2-2M19 19l1.6-1.6"/></svg></span>
+            <span class="calc-card__tag">주거</span>
+          </div>
+          <h3>전세 vs 월세 주거비 손익분기</h3>
+          <p>전세대출 이자·보증금 기회비용·월세 세액공제를 넣어 어느 쪽이 매달 얼마나 유리한지와 손익분기 월세를 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../pyeong/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.2" y="9" width="19.6" height="6" rx="1.6"/><path d="M6.4 9v2.6M9.8 9v2.6M13.2 9v2.6M16.6 9v2.6M20 9v2.6"/></svg></span>
+            <span class="calc-card__tag">주거</span>
+          </div>
+          <h3>평수 · 전용면적 ㎡ 변환 계산기</h3>
+          <p>㎡와 평을 서로 바꾸고, 전용률로 공급면적·평형을 추정하며, 매매가·전세금으로 평당 가격과 방 크기 감각까지 계산합니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../lease-check/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.2" cy="8.2" r="4.2"/><path d="M11.2 11.2 20 20M16.4 16.4l2-2M19 19l1.6-1.6"/></svg></span>
+            <span class="calc-card__tag">주거</span>
+          </div>
+          <h3>전세·월세 안전 계약 체크리스트 & 특약 복사기</h3>
+          <p>계약 전·당일·잔금 후 체크리스트와 전세가율·선순위 근저당 위험도, 그대로 붙여 넣는 안전 특약 8종을 한 페이지에 담았습니다.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="calc-card" href="../loan/">
+          <div class="calc-card__top">
+            <span class="calc-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span>
+            <span class="calc-card__tag">주거</span>
+          </div>
+          <h3>대출 이자 · 상환방식 비교</h3>
+          <p>원리금균등·원금균등·체증식·만기일시의 첫 달 납입액과 총 이자를 나란히 비교합니다. 주담대·전세·신용대출 프리셋.</p>
+          <div class="calc-card__foot"><span>계산기 열기</span><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+      </div>
+      <p class="related-all"><a href="../sitemap/">도구 24종 전체 목록 보기</a></p>
+      </section>
+
+      <div class="ads-slot" data-slot="bottom" hidden></div>
+
+      <div class="embed-footer"><a href="https://vgpymw5zfv-star.github.io/cheongyak/" target="_blank" rel="noopener">도토리 툴즈 전체 보기 ↗</a></div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__top">
+        <a class="site-footer__brand" href="../index.html">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8v1.9"/><path d="M5.9 9.1c0-2.5 2.7-4.5 6.1-4.5s6.1 2 6.1 4.5c0 .5-.4.9-.9.9H6.8c-.5 0-.9-.4-.9-.9z"/><path d="M7.3 10.9h9.4c0 4.4-1.9 8.6-4.7 10.2-2.8-1.6-4.7-5.8-4.7-10.2z"/></svg></span>
+          <span>도토리 툴즈</span>
+        </a>
+        <nav aria-label="사이트 정보">
+          <a href="../about/">운영 소개</a>
+          <a href="../privacy/">개인정보처리방침</a>
+          <a href="../contact/">문의</a>
+          <a href="../sitemap/">사이트맵</a>
+        </nav>
+      </div>
+      <p>기준일 <span data-기준일>2026년 11월</span> · 운영 도토리사원 · <a href="../contact/">문의 페이지</a></p>
+      <p class="disclaimer">이 사이트의 모든 계산 결과는 공개된 요율과 단순화한 가정에 따른 <strong>참고용 추정치</strong>입니다. 세금·요금·환급 여부는 개인의 실제 조건과 관계 기관의 최종 결정에 따라 달라질 수 있으며, 계산 결과를 근거로 한 신고·계약·투자 판단의 책임은 이용자에게 있습니다. 공식 기준은 국세청 홈택스, 한국전력공사, 국토교통부, 서울시 등 원문을 확인하세요.</p>
+      <p>© <span data-year>2026</span> 도토리 툴즈. 직접 만든 무료 도구이며, 어떤 금융기관과도 제휴 관계가 없습니다.</p>
+    </div>
+  </footer>
+  <script src="../assets/site-config.js"></script>
+  <script src="../assets/app.js"></script>
+  <script src="../assets/js/dotori-core.js"></script>
+  <script src="../assets/js/cheongyak.js"></script>
+  <script src="../assets/js/page-cheongyak.js"></script>
+</body>
+</html>
