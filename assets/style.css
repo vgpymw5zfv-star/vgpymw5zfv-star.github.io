@@ -3275,9 +3275,12 @@ table.data tbody tr.is-next td {
   height: 380px;
   pointer-events: none;
   background:
-    radial-gradient(46% 58% at 24% 42%, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0) 72%),
-    radial-gradient(42% 52% at 74% 26%, rgba(31, 42, 68, 0.075), rgba(31, 42, 68, 0) 74%),
-    radial-gradient(30% 40% at 52% 78%, rgba(96, 165, 250, 0.07), rgba(96, 165, 250, 0) 76%);
+    radial-gradient(46% 58% at 24% 42%, rgba(37, 99, 235, 0.09), rgba(37, 99, 235, 0) 72%),
+    radial-gradient(42% 52% at 74% 26%, rgba(31, 42, 68, 0.06), rgba(31, 42, 68, 0) 74%),
+    radial-gradient(30% 40% at 52% 78%, rgba(96, 165, 250, 0.06), rgba(96, 165, 250, 0) 76%);
+  /* 가장자리를 부드럽게 깎아 그라디언트 상자의 각진 경계가 보이지 않게 한다 */
+  -webkit-mask-image: radial-gradient(50% 62% at 46% 44%, #000 0%, rgba(0, 0, 0, 0) 90%);
+  mask-image: radial-gradient(50% 62% at 46% 44%, #000 0%, rgba(0, 0, 0, 0) 90%);
 }
 
 @keyframes hero-in {
