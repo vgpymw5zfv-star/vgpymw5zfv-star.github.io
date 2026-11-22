@@ -306,7 +306,7 @@ main {
   flex: none;
   margin-top: 1px;
   opacity: 0.75;
-  transition: transform 0.18s ease;
+  transition: transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.18s ease;
 }
 
 .nav-item.is-open .nav-toggle__chev {
@@ -369,22 +369,43 @@ main {
 
 .nav-item.is-open .nav-panel {
   display: flex;
-  animation: nav-panel-in 0.14s ease both;
+  transform-origin: 50% 0;
+  animation: nav-panel-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 닫힘: 잠깐 display 를 유지한 채 페이드·축소 (app.js 가 190ms 뒤 클래스를 뺀다) */
+.nav-item.is-closing .nav-panel {
+  display: flex;
+  transform-origin: 50% 0;
+  pointer-events: none;
+  animation: nav-panel-out 0.15s cubic-bezier(0.4, 0, 1, 1) both;
 }
 
 @keyframes nav-panel-in {
   from {
     opacity: 0;
-    transform: translateY(-4px);
+    transform: translateY(-6px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: none;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes nav-panel-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.985);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nav-item.is-open .nav-panel {
+  .nav-item.is-open .nav-panel,
+  .nav-item.is-closing .nav-panel {
     animation: none;
   }
 }
@@ -1772,17 +1793,24 @@ table.data td.is-muted {
 }
 
 .faq summary::after {
-  content: "+";
+  content: "";
   flex: none;
+  width: 12px;
+  height: 12px;
+  margin-top: 4px;
   color: var(--muted-light);
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.2;
-  transition: transform 0.16s ease;
+  background-image: linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1.5px 12px, 12px 1.5px;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    color 0.18s ease;
 }
 
 .faq details[open] summary::after {
-  content: "−";
+  color: var(--blue);
+  transform: rotate(45deg);
 }
 
 .faq p {
@@ -2484,49 +2512,9 @@ body.embed-mode .embed-hide-detail {
   }
 }
 
-/* 첫 진입: 카드·카드 그리드 순차 등장 */
-.hero > *,
-.calc-card,
-.field-group,
-.result-card,
-.summary,
-.card,
-.prose,
-.faq details,
-.steps li {
-  animation: riseIn 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.hero > :nth-child(2) {
-  animation-delay: 40ms;
-}
-
-.hero > :nth-child(3) {
-  animation-delay: 80ms;
-}
-
-.grid > :nth-child(2),
-.calc-col > :nth-child(2),
-.result-col > :nth-child(2) {
-  animation-delay: 50ms;
-}
-
-.grid > :nth-child(3),
-.result-col > :nth-child(3) {
-  animation-delay: 90ms;
-}
-
-.grid > :nth-child(4) {
-  animation-delay: 130ms;
-}
-
-.grid > :nth-child(5) {
-  animation-delay: 170ms;
-}
-
-.section:nth-of-type(n + 2) .section-head h2 {
-  animation: fadeIn 220ms ease both;
-}
+/* 첫 진입 연출은 아래 '모션 레이어 v2'(파일 끝)에서 처리한다.
+   - 히어로·페이지 제목: 즉시 순차 등장
+   - 그 아래 섹션: IntersectionObserver 스크롤 리빌 (html.reveal-ready) */
 
 /* 카드 호버: 부드러운 lift */
 .calc-card,
@@ -2571,11 +2559,22 @@ body.embed-mode .embed-hide-detail {
 
 /* FAQ 아코디언 */
 .faq details {
-  transition: border-color 0.18s ease, background 0.18s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .faq details[open] p {
-  animation: fadeIn 200ms ease both;
+  animation: faq-slide-in 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes faq-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .faq summary {
@@ -2588,7 +2587,7 @@ body.embed-mode .embed-hide-detail {
 
 /* 게이지 */
 .gauge__fill {
-  transition: width 0.32s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease;
+  transition: width 0.55s cubic-bezier(0.34, 1.36, 0.64, 1), background 0.2s ease;
 }
 
 /* 링크 화살표 */
@@ -2757,7 +2756,7 @@ body.embed-mode .result-actions {
   width: 0;
   border-radius: 999px;
   background: var(--blue);
-  transition: width 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: width 0.55s cubic-bezier(0.34, 1.36, 0.64, 1);
 }
 .progress__label {
   margin-top: 8px;
@@ -3172,7 +3171,7 @@ table.data tbody tr.is-next td {
   height: 100%;
   border-radius: 999px;
   background: var(--line-strong);
-  transition: width 0.28s ease;
+  transition: width 0.5s cubic-bezier(0.34, 1.36, 0.64, 1);
 }
 
 .up-row.is-best .up-row__bar span {
@@ -3253,5 +3252,295 @@ table.data tbody tr.is-next td {
 
   .cr-row .field-row {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   모션 레이어 v2 — 스크롤 리빌 · 헤더 · 카드 · 토스트
+   토스·Apple·Linear 감성의 절제된 60fps 모션. 정체성(화이트·네이비·블루) 유지.
+   ========================================================================== */
+
+/* ---------- 히어로 앰비언트 글로우 + 순차 등장 ---------- */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -120px 0 auto 0;
+  height: 380px;
+  pointer-events: none;
+  background:
+    radial-gradient(46% 58% at 24% 42%, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0) 72%),
+    radial-gradient(42% 52% at 74% 26%, rgba(31, 42, 68, 0.075), rgba(31, 42, 68, 0) 74%),
+    radial-gradient(30% 40% at 52% 78%, rgba(96, 165, 250, 0.07), rgba(96, 165, 250, 0) 76%);
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero__label,
+.page-head {
+  animation: hero-in 0.62s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero h1 {
+  animation: hero-in 0.66s cubic-bezier(0.16, 1, 0.3, 1) 70ms both;
+}
+
+.hero__lead {
+  animation: hero-in 0.66s cubic-bezier(0.16, 1, 0.3, 1) 140ms both;
+}
+
+.hero__meta,
+.hero .filters {
+  animation: hero-in 0.66s cubic-bezier(0.16, 1, 0.3, 1) 210ms both;
+}
+
+body.embed-mode .hero__label,
+body.embed-mode .hero h1,
+body.embed-mode .hero__lead,
+body.embed-mode .hero__meta,
+body.embed-mode .page-head {
+  animation: none;
+}
+
+/* ---------- 스티키 헤더: 스크롤 시 블러·그림자 강조 ---------- */
+
+.site-header {
+  transition: background-color 0.24s ease, box-shadow 0.24s ease,
+    border-color 0.24s ease;
+}
+
+.site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.82);
+  border-bottom-color: transparent;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04), 0 10px 28px -16px rgba(15, 23, 42, 0.26);
+}
+
+/* ---------- 스크롤 리빌 (IntersectionObserver) ---------- */
+
+html.reveal-ready .section-head:not(.is-revealed),
+html.reveal-ready .calc-card:not(.is-revealed),
+html.reveal-ready .guide-card:not(.is-revealed),
+html.reveal-ready .steps li:not(.is-revealed),
+html.reveal-ready .faq details:not(.is-revealed),
+html.reveal-ready .prose:not(.is-revealed),
+html.reveal-ready .result-card:not(.is-revealed),
+html.reveal-ready .card:not(.is-revealed),
+html.reveal-ready .summary:not(.is-revealed) {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+}
+
+html.reveal-ready .is-revealing {
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition-delay: var(--reveal-delay, 0ms) !important;
+}
+
+/* is-revealed 가 되면 사전 상태 규칙(:not(.is-revealed))이 빠지면서
+   기본값(불투명·변형 없음)으로 전환된다. transform 을 고정하지 않아
+   리빌 뒤 카드 호버 lift 가 그대로 살아 있다. */
+
+/* 초기 화면·스크롤 복원으로 이미 지나간 요소는 전환 없이 즉시 */
+html.reveal-ready .reveal-skip {
+  transition: none !important;
+}
+
+/* ---------- 계산기 카드 마이크로 인터랙션 ---------- */
+
+.calc-card {
+  overflow: hidden;
+  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease, border-color 0.24s ease;
+}
+
+.calc-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  border-radius: 16px 16px 0 0;
+  background: linear-gradient(90deg, var(--blue), #60a5fa);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.calc-card:hover,
+.calc-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: #c9d6ef;
+  box-shadow: 0 4px 10px rgba(27, 34, 51, 0.05),
+    0 20px 46px -18px rgba(37, 99, 235, 0.3);
+}
+
+.calc-card:hover::after,
+.calc-card:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.calc-card__icon {
+  transition: transform 0.34s cubic-bezier(0.34, 1.3, 0.64, 1),
+    background-color 0.22s ease, color 0.22s ease;
+}
+
+.calc-card:hover .calc-card__icon,
+.calc-card:focus-visible .calc-card__icon {
+  transform: translateY(-1px) rotate(-4deg) scale(1.06);
+  background: #e7efff;
+  color: var(--blue);
+}
+
+.calc-card__foot .arrow {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.calc-card:hover .calc-card__foot .arrow,
+.calc-card:focus-visible .calc-card__foot .arrow {
+  transform: translateX(4px);
+}
+
+/* 필터 전환: 딱 사라지지 않고 페이드·스케일로 교체 */
+.calc-card.is-filtering {
+  opacity: 0;
+  transform: scale(0.985);
+  pointer-events: none;
+  transition: opacity 0.13s ease, transform 0.13s ease;
+}
+
+.calc-card.is-entering {
+  opacity: 0;
+  transform: scale(0.985) translate3d(0, 6px, 0);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 칩: 활성 상태·누름 피드백 */
+.chip:hover {
+  background: #f7f9ff;
+}
+
+.chip[aria-pressed="true"] {
+  box-shadow: 0 6px 16px -9px rgba(31, 42, 68, 0.6);
+}
+
+.chip:active {
+  transform: scale(0.96);
+}
+
+/* ---------- 결과 카드: 재계산 글로우 펄스 ---------- */
+
+.result-card.is-changing {
+  animation: result-pulse 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 14px 36px rgba(37, 99, 235, 0.22);
+}
+
+@keyframes result-pulse {
+  0% {
+    box-shadow: 0 10px 30px rgba(31, 42, 68, 0.16);
+  }
+  35% {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16),
+      0 16px 44px rgba(37, 99, 235, 0.3);
+  }
+  100% {
+    box-shadow: 0 10px 30px rgba(31, 42, 68, 0.16);
+  }
+}
+
+.result-card.is-changing .result-value {
+  animation: value-pop 0.42s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+@keyframes value-pop {
+  0% {
+    transform: scale(1);
+  }
+  32% {
+    transform: scale(1.016);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ---------- 플로팅 토스트 ---------- */
+
+.dotori-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 90;
+  max-width: min(420px, calc(100vw - 32px));
+  padding: 11px 18px;
+  border-radius: 999px;
+  background: rgba(31, 42, 68, 0.96);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  text-align: center;
+  box-shadow: 0 14px 32px -12px rgba(15, 23, 42, 0.55);
+  opacity: 0;
+  transform: translate(-50%, 10px) scale(0.98);
+  pointer-events: none;
+  transition: opacity 0.26s ease, transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dotori-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+/* ---------- 접근성: 동작 줄이기 ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html.reveal-ready .section-head,
+  html.reveal-ready .calc-card,
+  html.reveal-ready .guide-card,
+  html.reveal-ready .steps li,
+  html.reveal-ready .faq details,
+  html.reveal-ready .prose,
+  html.reveal-ready .result-card,
+  html.reveal-ready .card,
+  html.reveal-ready .summary {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .calc-card::after,
+  .calc-card:hover {
+    transform: none;
+  }
+
+  .calc-card:hover .calc-card__icon,
+  .calc-card:hover .calc-card__foot .arrow {
+    transform: none;
+  }
+
+  .result-card.is-changing,
+  .result-card.is-changing .result-value {
+    animation: none;
+  }
+
+  .dotori-toast {
+    transition: none;
   }
 }

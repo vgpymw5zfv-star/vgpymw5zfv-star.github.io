@@ -12,6 +12,7 @@
   var config = window.DOTORI_CONFIG || {};
   var EMBED = config.EMBED || {};
   var embedKey = EMBED.queryKey || "embed";
+  var supportsIO = typeof window.IntersectionObserver === "function";
 
   /* ---------------- 유틸 ---------------- */
 
@@ -21,6 +22,13 @@
 
   function $$(sel, root) {
     return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+  }
+
+  function reduceMotion() {
+    return !!(
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
   }
 
   function isEmbedRequested() {
@@ -408,6 +416,7 @@
     if (span) span.textContent = text;
     btn.classList.add("is-done");
     if (status) status.textContent = message;
+    if (message) toast(message);
     window.clearTimeout(btn._dotoriFlash);
     btn._dotoriFlash = window.setTimeout(function () {
       if (span) span.textContent = btn.getAttribute("data-label") || "";
@@ -578,6 +587,9 @@
       if (openItem && openItem !== item) close(openItem);
       openItem = item;
       item._hoverOpen = false;
+      /* 닫히는 중이던 패널을 다시 열면 닫힘 애니메이션을 취소한다 */
+      window.clearTimeout(item._closingTimer);
+      item.classList.remove("is-closing");
       item.classList.add("is-open");
       var btn = btnOf(item);
       if (btn) btn.setAttribute("aria-expanded", "true");
@@ -590,6 +602,7 @@
 
     function close(item) {
       if (!item) return;
+      var wasOpen = item.classList.contains("is-open");
       item.classList.remove("is-open");
       var btn = btnOf(item);
       if (btn) btn.setAttribute("aria-expanded", "false");
@@ -597,6 +610,14 @@
       if (panel) {
         panel.style.left = "";
         panel.style.width = "";
+        if (wasOpen && !reduceMotion()) {
+          /* 닫힘도 짧게 페이드·축소한 뒤 display:none (레이아웃·가로 스크롤 영향 없음) */
+          item.classList.add("is-closing");
+          window.clearTimeout(item._closingTimer);
+          item._closingTimer = window.setTimeout(function () {
+            item.classList.remove("is-closing");
+          }, 190);
+        }
       }
       if (openItem === item) openItem = null;
     }
@@ -723,13 +744,20 @@
     var chips = $$(".chip", bar);
     var cards = $$("[data-category]");
     var empty = $("[data-filter-empty]");
+    var current = "all";
+    var token = 0;
+    var enterTimer = null;
 
-    function apply(value) {
+    function match(card, value) {
+      return value === "all" || card.getAttribute("data-category") === value;
+    }
+
+    function paint(value) {
       var shown = 0;
       cards.forEach(function (card) {
-        var match = value === "all" || card.getAttribute("data-category") === value;
-        card.hidden = !match;
-        if (match) shown += 1;
+        var ok = match(card, value);
+        card.hidden = !ok;
+        if (ok) shown += 1;
       });
       chips.forEach(function (chip) {
         chip.setAttribute(
@@ -738,16 +766,204 @@
         );
       });
       if (empty) empty.setAttribute("data-visible", shown === 0 ? "true" : "false");
+      return shown;
+    }
+
+    /* 카드가 툭 사라지지 않고 페이드·스케일로 교체된다 (reduced-motion·embed는 즉시) */
+    function animateFilter(value) {
+      var my = ++token;
+      var instant = !supportsIO || reduceMotion();
+
+      if (instant) {
+        paint(value);
+        return;
+      }
+
+      var visible = cards.filter(function (card) {
+        return !card.hidden;
+      });
+
+      visible.forEach(function (card) {
+        card.classList.remove("is-entering");
+        card.classList.add("is-filtering");
+      });
+
+      window.setTimeout(function () {
+        if (my !== token) return;
+        visible.forEach(function (card) {
+          card.classList.remove("is-filtering");
+        });
+        paint(value);
+
+        var shown = cards.filter(function (card) {
+          return !card.hidden;
+        });
+        shown.forEach(function (card, i) {
+          card.classList.add("is-entering");
+          card.style.transitionDelay = Math.min(i, 7) * 28 + "ms";
+        });
+        window.requestAnimationFrame(function () {
+          window.requestAnimationFrame(function () {
+            if (my !== token) return;
+            shown.forEach(function (card) {
+              card.classList.remove("is-entering");
+            });
+          });
+        });
+        window.clearTimeout(enterTimer);
+        enterTimer = window.setTimeout(function () {
+          shown.forEach(function (card) {
+            card.style.transitionDelay = "";
+          });
+        }, 620);
+      }, visible.length ? 130 : 0);
     }
 
     chips.forEach(function (chip) {
       chip.addEventListener("click", function () {
-        apply(chip.getAttribute("data-filter") || "all");
+        var value = chip.getAttribute("data-filter") || "all";
+        if (value === current) return;
+        current = value;
+        animateFilter(value);
       });
     });
 
-    apply("all");
+    paint("all");
   }
+
+  /* ---------------- 헤더 스크롤 상태 ---------------- */
+
+  function initScrollState() {
+    var header = $(".site-header");
+    if (!header) return;
+    var on = null;
+
+    function update() {
+      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var next = y > 8;
+      if (next === on) return;
+      on = next;
+      header.classList.toggle("is-scrolled", next);
+    }
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  }
+
+  /* ---------------- 스크롤 연동 스태거 리빌 ---------------- */
+
+  /*
+   * IntersectionObserver 로 섹션이 화면에 들어올 때마다 페이드업한다.
+   * - 초기 화면(첫 뷰포트) 요소는 지연 없이 즉시 표시
+   * - 미지원 브라우저 · embed · prefers-reduced-motion 에서는 클래스를 붙이지 않아
+   *   어떤 요소도 숨은 채로 남지 않는다 (CSS 사전 상태가 html.reveal-ready 하위에만 적용)
+   */
+  function initReveal() {
+    if (embed || !supportsIO || reduceMotion()) return;
+
+    var root = document.documentElement;
+    var selector = [
+      ".section-head",
+      ".calc-card",
+      ".guide-card",
+      ".steps li",
+      ".faq details",
+      ".prose",
+      ".result-card",
+      ".card",
+      ".summary"
+    ].join(", ");
+
+    var items = $$(selector);
+    if (!items.length) return;
+
+    var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+    var pending = [];
+
+    items.forEach(function (el) {
+      var box = el.getBoundingClientRect();
+      if (box.top < vh * 0.94) {
+        /* 이미 보이는 요소: 지연 없이 즉시 (스크롤 복원으로 위쪽에 있는 요소는 애니메이션 없음) */
+        if (box.bottom < 0) el.classList.add("reveal-skip");
+        el.classList.add("is-revealed");
+      } else {
+        pending.push(el);
+      }
+    });
+
+    root.classList.add("reveal-ready");
+
+    if (!pending.length) return;
+
+    var io = new IntersectionObserver(
+      function (entries) {
+        var batch = [];
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          io.unobserve(entry.target);
+          batch.push(entry.target);
+        });
+        if (!batch.length) return;
+
+        batch.sort(function (a, b) {
+          return a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+        });
+
+        batch.forEach(function (el, i) {
+          var delay = Math.min(i, 5) * 45;
+          el.style.setProperty("--reveal-delay", delay + "ms");
+          el.classList.add("is-revealing", "is-revealed");
+          window.setTimeout(function () {
+            el.classList.remove("is-revealing");
+          }, delay + 660);
+        });
+      },
+      { root: null, rootMargin: "0px 0px -6% 0px", threshold: 0.05 }
+    );
+
+    pending.forEach(function (el) {
+      io.observe(el);
+    });
+
+    /* 안전망: 어떤 이유로 관찰이 누락돼도 화면 안 요소는 2초 뒤 반드시 보인다 */
+    window.setTimeout(function () {
+      var h = window.innerHeight || document.documentElement.clientHeight || 800;
+      pending.forEach(function (el) {
+        if (el.classList.contains("is-revealed")) return;
+        var box = el.getBoundingClientRect();
+        if (box.top < h && box.bottom > 0) {
+          el.classList.add("reveal-skip", "is-revealed");
+          io.unobserve(el);
+        }
+      });
+    }, 2000);
+  }
+
+  /* ---------------- 플로팅 토스트 ---------------- */
+
+  var toastEl = null;
+  var toastTimer = 0;
+
+  function toast(message) {
+    if (!message || !document.body) return;
+    if (!toastEl) {
+      toastEl = document.createElement("div");
+      toastEl.className = "dotori-toast";
+      toastEl.setAttribute("role", "status");
+      toastEl.setAttribute("aria-live", "polite");
+      document.body.appendChild(toastEl);
+    }
+    toastEl.textContent = message;
+    window.clearTimeout(toastTimer);
+    window.requestAnimationFrame(function () {
+      toastEl.classList.add("is-visible");
+    });
+    toastTimer = window.setTimeout(function () {
+      toastEl.classList.remove("is-visible");
+    }, 2000);
+  }
+
+  window.DotoriToast = toast;
 
   /* ---------------- 푸터 연도 / 기준일 ---------------- */
 
@@ -766,7 +982,9 @@
     if (embed) document.body.classList.add("embed-mode");
     fillDynamicText();
     markCurrentNav();
+    initScrollState();
     initNavDropdowns();
+    initReveal();
     renderBanner();
     bindResultActions();
     initFilters();
@@ -811,20 +1029,13 @@
     el.hidden = !visible;
   }
 
-  var reduceMotion = function () {
-    return (
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    );
-  };
-
   /**
    * 핵심 금액 카운트업 (220~280ms, rAF)
    * - prefers-reduced-motion 이면 즉시 최종값
    * - 애니메이션 도중 다시 호출되면 이전 프레임을 중단하고 새 값으로 이어간다
    * - 종료 시점에는 항상 목표값과 정확히 일치한다
    */
-  function countTo(id, value, formatter, duration) {
+  function countTo(id, value, formatter, duration, finalText) {
     var el = typeof id === "string" ? document.getElementById(id) : id;
     if (!el) return;
     var format =
@@ -839,9 +1050,11 @@
 
     el.setAttribute("data-count-value", String(to));
 
+    var finalValue = typeof finalText === "string" ? finalText : format(to);
+
     if (reduceMotion()) {
       el._countToken = (el._countToken || 0) + 1;
-      el.textContent = format(to);
+      el.textContent = finalValue;
       return;
     }
 
@@ -859,7 +1072,7 @@
     }
 
     if (Math.abs(to - from) < 0.5) {
-      el.textContent = format(to);
+      el.textContent = finalValue;
       return;
     }
 
@@ -873,14 +1086,14 @@
       if (t < 1) {
         window.requestAnimationFrame(frame);
       } else {
-        el.textContent = format(to);
+        el.textContent = finalValue;
       }
     }
     window.requestAnimationFrame(frame);
 
     /* 안전망: 탭이 백그라운드로 가 rAF가 멈춰도 최종값은 보장 */
     window.setTimeout(function () {
-      if (el._countToken === token) el.textContent = format(to);
+      if (el._countToken === token) el.textContent = finalValue;
     }, dur + 120);
   }
 

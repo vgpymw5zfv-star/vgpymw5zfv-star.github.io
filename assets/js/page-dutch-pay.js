@@ -346,7 +346,7 @@
       var transfers = mode === "direct" ? res.direct : res.netted;
 
       if (res.totalAmount > 0) {
-        setText(el.value, D.won(res.perHead));
+        UI.countTo(el.value, res.perHead, D.won, 360);
         setText(
           el.sub,
           "총 " +

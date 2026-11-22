@@ -232,7 +232,15 @@
         return;
       }
 
-      setText(els.total, r.total + "점");
+      UI.countTo(
+        els.total,
+        r.total,
+        function (v) {
+          return Math.round(v) + "점";
+        },
+        360,
+        r.total + "점"
+      );
       setText(
         els.totalSub,
         r.owned

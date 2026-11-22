@@ -230,7 +230,7 @@
 
       if (mode === "net") {
         setText(el.resultLabel, "필요한 세전 금액");
-        setText(el.value, F.won(r.gross));
+        UI.countTo(el.value, r.gross, F.won, 420);
         setText(
           el.sub,
           "실수령 " + F.won(r.net) + " · 원천징수 " + F.won(r.withheld) + " (목표 " + F.won(input) + ")"
@@ -243,7 +243,7 @@
         }
       } else {
         setText(el.resultLabel, "실수령액");
-        setText(el.value, F.won(r.net));
+        UI.countTo(el.value, r.net, F.won, 420);
         setText(
           el.sub,
           "세전 " +

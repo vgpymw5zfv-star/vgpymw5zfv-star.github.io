@@ -120,7 +120,9 @@
       var side = P.squareSide(sqm);
       var perPyeong = P.pricePerPyeong(price, calc.supply);
 
-      setText(el.value, P.comma(pyeong, 2) + "평");
+      UI.countTo(el.value, pyeong, function (v) {
+        return P.comma(v, 2) + "평";
+      }, 380);
       setText(
         el.sub,
         basis === "supply"

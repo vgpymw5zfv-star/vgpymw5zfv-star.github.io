@@ -210,7 +210,7 @@
       }
 
       setText(el.label, best.perLabel + "당 최저 단가");
-      setText(el.value, best.unitPriceText);
+      UI.countTo(el.value, best.unitPrice, U.unitText, 380);
       setText(
         el.sub,
         (best.name || best.index + "번 상품") +

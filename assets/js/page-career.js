@@ -249,7 +249,15 @@
         return;
       }
 
-      setText(els.total, result.label);
+      UI.countTo(
+        els.total,
+        result.recognizedMonths,
+        function (v) {
+          return yearsMonths(Math.max(0, Math.round(v)));
+        },
+        420,
+        result.label
+      );
       setText(
         els.totalSub,
         "경력 " + result.count + "건 · " + (mode === "merge" ? "겹친 기간 중복 제거" : "단순 합산")

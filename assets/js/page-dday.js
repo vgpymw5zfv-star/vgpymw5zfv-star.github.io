@@ -111,7 +111,16 @@
       var w = D.weekParts(diff);
       var m = D.monthParts(base, target);
 
-      setText(valueEl, D.ddayText(diff));
+      UI.countTo(
+        valueEl,
+        diff,
+        function (v) {
+          var n = Math.round(v);
+          return n === 0 ? "D-Day" : n > 0 ? "D-" + n : "D+" + Math.abs(n);
+        },
+        360,
+        D.ddayText(diff)
+      );
       setText(subEl, D.label(target) + (diff >= 0 ? "까지" : " 이후"));
       setText(stateEl, diff === 0 ? "오늘입니다" : diff > 0 ? "앞으로 " + diff + "일" : diff + "일 지났습니다");
       setText(totalEl, info.total.toLocaleString("ko-KR") + "일");

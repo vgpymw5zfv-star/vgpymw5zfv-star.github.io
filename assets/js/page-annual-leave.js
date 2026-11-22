@@ -135,7 +135,15 @@
       var numbers = readNumbers();
       var pay = A.leavePay(numbers.wage, numbers.hours, remain);
 
-      setText(els.days, ent.days + "일");
+      UI.countTo(
+        els.days,
+        ent.days,
+        function (v) {
+          return Math.round(v) + "일";
+        },
+        360,
+        ent.days + "일"
+      );
       setText(
         els.daysSub,
         "근속 " +
