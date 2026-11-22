@@ -47,9 +47,9 @@
 ├── 404.html
 ├── robots.txt · sitemap.xml
 ├── assets/
-│   ├── style.css             # 디자인 시스템 전체
+│   ├── style.css             # 디자인 시스템 전체 + 모션 레이어(리빌·호버·토스트)
 │   ├── site-config.js        # ★ 중앙 설정(애드센스·배너·임베드)
-│   ├── app.js                # 공통 UI, 임베드 모드, 애드센스/배너 주입
+│   ├── app.js                # 공통 UI, 임베드 모드, 스크롤 리빌, 토스트, 카운트업
 │   ├── favicon.svg · og-dotori.png
 │   └── js/
 │       ├── dotori-core.js    # 세금·포맷 공용 코어 (DOM 비의존)
@@ -65,6 +65,13 @@
 ├── cheongyak/ · career/
 └── about/ · privacy/ · contact/
 ```
+
+## 모션 · 접근성
+
+- 히어로·페이지 제목은 진입 시 순차 페이드업, 그 아래 섹션은 `IntersectionObserver`로 스크롤 시 45ms 스태거 리빌(`.section-head`·`.calc-card`·`.faq details`·`.prose` 등).
+- 리빌 사전 상태는 `html.reveal-ready` 하위에만 적용되므로 **JS 미실행·미지원 브라우저·임베드(`?embed=1`)·`prefers-reduced-motion: reduce`에서는 어떤 요소도 숨은 채 남지 않는다**.
+- 헤더는 스크롤 8px 이상에서 `.is-scrolled`(블러·그림자), 드롭다운은 열기/닫기 스프링 모션, 홈 필터는 페이드-스케일 전환, 결과 복사·공유는 하단 플로팅 토스트(`.dotori-toast`)로 피드백.
+- 숫자형 계산기 20종의 주 결과값은 `DotoriUI.countTo`로 카운트업하며, 종료값은 항상 실제 표기와 정확히 일치한다(포맷터·`finalText` 인자).
 
 ## 설정 하나로 광고 켜기
 
@@ -103,6 +110,10 @@ git add -A && git commit -m "도토리 툴즈 배포" && git push origin main
 Settings → Pages → Source: `Deploy from a branch` / `main` / `/ (root)`.
 
 ## 검증
+
+- 계산 로직: `tools/node/bin/node tools/dotori-build/tests/*.js` (전부 통과해야 배포)
+- 링크: `python3 tools/dotori-build/check_links.py`
+- 모션·반응형(로컬/라이브): `tools/dotori-build/qa_motion_1123.py`, `qa_motion_live.py`
 
 계산 로직은 Node 단위 테스트로 검증합니다(저장소 밖 `tools/dotori-build/tests/calc.test.js`).
 입력값은 브라우저 밖으로 나가지 않으며, 모든 계산은 방문자 기기에서 실행됩니다.
