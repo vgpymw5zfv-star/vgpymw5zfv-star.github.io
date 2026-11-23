@@ -111,7 +111,7 @@
         "</div>" +
         '<div class="field-row">' +
         '<label class="field">' +
-        '<span class="field-label">이름 <small>선택</small></span>' +
+        '<span class="field-label">이름</span>' +
         '<span class="field-control"><input type="text" data-k="name" autocomplete="off" placeholder="예: 넷플릭스"></span>' +
         "</label>" +
         '<label class="field">' +
