@@ -240,9 +240,9 @@
       " × " +
       result.rate +
       "% × " +
-      result.remainDays +
+      result.remainDays.toLocaleString("ko-KR") +
       "일 ÷ " +
-      result.denomDays +
+      result.denomDays.toLocaleString("ko-KR") +
       "일"
     );
   }

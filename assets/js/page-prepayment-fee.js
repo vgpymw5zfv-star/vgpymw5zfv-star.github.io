@@ -188,9 +188,9 @@
         " × " +
         result.rate +
         "% × " +
-        result.remainDays +
+        result.remainDays.toLocaleString("ko-KR") +
         "일 ÷ " +
-        result.denomDays +
+        result.denomDays.toLocaleString("ko-KR") +
         "일";
       if (result.exemptReason === "period") {
         calcLine = "실행일부터 3년이 지나 수수료가 면제됩니다 (0원)";

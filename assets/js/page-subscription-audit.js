@@ -109,15 +109,17 @@
         '<span class="sa-row__no">항목</span>' +
         '<button type="button" class="btn-ghost sa-remove">삭제</button>' +
         "</div>" +
+        '<div class="field-row">' +
         '<label class="field">' +
         '<span class="field-label">이름 <small>선택</small></span>' +
         '<span class="field-control"><input type="text" data-k="name" autocomplete="off" placeholder="예: 넷플릭스"></span>' +
         "</label>" +
-        '<div class="field-row field-row--3" style="margin-top:10px">' +
         '<label class="field">' +
         '<span class="field-label">금액 <small>원</small></span>' +
         '<span class="field-control"><input type="number" inputmode="numeric" min="0" step="100" data-k="amount" placeholder="0"></span>' +
         "</label>" +
+        "</div>" +
+        '<div class="field-row" style="margin-top:10px">' +
         '<label class="field">' +
         '<span class="field-label">주기</span>' +
         '<span class="field-control"><select data-k="cycle">' +

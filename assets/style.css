@@ -3313,14 +3313,47 @@ table.data tbody tr.is-next td {
   .sa-row {
     padding: 12px;
   }
+}
 
-  .sa-row .field-row--3 {
-    grid-template-columns: 1fr 1fr;
-  }
+/* ==========================================================================
+   중도상환수수료 — 밝은 배경의 값 목록 (결과 카드 밖)
+   ========================================================================== */
 
-  .sa-row .field-row--3 > .field:first-child {
-    grid-column: 1 / -1;
-  }
+.kv-rows {
+  display: grid;
+  margin-top: 4px;
+  border-top: 1px solid var(--line);
+}
+
+.kv-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.kv-row:last-child {
+  border-bottom: 0;
+}
+
+.kv-row dt {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.kv-row dd {
+  margin: 0;
+  color: var(--navy);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.kv-row--strong dd {
+  font-size: 15.5px;
 }
 
 /* ==========================================================================
