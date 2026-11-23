@@ -815,6 +815,11 @@ main {
   margin-top: 16px;
 }
 
+/* 2~3열 필드 행 안에서는 세로 간격 규칙을 빼 라벨·입력이 같은 줄에 정렬되게 한다 */
+.field-row > .field {
+  margin-top: 0;
+}
+
 .field-label {
   display: flex;
   align-items: baseline;
