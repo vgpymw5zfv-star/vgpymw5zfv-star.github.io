@@ -203,10 +203,16 @@
       setText(
         els.denom,
         result.capped
-          ? "3년 " + result.denomDays + "일 (만기 " + result.termLabel + ")"
-          : result.termLabel + " " + result.denomDays + "일"
+          ? "3년 " + result.denomDays.toLocaleString("ko-KR") + "일 (만기 " + result.termLabel + ")"
+          : result.termLabel + " " + result.denomDays.toLocaleString("ko-KR") + "일"
       );
-      setText(els.days, result.elapsedDays + "일 / " + Math.max(0, result.remainDays) + "일");
+      setText(
+        els.days,
+        result.elapsedDays.toLocaleString("ko-KR") +
+          "일 / " +
+          Math.max(0, result.remainDays).toLocaleString("ko-KR") +
+          "일"
+      );
       setText(
         els.exempt,
         result.limitDate + (result.daysToExempt > 0 ? " (D-" + result.daysToExempt + ")" : " (지남)")
