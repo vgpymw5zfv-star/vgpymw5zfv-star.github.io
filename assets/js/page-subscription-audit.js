@@ -115,7 +115,7 @@
         '<span class="field-control"><input type="text" data-k="name" autocomplete="off" placeholder="예: 넷플릭스"></span>' +
         "</label>" +
         '<label class="field">' +
-        '<span class="field-label">금액 <small>원</small></span>' +
+        '<span class="field-label">금액(원)</span>' +
         '<span class="field-control"><input type="number" inputmode="numeric" min="0" step="100" data-k="amount" placeholder="0"></span>' +
         "</label>" +
         "</div>" +
