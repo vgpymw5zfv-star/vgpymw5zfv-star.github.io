@@ -96,6 +96,18 @@ window.DOTORI_CONFIG = {
         title: "2026년 11월 보금자리론·주담대 조건 한눈에 보기",
         href: "https://news67.tistory.com/13",
         cta: "티스토리 글 보기"
+      },
+      "prepayment-fee": {
+        label: "도토리사원 티스토리",
+        title: "2026년 11월 보금자리론·주담대 조건 — 갈아타기 전에 볼 것",
+        href: "https://news67.tistory.com/13",
+        cta: "티스토리 글 보기"
+      },
+      "subscription-audit": {
+        label: "도토리노트",
+        title: "유튜브 프리미엄 라이트 가격 vs 프리미엄, 구독료 정리 기준",
+        href: "https://blog.naver.com/dotorisawon/224484731723",
+        cta: "도토리노트 글 보기"
       }
     }
   },

@@ -1,6 +1,6 @@
 # 🧮 도토리 툴즈 (dotori-calc)
 
-직장인·자취생 생활비·절세·주거 계산기 17종 + 실전 체크도구 2종 + 문서·일정 도구 5종(24종) — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
+직장인·자취생 생활비·절세·주거 계산기 19종 + 실전 체크도구 2종 + 문서·일정 도구 5종(26종) — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
 빌드 서버 없이 GitHub Pages에 그대로 올려 쓰는 구조입니다.
 
 - 홈: https://vgpymw5zfv-star.github.io/
@@ -35,6 +35,8 @@
 | `/dutch-pay/` | 모임 회비 · 더치페이 정산 (차수별 결제자·참석자, 끝전 처리, 서로 상계한 최소 송금, 카톡 문구) | 당사자 합의에 따른 정산(민법 §105), 계좌이체·간편송금 관행 |
 | `/cheongyak/` | 청약 가점 · 무주택기간·부양가족·청약통장 84점 (기산일 자동 계산, 배점표, 다음 구간까지 남은 기간, 약한 항목 정리) | 「주택공급에 관한 규칙」 §28·별표 1, §10제6항(미성년 가입 5년 인정), 한국부동산원 청약홈 가점계산 |
 | `/career/` | 경력기간 계산기 (경력별 기간, 재직 중 기준일까지, 수습 제외 인정 경력, 겹친 기간 중복 제거, 이력서용 요약 복사) | 인사 실무 관행(1개월=30일), 채용공고 경력요건 표기 기준 |
+| `/subscription-audit/` | 고정비·구독료 연간 합산 진단기 (항목별 주기 월 환산, 월·연 합계, 소득 대비 비율·50% 기준선, 카테고리 비중, 해지 후보 절약액) | 50/30/20 법칙(워런·타이기 2005), 신한카드 빅데이터연구소 2026-11, 서울시 전자상거래센터 2025-04, 대한상의·엠브레인 2025-02 |
+| `/prepayment-fee/` | 중도상환수수료 (실행일·만기일·상환금액·요율, 3년 부과기간, 면제일, 시점별 수수료 표, 이자 비교, 2026 은행별 공시 요율) | 금융소비자 보호에 관한 법률 §20①4호나목·감독규정 §14⑥9호, 은행연합회 중도상환수수료 계산방법·2026 공시, 금융위 2025-01-09 보도자료 |
 
 정책 페이지: `/about/` · `/privacy/` · `/contact/` · `404.html` · `robots.txt` · `sitemap.xml`
 
@@ -59,10 +61,11 @@
 │       ├── unit-price.js · msg-template.js  (단위가격·문자 템플릿, DOM 비의존)
 │       ├── annual-leave.js · pyeong.js · freelance-tax.js · dutch-pay.js
 │       ├── cheongyak.js · career.js  (청약 가점·경력기간, DOM 비의존)
+│       ├── subscription-audit.js · prepayment-fee.js  (고정비 진단·중도상환수수료, DOM 비의존)
 │       └── page-*.js         # 각 페이지 입력 → 결과 연결
 ├── salary/ · sme-tax/ · housing/ · electricity/ · transit/ · rent-tax/ · ai-cost/ · heating/
 ├── text-counter/ · dday/ · unit-price/ · msg-template/ · annual-leave/ · pyeong/ · freelance-tax/ · dutch-pay/
-├── cheongyak/ · career/
+├── cheongyak/ · career/ · subscription-audit/ · prepayment-fee/
 └── about/ · privacy/ · contact/
 ```
 
