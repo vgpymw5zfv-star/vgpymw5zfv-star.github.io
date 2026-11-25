@@ -102,6 +102,14 @@ ADSENSE_SLOTS: { top: "", bottom: "" },  // 수동 광고 단위를 쓸 때만 �
 
 > 임베드 모드에서는 애드센스를 의도적으로 숨깁니다(iframe 내 광고는 AdSense 정책상 무효 노출 위험).
 
+## 티스토리 연결 CTA
+
+계산 결과 카드 바로 아래에 관련 티스토리 글(`news67.tistory.com`)로 이어지는 링크 한 칸이 붙습니다.
+
+- 매핑은 `tools/dotori-build/build.py`의 `TISTORY_CTA`(슬러그 → 주소·한 줄 훅·글 제목) 한 곳에서만 관리합니다. 새 글을 쓰면 여기 한 줄만 추가하고 다시 빌드하면 됩니다.
+- 주제가 직접 맞닿는 **공개 글만** 넣습니다(`/2·/3·/4·/10` 비공개, `/8·/9` 삭제, `/25·/26` 미발행 금지). 매핑이 없는 도구에는 CTA가 붙지 않습니다.
+- 결과 카드는 입력과 계산 로직을 건드리지 않고 정적 `<a href>`만 추가하며, 1280px·390px·360px와 `?embed=1`에서 같은 모양으로 보입니다.
+
 ## 배포
 
 GitHub Pages(사용자 사이트) 저장소 루트에 이 폴더의 **내용물 전체**를 올리면 끝입니다.
@@ -116,6 +124,7 @@ Settings → Pages → Source: `Deploy from a branch` / `main` / `/ (root)`.
 
 - 계산 로직: `tools/node/bin/node tools/dotori-build/tests/*.js` (전부 통과해야 배포)
 - 링크: `python3 tools/dotori-build/check_links.py`
+- 티스토리 CTA: `python3 tools/dotori-build/tests/tistory_cta_test.py --online` (매핑·비공개 글 차단·삽입 위치·라이브 글 제목 일치)
 - 모션·반응형(로컬/라이브): `tools/dotori-build/qa_motion_1123.py`, `qa_motion_live.py`
 
 계산 로직은 Node 단위 테스트로 검증합니다(저장소 밖 `tools/dotori-build/tests/calc.test.js`).
