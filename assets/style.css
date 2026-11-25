@@ -3618,6 +3618,159 @@ html.reveal-ready .reveal-skip {
   transform: translate(-50%, 0) scale(1);
 }
 
+/* ==========================================================================
+   티스토리 연결 CTA — 계산 결과 아래에서 관련 글로 이어 주는 링크
+   (계산 로직·입력 필드와 무관한 순수 링크 블록, embed 모드에서도 표시)
+   ========================================================================== */
+
+.ts-cta {
+  margin: 0;
+}
+
+/* 결과 카드가 없는 페이지에서 결과 영역 끝에 놓을 때 */
+.ts-cta--standalone {
+  margin: 22px 0 0;
+}
+
+.ts-cta__link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 1px solid #cfdcf3;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #fcfeff 0%, var(--bg-soft-blue) 100%);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.ts-cta__link:hover {
+  border-color: #a8c1e8;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+}
+
+.ts-cta__link:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.ts-cta__body {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ts-cta__blog {
+  display: block;
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.ts-cta__lead {
+  display: block;
+  margin-top: 3px;
+  color: var(--blue-dark);
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+.ts-cta__title {
+  display: -webkit-box;
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.ts-cta__go {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.ts-cta__go svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ts-cta__link:hover .ts-cta__go,
+.ts-cta__link:focus-visible .ts-cta__go {
+  background: var(--blue-dark);
+  transform: translateX(2px);
+}
+
+/* 좁은 화면(360~390px) */
+@media (max-width: 480px) {
+  .ts-cta--standalone {
+    margin-top: 18px;
+  }
+
+  .ts-cta__link {
+    gap: 12px;
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .ts-cta__lead {
+    font-size: 14.5px;
+  }
+
+  .ts-cta__title {
+    font-size: 12.5px;
+  }
+
+  .ts-cta__go {
+    width: 34px;
+    height: 34px;
+  }
+
+  .ts-cta__go svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* 티스토리 임베드 모드 (?embed=1) — 링크는 유지하고 높이만 줄인다 */
+body.embed-mode .ts-cta {
+  max-width: 980px;
+  margin: 12px auto 0;
+}
+
+body.embed-mode .ts-cta__link {
+  padding: 12px 14px;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+body.embed-mode .ts-cta__lead {
+  font-size: 14px;
+}
+
+body.embed-mode .ts-cta__title {
+  font-size: 12px;
+}
+
+body.embed-mode .ts-cta__go {
+  width: 32px;
+  height: 32px;
+}
+
 /* ---------- 접근성: 동작 줄이기 ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -3651,5 +3804,15 @@ html.reveal-ready .reveal-skip {
 
   .dotori-toast {
     transition: none;
+  }
+
+  .ts-cta__link,
+  .ts-cta__go {
+    transition: none;
+  }
+
+  .ts-cta__link:hover .ts-cta__go,
+  .ts-cta__link:focus-visible .ts-cta__go {
+    transform: none;
   }
 }
