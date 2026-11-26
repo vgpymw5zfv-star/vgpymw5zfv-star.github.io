@@ -736,27 +736,94 @@
     });
   }
 
-  /* ---------------- 홈 카테고리 필터 ---------------- */
+  /* ---------------- 홈 카테고리 필터 · 도구 검색 ---------------- */
 
   function initFilters() {
     var bar = $("[data-filter-bar]");
     if (!bar) return;
     var chips = $$(".chip", bar);
+    var thumb = $(".tabs__thumb", bar);
     var cards = $$("[data-category]");
     var empty = $("[data-filter-empty]");
+    var countEl = $("[data-filter-count]");
+    var featured = $("[data-featured]");
+    var input = $("[data-tool-search]");
+    var panel = $("[data-cmd-results]");
+    var cmd = $("[data-cmd]");
     var current = "all";
+    var query = "";
     var token = 0;
     var enterTimer = null;
+    var activeItem = -1;
 
-    function match(card, value) {
-      return value === "all" || card.getAttribute("data-category") === value;
+    var index = cards.map(function (card) {
+      var h3 = $("h3", card);
+      var tag = $(".calc-card__tag", card);
+      var text = [
+        h3 ? h3.textContent : "",
+        tag ? tag.textContent : "",
+        card.getAttribute("data-category") || "",
+        card.getAttribute("data-keywords") || "",
+        card.getAttribute("href") || ""
+      ]
+        .join(" ")
+        .toLowerCase()
+        .replace(/\s+/g, " ");
+      return {
+        card: card,
+        text: text,
+        title: h3 ? squeeze(h3.textContent) : "",
+        cat: card.getAttribute("data-category") || "",
+        href: card.getAttribute("href") || ""
+      };
+    });
+
+    /* 카테고리별 개수 — 탭 라벨 옆 배지 */
+    var counts = { all: index.length };
+    index.forEach(function (item) {
+      counts[item.cat] = (counts[item.cat] || 0) + 1;
+    });
+    chips.forEach(function (chip) {
+      var badge = $(".chip__count", chip);
+      var key = chip.getAttribute("data-filter") || "all";
+      if (badge) badge.textContent = String(counts[key] || 0);
+    });
+
+    function placeThumb() {
+      if (!thumb) return;
+      var active = null;
+      chips.forEach(function (chip) {
+        if (chip.getAttribute("aria-pressed") === "true") active = chip;
+      });
+      if (!active) {
+        thumb.style.width = "0px";
+        return;
+      }
+      var s = bar.getBoundingClientRect();
+      var r = active.getBoundingClientRect();
+      var bl = parseFloat(window.getComputedStyle(bar).borderLeftWidth) || 0;
+      thumb.style.width = r.width + "px";
+      thumb.style.transform =
+        "translate(" + (r.left - s.left - bl - 4) + "px,0)";
+    }
+
+    function matchCategory(item) {
+      return current === "all" || item.cat === current;
+    }
+
+    function matchQuery(item) {
+      if (!query) return true;
+      var words = query.split(/\s+/).filter(Boolean);
+      return words.every(function (w) {
+        return item.text.indexOf(w) !== -1;
+      });
     }
 
     function paint(value) {
       var shown = 0;
-      cards.forEach(function (card) {
-        var ok = match(card, value);
-        card.hidden = !ok;
+      index.forEach(function (item) {
+        var ok = matchCategory(item) && matchQuery(item);
+        item.card.hidden = !ok;
         if (ok) shown += 1;
       });
       chips.forEach(function (chip) {
@@ -765,7 +832,34 @@
           chip.getAttribute("data-filter") === value ? "true" : "false"
         );
       });
-      if (empty) empty.setAttribute("data-visible", shown === 0 ? "true" : "false");
+      if (countEl) {
+        countEl.textContent = query
+          ? "‘" + query + "’ 검색 결과 " + shown + "개"
+          : shown + "개 도구";
+      }
+      if (empty) {
+        empty.setAttribute("data-visible", shown === 0 ? "true" : "false");
+        if (shown === 0) {
+          empty.textContent = query
+            ? "‘" + query + "’에 맞는 도구를 찾지 못했습니다. 다른 단어로 찾아보세요."
+            : "해당 카테고리의 도구가 아직 없습니다.";
+        }
+      }
+      if (featured) featured.hidden = !(value === "all" && !query);
+      placeThumb();
+      if (value !== "all" || query) {
+        var active = null;
+        chips.forEach(function (chip) {
+          if (chip.getAttribute("aria-pressed") === "true") active = chip;
+        });
+        if (active && active.scrollIntoView) {
+          try {
+            active.scrollIntoView({ block: "nearest", inline: "center" });
+          } catch (e) {
+            /* 구형 브라우저는 무시 */
+          }
+        }
+      }
       return shown;
     }
 
@@ -828,7 +922,378 @@
       });
     });
 
+    /* ---------------- 커맨드 검색 ---------------- */
+
+    function results() {
+      if (!query) return [];
+      return index.filter(function (item) {
+        return matchCategory(item) && matchQuery(item);
+      });
+    }
+
+    function closePanel() {
+      if (!panel) return;
+      panel.hidden = true;
+      activeItem = -1;
+      if (cmd) cmd.classList.remove("is-searching");
+      if (input) input.setAttribute("aria-expanded", "false");
+    }
+
+    function setActive(i) {
+      var items = $$(".cmd__item", panel);
+      if (!items.length) return;
+      activeItem = (i + items.length) % items.length;
+      items.forEach(function (el, k) {
+        el.classList.toggle("is-active", k === activeItem);
+        if (k === activeItem && el.scrollIntoView) {
+          try {
+            el.scrollIntoView({ block: "nearest" });
+          } catch (e) {}
+        }
+      });
+    }
+
+    function renderPanel() {
+      if (!panel) return;
+      var list = results();
+      if (!query) {
+        closePanel();
+        return;
+      }
+      panel.innerHTML = "";
+      if (!list.length) {
+        var note = document.createElement("p");
+        note.className = "cmd__empty";
+        note.textContent = "‘" + query + "’에 맞는 도구가 없습니다.";
+        panel.appendChild(note);
+      } else {
+        list.slice(0, 7).forEach(function (item) {
+          var a = document.createElement("a");
+          a.className = "cmd__item";
+          a.href = item.href;
+          a.setAttribute("role", "option");
+          var name = document.createElement("span");
+          name.textContent = item.title;
+          var cat = document.createElement("span");
+          cat.className = "cmd__cat";
+          cat.textContent = item.cat;
+          a.appendChild(name);
+          a.appendChild(cat);
+          panel.appendChild(a);
+        });
+      }
+      panel.hidden = false;
+      activeItem = -1;
+      if (cmd) cmd.classList.add("is-searching");
+      if (input) input.setAttribute("aria-expanded", "true");
+    }
+
+    function applyQuery(value, showPanel) {
+      query = String(value || "").trim().toLowerCase();
+      animateFilter(current);
+      if (showPanel) renderPanel();
+      else closePanel();
+    }
+
+    if (input) {
+      /* 좁은 화면에서는 짧은 안내 문구로 (검색창 폭에 맞춰) */
+      var fullPlaceholder = input.getAttribute("placeholder") || "";
+      var shortPlaceholder = "예) 주휴수당, 전기세";
+      function syncPlaceholder() {
+        var narrow = (window.innerWidth || 0) <= 560;
+        input.setAttribute(
+          "placeholder",
+          narrow ? shortPlaceholder : fullPlaceholder
+        );
+      }
+      syncPlaceholder();
+      window.addEventListener("resize", syncPlaceholder);
+
+      var debounce = 0;
+      input.addEventListener("input", function () {
+        window.clearTimeout(debounce);
+        var value = input.value;
+        debounce = window.setTimeout(function () {
+          applyQuery(value, true);
+        }, 90);
+      });
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          setActive(activeItem + 1);
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          setActive(activeItem - 1);
+        } else if (e.key === "Enter") {
+          var items = $$(".cmd__item", panel);
+          var target = items[activeItem >= 0 ? activeItem : 0];
+          if (target) {
+            e.preventDefault();
+            window.location.href = target.getAttribute("href");
+          }
+        } else if (e.key === "Escape") {
+          closePanel();
+          if (input.value) {
+            input.value = "";
+            applyQuery("", false);
+          } else {
+            input.blur();
+          }
+        }
+      });
+      input.addEventListener("focus", function () {
+        if (input.value.trim()) renderPanel();
+      });
+
+      $$("[data-search-suggest]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var word = btn.getAttribute("data-search-suggest") || "";
+          input.value = word;
+          input.focus();
+          applyQuery(word, true);
+        });
+      });
+
+      /* "/" 로 검색창 열기 */
+      document.addEventListener("keydown", function (e) {
+        if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
+        var tag = (e.target && e.target.tagName) || "";
+        if (/^(INPUT|TEXTAREA|SELECT)$/.test(tag) || (e.target && e.target.isContentEditable)) return;
+        e.preventDefault();
+        input.focus();
+        input.select();
+      });
+    }
+
+    if (cmd) {
+      document.addEventListener("click", function (e) {
+        if (!cmd.contains(e.target)) closePanel();
+      });
+    }
+
+    window.addEventListener("resize", placeThumb);
+    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+      document.fonts.ready.then(placeThumb);
+    }
+
     paint("all");
+    window.requestAnimationFrame(placeThumb);
+  }
+
+  /* ---------------- 세그먼트 슬라이딩 인디케이터 ---------------- */
+
+  /*
+   * .segment 그룹마다 흰색 썸(thumb) 하나를 깔고, 선택된 버튼의 위치·크기로 옮긴다.
+   * 버튼의 aria-pressed 가 바뀌는 모든 경로(클릭·프로그램 갱신)를 MutationObserver 로 잡는다.
+   */
+  function initSegmentThumbs() {
+    var segs = $$(".segment");
+    if (!segs.length) return;
+
+    segs.forEach(function (seg) {
+      if ($(".segment__thumb", seg)) return;
+      var thumb = document.createElement("span");
+      thumb.className = "segment__thumb";
+      thumb.setAttribute("aria-hidden", "true");
+      seg.classList.add("has-thumb");
+      seg.appendChild(thumb);
+
+      var frame = 0;
+
+      function place() {
+        var active = $('button[aria-pressed="true"]', seg);
+        if (!active) {
+          thumb.style.width = "0px";
+          thumb.style.height = "0px";
+          return;
+        }
+        var s = seg.getBoundingClientRect();
+        var r = active.getBoundingClientRect();
+        var cs = window.getComputedStyle(seg);
+        var bl = parseFloat(cs.borderLeftWidth) || 0;
+        var bt = parseFloat(cs.borderTopWidth) || 0;
+        thumb.style.width = r.width + "px";
+        thumb.style.height = r.height + "px";
+        thumb.style.transform =
+          "translate(" +
+          (r.left - s.left - bl - 4) +
+          "px," +
+          (r.top - s.top - bt - 4) +
+          "px)";
+      }
+
+      function schedule() {
+        window.cancelAnimationFrame(frame);
+        frame = window.requestAnimationFrame(place);
+      }
+
+      seg._dotoriThumb = schedule;
+      seg.addEventListener("click", schedule);
+
+      if (typeof MutationObserver === "function") {
+        var mo = new MutationObserver(schedule);
+        $$("button", seg).forEach(function (b) {
+          mo.observe(b, { attributes: true, attributeFilter: ["aria-pressed"] });
+        });
+      }
+
+      schedule();
+      window.setTimeout(schedule, 60);
+    });
+
+    window.addEventListener("resize", function () {
+      segs.forEach(function (seg) {
+        if (seg._dotoriThumb) seg._dotoriThumb();
+      });
+    });
+
+    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+      document.fonts.ready.then(function () {
+        segs.forEach(function (seg) {
+          if (seg._dotoriThumb) seg._dotoriThumb();
+        });
+      });
+    }
+  }
+
+  /* ---------------- 결과 KPI 비중 미터 ---------------- */
+
+  /*
+   * 결과 카드의 항목 중 같은 단위(원·시간·% 등)가 2개 이상이고
+   * 최대/최소 비율이 30배 안쪽이면(읽을 수 있는 분포) 각 항목 아래에
+   * 상대 크기를 나타내는 얇은 선을 그린다. 표시 문구는 바꾸지 않는다.
+   */
+  function decorateResultRows() {
+    var cards = $$(".result-card");
+    if (!cards.length) return;
+
+    cards.forEach(function (card) {
+      var rows = $$(".result-row", card);
+      if (!rows.length) return;
+
+      var parsed = [];
+      rows.forEach(function (row) {
+        var dd = row.querySelector("dd");
+        if (!dd) return;
+        var text = squeeze(dd.textContent);
+        var m = text.match(/^([\d,]+(?:\.\d+)?)\s*(원|만원|시간|일|개월|년|점|%)$/);
+        if (!m) {
+          var old = row.querySelector(".result-row__meter");
+          if (old) old.parentNode.removeChild(old);
+          return;
+        }
+        var unit = m[2];
+        var value = parseFloat(m[1].replace(/,/g, ""));
+        if (!isFinite(value) || value <= 0) return;
+        parsed.push({ row: row, unit: unit, value: value });
+      });
+
+      var groups = {};
+      parsed.forEach(function (p) {
+        (groups[p.unit] = groups[p.unit] || []).push(p);
+      });
+
+      parsed.forEach(function (p) {
+        var row = p.row;
+        var meter = row.querySelector(".result-row__meter");
+        var group = groups[p.unit] || [];
+        var max = 0;
+        var min = Infinity;
+        group.forEach(function (g) {
+          if (g.value > max) max = g.value;
+          if (g.value < min) min = g.value;
+        });
+        var readable =
+          group.length >= 2 && min > 0 && max / min <= 30 && max > min;
+        if (!readable) {
+          if (meter) meter.parentNode.removeChild(meter);
+          return;
+        }
+        if (!meter) {
+          meter = document.createElement("span");
+          meter.className = "result-row__meter";
+          meter.setAttribute("aria-hidden", "true");
+          row.appendChild(meter);
+        }
+        var pct = Math.max(4, Math.round((p.value / max) * 100));
+        meter.style.width = pct + "%";
+      });
+    });
+  }
+
+  function watchResultMeters() {
+    if (!$(".result-card")) return;
+    decorateResultRows();
+    var timer = 0;
+    function schedule() {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(decorateResultRows, 180);
+    }
+    document.addEventListener("input", schedule);
+    document.addEventListener("change", schedule);
+    document.addEventListener("click", schedule);
+    window.addEventListener("load", schedule);
+    window.setTimeout(decorateResultRows, 260);
+  }
+
+  /* ---------------- FAQ 아코디언 높이 전환 ---------------- */
+
+  function initFaqMotion() {
+    if (reduceMotion() || embed) return;
+    var items = $$(".faq details");
+    if (!items.length) return;
+
+    items.forEach(function (item) {
+      var summary = $("summary", item);
+      var body = $("p", item);
+      if (!summary || !body) return;
+
+      summary.addEventListener("click", function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+        var running = item._dotoriAnim;
+        if (running) {
+          try {
+            running.cancel();
+          } catch (err) {}
+          item._dotoriAnim = null;
+        }
+        e.preventDefault();
+
+        var opening = !item.open;
+        body.style.overflow = "hidden";
+
+        function finish(open) {
+          item.open = open;
+          body.style.height = "";
+          body.style.overflow = "";
+          item._dotoriAnim = null;
+        }
+
+        var from = opening ? 0 : body.offsetHeight;
+        if (opening) item.open = true;
+        var to = opening ? body.scrollHeight : 0;
+
+        var anim;
+        try {
+          anim = body.animate(
+            [
+              { height: from + "px", opacity: opening ? 0.2 : 1 },
+              { height: to + "px", opacity: opening ? 1 : 0.2 }
+            ],
+            { duration: opening ? 260 : 200, easing: "cubic-bezier(0.16, 1, 0.3, 1)", fill: "both" }
+          );
+        } catch (err) {
+          finish(opening);
+          return;
+        }
+        body.style.height = to + "px";
+        item._dotoriAnim = anim;
+        anim.onfinish = function () {
+          body.style.height = "";
+          finish(opening);
+        };
+      });
+    });
   }
 
   /* ---------------- 헤더 스크롤 상태 ---------------- */
@@ -871,7 +1336,9 @@
       ".prose",
       ".result-card",
       ".card",
-      ".summary"
+      ".summary",
+      ".feature-card",
+      ".trust-item"
     ].join(", ");
 
     var items = $$(selector);
@@ -988,6 +1455,9 @@
     renderBanner();
     bindResultActions();
     initFilters();
+    initSegmentThumbs();
+    watchResultMeters();
+    initFaqMotion();
     watchTableScroll();
     injectAdsense();
     injectGA4();
