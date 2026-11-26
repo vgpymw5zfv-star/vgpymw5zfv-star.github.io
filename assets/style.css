@@ -4673,10 +4673,10 @@ table.data td,
 
 .mini-chart__bar {
   flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: end;
+  justify-items: stretch;
   gap: 6px;
   height: 100%;
   min-width: 0;
@@ -4686,6 +4686,7 @@ table.data td,
   display: block;
   width: 100%;
   height: var(--h, 40%);
+  min-height: 4px;
   border-radius: 4px 4px 2px 2px;
   background: linear-gradient(180deg, rgba(94, 234, 212, 0.85), rgba(13, 148, 136, 0.35));
 }
