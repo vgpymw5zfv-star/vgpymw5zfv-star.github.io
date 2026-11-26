@@ -49,7 +49,7 @@
 ├── 404.html
 ├── robots.txt · sitemap.xml
 ├── assets/
-│   ├── style.css             # 디자인 시스템 전체 + 모션 레이어(리빌·호버·토스트)
+│   ├── style.css             # 디자인 시스템(스톤·옵시디언·틸) + 모션 레이어(리빌·썸·미터·토스트)
 │   ├── site-config.js        # ★ 중앙 설정(애드센스·배너·임베드)
 │   ├── app.js                # 공통 UI, 임베드 모드, 스크롤 리빌, 토스트, 카운트업
 │   ├── favicon.svg · og-dotori.png
@@ -69,11 +69,19 @@
 └── about/ · privacy/ · contact/
 ```
 
+## 디자인 시스템 (2026-11-27 리뉴얼)
+
+- **팔레트**: 웜 스톤 배경 `#F5F4F0` · 옵시디언 잉크 `#111318` · 틸/민트 액센트 `#0D9488` `#10B981` · 흰 서피스 + `rgba(17,19,24,.08)` 극세사 보더. (구 블루 `#2563EB`·딥네이비 `#0F172A` 폐기)
+- **타이포**: Pretendard, 숫자는 `tabular-nums`/`font-feature-settings:"tnum"`. 제목은 800 웨이트·-0.04em 자간.
+- **홈**: 다크 에디토리얼 히어로 + 커맨드 검색(키보드 `/`) + 카테고리 슬라이딩 탭 + 신규 2종 피처드 카드 + 4열 벤토 그리드.
+- **도구 28종 공통 레이아웃**: 상단 풀폭 **결과 대시보드**(큰 숫자·KPI 스트립·비중 미터·복사/공유) → 판정 알림 → 입력 카드 2단 → 요약. `.result-col` 은 `display:contents` 로 그리드 항목만 순서(order)를 바꾼다 — DOM·ID·JS 바인딩은 그대로.
+
 ## 모션 · 접근성
 
-- 히어로·페이지 제목은 진입 시 순차 페이드업, 그 아래 섹션은 `IntersectionObserver`로 스크롤 시 45ms 스태거 리빌(`.section-head`·`.calc-card`·`.faq details`·`.prose` 등).
+- 히어로·페이지 제목은 진입 시 순차 페이드업, 그 아래 섹션은 `IntersectionObserver`로 스크롤 시 45ms 스태거 리빌(`.section-head`·`.calc-card`·`.feature-card`·`.trust-item`·`.faq details`·`.prose` 등).
 - 리빌 사전 상태는 `html.reveal-ready` 하위에만 적용되므로 **JS 미실행·미지원 브라우저·임베드(`?embed=1`)·`prefers-reduced-motion: reduce`에서는 어떤 요소도 숨은 채 남지 않는다**.
-- 헤더는 스크롤 8px 이상에서 `.is-scrolled`(블러·그림자), 드롭다운은 열기/닫기 스프링 모션, 홈 필터는 페이드-스케일 전환, 결과 복사·공유는 하단 플로팅 토스트(`.dotori-toast`)로 피드백.
+- 헤더는 스크롤 8px 이상에서 `.is-scrolled`(블러·그림자), 드롭다운은 열기/닫기 스프링 모션, 홈 카테고리 탭은 검은 슬라이딩 썸(`.tabs__thumb`), 홈 필터는 페이드-스케일 전환, 결과 복사·공유는 하단 플로팅 토스트(`.dotori-toast`)로 피드백.
+- 세그먼트(`.segment`)는 선택 버튼 위치를 따라 움직이는 흰 썸(`.segment__thumb`, `MutationObserver`로 `aria-pressed` 변화 감지), 결과 카드 KPI 는 같은 단위 항목끼리의 상대 크기를 2px 미터로 표시, FAQ 는 `details` 를 유지한 채 높이를 애니메이션한다.
 - 숫자형 계산기 20종의 주 결과값은 `DotoriUI.countTo`로 카운트업하며, 종료값은 항상 실제 표기와 정확히 일치한다(포맷터·`finalText` 인자).
 
 ## 설정 하나로 광고 켜기
