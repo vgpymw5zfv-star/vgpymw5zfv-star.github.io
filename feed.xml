@@ -3,14 +3,14 @@
   <channel>
     <title>도토리 툴즈</title>
     <link>https://vgpymw5zfv-star.github.io/</link>
-    <description>2026년 11월 기준 공식 요율로 계산하는 무료 도구 26종</description>
+    <description>2026년 11월 기준 공식 요율로 계산하는 무료 도구 28종</description>
     <language>ko</language>
-    <lastBuildDate>2026-11-25</lastBuildDate>
+    <lastBuildDate>2026-11-27</lastBuildDate>
     <item>
-      <title>도토리 툴즈 — 연봉·세금·생활비·고정비·전세·청약가점 무료 도구 26종</title>
+      <title>도토리 툴즈 — 연봉·세금·생활비·고정비·전세·청약가점 무료 도구 28종</title>
       <link>https://vgpymw5zfv-star.github.io/</link>
       <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/</guid>
-      <description>2026 연봉 실수령액, 중소기업 소득세 감면, 퇴직금·퇴직소득세, 월세 세액공제, 전세 vs 월세, 대출 이자·상환방식, 중도상환수수료, 전기세 누진제, 난방비, 실업급여, 단위가격·1+1 비교, K-패스 vs 기후동행카드, 차 유지비, AI 구독료, 고정비·구독료 진단, 평수·면적 환산, 청약 가점(84점), 경력기간까지. 2026년 11월 기준 공식 요율로 바로 계산하는 무료 계산기 19종, 전세 계약·연말정산 체크도구 2종, 글자수·바이트와 D-day·문자 템플릿·연차·경력기간 도구 5종.</description>
+      <description>2026 연봉 실수령액, 최저임금·주휴수당, 중소기업 소득세 감면, 퇴직금·퇴직소득세, 월세 세액공제, 전세 vs 월세, 대출 이자·상환방식, 중도상환수수료, 예금·적금 이자(세후), 전기세 누진제, 난방비, 실업급여, 단위가격·1+1 비교, K-패스 vs 기후동행카드, 차 유지비, AI 구독료, 고정비·구독료 진단, 평수·면적 환산, 청약 가점(84점), 경력기간까지. 2026년 11월 기준 공식 요율로 바로 계산하는 무료 계산기 21종, 전세 계약·연말정산 체크도구 2종, 글자수·바이트와 D-day·문자 템플릿·연차·경력기간 도</description>
     </item>
     <item>
       <title>중소기업 취업자 소득세 감면 90% 계산기 · 5년 경정청구 환급액 | 도토리 툴즈</title>
@@ -106,7 +106,7 @@
       <title>사이트맵 · 전체 페이지 한눈에 | 도토리 툴즈</title>
       <link>https://vgpymw5zfv-star.github.io/sitemap/</link>
       <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/sitemap/</guid>
-      <description>도토리 툴즈의 모든 페이지를 한 곳에서 확인하세요. 계산기 14종·체크도구 2종·문서·일정 도구 4종과 운영 소개, 개인정보처리방침, 문의 페이지, 검색엔진용 sitemap.xml·robots.txt 안내까지 정리했습니다.</description>
+      <description>도토리 툴즈의 모든 페이지를 한 곳에서 확인하세요. 계산기 21종·체크도구 2종·문서·일정 도구 5종과 운영 소개, 개인정보처리방침, 문의 페이지, 검색엔진용 sitemap.xml·robots.txt 안내까지 정리했습니다.</description>
     </item>
     <item>
       <title>전세·월세 안전 계약 체크리스트 &amp; 특약 복사기 | 도토리 툴즈</title>
@@ -191,6 +191,18 @@
       <link>https://vgpymw5zfv-star.github.io/prepayment-fee/</link>
       <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/prepayment-fee/</guid>
       <description>중도상환금액 × 수수료율 × 잔여일수 ÷ 대출기간으로 중도상환수수료를 계산합니다. 대출기간이 3년을 넘으면 3년 기준, 면제일(D-day)과 시점별 수수료 표, 지금 갚을지 이자와 비교, 2026년 은행별 공시 요율까지. 2026년 11월 기준.</description>
+    </item>
+    <item>
+      <title>2026 최저임금 계산기 · 주휴수당·시급→월급 (2027 10,700원) | 도토리 툴즈</title>
+      <link>https://vgpymw5zfv-star.github.io/min-wage/</link>
+      <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/min-wage/</guid>
+      <description>2026년 최저임금 시급 10,320원(월 2,156,880원), 2027년 10,700원(월 2,236,300원) 기준으로 1일 근무시간·주 근무일수만 넣으면 주휴수당·주급·월급·연봉이 바로 나옵니다. 최저임금 미달 여부와 부족액, ‘주휴수당 포함 시급’의 실제 기본시급까지 계산합니다.</description>
+    </item>
+    <item>
+      <title>예금·적금 이자 계산기 · 세후 만기 수령액·단리·월복리 (2026) | 도토리 툴즈</title>
+      <link>https://vgpymw5zfv-star.github.io/deposit-interest/</link>
+      <guid isPermaLink="true">https://vgpymw5zfv-star.github.io/deposit-interest/</guid>
+      <description>예금(거치식)·적금(적립식) 금액·기간·연이율로 세전 이자, 이자소득세 15.4%, 세후 이자와 만기 수령액을 계산합니다. 단리·월복리, 비과세, 기간별·예금 대비 적금 이자 차이, 금융소득종합과세·예금자보호 1억원 안내까지. 2026년 11월 기준.</description>
     </item>
   </channel>
 </rss>

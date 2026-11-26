@@ -1,6 +1,6 @@
 # 🧮 도토리 툴즈 (dotori-calc)
 
-직장인·자취생 생활비·절세·주거 계산기 19종 + 실전 체크도구 2종 + 문서·일정 도구 5종(26종) — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
+직장인·자취생 생활비·절세·주거 계산기 21종 + 실전 체크도구 2종 + 문서·일정 도구 5종(28종) — **순수 정적 사이트(HTML + CSS + Vanilla JS)**.
 빌드 서버 없이 GitHub Pages에 그대로 올려 쓰는 구조입니다.
 
 - 홈: https://vgpymw5zfv-star.github.io/

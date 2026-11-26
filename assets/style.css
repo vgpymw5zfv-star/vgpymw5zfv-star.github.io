@@ -3816,3 +3816,10 @@ body.embed-mode .ts-cta__go {
     transform: none;
   }
 }
+
+/* 입력값과 같은 행 강조 — 주 근무시간별·기간별 표에서 현재 조건을 표시 */
+table.data tbody tr.is-best > th,
+table.data tbody tr.is-best > td {
+  color: var(--blue-dark);
+  font-weight: 700;
+}
