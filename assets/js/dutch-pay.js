@@ -289,7 +289,7 @@
       0
     );
     lines.push("합계 " + won(totalSend));
-    lines.push("도토리 툴즈 더치페이 계산기");
+    lines.push("도토리랩 더치페이 계산기");
     return lines.join("\n");
   }
 

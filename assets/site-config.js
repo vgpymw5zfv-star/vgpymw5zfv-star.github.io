@@ -8,7 +8,7 @@
    ========================================================================== */
 
 window.DOTORI_CONFIG = {
-  siteName: "도토리 툴즈",
+  siteName: "도토리랩",
   siteTagline: "직장인 · 자취생 생활비와 세금을 30초에 계산",
   baseUrl: "https://vgpymw5zfv-star.github.io",
   author: "도토리사원",
@@ -118,7 +118,7 @@ window.DOTORI_CONFIG = {
      ---------------------------------------------------------------------- */
   EMBED: {
     queryKey: "embed",
-    sourceLabel: "도토리 툴즈 전체 보기 ↗",
+    sourceLabel: "도토리랩 전체 보기 ↗",
     minHeight: 420
   }
 };

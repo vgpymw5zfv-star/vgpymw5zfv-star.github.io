@@ -270,7 +270,7 @@
           : "· 환급 예상 약 " + won(-state.annual.diff)
       );
     }
-    lines.push("도토리 툴즈 · 2026년 11월 기준");
+    lines.push("도토리랩 · 2026년 11월 기준");
     return lines.join("\n");
   }
 

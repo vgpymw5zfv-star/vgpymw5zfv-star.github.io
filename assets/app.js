@@ -998,7 +998,7 @@
     if (input) {
       /* 좁은 화면에서는 짧은 안내 문구로 (검색창 폭에 맞춰) */
       var fullPlaceholder = input.getAttribute("placeholder") || "";
-      var shortPlaceholder = "예) 주휴수당, 전기세";
+      var shortPlaceholder = "예: 주휴수당, 예금 이자";
       function syncPlaceholder() {
         var narrow = (window.innerWidth || 0) <= 560;
         input.setAttribute(
