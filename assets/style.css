@@ -3317,6 +3317,11 @@ body.embed-mode .embed-footer a {
     padding: 0 14px;
   }
 
+  .calc-layout {
+    margin-left: -14px;
+    margin-right: -14px;
+  }
+
   .calc-card--row h3 {
     font-size: 14.5px;
   }
