@@ -2034,6 +2034,37 @@ main {
   background: var(--bg);
 }
 
+.cr-row,
+.sa-row {
+  margin-top: 12px;
+  padding: 14px 15px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg);
+}
+
+.cr-row__head,
+.sa-row__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cr-row__no,
+.sa-row__no {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sub);
+  letter-spacing: -0.01em;
+}
+
+.cr-row .field-control,
+.sa-row .field-control {
+  background: var(--surface);
+}
+
 .up-item + .up-item {
   margin-top: 12px;
 }
