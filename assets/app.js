@@ -307,12 +307,629 @@
     });
   }
 
-  /* ---------------- 결과 복사 · 링크 공유 ---------------- */
+  /* ---------------- 결과 복사 · 이미지 저장 ---------------- */
 
   var ICON_COPY =
     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.4"/><path d="M15 5.5H6.5A1.5 1.5 0 0 0 5 7v8.5"/></svg>';
-  var ICON_SHARE =
-    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5.2" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.8" r="2.5"/><path d="M8.2 10.8 15.8 6.4M8.2 13.2l7.6 4.4"/></svg>';
+  /* ---------------- 결과 캡처 (Canvas → PNG · 새 창 공유) ---------------- */
+
+  var ICON_CAPTURE =
+    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6.5" width="18" height="13.5" rx="3.2"/><circle cx="12" cy="13.2" r="3.2"/><path d="M8.4 6.5 9.6 4.2h4.8l1.2 2.3"/></svg>';
+
+  var CAPTURE_FONT =
+    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, "Segoe UI", Roboto, sans-serif';
+
+  var CAPTURE_ORIGIN = "vgpymw5zfv-star.github.io";
+
+  function captureSlug() {
+    var seg = window.location.pathname.split("/").filter(Boolean);
+    var slug = seg.length ? seg[seg.length - 1].replace(/\.html$/, "") : "";
+    return slug || "home";
+  }
+
+  function captureFileName() {
+    return "dotori-result-" + captureSlug() + ".png";
+  }
+
+  function roundBox(ctx, x, y, w, h, r) {
+    var rr = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + rr, y);
+    ctx.lineTo(x + w - rr, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + rr);
+    ctx.lineTo(x + w, y + h - rr);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - rr, y + h);
+    ctx.lineTo(x + rr, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - rr);
+    ctx.lineTo(x, y + rr);
+    ctx.quadraticCurveTo(x, y, x + rr, y);
+    ctx.closePath();
+  }
+
+  /* 한글은 띄어쓰기 단위로 접고, 한 단어가 폭을 넘으면 글자 단위로 자른다 */
+  function wrapLines(ctx, text, maxWidth) {
+    var words = String(text || "").split(/\s+/).filter(Boolean);
+    var lines = [];
+    var line = "";
+    words.forEach(function (word) {
+      var next = line ? line + " " + word : word;
+      if (ctx.measureText(next).width <= maxWidth || !line) {
+        line = next;
+        return;
+      }
+      lines.push(line);
+      line = word;
+    });
+    if (line) lines.push(line);
+    var out = [];
+    lines.forEach(function (item) {
+      if (ctx.measureText(item).width <= maxWidth) {
+        out.push(item);
+        return;
+      }
+      var chunk = "";
+      for (var i = 0; i < item.length; i += 1) {
+        var probe = chunk + item.charAt(i);
+        if (ctx.measureText(probe).width > maxWidth && chunk) {
+          out.push(chunk);
+          chunk = item.charAt(i);
+        } else {
+          chunk = probe;
+        }
+      }
+      if (chunk) out.push(chunk);
+    });
+    return out.length ? out : [""];
+  }
+
+  function captureData() {
+    var card = $(".result-card");
+    var h1 = $("h1");
+    var title = squeeze(h1 ? h1.textContent : "") || squeeze(document.title);
+    var dateEl = $(".page-badge--date");
+    var label = card && $(".result-card__label", card) ? $(".result-card__label", card) : null;
+    var value = card && $(".result-value", card) ? $(".result-value", card) : null;
+    var sub = card && $(".result-sub", card) ? $(".result-sub", card) : null;
+    var insight = card ? $(".result-insight", card) : null;
+    var badge = "";
+    if (insight && !insight.hidden) {
+      var badgeEl = $("[data-insight-badge]", insight);
+      if (badgeEl) badge = squeeze(badgeEl.textContent);
+    }
+    var rows = [];
+    if (card) {
+      $$(".result-row", card).forEach(function (row) {
+        var dt = $("dt", row);
+        var dd = $("dd", row);
+        var k = squeeze(dt ? dt.textContent : "");
+        var v = squeeze(dd ? dd.textContent : "");
+        if (k && v) rows.push({ k: k, v: v });
+      });
+    }
+    var note = card && $(".result-note", card) ? squeeze($(".result-note", card).textContent) : "";
+
+    /* 배지 안의 '기준일' 캡션과 날짜가 붙어 읽히지 않도록 한 칸 띄운다 */
+    var dateText = squeeze(dateEl ? dateEl.textContent : "");
+    if (dateEl) {
+      var capEl = $(".page-badge__k", dateEl);
+      var cap = squeeze(capEl ? capEl.textContent : "");
+      if (cap && dateText.indexOf(cap) === 0) {
+        dateText = cap + " " + dateText.slice(cap.length).trim();
+      }
+    }
+
+    return {
+      title: title,
+      date: dateText,
+      label: squeeze(label ? label.textContent : ""),
+      value: squeeze(value ? value.textContent : ""),
+      sub: squeeze(sub ? sub.textContent : ""),
+      badge: badge,
+      rows: rows,
+      note: note
+    };
+  }
+
+  function drawCapture(data) {
+    var W = 1080;
+    var PAD = 76;
+    var S = 2;
+    var H = 2800;
+    var canvas = document.createElement("canvas");
+    canvas.width = W * S;
+    canvas.height = H * S;
+    var ctx = canvas.getContext("2d");
+    ctx.scale(S, S);
+    ctx.textBaseline = "alphabetic";
+    ctx.textAlign = "left";
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, W, H);
+
+    function font(weight, size) {
+      ctx.font = weight + " " + size + "px " + CAPTURE_FONT;
+    }
+
+    function rule(at, color) {
+      ctx.strokeStyle = color || "#f1f3f5";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(PAD, at);
+      ctx.lineTo(W - PAD, at);
+      ctx.stroke();
+    }
+
+    var y = PAD;
+
+    /* 브랜드 · 기준일 */
+    ctx.fillStyle = "#3182f6";
+    ctx.beginPath();
+    ctx.arc(PAD + 6, y + 13, 6, 0, Math.PI * 2);
+    ctx.fill();
+    font(700, 27);
+    ctx.fillStyle = "#191f28";
+    ctx.fillText("도토리랩", PAD + 22, y + 22);
+    font(500, 20);
+    ctx.fillStyle = "#8b95a1";
+    ctx.textAlign = "right";
+    ctx.fillText(data.date || "2026년 11월 기준", W - PAD, y + 20);
+    ctx.textAlign = "left";
+    y += 52;
+    rule(y, "#e5e8eb");
+    y += 60;
+
+    /* 계산기 제목 */
+    font(700, 40);
+    var titleLines = wrapLines(ctx, data.title, W - PAD * 2).slice(0, 2);
+    ctx.fillStyle = "#191f28";
+    titleLines.forEach(function (line) {
+      ctx.fillText(line, PAD, y);
+      y += 54;
+    });
+    y += 28;
+
+    /* 결과 라벨 */
+    if (data.label) {
+      font(500, 22);
+      ctx.fillStyle = "#4e5968";
+      wrapLines(ctx, data.label, W - PAD * 2).slice(0, 1).forEach(function (line) {
+        ctx.fillText(line, PAD, y);
+      });
+      y += 44;
+    }
+
+    /* 히어로 금액 */
+    var valueText = data.value || "—";
+    var size = 74;
+    font(700, size);
+    while (size > 34 && ctx.measureText(valueText).width > W - PAD * 2) {
+      size -= 2;
+      font(700, size);
+    }
+    ctx.fillStyle = "#3182f6";
+    ctx.fillText(valueText, PAD, y + 54);
+    y += 82;
+
+    /* 결론 문장 */
+    if (data.sub) {
+      font(600, 24);
+      ctx.fillStyle = "#00a86b";
+      wrapLines(ctx, data.sub, W - PAD * 2).slice(0, 2).forEach(function (line) {
+        ctx.fillText(line, PAD, y + 22);
+        y += 36;
+      });
+      y += 10;
+    }
+    y += 16;
+
+    /* 한 줄 결론 배지 */
+    if (data.badge) {
+      font(700, 23);
+      var badgeLines = wrapLines(ctx, data.badge, W - PAD * 2 - 54).slice(0, 3);
+      var panelH = 40 + badgeLines.length * 33;
+      roundBox(ctx, PAD, y, W - PAD * 2, panelH, 18);
+      ctx.fillStyle = "#f5f9ff";
+      ctx.fill();
+      ctx.strokeStyle = "#e3eefc";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.fillStyle = "#3182f6";
+      ctx.beginPath();
+      ctx.arc(PAD + 30, y + 30, 6, 0, Math.PI * 2);
+      ctx.fill();
+      font(700, 23);
+      ctx.fillStyle = "#191f28";
+      badgeLines.forEach(function (line, i) {
+        ctx.fillText(line, PAD + 48, y + 38 + i * 33);
+      });
+      y += panelH + 30;
+    }
+
+    /* 세부 항목 */
+    if (data.rows.length) {
+      rule(y, "#e5e8eb");
+      y += 24;
+      data.rows.forEach(function (row, idx) {
+        font(600, 25);
+        var valueWidth = ctx.measureText(row.v).width;
+        var keyMax = W - PAD * 2 - valueWidth - 48;
+        font(500, 23);
+        var keyLines = wrapLines(ctx, row.k, keyMax).slice(0, 2);
+        ctx.fillStyle = "#8b95a1";
+        keyLines.forEach(function (line, i) {
+          ctx.fillText(line, PAD, y + 22 + i * 30);
+        });
+        font(600, 25);
+        ctx.fillStyle = "#191f28";
+        ctx.textAlign = "right";
+        ctx.fillText(row.v, W - PAD, y + 22);
+        ctx.textAlign = "left";
+        y += (keyLines.length > 1 ? 22 + 30 * (keyLines.length - 1) : 0) + 50;
+        if (idx < data.rows.length - 1) {
+          rule(y, "#f1f3f5");
+        }
+      });
+      y += 4;
+    }
+
+    /* 각주 */
+    if (data.note) {
+      y += 18;
+      font(500, 20);
+      ctx.fillStyle = "#8b95a1";
+      wrapLines(ctx, data.note, W - PAD * 2).slice(0, 3).forEach(function (line) {
+        ctx.fillText(line, PAD, y);
+        y += 30;
+      });
+    }
+
+    /* 하단 워터마크 */
+    y += 24;
+    rule(y, "#e5e8eb");
+    y += 36;
+    font(700, 20);
+    ctx.fillStyle = "#4e5968";
+    ctx.fillText("도토리랩", PAD, y);
+    font(500, 18);
+    ctx.fillStyle = "#b0b8c1";
+    ctx.textAlign = "right";
+    ctx.fillText(CAPTURE_ORIGIN, W - PAD, y);
+    ctx.textAlign = "left";
+    y += Math.round(PAD * 0.8);
+
+    var finalH = Math.max(320, Math.min(H, Math.round(y)));
+    var out = document.createElement("canvas");
+    out.width = canvas.width;
+    out.height = finalH * S;
+    var octx = out.getContext("2d");
+    octx.drawImage(canvas, 0, 0, canvas.width, finalH * S, 0, 0, canvas.width, finalH * S);
+    return out;
+  }
+
+  function canvasToBlob(canvas, done) {
+    if (canvas.toBlob) {
+      canvas.toBlob(function (blob) {
+        if (blob) {
+          done(blob);
+          return;
+        }
+        done(null);
+      }, "image/png");
+      return;
+    }
+    done(null);
+  }
+
+  function captureShareText(data) {
+    var lines = [];
+    if (data.title) lines.push(data.title);
+    if (data.value) lines.push((data.label ? data.label + ": " : "") + data.value);
+    if (data.sub) lines.push(data.sub);
+    lines.push(CAPTURE_ORIGIN);
+    return lines.join("\n");
+  }
+
+  var CAPTURE_CSS =
+    "html,body{margin:0;padding:0;background:#f2f4f6;}" +
+    "body{font-family:" + CAPTURE_FONT.replace(/"/g, "'") + ";color:#191f28;-webkit-text-size-adjust:100%;}" +
+    ".wrap{max-width:720px;margin:0 auto;padding:26px 18px 44px;}" +
+    ".top{display:flex;align-items:center;justify-content:space-between;margin:0 2px 14px;}" +
+    ".brand{font-size:15px;font-weight:700;letter-spacing:-0.02em;}" +
+    ".tag{font-size:12px;font-weight:700;color:#3182f6;background:#e8f3ff;border-radius:999px;padding:5px 11px;}" +
+    ".shot{display:block;width:100%;height:auto;background:#fff;border:1px solid #e5e8eb;border-radius:18px;box-shadow:0 12px 34px rgba(25,31,40,0.09);}" +
+    ".btns{display:flex;gap:10px;margin-top:20px;}" +
+    "button{flex:1;height:54px;border:0;border-radius:14px;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:-0.01em;cursor:pointer;}" +
+    "button.primary{background:#3182f6;color:#ffffff;}" +
+    "button.primary:active{background:#1b64da;}" +
+    "button.ghost{background:#ffffff;color:#4e5968;border:1px solid #e5e8eb;}" +
+    "button.ghost:active{background:#f2f4f6;}" +
+    ".status{min-height:22px;margin:14px 0 0;color:#00a86b;font-size:13.5px;font-weight:600;text-align:center;}" +
+    ".status.is-muted{color:#8b95a1;}" +
+    ".hint{margin:8px 0 0;color:#b0b8c1;font-size:12.5px;line-height:1.6;text-align:center;}" +
+    "@media(max-width:520px){.wrap{padding:16px 14px 30px;}button{height:50px;}.btns{margin-top:16px;}}";
+
+  function captureMarkup(imageUrl) {
+    return (
+      '<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+      "<title>도토리랩 · 결과 캡처</title><style>" + CAPTURE_CSS + "</style></head><body>" +
+      '<div class="wrap"><div class="top"><span class="brand">도토리랩</span><span class="tag">결과 캡처</span></div>' +
+      '<img class="shot" src="' + imageUrl + '" alt="도토리랩 계산 결과 캡처">' +
+      '<div class="btns"><button type="button" class="primary" data-capture-share>공유하기</button>' +
+      '<button type="button" class="ghost" data-capture-save>이미지 저장</button></div>' +
+      '<p class="status" data-capture-status role="status"></p>' +
+      '<p class="hint">이 창을 닫아도 계산 결과에는 영향이 없습니다. 입력값은 서버로 전송되지 않습니다.</p>' +
+      "</div></body></html>"
+    );
+  }
+
+  /* 새 창(문서) 또는 페이지 안 모달(요소)에 같은 버튼 동작을 붙인다 */
+  function wireCaptureUi(root, opts) {
+    var doc = opts.doc;
+    var nav = opts.nav;
+    var blob = opts.blob;
+    var data = opts.data;
+    var filename = opts.filename;
+    var imageUrl = opts.imageUrl;
+
+    function setStatus(text, muted) {
+      var el = root.querySelector("[data-capture-status]");
+      if (el) {
+        el.textContent = text;
+        el.className = "status" + (muted ? " is-muted" : "");
+      }
+      if (opts.toast) toast(text);
+    }
+
+    function save() {
+      try {
+        var a = doc.createElement("a");
+        a.href = imageUrl;
+        a.download = filename;
+        a.rel = "noopener";
+        doc.body.appendChild(a);
+        a.click();
+        doc.body.removeChild(a);
+        setStatus("이미지를 저장했습니다 ✓");
+      } catch (e) {
+        setStatus("저장하지 못했습니다. 이미지를 길게 눌러 저장해 주세요.", true);
+      }
+    }
+
+    function copyImage() {
+      if (nav && nav.clipboard && nav.clipboard.write && opts.ClipboardItemCtor) {
+        try {
+          var item = new opts.ClipboardItemCtor({ "image/png": blob });
+          nav.clipboard.write([item]).then(
+            function () {
+              setStatus("이미지를 클립보드에 복사했습니다. 붙여넣기 해 보세요 ✓");
+            },
+            function () {
+              save();
+              setStatus("이 기기에서는 공유 창을 열 수 없어 이미지로 저장했습니다.", true);
+            }
+          );
+          return;
+        } catch (e) {
+          /* 아래 다운로드 폴백 */
+        }
+      }
+      save();
+      setStatus("이 기기에서는 공유 창을 열 수 없어 이미지로 저장했습니다.", true);
+    }
+
+    function share() {
+      var file = null;
+      if (opts.FileCtor) {
+        try {
+          file = new opts.FileCtor([blob], filename, { type: "image/png" });
+        } catch (e) {
+          file = null;
+        }
+      }
+      if (file && nav && nav.share) {
+        var payload = { files: [file], title: data.title, text: captureShareText(data) };
+        var can = true;
+        try {
+          if (nav.canShare) can = nav.canShare(payload);
+        } catch (e) {
+          can = false;
+        }
+        if (can) {
+          var pending = null;
+          try {
+            pending = nav.share(payload);
+          } catch (e) {
+            pending = null;
+          }
+          if (pending && typeof pending.then === "function") {
+            pending.then(
+              function () {
+                /* 공유가 끝나도 이 창은 그대로 둔다 */
+                setStatus("공유 완료 ✓");
+              },
+              function (err) {
+                if (err && (err.name === "AbortError" || err.name === "Abort")) {
+                  setStatus("공유를 취소했습니다.", true);
+                  return;
+                }
+                copyImage();
+              }
+            );
+            return;
+          }
+        }
+      }
+      copyImage();
+    }
+
+    var shareBtn = root.querySelector("[data-capture-share]");
+    var saveBtn = root.querySelector("[data-capture-save]");
+    if (shareBtn) shareBtn.addEventListener("click", share);
+    if (saveBtn) saveBtn.addEventListener("click", save);
+  }
+
+  function captureModal(blob, data, filename, imageUrl) {
+    var wrap = document.createElement("div");
+    wrap.className = "capture-modal";
+    wrap.setAttribute("role", "dialog");
+    wrap.setAttribute("aria-modal", "true");
+    wrap.setAttribute("aria-label", "결과 캡처");
+    wrap.innerHTML =
+      '<div class="capture-modal__panel">' +
+      '<div class="capture-modal__top"><span class="capture-modal__brand">도토리랩</span>' +
+      '<span class="capture-modal__tag">결과 캡처</span>' +
+      '<button type="button" class="capture-modal__close" data-capture-close aria-label="닫기">×</button></div>' +
+      '<img class="capture-modal__shot" src="' + imageUrl + '" alt="도토리랩 계산 결과 캡처">' +
+      '<div class="capture-modal__btns">' +
+      '<button type="button" class="result-action" data-capture-share><span>공유하기</span></button>' +
+      '<button type="button" class="result-action" data-capture-save><span>이미지 저장</span></button>' +
+      "</div>" +
+      '<p class="status capture-modal__status" data-capture-status role="status"></p>' +
+      "</div>";
+    document.body.appendChild(wrap);
+    document.documentElement.style.overflow = "hidden";
+
+    function close() {
+      document.removeEventListener("keydown", onKey);
+      document.documentElement.style.overflow = "";
+      if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
+      window.setTimeout(function () {
+        try {
+          URL.revokeObjectURL(imageUrl);
+        } catch (e) {}
+      }, 400);
+    }
+
+    function onKey(e) {
+      if (e.key === "Escape") close();
+    }
+
+    wrap.addEventListener("click", function (e) {
+      if (e.target === wrap) close();
+    });
+    var closeBtn = wrap.querySelector("[data-capture-close]");
+    if (closeBtn) closeBtn.addEventListener("click", close);
+    document.addEventListener("keydown", onKey);
+
+    wireCaptureUi(wrap, {
+      doc: document,
+      nav: navigator,
+      blob: blob,
+      data: data,
+      filename: filename,
+      imageUrl: imageUrl,
+      FileCtor: window.File,
+      ClipboardItemCtor: window.ClipboardItem,
+      toast: toast
+    });
+    return close;
+  }
+
+  function openResultCapture(btn) {
+    var data = captureData();
+    var win = null;
+    /* 클릭과 같은 시점에 창을 먼저 열어야 팝업 차단에 걸리지 않는다 */
+    try {
+      win = window.open("", "_blank");
+    } catch (e) {
+      win = null;
+    }
+
+    if (win && win.document) {
+      try {
+        win.document.open();
+        win.document.write(
+          '<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">' +
+            '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+            "<title>도토리랩 · 결과 캡처</title><style>" + CAPTURE_CSS + "</style></head><body>" +
+            '<div class="wrap"><p class="status is-muted">결과 이미지를 만드는 중입니다…</p></div>' +
+            "</body></html>"
+        );
+        win.document.close();
+        win.focus();
+      } catch (e) {
+        win = null;
+      }
+    }
+
+    function finish(blob) {
+      if (!blob) {
+        if (win && !win.closed) {
+          try {
+            win.close();
+          } catch (e) {}
+        }
+        toast("결과 이미지를 만들지 못했습니다.");
+        if (btn) flashAction(btn, "캡처 실패", null, "결과 이미지를 만들지 못했습니다.");
+        return;
+      }
+      var filename = captureFileName();
+      var imageUrl = URL.createObjectURL(blob);
+
+      if (win && !win.closed && win.document) {
+        try {
+          win.document.open();
+          win.document.write(captureMarkup(imageUrl));
+          win.document.close();
+          wireCaptureUi(win.document, {
+            doc: win.document,
+            nav: win.navigator,
+            blob: blob,
+            data: data,
+            filename: filename,
+            imageUrl: imageUrl,
+            FileCtor: win.File,
+            ClipboardItemCtor: win.ClipboardItem,
+            toast: function () {}
+          });
+          return;
+        } catch (e) {
+          /* 아래 모달 폴백 */
+        }
+      }
+
+      /* 팝업이 차단된 환경 → 페이지 안 모달로 안내 */
+      captureModal(blob, data, filename, imageUrl);
+      toast("새 창이 차단되어 이 화면에 결과 캡처를 열었습니다.");
+    }
+
+    function render() {
+      var canvas = null;
+      try {
+        canvas = drawCapture(data);
+      } catch (e) {
+        canvas = null;
+      }
+      if (!canvas) {
+        finish(null);
+        return;
+      }
+      canvasToBlob(canvas, function (blob) {
+        if (blob) {
+          finish(blob);
+          return;
+        }
+        /* toBlob 미지원 → data URL → Blob */
+        try {
+          var dataUrl = canvas.toDataURL("image/png");
+          var parts = dataUrl.split(",");
+          var binary = atob(parts[1]);
+          var bytes = new Uint8Array(binary.length);
+          for (var i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+          finish(new Blob([bytes], { type: "image/png" }));
+        } catch (e) {
+          finish(null);
+        }
+      });
+    }
+
+    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+      document.fonts.ready.then(render, render);
+    } else {
+      render();
+    }
+  }
+
 
   /* 임베드 파라미터를 떼어낸 공유용 주소 */
   function shareUrl() {
@@ -436,10 +1053,10 @@
       row.className = "result-actions";
       row.setAttribute("data-result-actions", "1");
       row.setAttribute("role", "group");
-      row.setAttribute("aria-label", "결과 복사 및 공유");
+      row.setAttribute("aria-label", "결과 복사 및 이미지 저장");
 
       var copyBtn = actionButton("copy", "결과 복사", ICON_COPY);
-      var shareBtn = actionButton("share", "링크 공유", ICON_SHARE);
+      var captureBtn = actionButton("capture", "결과 캡처", ICON_CAPTURE);
       var status = document.createElement("span");
       status.className = "result-actions__status";
       status.setAttribute("role", "status");
@@ -455,48 +1072,13 @@
         });
       });
 
-      shareBtn.addEventListener("click", function () {
-        var data = resultShareData();
-
-        function copyLink() {
-          copyText(data.url).then(function (ok) {
-            if (ok) {
-              flashAction(shareBtn, "링크 복사됨 ✓", status, "링크를 클립보드에 복사했습니다.");
-            } else {
-              flashAction(shareBtn, "복사 실패", status, "복사하지 못했습니다. 주소창의 링크를 이용해 주세요.");
-            }
-          });
-        }
-
-        if (navigator.share) {
-          var pending;
-          try {
-            pending = navigator.share({ title: data.title, text: data.body, url: data.url });
-          } catch (e) {
-            copyLink();
-            return;
-          }
-          if (pending && typeof pending.then === "function") {
-            pending.then(
-              function () {
-                status.textContent = "";
-              },
-              function (err) {
-                /* 사용자가 공유 창을 닫은 경우는 조용히 넘어간다 */
-                if (err && (err.name === "AbortError" || err.name === "Abort")) return;
-                copyLink();
-              }
-            );
-          }
-          return;
-        }
-
-        /* 공유 미지원 브라우저(데스크톱 등) → 링크 복사 */
-        copyLink();
+      captureBtn.addEventListener("click", function () {
+        openResultCapture(captureBtn);
+        if (status) status.textContent = "결과 캡처 창을 열었습니다.";
       });
 
       row.appendChild(copyBtn);
-      row.appendChild(shareBtn);
+      row.appendChild(captureBtn);
       row.appendChild(status);
       card.appendChild(row);
     });
@@ -797,9 +1379,10 @@
       var s = bar.getBoundingClientRect();
       var r = active.getBoundingClientRect();
       var bl = parseFloat(window.getComputedStyle(bar).borderLeftWidth) || 0;
+      /* 탭 바가 가로로 스크롤된 만큼(scrollLeft)을 더해야 밑줄이 활성 탭 밑에 그대로 붙는다 */
+      var x = r.left - s.left - bl + (bar.scrollLeft || 0);
       thumb.style.width = r.width + "px";
-      thumb.style.transform =
-        "translate(" + (r.left - s.left - bl - 4) + "px,0)";
+      thumb.style.transform = "translate(" + x + "px,0)";
     }
 
     function matchCategory(item) {
@@ -816,6 +1399,7 @@
 
     function paint(value) {
       var shown = 0;
+      var barTop = bar.getBoundingClientRect().top;
       index.forEach(function (item) {
         var ok = matchCategory(item) && matchQuery(item);
         item.card.hidden = !ok;
@@ -841,6 +1425,18 @@
         }
       }
       if (featured) featured.hidden = !(value === "all" && !query);
+
+      /* 카테고리를 바꾸면 위쪽 'Top 4' 영역이 접혀 문서가 위로 튄다.
+         탭 바가 화면에서 보이던 자리를 그대로 지켜, 탭과 아래 목록이 붙어 있게 한다. */
+      var delta = bar.getBoundingClientRect().top - barTop;
+      if (Math.abs(delta) > 1) {
+        var root = document.documentElement;
+        var prev = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto";
+        window.scrollBy(0, delta);
+        root.style.scrollBehavior = prev;
+      }
+
       placeThumb();
       if (value !== "all" || query) {
         var active = null;
@@ -1067,11 +1663,27 @@
     }
 
     window.addEventListener("resize", placeThumb);
+    if (bar.addEventListener) {
+      bar.addEventListener("scroll", placeThumb, { passive: true });
+    }
     if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
       document.fonts.ready.then(placeThumb);
     }
 
-    paint("all");
+    /* 헤더 '전체 도구'의 카테고리를 누르면 index.html?cat=절세#tools 로 들어온다 */
+    var startValue = "all";
+    try {
+      var wantCat = new URLSearchParams(window.location.search).get("cat");
+      if (wantCat) {
+        chips.forEach(function (chip) {
+          if (chip.getAttribute("data-filter") === wantCat) startValue = wantCat;
+        });
+      }
+    } catch (e) {
+      /* URLSearchParams 미지원 브라우저는 전체 탭으로 */
+    }
+    current = startValue;
+    paint(startValue);
     window.requestAnimationFrame(placeThumb);
   }
 
