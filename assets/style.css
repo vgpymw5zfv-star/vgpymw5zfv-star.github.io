@@ -3647,15 +3647,15 @@ body.embed-mode .embed-footer a {
 
   .calc-layout {
     grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
-    gap: 14px;
+    gap: 18px;
   }
 
   .calc-col {
-    padding: 22px 22px 24px;
+    padding: 26px 24px 28px;
   }
 
   .result-col {
-    padding: 20px 20px 18px;
+    padding: 24px 22px 22px;
   }
 
   .picks__grid {
@@ -3746,7 +3746,7 @@ body.embed-mode .embed-footer a {
 
   .calc-col,
   .result-col {
-    padding: 20px 18px;
+    padding: 24px 18px 26px;
     border-radius: var(--radius-lg);
   }
 
@@ -3756,15 +3756,15 @@ body.embed-mode .embed-footer a {
   }
 
   .calc-col {
-    gap: 22px;
+    gap: 26px;
   }
 
   .calc-col > .field-group + .field-group {
-    padding-top: 22px;
+    padding-top: 26px;
   }
 
   .result-col > .field-group {
-    padding-top: 18px;
+    padding-top: 22px;
     border-top: 1px solid var(--line);
     margin-top: 4px;
   }
@@ -3894,7 +3894,7 @@ body.embed-mode .embed-footer a {
   }
 
   .section {
-    padding: 34px 0 4px;
+    padding: 40px 0 4px;
   }
 
   .section-head h2 {
@@ -3941,7 +3941,7 @@ body.embed-mode .embed-footer a {
   }
 
   .result-action {
-    height: 46px;
+    height: 48px;
   }
 
   .field-row--3 {
@@ -3949,12 +3949,12 @@ body.embed-mode .embed-footer a {
   }
 
   .faq summary {
-    padding: 15px 18px;
+    padding: 18px 18px;
     font-size: 14.5px;
   }
 
   .faq details p {
-    padding: 0 18px 18px;
+    padding: 0 18px 22px;
     font-size: 13.5px;
   }
 
@@ -4035,16 +4035,16 @@ body.embed-mode .embed-footer a {
 
   .calc-col,
   .result-col {
-    padding: 18px 16px;
+    padding: 22px 16px 24px;
     border-radius: 20px;
   }
 
   .presets {
-    padding: 9px 10px;
+    padding: 11px 12px;
   }
 
   .field-control {
-    height: 50px;
+    height: 52px;
   }
 
   .segment--wrap button {
@@ -4060,7 +4060,7 @@ body.embed-mode .embed-footer a {
   }
 
   .result-actions {
-    gap: 6px;
+    gap: 8px;
   }
 
   .result-action {
@@ -4083,7 +4083,7 @@ body.embed-mode .embed-footer a {
 
   table.data.table--stack tbody tr {
     display: block;
-    padding: 8px 0;
+    padding: 11px 0;
     border-bottom: 1px solid var(--line);
   }
 
@@ -4093,7 +4093,7 @@ body.embed-mode .embed-footer a {
 
   table.data.table--stack tbody th {
     display: block;
-    padding: 6px 14px;
+    padding: 8px 14px;
     border: 0;
     font-size: 13px;
   }
@@ -4102,7 +4102,7 @@ body.embed-mode .embed-footer a {
     display: flex;
     justify-content: space-between;
     gap: 12px;
-    padding: 4px 14px;
+    padding: 6px 14px;
     border: 0;
     font-size: 13px;
   }
