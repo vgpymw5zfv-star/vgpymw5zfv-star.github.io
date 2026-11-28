@@ -567,13 +567,8 @@
       var vw = document.documentElement.clientWidth || window.innerWidth;
       var pad = 12;
 
-      /* 좁은 화면: 버튼 위치와 상관없이 화면 폭에 맞춘 패널을 왼쪽에 고정 */
-      if (vw <= 720) {
-        var box = item.getBoundingClientRect();
-        panel.style.width = Math.min(340, vw - pad * 2) + "px";
-        panel.style.left = Math.round(pad - box.left) + "px";
-        return;
-      }
+      /* 좁은 화면: 패널은 화면 폭에 맞춘 고정 레이어 — 위치는 CSS(left/right 12px)가 맡는다 */
+      if (vw <= 900) return;
 
       var r = panel.getBoundingClientRect();
       var current = parseFloat(window.getComputedStyle(panel).left) || 0;
@@ -1443,6 +1438,138 @@
     });
   }
 
+  /* ---------------- 입력칸 안쪽 단위 라벨 ---------------- */
+
+  /*
+   * 라벨 끝의 "(원)" "(시간)" "(%) 같은 단위를 입력칸 안쪽 작은 칩으로 옮긴다.
+   * 라벨은 짧아지고, 숫자를 넣는 위치 옆에 단위가 붙어 오입력을 줄인다.
+   * 단위 표기가 이미 있는 칸(.field-unit)은 건드리지 않는다.
+   */
+  function initFieldUnits() {
+    var UNIT_RE = /^(.*\S)\s*\((원|만원|천원|시간|일|개월|년|개|명|회|주|%|kWh|kwh|㎡|평|B|자|점|세|원\/㎡|만원\/㎡)\)\s*$/;
+
+    function apply() {
+      $$(".field-control").forEach(function (control) {
+        if ($(".field-unit", control)) return;
+        if (!$("input, select", control)) return;
+        var field = control.closest("label.field");
+        if (!field) return;
+        var labelEl = $(".field-label", field);
+        if (!labelEl) return;
+        var labelText = squeeze(labelEl.textContent || "");
+        var m = labelText.match(UNIT_RE);
+        if (!m) return;
+        var unit = m[2];
+        var base = m[1].trim();
+        if (!base) return;
+        if ((labelEl.textContent || "").trim() !== base) labelEl.textContent = base;
+        if (!$(".field-unit-inline", control)) {
+          var chip = document.createElement("span");
+          chip.className = "field-unit-inline";
+          chip.setAttribute("aria-hidden", "true");
+          chip.textContent = unit;
+          control.appendChild(chip);
+          control.classList.add("has-unit");
+        }
+      });
+    }
+
+    apply();
+
+    /* 페이지 스크립트가 라벨을 다시 쓰는 경우(예: 예금↔적금 전환)도 따라간다 */
+    var timer = 0;
+    function schedule() {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(apply, 120);
+    }
+    document.addEventListener("input", schedule);
+    document.addEventListener("change", schedule);
+    document.addEventListener("click", schedule);
+    window.setTimeout(apply, 400);
+  }
+
+  /* ---------------- 빠른 설정 프리셋 ---------------- */
+
+  /*
+   * <button data-preset='[["mw-day","8"],["mw-days","5"]]'>
+   * 입력 id 면 값을 넣고 input·change 를 발생시켜 계산기를 다시 돌린다.
+   * 세그먼트 그룹 id 면 해당 data-value 버튼을 눌러 준다.
+   */
+  function initPresets() {
+    var buttons = $$("[data-preset]");
+    if (!buttons.length) return;
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var pairs;
+        try {
+          pairs = JSON.parse(btn.getAttribute("data-preset") || "[]");
+        } catch (e) {
+          return;
+        }
+        pairs.forEach(function (pair) {
+          var target = document.getElementById(pair[0]);
+          if (!target) return;
+          if (/^(INPUT|SELECT|TEXTAREA)$/.test(target.tagName)) {
+            target.value = pair[1];
+            target.dispatchEvent(new Event("input", { bubbles: true }));
+            target.dispatchEvent(new Event("change", { bubbles: true }));
+          } else {
+            var segBtn = $('button[data-value="' + pair[1] + '"]', target);
+            if (segBtn) segBtn.click();
+          }
+        });
+        buttons.forEach(function (b) {
+          b.classList.toggle("is-active", b === btn);
+        });
+        btn.blur();
+      });
+    });
+
+    /* 직접 값을 고치면 프리셋 강조는 옅어진다 */
+    document.addEventListener("input", function (e) {
+      if (!e.target || !e.target.id) return;
+      buttons.forEach(function (b) {
+        var data = b.getAttribute("data-preset") || "";
+        if (data.indexOf('"' + e.target.id + '"') !== -1) b.classList.remove("is-active");
+      });
+    });
+  }
+
+  /* ---------------- 헤더 검색 바로가기 ---------------- */
+
+  function initNavSearch() {
+    var link = $("[data-nav-search]");
+    var input = $("[data-tool-search]");
+
+    if (link && input) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        input.focus();
+        try {
+          input.select();
+        } catch (err) {}
+      });
+    }
+
+    /* 홈이 아닌 페이지에서 "/" → 홈 검색으로 이동 */
+    if (link && !input) {
+      document.addEventListener("keydown", function (e) {
+        if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
+        var tag = (e.target && e.target.tagName) || "";
+        if (/^(INPUT|TEXTAREA|SELECT)$/.test(tag) || (e.target && e.target.isContentEditable)) return;
+        e.preventDefault();
+        window.location.href = link.getAttribute("href");
+      });
+    }
+
+    if (input && window.location.hash === "#search") {
+      window.setTimeout(function () {
+        input.focus();
+      }, 120);
+    }
+  }
+
   /* ---------------- 시작 ---------------- */
 
   function init() {
@@ -1451,6 +1578,9 @@
     markCurrentNav();
     initScrollState();
     initNavDropdowns();
+    initNavSearch();
+    initFieldUnits();
+    initPresets();
     initReveal();
     renderBanner();
     bindResultActions();
