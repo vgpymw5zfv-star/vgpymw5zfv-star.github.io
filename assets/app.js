@@ -1428,8 +1428,11 @@
 
       /* 카테고리를 바꾸면 위쪽 'Top 4' 영역이 접혀 문서가 위로 튄다.
          탭 바가 화면에서 보이던 자리를 그대로 지켜, 탭과 아래 목록이 붙어 있게 한다. */
+      /* 검색창에 타이핑하는 중에는 페이지 스크롤을 건드리지 않는다(화면 튐 방지).
+         목록이 줄면서 탭 바가 움직이는 만큼만 스크롤로 보정하던 부분을 건너뛴다. */
+      var typing = input && document.activeElement === input;
       var delta = bar.getBoundingClientRect().top - barTop;
-      if (Math.abs(delta) > 1) {
+      if (!typing && Math.abs(delta) > 1) {
         var root = document.documentElement;
         var prev = root.style.scrollBehavior;
         root.style.scrollBehavior = "auto";
@@ -1438,7 +1441,7 @@
       }
 
       placeThumb();
-      if (value !== "all" || query) {
+      if (!typing && (value !== "all" || query)) {
         var active = null;
         chips.forEach(function (chip) {
           if (chip.getAttribute("aria-pressed") === "true") active = chip;
@@ -2148,38 +2151,258 @@
     });
   }
 
-  /* ---------------- 헤더 검색 바로가기 ---------------- */
+  /* ---------------- 헤더 검색 창 ---------------- */
 
+  /*
+   * 헤더 '검색'은 페이지 어디서든 고정 레이어(dialog)로 열린다.
+   * 문서 스크롤을 건드리지 않으므로, 페이지 아래에서 열어 타이핑해도 화면이 튀지 않는다.
+   */
   function initNavSearch() {
-    var link = $("[data-nav-search]");
-    var input = $("[data-tool-search]");
+    var modal = $("[data-search-modal]");
+    var openers = $$("[data-nav-search]");
+    if (!modal || !openers.length) return;
 
-    if (link && input) {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-        input.focus();
-        try {
-          input.select();
-        } catch (err) {}
+    var input = $("[data-search-modal-input]", modal);
+    var list = $("[data-search-modal-results]", modal);
+    var empty = $("[data-search-modal-empty]", modal);
+    var closeBtn = $("[data-search-modal-close]", modal);
+    var data = (window.DOTORI_SEARCH || []).slice();
+    var active = -1;
+    var lastFocus = null;
+    var supportsDialog = typeof modal.showModal === "function";
+    var heroInput = $("[data-tool-search]");
+
+    function matches(item, q) {
+      if (!q) return true;
+      var words = q.split(/\s+/).filter(Boolean);
+      var hay = (item.n + " " + item.t + " " + item.c + " " + item.k).toLowerCase();
+      return words.every(function (w) {
+        return hay.indexOf(w) !== -1;
       });
     }
 
-    /* 홈이 아닌 페이지에서 "/" → 홈 검색으로 이동 */
-    if (link && !input) {
+    function paintList(q) {
+      if (!list) return;
+      list.innerHTML = "";
+      var found = data.filter(function (item) {
+        return matches(item, q);
+      });
+      found.slice(0, 9).forEach(function (item, i) {
+        var a = document.createElement("a");
+        a.className = "search-modal__item";
+        a.href = item.u;
+        a.setAttribute("role", "option");
+        a.setAttribute("data-idx", String(i));
+        var name = document.createElement("span");
+        name.textContent = item.n;
+        var cat = document.createElement("span");
+        cat.className = "nav-panel__desc";
+        cat.textContent = item.c;
+        a.appendChild(name);
+        a.appendChild(cat);
+        list.appendChild(a);
+      });
+      active = -1;
+      list.scrollTop = 0;
+      if (empty) empty.hidden = found.length > 0;
+      if (input) input.setAttribute("aria-expanded", found.length ? "true" : "false");
+    }
+
+    function go(i) {
+      var links = $$(".search-modal__item", list || modal);
+      if (!links.length) return;
+      var el = links[(i + links.length) % links.length];
+      links.forEach(function (x) {
+        x.classList.toggle("is-active", x === el);
+      });
+      /* 목록 안에서만 스크롤한다 — 페이지 스크롤은 건드리지 않는다 */
+      if (list) {
+        var top = el.offsetTop - list.clientHeight / 2 + el.offsetHeight / 2;
+        list.scrollTop = Math.max(0, top);
+      }
+      active = Number(el.getAttribute("data-idx"));
+    }
+
+    /* html 에 overflow:hidden 을 걸어야 스크롤 위치가 그대로 유지된다
+       (body 에만 걸면 뷰포트로 전파되며 스크롤이 튄다). */
+    function lockScroll() {
+      var gap = window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.classList.add("is-modal-open");
+      document.body.classList.add("is-modal-open");
+      if (gap > 0) document.documentElement.style.paddingRight = gap + "px";
+    }
+
+    function unlockScroll() {
+      document.documentElement.classList.remove("is-modal-open");
+      document.body.classList.remove("is-modal-open");
+      document.documentElement.style.paddingRight = "";
+    }
+
+    function openModal(seed) {
+      lastFocus = document.activeElement;
+      if (supportsDialog && !modal.open) {
+        try {
+          modal.showModal();
+        } catch (e) {
+          modal.setAttribute("open", "");
+        }
+      } else {
+        modal.setAttribute("open", "");
+      }
+      lockScroll();
+      if (input) {
+        input.value = seed || "";
+        paintList((seed || "").trim().toLowerCase());
+        try {
+          input.focus({ preventScroll: true });
+        } catch (e) {
+          input.focus();
+        }
+        input.select();
+      }
+    }
+
+    function closeModal() {
+      if (supportsDialog && modal.open) {
+        try {
+          modal.close();
+        } catch (e) {
+          modal.removeAttribute("open");
+        }
+      } else {
+        modal.removeAttribute("open");
+      }
+      unlockScroll();
+      if (lastFocus && lastFocus.focus) {
+        try {
+          lastFocus.focus({ preventScroll: true });
+        } catch (e) {
+          lastFocus.focus();
+        }
+      }
+    }
+
+    openers.forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        openModal("");
+      });
+    });
+
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+
+    /* 바깥(어두운 배경) 클릭 → 닫기 */
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal) closeModal();
+    });
+    modal.addEventListener("cancel", function (e) {
+      e.preventDefault();
+      closeModal();
+    });
+
+    if (input) {
+      input.addEventListener("input", function () {
+        paintList(input.value.trim().toLowerCase());
+      });
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          go(active + 1);
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          go(active - 1);
+        } else if (e.key === "Enter") {
+          var links = $$(".search-modal__item", list || modal);
+          var target = links[active >= 0 ? active : 0];
+          if (target) {
+            e.preventDefault();
+            window.location.href = target.getAttribute("href");
+          }
+        } else if (e.key === "Escape") {
+          e.preventDefault();
+          closeModal();
+        }
+      });
+    }
+
+    /* 홈이 아닌 페이지에서 "/" → 검색 창 (홈은 히어로 검색창이 맡는다) */
+    if (!heroInput) {
       document.addEventListener("keydown", function (e) {
         if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
         var tag = (e.target && e.target.tagName) || "";
         if (/^(INPUT|TEXTAREA|SELECT)$/.test(tag) || (e.target && e.target.isContentEditable)) return;
         e.preventDefault();
-        window.location.href = link.getAttribute("href");
+        openModal("");
       });
     }
 
-    if (input && window.location.hash === "#search") {
+    /* 홈 주소 끝에 #search 로 들어오면 히어로 검색창에 초점만 준다 */
+    if (heroInput && window.location.hash === "#search") {
       window.setTimeout(function () {
-        input.focus();
+        try {
+          heroInput.focus({ preventScroll: true });
+        } catch (e) {
+          heroInput.focus();
+        }
       }, 120);
     }
+  }
+
+  /* ---------------- 모바일 햄버거 메뉴 ---------------- */
+
+  function initNavMenu() {
+    var burger = $("[data-nav-burger]");
+    var nav = $(".site-nav");
+    var backdrop = $("[data-nav-backdrop]");
+    if (!burger || !nav) return;
+    var mq = window.matchMedia ? window.matchMedia("(max-width: 900px)") : null;
+
+    function setOpen(open) {
+      document.body.classList.toggle("is-nav-open", open);
+      document.documentElement.classList.toggle("is-nav-open", open);
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      burger.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
+      if (backdrop) backdrop.hidden = !open;
+    }
+
+    burger.addEventListener("click", function (e) {
+      e.preventDefault();
+      setOpen(!document.body.classList.contains("is-nav-open"));
+    });
+
+    if (backdrop) {
+      backdrop.addEventListener("click", function () {
+        setOpen(false);
+      });
+    }
+
+    nav.addEventListener("click", function (e) {
+      var a = e.target && e.target.closest ? e.target.closest("a") : null;
+      if (a) setOpen(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && document.body.classList.contains("is-nav-open")) setOpen(false);
+    });
+
+    function onResize() {
+      if (!mq || mq.matches) return;
+      setOpen(false);
+    }
+    window.addEventListener("resize", onResize);
+    if (mq && mq.addEventListener) mq.addEventListener("change", onResize);
+  }
+
+  /* ---------------- 접힌 패널 안의 표 다시 재기 ---------------- */
+
+  function initDetailTables() {
+    document.addEventListener(
+      "toggle",
+      function (e) {
+        if (e.target && e.target.tagName === "DETAILS") markScrollableTables();
+      },
+      true
+    );
   }
 
   /* ---------------- 시작 ---------------- */
@@ -2190,7 +2413,9 @@
     markCurrentNav();
     initScrollState();
     initNavDropdowns();
+    initNavMenu();
     initNavSearch();
+    initDetailTables();
     initFieldUnits();
     initPresets();
     initReveal();
