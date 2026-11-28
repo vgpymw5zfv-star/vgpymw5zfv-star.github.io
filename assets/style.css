@@ -4502,6 +4502,10 @@ html.is-modal-open body {
 
 /* ---------- 세부 설정 더보기 ---------- */
 
+.calc-col > .field-more {
+  margin-top: 0;
+}
+
 .field-more {
   margin-top: 6px;
   border: 1px solid var(--line);
